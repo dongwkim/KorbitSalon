@@ -5,8 +5,8 @@ import json
 import time
 import logging
 
-logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='Auth.trc',level=logging.INFO)
-logger = logging.getLogger('auth-test')
+logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='api.trc',level=logging.DEBUG)
+logger = logging.getLogger('api')
 URL = 'https://api.korbit.co.kr/v1'
 
 def get(url_suffix, header='', **params):
@@ -60,7 +60,7 @@ def load_token(filename):
         return json.loads(f.read())
     f.close()
 
-def getAccessToken():
+def getAccessToken(keydir):
     '''
     curl -D - -X POST -d "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&username=$EMAIL&password=$PASSWORD&grant_type=password" https://api.korbit.co.kr/v1/oauth2/access_token
     {
@@ -70,8 +70,8 @@ def getAccessToken():
       "refresh_token":"vn5xoOf4PzckgnqjQSL9Sb3KxWJvYtm"
    }
     '''
-    def requestToken(token):
-        client_id,client_secret = getKey('C:\Users\dongwkim\Keys\korbit_key.csv')
+    def requestToken():
+        client_id,client_secret = getKey(keydir)
         token = post('oauth2/access_token', client_id=client_id, client_secret=client_secret, username='dotorry@gmail.com', password='DDo3145692', grant_type='password')
 
         token['timestamp'] = time.time()
@@ -81,7 +81,7 @@ def getAccessToken():
         return token
 
     def refreshToken(token):
-        client_id,client_secret = getKey('C:\Users\dongwkim\Keys\korbit_key.csv')
+        client_id,client_secret = getKey(keydir)
         token = post('oauth2/access_token', client_id=client_id, client_secret=client_secret, refresh_token=token['refresh_token'], grant_type='refresh_token')
 
         token['timestamp'] = time.time()
@@ -101,7 +101,7 @@ def getAccessToken():
     try:
         token = load_token('korbit_token.json')
     except ValueError:
-        token = requestToken(token)
+        token = requestToken()
 
     if chkTokenExpired(token):
         token = refreshToken(token)
