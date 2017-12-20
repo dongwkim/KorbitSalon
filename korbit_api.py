@@ -129,6 +129,10 @@ def cancelOrder(order,header):
     cancel = post('user/orders/cancel', header, id=order['id'], currency_pair=order['currency_pair'],nonce=order['nonce'] )
     return cancel
 
+def listOrder(currency,header):
+    listorder = get('user/orders/open', header,  currency_pair=currency )
+    return listorder
+
 def getNonce():
     return int(time.time() * 1000)
 
@@ -159,12 +163,15 @@ def genHTML(path = '/usb/s1/nginx/html/index.html'):
 #print getKey('C:\Users\dongwkim\Korbit\Key\keys.csv')
 if __name__ == "__main__":
 
+    #### API test
+    currency='xrp_krw'
     pooling()
-    token = getAccessToken()
+    token = getAccessToken('c:/Users/dongwkim/Keys/korbit_key.csv')
     header = {"Authorization": "Bearer " + token['access_token']}
     balance = chkUserBalance('krw',header)
     ticker = get('ticker/detailed', currency_pair='xrp_krw')
-    nonce = int(time.time() * 1000)
+    #nonce = int(time.time() * 1000)
+    #nonce = getNonce()
 
     mybid = {"currency_pair" : "xrp_krw", "type":"limit", "price": "700", "coin_amount":"10", "nonce": getNonce()}
     bidorder = bidOrder(mybid, header)
@@ -174,6 +181,11 @@ if __name__ == "__main__":
     myask = {"currency_pair" : "xrp_krw", "type":"limit", "price": "710", "coin_amount":"10", "nonce": getNonce()}
     askorder = askOrder(myask,header)
     print "{} {:7s}: id# {:10s} is {:7s}".format(askorder['currencyPair'],'Sell',askorder['orderId'] ,askorder['status'])
+    time.sleep(1)
+
+    listorder = listOrder(currency, header)
+    for i in range(len(listorder)):
+        print("{} {:7s}: id# {:10s} is {:7s}".format(currency,'List',listorder[i]['id'] ,listorder[i]['type']))
 
     mycancel = {"currency_pair": bidorder['currencyPair'], "id": bidorder['orderId'],"nonce":getNonce()}
     cancel = cancelOrder(mycancel,header)

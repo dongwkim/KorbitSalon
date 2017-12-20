@@ -59,10 +59,12 @@ if __name__ == "__main__":
 
 
 
-        if ticker['timestamp'] > prev_ticker['timestamp'] or ticker['bid'] != prev_ticker['bid'] or ticker['ask'] != prev_ticker['bid']:
+        if ticker['timestamp'] > prev_ticker['timestamp'] or ticker['bid'] != prev_ticker['bid'] or ticker['ask'] != prev_ticker['ask']:
 
             # Calcuate String Format Timestamp
-            ctime = getStrTime(ticker['timestamp'])
+            #ctime = getStrTime(ticker['timestamp'])
+            # Get Current Time
+            ctime = getStrTime(time.time() * 1000)
             # Cacculate 10min past timstamps
             ten_min_time = (time.time() - ( 10 * 60 )) * 1000
 
@@ -85,13 +87,15 @@ if __name__ == "__main__":
 
             ## write to nginx index.html, will be replaced to redis
             #ctime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(ticker['timestamp']//1000))
-            if tx_hr_time_delta == 0:
-                trend = 0
-            else:
-                hr_trend = float(tx_hr_price_delta / tx_hr_time_delta)
+            #if tx_hr_time_delta == 0:
+            #    trend = 0
+            #else:
+            #    hr_trend = float(tx_hr_price_delta / tx_hr_time_delta)
 
             # print trading stats
-            print "{} | Price: p:{}/b:{}/a:{} | Buy: {}/{} |  1Hr: delta: {:3.0f} {}/{}/{} tx: {} | 10Min: delta: {:3.0f} {}/{}/{} | tx: {:3d} lat: {:4d} ms| bidding ({}) | balance:{}  ".format(ctime, last, bid,ask, buy_price,sell_price,  tx_hr_price_delta,tx_hr_price_min, tx_hr_price_avg,tx_hr_price_max,  hr_tx_len, tx_10min_price_delta,tx_10min_price_min,tx_10min_price_avg, tx_10min_price_max,ten_min_pos,lat,total_bidding,int(balance['available'] + balance['trade_in_use']))
+            curr_balance = int(balance['available'] + balance['trade_in_use'])
+            print "{} | Price: p:{}/b:{}/a:{} | Buy: {}/{} |  1Hr: delta: {:3.0f} {}/{}/{} tx: {} | 10Min: delta: {:3.0f} {}/{}/{} |  tx: {:3d} lat: {:4d} ms| bidding ({}) | balance:{}  " \
+            .format(ctime, last, bid,ask, buy_price,sell_price,  tx_hr_price_delta,tx_hr_price_min, tx_hr_price_avg,tx_hr_price_max,  hr_tx_len, tx_10min_price_delta,tx_10min_price_min,tx_10min_price_avg, tx_10min_price_max,ten_min_pos,lat,total_bidding,curr_balance)
             ## Buy Position
             ## less than 1 hour average AND less than 10min average, but ask price should not be greater than 11min max AND Greater than min(1hr min,10min min)
 
@@ -108,22 +112,30 @@ if __name__ == "__main__":
                 elapsed = int(time.time() * 1000 - stime)
                 print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),bidorder['currencyPair'],'Buy',str(bidorder['orderId']) ,bidorder['status'], elapsed)
 
-                # check trading  success
-                if bidorder['status'] == 'success':
+                ### List Open Order
+                ## Open Order is not queries as soon as ordered, need sleep interval
+                time.sleep(1)
+                listorder = listOrder(currency,header)
+
+                # check bidding was  success.
+                if bidorder['status'] == 'success' and len(listorder) == 0:
                     balance = chkUserBalance('krw',header)
                     trading = True
                     buy_time = time.time()
-                # if failed to buy order , cancel pending order
-                else:
-                    mycancel = {"currency_pair": bidorder['currencyPair'], "id": bidorder['orderId'],"nonce":getNonce()}
-                    stime = time.time() * 1000
-                    cancelorder = cancelOrder(mycancel, header)
-                    elapsed = int(time.time() * 1000 - stime)
-                    for i in range(len(cancelorder)):
-                        print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancelorder[i]['currencyPair'],'Cancel',str(cancelorder[i]['orderId']) ,cancelorder[i]['status'], elapsed))
-                    if cancelorder[0]['status'] == 'success':
-                        balance = chkUserBalance('krw',header)
-                        trading = False
+                # if open order is exist, cancel all bidding order
+                elif bidorder['status'] == 'success' and len(listorder) > 0:
+                    for i in range(len(listorder)):
+                        print("{} {:7s}: id# {:10s} is {:7s}".format(currency,'List',listorder[i]['id'] ,listorder[i]['type']))
+                        # if failed to buy order , cancel pending order
+                        mycancel = {"currency_pair": currency, "id": listorder[i]['id'],"nonce":getNonce()}
+                        stime = time.time() * 1000
+                        cancelorder = cancelOrder(mycancel, header)
+                        elapsed = int(time.time() * 1000 - stime)
+                        for i in range(len(cancelorder)):
+                            print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancelorder[i]['currencyPair'],'Cancel',str(cancelorder[i]['orderId']) ,cancelorder[i]['status'], elapsed))
+                        if cancelorder[0]['status'] == 'success':
+                            balance = chkUserBalance('krw',header)
+                            trading = False
 
                 #print "zz1: Buy {} coin at {} won, will be ask at {} won".format(bid_volume, buy_price, sell_price)
             # Aggressive Bidding when trading trend is high, high tx users
@@ -136,35 +148,41 @@ if __name__ == "__main__":
                 askorder = askOrder(myask,header)
                 elapsed = int(time.time() * 1000 - stime)
                 print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),askorder['currencyPair'],'Sell',str(askorder['orderId']) ,askorder['status'], elapsed)
-                # check trading  success
-                if askorder['status'] == 'success':
+
+                # check list open orders
+                time.sleep(1)
+                listorder = listOrder(currency,header)
+
+                # if list open orders is 0 , trading was success
+                if askorder['status'] == 'success' and len(listorder) == 0:
                     trading = False
                     # initialize trading price
                     buy_price = sell_price = 0
                     sell_time = time.time()
                     buy_sell_gap = sell_time - buy_time
+                    # increase bidding count
                     total_bidding += 1
+                    # check balance
                     balance = chkUserBalance('krw',header)
-                # if failed to buy order , cancel pending order
-                else:
-                    mycancel = {"currency_pair": askorder['currencyPair'], "id": askorder['orderId'],"nonce":getNonce()}
-                    stime = time.time() * 1000
-                    cancelorder = cancelOrder(mycancel, header)
-                    elapsed = int(time.time() * 1000 - stime)
-                    for i in range(len(cancelorder)):
-                        print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancelorder[i]['currencyPair'],'Cancel',str(cancelorder[i]['orderId']) ,cancelorder[i]['status'], elapsed))
-                    if cancelorder[0]['status'] == 'success':
-                        balance = chkUserBalance('krw',header)
-                        trading = False
-
-                #print "zz2: Sell {} coin at {} won, elapsed:{} , bidding# {}".format(bid_volume,ask,buy_sell_gap,total_bidding)
-
-
+                # if failed to sell order , cancel all ask orders
+                elif bidorder['status'] == 'success' and len(listorder) > 0:
+                    for i in range(len(listorder)):
+                        print("{} {:7s}: id# {:10s} is {:7s}".format(currency,'List',listorder[i]['id'] ,listorder[i]['type']))
+                        # if failed to buy order , cancel pending order
+                        mycancel = {"currency_pair": currency, "id": listorder[i]['id'],"nonce":getNonce()}
+                        stime = time.time() * 1000
+                        cancelorder = cancelOrder(mycancel, header)
+                        elapsed = int(time.time() * 1000 - stime)
+                        for i in range(len(cancelorder)):
+                            print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancelorder[i]['currencyPair'],'Cancel',str(cancelorder[i]['orderId']) ,cancelorder[i]['status'], elapsed))
+                        if cancelorder[0]['status'] == 'success':
+                            balance = chkUserBalance('krw',header)
+                            trading = True
+            #print "zz2: Sell {} coin at {} won, elapsed:{} , bidding# {}".format(bid_volume,ask,buy_sell_gap,total_bidding)
             ## End Trading
             ## Generate HTML for mobile
             #print("Available:{} , Trade:{} ".format(balance["available"], balance["trade_in_use"]))
             #genHTML()
-
         else:
             continue
 
