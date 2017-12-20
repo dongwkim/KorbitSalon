@@ -1,0 +1,2 @@
+# KorbitSalon
+Korbit Bot Trading
