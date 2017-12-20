@@ -9,6 +9,7 @@ if __name__ == "__main__":
     #logger = logging.getLogger('korbit_trading')
 
     pooling()
+    ## API key
     token = getAccessToken('C:\Users\dongwkim\Keys\korbit_key.csv')
     header = {"Authorization": "Bearer " + token['access_token']}
 
