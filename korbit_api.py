@@ -1,4 +1,4 @@
-
+#!/usr/bin/python
 import requests
 import csv
 import json
@@ -143,14 +143,12 @@ def askOrder(order,header):
 def getStrTime(epoch_time):
     return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(epoch_time//1000))
 
-def genHTML(path = '/usb/s1/nginx/html/index.html'):
-    html = '<meta http-equiv="refresh" content="3"><font size="10"> Time : {}<br> Price : {:,} / 60min Avg: {:,} / 10min Avg: {:,} <br>Purchase : {:,} <br>Deal Count: {}<br>Latency : {} ms</font>'.format(ctime, int(last),int(tx_hr_price_avg),int(tx_10min_price_avg), int(buy_price), int(total_bidding),lat)
+def genHTML(path ,ctime,last, tx_10min_price_delta, tx_hr_price_delta, buy_price, total_bidding, curr_balance, lat ):
+    html = '<meta http-equiv="refresh" content="3"><font size="10"> Time : {}<br> Price : {:,} Delta :{}/{} <br> Buy Price: {} <br>Deal Count: {}<br> Balance: {:,} <br>Latency : {} ms</font>'.format(ctime, int(last),tx_10min_price_delta, tx_hr_price_delta, int(buy_price), int(total_bidding),int(curr_balance), lat)
     f = open(path,'w')
     #f.write(json.dumps(ticker))
     f.write(html)
     f.close()
-
-
 
 
 
@@ -181,7 +179,7 @@ if __name__ == "__main__":
     myask = {"currency_pair" : "xrp_krw", "type":"limit", "price": "710", "coin_amount":"10", "nonce": getNonce()}
     askorder = askOrder(myask,header)
     print "{} {:7s}: id# {:10s} is {:7s}".format(askorder['currencyPair'],'Sell',askorder['orderId'] ,askorder['status'])
-    time.sleep(1)
+    time.sleep(1.5)
 
     listorder = listOrder(currency, header)
     for i in range(len(listorder)):

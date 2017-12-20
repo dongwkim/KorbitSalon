@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from  korbit_api import *
 import time
 #import logging
@@ -96,6 +97,8 @@ if __name__ == "__main__":
             curr_balance = int(balance['available'] + balance['trade_in_use'])
             print "{} | Price: p:{}/b:{}/a:{} | Buy: {}/{} |  1Hr: delta: {:3.0f} {}/{}/{} tx: {} | 10Min: delta: {:3.0f} {}/{}/{} |  tx: {:3d} lat: {:4d} ms| bidding ({}) | balance:{}  " \
             .format(ctime, last, bid,ask, buy_price,sell_price,  tx_hr_price_delta,tx_hr_price_min, tx_hr_price_avg,tx_hr_price_max,  hr_tx_len, tx_10min_price_delta,tx_10min_price_min,tx_10min_price_avg, tx_10min_price_max,ten_min_pos,lat,total_bidding,curr_balance)
+            # Create HTML for realtime view
+            genHTML(path='index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = curr_balance )
             ## Buy Position
             ## less than 1 hour average AND less than 10min average, but ask price should not be greater than 11min max AND Greater than min(1hr min,10min min)
 
@@ -114,7 +117,7 @@ if __name__ == "__main__":
 
                 ### List Open Order
                 ## Open Order is not queries as soon as ordered, need sleep interval
-                time.sleep(1)
+                time.sleep(1.5)
                 listorder = listOrder(currency,header)
 
                 # check bidding was  success.
@@ -183,6 +186,7 @@ if __name__ == "__main__":
             ## Generate HTML for mobile
             #print("Available:{} , Trade:{} ".format(balance["available"], balance["trade_in_use"]))
             #genHTML()
+
         else:
             continue
 
