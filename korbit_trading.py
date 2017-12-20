@@ -25,7 +25,7 @@ if __name__ == "__main__":
     logger.info('Start Connection Pooling ')
     pooling()
     ## Get Token from API key
-    token = getAccessToken('C:\Users\dongwkim\Keys\korbit_key.csv')
+    token = getAccessToken('/usb/s1/key/korbit_key.csv')
     ## Set HTTP Header for Private API
     header = {"Authorization": "Bearer " + token['access_token']}
 
@@ -40,7 +40,7 @@ if __name__ == "__main__":
         # refresh token every 30 min
         if time.strftime("%M", time.gmtime()) in ['00', '30']:
             ## Get Token from API key
-            token = getAccessToken('C:\Users\dongwkim\Keys\korbit_key.csv')
+            token = getAccessToken('/usb/s1/key/korbit_key.csv')
             ## Set HTTP Header for Private API
             header = {"Authorization": "Bearer " + token['access_token']}
 
@@ -98,7 +98,7 @@ if __name__ == "__main__":
             print "{} | Price: p:{}/b:{}/a:{} | Buy: {}/{} |  1Hr: delta: {:3.0f} {}/{}/{} tx: {} | 10Min: delta: {:3.0f} {}/{}/{} |  tx: {:3d} lat: {:4d} ms| bidding ({}) | balance:{}  " \
             .format(ctime, last, bid,ask, buy_price,sell_price,  tx_hr_price_delta,tx_hr_price_min, tx_hr_price_avg,tx_hr_price_max,  hr_tx_len, tx_10min_price_delta,tx_10min_price_min,tx_10min_price_avg, tx_10min_price_max,ten_min_pos,lat,total_bidding,curr_balance)
             # Create HTML for realtime view
-            genHTML(path='index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = curr_balance )
+            genHTML(path='/usb/s1/nginx/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = curr_balance )
             ## Buy Position
             ## less than 1 hour average AND less than 10min average, but ask price should not be greater than 11min max AND Greater than min(1hr min,10min min)
 

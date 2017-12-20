@@ -1592,3 +1592,41 @@
 2017-12-21 00:16:56,046 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 45287
 2017-12-21 00:16:56,795 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 164
 2017-12-21 00:16:57,032 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 45287
+2017-12-21 00:24:04,982 INFO requests.packages.urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-21 00:24:05,382 DEBUG requests.packages.urllib3.connectionpool "GET /v1/user/balances HTTP/1.1" 200 None
+2017-12-21 00:24:05,605 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 166
+2017-12-21 00:24:06,335 DEBUG requests.packages.urllib3.connectionpool "POST /v1/user/orders/buy?nonce=1513783445610&price=700&type=limit&currency_pair=xrp_krw&coin_amount=10 HTTP/1.1" 200 None
+2017-12-21 00:24:06,758 DEBUG requests.packages.urllib3.connectionpool "POST /v1/user/orders/sell?nonce=1513783446341&price=710&type=limit&currency_pair=xrp_krw&coin_amount=10 HTTP/1.1" 200 None
+2017-12-21 00:24:08,485 DEBUG requests.packages.urllib3.connectionpool "GET /v1/user/orders/open?currency_pair=xrp_krw HTTP/1.1" 200 None
+2017-12-21 00:24:08,953 DEBUG requests.packages.urllib3.connectionpool "POST /v1/user/orders/cancel?nonce=1513783448490&id=4401089&currency_pair=xrp_krw HTTP/1.1" 200 None
+2017-12-21 00:24:59,658 INFO korbit_trading Start Connection Pooling 
+2017-12-21 00:24:59,684 INFO requests.packages.urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-21 00:25:00,075 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 166
+2017-12-21 00:25:00,344 DEBUG requests.packages.urllib3.connectionpool "GET /v1/user/balances HTTP/1.1" 200 None
+2017-12-21 00:25:01,057 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 166
+2017-12-21 00:25:01,319 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 42504
+2017-12-21 00:25:02,063 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 166
+2017-12-21 00:25:02,477 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 42430
+2017-12-21 00:25:03,287 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 166
+2017-12-21 00:25:03,728 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 42430
+2017-12-21 00:25:04,471 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 166
+2017-12-21 00:25:04,716 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 42430
+2017-12-21 00:25:05,645 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 166
+2017-12-21 00:25:06,065 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 42430
+2017-12-21 00:25:06,821 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 166
+2017-12-21 00:25:07,354 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 42510
+2017-12-21 00:25:08,119 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 161
+2017-12-21 00:25:08,362 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 42350
+2017-12-21 00:25:09,104 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 161
+2017-12-21 00:25:09,368 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 42350
+2017-12-21 00:25:10,162 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 161
+2017-12-21 00:25:10,452 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 42189
+2017-12-21 00:25:11,223 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 161
+2017-12-21 00:25:11,469 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 42189
+2017-12-21 00:25:12,249 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 161
+2017-12-21 00:25:12,493 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 42189
+2017-12-21 00:25:13,249 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 161
+2017-12-21 00:25:13,498 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 42189
+2017-12-21 00:25:14,278 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 161
+2017-12-21 00:25:14,749 DEBUG requests.packages.urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 41801
+2017-12-21 00:25:15,519 DEBUG requests.packages.urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 161

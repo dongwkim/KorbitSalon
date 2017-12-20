@@ -164,7 +164,7 @@ if __name__ == "__main__":
     #### API test
     currency='xrp_krw'
     pooling()
-    token = getAccessToken('c:/Users/dongwkim/Keys/korbit_key.csv')
+    token = getAccessToken('/usb/s1/key/korbit_key.csv')
     header = {"Authorization": "Bearer " + token['access_token']}
     balance = chkUserBalance('krw',header)
     ticker = get('ticker/detailed', currency_pair='xrp_krw')
