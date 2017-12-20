@@ -137,7 +137,14 @@ def askOrder(order,header):
     return ask
 
 def getStrTime(epoch_time):
-    return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(epoch_time))
+    return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(epoch_time//1000))
+
+def genHTML(path = '/usb/s1/nginx/html/index.html'):
+    html = '<meta http-equiv="refresh" content="3"><font size="10"> Time : {}<br> Price : {:,} / 60min Avg: {:,} / 10min Avg: {:,} <br>Purchase : {:,} <br>Deal Count: {}<br>Latency : {} ms</font>'.format(ctime, int(last),int(tx_hr_price_avg),int(tx_10min_price_avg), int(buy_price), int(total_bidding),lat)
+    f = open(path,'w')
+    #f.write(json.dumps(ticker))
+    f.write(html)
+    f.close()
 
 
 
