@@ -9,13 +9,14 @@ if __name__ == "__main__":
     logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='trading.trc',level=logging.DEBUG)
     logger = logging.getLogger('korbit_trading')
     ### Vriables
-    bid_volume = 10
+    money = 90000
     trading = False
-    benefit = 20
+    benefit = 0.05
     total_bidding = 0
     buy_price = 0
     sell_price = 0
-    limit = 880
+    #limit is calculated dynamically based on max 
+    limit = 3 
     currency = 'xrp_krw'
 
 
@@ -96,17 +97,20 @@ if __name__ == "__main__":
             # print trading stats
             curr_balance = int(balance['available'] + balance['trade_in_use'])
             print "{} | Price: p:{}/b:{}/a:{} | Buy: {}/{} |  1Hr: delta: {:3.0f} {}/{}/{} tx: {} | 10Min: delta: {:3.0f} {}/{}/{} |  tx: {:3d} lat: {:4d} ms| bidding ({}) | balance:{}  " \
-            .format(ctime, last, bid,ask, buy_price,sell_price,  tx_hr_price_delta,tx_hr_price_min, tx_hr_price_avg,tx_hr_price_max,  hr_tx_len, tx_10min_price_delta,tx_10min_price_min,tx_10min_price_avg, tx_10min_price_max,ten_min_pos,lat,total_bidding,curr_balance)
+            .format(ctime, last, bid,ask, buy_price,sell_price,  tx_hr_price_delta,tx_hr_price_min, tx_hr_price_avg,tx_hr_price_max,  hr_tx_len, tx_10min_price_delta,tx_10min_price_min,tx_10min_price_avg, tx_10min_price_max,ten_min_pos,lat,total_bidding,int(curr_balance)//10)
             # Create HTML for realtime view
-            genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = curr_balance )
+            genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = int(curr_balance)//10 )
             ## Buy Position
-            ## less than 1 hour average AND less than 10min average, but ask price should not be greater than 11min max AND Greater than min(1hr min,10min min)
 
-            if not trading and last <= tx_hr_price_avg and last < tx_10min_price_avg  \
-                and ( tx_10min_price_delta < -25 or ( tx_hr_price_delta < -45 and tx_10min_price_delta < -5 )) \
-                and ( last + benefit * 5 < tx_hr_price_max ) and ask == last and last < int(low + high)/2:
+            ## Buy when price is drop suddenly 
+
+            if (not trading and last <= tx_hr_price_avg and last < tx_10min_price_avg  \
+                and ( tx_10min_price_delta < -40 or ( tx_hr_price_delta < -90 and tx_10min_price_delta < -10 )) \
+                and ( last + int( last *  benefit) * 5 < tx_hr_price_max ) and ask == last and last < int(low + high)/2): 
+            ## Set sell price
                 buy_price = ask
-                sell_price = ask + benefit
+                sell_price = ask + int(ask * benefit)
+                bid_volume = int(int(money) // ask)
 
                 ### Buy Order
                 mybid = {"currency_pair" : currency, "type":"limit", "price": buy_price, "coin_amount": bid_volume, "nonce": getNonce()}
@@ -117,14 +121,54 @@ if __name__ == "__main__":
 
                 ### List Open Order
                 ## Open Order is not queries as soon as ordered, need sleep interval
-                time.sleep(1.5)
+                time.sleep(2)
                 listorder = listOrder(currency,header)
 
                 # check bidding was  success.
                 if bidorder['status'] == 'success' and len(listorder) == 0:
-                    balance = chkUserBalance('krw',header)
+                    xrp_balance = chkUserBalance('xrp',header)
                     trading = True
                     buy_time = time.time()
+                    sell_volume = xrp_balance['available']
+                # if open order is exist, cancel all bidding order
+                elif bidorder['status'] == 'success' and len(listorder) > 0:
+                    for i in range(len(listorder)):
+                        print("{} {:7s}: id# {:10s} is {:7s}".format(currency,'List',listorder[i]['id'] ,listorder[i]['type']))
+                        # if failed to buy order , cancel pending order
+                        mycancel = {"currency_pair": currency, "id": listorder[i]['id'],"nonce":getNonce()}
+                        stime = time.time() * 1000
+                        cancelorder = cancelOrder(mycancel, header)
+                        elapsed = int(time.time() * 1000 - stime)
+                        for i in range(len(cancelorder)):
+                            print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancelorder[i]['currencyPair'],'Cancel',str(cancelorder[i]['orderId']) ,cancelorder[i]['status'], elapsed))
+                        if cancelorder[0]['status'] == 'success':
+                            balance = chkUserBalance('krw',header)
+                            trading = False
+
+            elif (not trading and (last + int(10) * limit) < high and ( (tx_10min_price_delta > 3 and tx_10min_price_delta < 10)  and tx_hr_price_delta > 50 )) \
+                or (not trading and (last + int(10) * limit) < high and ( tx_hr_price_delta < 5 and tx_hr_price_delta > -5 ) and ( tx_10min_price_delta < -20 )):
+                buy_price = ask
+                sell_price = ask + int(10)
+                buy_volume = int(int(bid_volume) // ask)
+
+                ### Buy Order
+                mybid = {"currency_pair" : currency, "type":"limit", "price": buy_price, "coin_amount": bid_volume, "nonce": getNonce()}
+                stime = time.time() * 1000
+                bidorder = bidOrder(mybid, header)
+                elapsed = int(time.time() * 1000 - stime)
+                print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),bidorder['currencyPair'],'Buy',str(bidorder['orderId']) ,bidorder['status'], elapsed)
+
+                ### List Open Order
+                ## Open Order is not queries as soon as ordered, need sleep interval
+                time.sleep(2)
+                listorder = listOrder(currency,header)
+
+                # check bidding was  success.
+                if bidorder['status'] == 'success' and len(listorder) == 0:
+                    xrp_balance = chkUserBalance('xrp',header)
+                    trading = True
+                    buy_time = time.time()
+                    sell_volume = xrp_balance['available']
                 # if open order is exist, cancel all bidding order
                 elif bidorder['status'] == 'success' and len(listorder) > 0:
                     for i in range(len(listorder)):
@@ -145,15 +189,15 @@ if __name__ == "__main__":
 
             ## Sell Position
             ##
-            if trading and last >= sell_price and bid >= sell_price:
-                myask = {"currency_pair" : currency, "type":"limit", "price": sell_price, "coin_amount": bid_volume, "nonce": getNonce()}
+            if trading and last >= sell_price and ask >= sell_price:
+                myask = {"currency_pair" : currency, "type":"limit", "price": sell_price, "coin_amount": sell_volume, "nonce": getNonce()}
                 stime = time.time() * 1000
                 askorder = askOrder(myask,header)
                 elapsed = int(time.time() * 1000 - stime)
                 print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),askorder['currencyPair'],'Sell',str(askorder['orderId']) ,askorder['status'], elapsed)
 
                 # check list open orders
-                time.sleep(1)
+                time.sleep(1.5)
                 listorder = listOrder(currency,header)
 
                 # if list open orders is 0 , trading was success

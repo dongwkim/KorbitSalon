@@ -108,12 +108,11 @@ def getAccessToken(keydir):
 
     return token
 
-def chkUserBalance(currency,header):
+def chkUserBalance(currency ,header):
       #token = getAccessToken()
       balance = get('user/balances',header)
       #balance = s.get('https://api.korbit.co.kr/v1/user/balances',headers= {"Authorization":"Bearer " + token['access_token']})
       return balance[currency]
-      #return balance[currency]
       #print json.loads(balance.text)
 
 def bidOrder(order,header):
@@ -171,19 +170,23 @@ if __name__ == "__main__":
     #nonce = int(time.time() * 1000)
     #nonce = getNonce()
 
-    mybid = {"currency_pair" : "xrp_krw", "type":"limit", "price": "700", "coin_amount":"10", "nonce": getNonce()}
-    bidorder = bidOrder(mybid, header)
+    mybid = {"currency_pair" : "xrp_krw", "type":"limit", "price": "500", "coin_amount":"10", "nonce": getNonce()}
+    #bidorder = bidOrder(mybid, header)
     #print order
-    print "{} {:7s}: id# {:10d} is {:7s}".format(bidorder['currencyPair'],'Buy',bidorder['orderId'] ,bidorder['status'])
+    #print "{} {:7s}: id# {:10d} is {:7s}".format(bidorder['currencyPair'],'Buy',bidorder['orderId'] ,bidorder['status'])
+    
+    balance = chkUserBalance('xrp', header)
+    print "{} {:7s}: Balance is  {:f} ".format('xrp','Balance',float(balance['available']) )
 
-    myask = {"currency_pair" : "xrp_krw", "type":"limit", "price": "710", "coin_amount":"10", "nonce": getNonce()}
-    askorder = askOrder(myask,header)
-    print "{} {:7s}: id# {:10s} is {:7s}".format(askorder['currencyPair'],'Sell',askorder['orderId'] ,askorder['status'])
+    myask = {"currency_pair" : "xrp_krw", "type":"limit", "price": "500", "coin_amount":"10", "nonce": getNonce()}
+    #askorder = askOrder(myask,header)
+    #print "{} {:7s}: id# {:10s} is {:7s}".format(askorder['currencyPair'],'Sell',askorder['orderId'] ,askorder['status'])
     time.sleep(1.5)
+
 
     listorder = listOrder(currency, header)
     for i in range(len(listorder)):
-        print("{} {:7s}: id# {:10s} is {:7s}".format(currency,'List',listorder[i]['id'] ,listorder[i]['type']))
+        print("{} {:7s}: id# {:10s} is {:7s}, volume {}".format(currency,'List',listorder[i]['id'] ,listorder[i]['type'],listorder[i]['open']['value']))
 
     mycancel = {"currency_pair": bidorder['currencyPair'], "id": bidorder['orderId'],"nonce":getNonce()}
     cancel = cancelOrder(mycancel,header)

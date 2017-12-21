@@ -9,14 +9,14 @@ if __name__ == "__main__":
     logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='trading.trc',level=logging.DEBUG)
     logger = logging.getLogger('korbit_trading')
     ### Vriables
-    bid_volume = 10
+    bid_volume = 0.01
     trading = False
-    benefit = 20
+    benefit = 15000
     total_bidding = 0
     buy_price = 0
     sell_price = 0
-    limit = 880
-    currency = 'xrp_krw'
+    limit = 980000
+    currency = 'eth_krw'
 
 
     URL = 'https://api.korbit.co.kr/v1'
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     header = {"Authorization": "Bearer " + token['access_token']}
 
     ### Fetching Ticker
-    prev_ticker = get('ticker/detailed', currency_pair='xrp_krw')
+    prev_ticker = get('ticker/detailed', currency_pair='eth_krw')
     ### Check Balance
     balance = chkUserBalance('krw',header)
 
@@ -46,9 +46,9 @@ if __name__ == "__main__":
 
 
         start = time.time()
-        ticker = get('ticker/detailed', currency_pair='xrp_krw')
-        #min_tx = get('transactions', currency_pair='xrp_krw', time='minute')
-        hr_tx = get('transactions', currency_pair='xrp_krw', time='hour')
+        ticker = get('ticker/detailed', currency_pair='eth_krw')
+        #min_tx = get('transactions', currency_pair='eth_krw', time='minute')
+        hr_tx = get('transactions', currency_pair='eth_krw', time='hour')
         end = time.time()
 
         lat = int((end - start)*100)
@@ -103,8 +103,8 @@ if __name__ == "__main__":
             ## less than 1 hour average AND less than 10min average, but ask price should not be greater than 11min max AND Greater than min(1hr min,10min min)
 
             if not trading and last <= tx_hr_price_avg and last < tx_10min_price_avg  \
-                and ( tx_10min_price_delta < -25 or ( tx_hr_price_delta < -45 and tx_10min_price_delta < -5 )) \
-                and ( last + benefit * 5 < tx_hr_price_max ) and ask == last and last < int(low + high)/2:
+                and ( tx_10min_price_delta < -25000 or ( tx_hr_price_delta < -45000 and tx_10min_price_delta < -10000 )) \
+                and ( last + benefit * 5 < tx_hr_price_max ) and ask == last and last < limit:
                 buy_price = ask
                 sell_price = ask + benefit
 

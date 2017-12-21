@@ -1,0 +1,26 @@
+2017-12-21 03:24:13,631 INFO korbit Open index.html file 
+2017-12-21 03:24:13,657 INFO requests.packages.urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-21 03:24:39,511 INFO korbit Open index.html file 
+2017-12-21 03:24:39,536 INFO requests.packages.urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-21 03:24:59,315 INFO korbit Open index.html file 
+2017-12-21 03:24:59,341 INFO requests.packages.urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-21 03:25:53,889 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:27:02,827 INFO korbit Open index.html file 
+2017-12-21 03:27:02,855 INFO requests.packages.urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-21 03:27:49,768 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:28:38,921 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:29:30,021 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:30:17,182 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:31:02,772 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:31:47,756 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:32:35,324 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:33:20,693 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:34:13,840 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:34:59,204 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:35:49,856 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:36:39,332 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:37:26,772 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:38:16,711 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:39:06,054 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:40:05,560 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2017-12-21 03:41:05,728 INFO requests.packages.urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
