@@ -16,7 +16,7 @@ if __name__ == "__main__":
     buy_price = 0
     sell_price = 0
     #limit is calculated dynamically based on max 
-    limit = 0.95
+    limit = 0.90
     currency = 'xrp_krw'
 
 
@@ -97,7 +97,7 @@ if __name__ == "__main__":
             # print trading stats
             curr_balance = int(balance['available'] + balance['trade_in_use'])
             print "{} | Price: p:{}/b:{}/a:{}/l:{} | Buy: {}/{} |  1Hr: delta: {:3.0f} {}/{}/{} tx: {} | 10Min: delta: {:3.0f} {}/{}/{} |  tx: {:3d} lat: {:4d} ms| bidding ({}) | balance:{}  " \
-            .format(ctime, last, bid,ask, int(high * .96), buy_price,sell_price,  tx_hr_price_delta,tx_hr_price_min, tx_hr_price_avg,tx_hr_price_max,  hr_tx_len, tx_10min_price_delta,tx_10min_price_min,tx_10min_price_avg, tx_10min_price_max,ten_min_pos,lat,total_bidding,int(curr_balance)//10)
+            .format(ctime, last, bid,ask, int(high * limit), buy_price,sell_price,  tx_hr_price_delta,tx_hr_price_min, tx_hr_price_avg,tx_hr_price_max,  hr_tx_len, tx_10min_price_delta,tx_10min_price_min,tx_10min_price_avg, tx_10min_price_max,ten_min_pos,lat,total_bidding,int(curr_balance)//10)
             # Create HTML for realtime view
             genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = int(curr_balance)//10 )
 
