@@ -174,18 +174,19 @@ if __name__ == "__main__":
     mybid = {"currency_pair" : "xrp_krw", "type":"limit", "price": "700", "coin_amount":"10", "nonce": getNonce()}
     bidorder = bidOrder(mybid, header)
     #print order
-    print "{} {:7s}: id# {:10d} is {:7s}".format(bidorder['currencyPair'],'Buy',bidorder['orderId'] ,bidorder['status'])
+    print "{} {:7s}: id# {:10s} is {:7s}".format(bidorder['currencyPair'],'Buy',str(bidorder['orderId']) ,bidorder['status'])
 
     myask = {"currency_pair" : "xrp_krw", "type":"limit", "price": "710", "coin_amount":"10", "nonce": getNonce()}
     askorder = askOrder(myask,header)
-    print "{} {:7s}: id# {:10s} is {:7s}".format(askorder['currencyPair'],'Sell',askorder['orderId'] ,askorder['status'])
+    print "{} {:7s}: id# {:10s} is {:7s}".format(askorder['currencyPair'],'Sell',str(askorder['orderId']) ,askorder['status'])
     time.sleep(1.5)
 
     listorder = listOrder(currency, header)
     for i in range(len(listorder)):
-        print("{} {:7s}: id# {:10s} is {:7s}".format(currency,'List',listorder[i]['id'] ,listorder[i]['type']))
+        print("{} {:7s}: id# {:10s} is {:7s}".format(currency,'List',str(listorder[i]['id']) ,listorder[i]['type']))
 
-    mycancel = {"currency_pair": bidorder['currencyPair'], "id": bidorder['orderId'],"nonce":getNonce()}
-    cancel = cancelOrder(mycancel,header)
-    for i in range(len(cancel)):
-        print("{} {:7s}: id# {:10s} is {:7s}".format(cancel[i]['currencyPair'],'Cancel',cancel[i]['orderId'] ,cancel[i]['status']))
+    for i in range(len(listorder)):
+        mycancel = {"currency_pair": bidorder['currencyPair'], "id": listorder[i]['id'],"nonce":getNonce()}
+        cancel = cancelOrder(mycancel,header)
+        for i in range(len(cancel)):
+            print("{} {:7s}: id# {:10s} is {:7s}".format(cancel[i]['currencyPair'],'Cancel',str(cancel[i]['orderId']) ,cancel[i]['status']))
