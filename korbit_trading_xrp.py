@@ -9,14 +9,14 @@ if __name__ == "__main__":
     logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='trading.trc',level=logging.DEBUG)
     logger = logging.getLogger('korbit_trading')
     ### Vriables
-    money = 90000
+    money = 50000
     trading = False
     benefit = 0.03
     total_bidding = 0
     buy_price = 0
     sell_price = 0
     #limit is calculated dynamically based on max 
-    limit = 3 
+    limit = 0.95
     currency = 'xrp_krw'
 
 
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     balance = chkUserBalance('krw',header)
 
     while True:
-        time.sleep(0.3)
+        time.sleep(0.5)
 
         # refresh token every 30 min
         if time.strftime("%M", time.gmtime()) in ['00', '30']:
@@ -96,17 +96,20 @@ if __name__ == "__main__":
 
             # print trading stats
             curr_balance = int(balance['available'] + balance['trade_in_use'])
-            print "{} | Price: p:{}/b:{}/a:{} | Buy: {}/{} |  1Hr: delta: {:3.0f} {}/{}/{} tx: {} | 10Min: delta: {:3.0f} {}/{}/{} |  tx: {:3d} lat: {:4d} ms| bidding ({}) | balance:{}  " \
-            .format(ctime, last, bid,ask, buy_price,sell_price,  tx_hr_price_delta,tx_hr_price_min, tx_hr_price_avg,tx_hr_price_max,  hr_tx_len, tx_10min_price_delta,tx_10min_price_min,tx_10min_price_avg, tx_10min_price_max,ten_min_pos,lat,total_bidding,int(curr_balance)//10)
+            print "{} | Price: p:{}/b:{}/a:{}/l:{} | Buy: {}/{} |  1Hr: delta: {:3.0f} {}/{}/{} tx: {} | 10Min: delta: {:3.0f} {}/{}/{} |  tx: {:3d} lat: {:4d} ms| bidding ({}) | balance:{}  " \
+            .format(ctime, last, bid,ask, int(high * .96), buy_price,sell_price,  tx_hr_price_delta,tx_hr_price_min, tx_hr_price_avg,tx_hr_price_max,  hr_tx_len, tx_10min_price_delta,tx_10min_price_min,tx_10min_price_avg, tx_10min_price_max,ten_min_pos,lat,total_bidding,int(curr_balance)//10)
             # Create HTML for realtime view
             genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = int(curr_balance)//10 )
-            ## Buy Position
+
+            ######################################
+            ## Buy Position                     #
+            ######################################
 
             ## Buy when price is drop suddenly 
 
             if (not trading and last <= tx_hr_price_avg and last < tx_10min_price_avg  \
-                and ( tx_10min_price_delta < -80 or ( tx_hr_price_delta < -90 and tx_10min_price_delta < -10 )) \
-                and ( last + int( last *  benefit) * 4 < tx_hr_price_max ) and ask == last and last < tx_10min_price_avg ): 
+                and ( tx_10min_price_delta < -150 or ( tx_hr_price_delta < -200 and tx_10min_price_delta < -100 )) \
+                and ( last + int( last *  benefit) * 4 < max ) and ask == last and last < tx_10min_price_avg ): 
             ## Set sell price
                 buy_price = ask
                 sell_price = ask + int(ask * benefit)
@@ -145,11 +148,11 @@ if __name__ == "__main__":
                             balance = chkUserBalance('krw',header)
                             trading = False
 
-            elif (not trading and (last + int(10) * limit) < high and ( (tx_10min_price_delta > 3 and tx_10min_price_delta < 10)  and tx_hr_price_delta > 50 )) \
-                or (not trading and (last + int(10) * limit) < high and ( (tx_10min_price_delta > 3 and tx_10min_price_delta < 10)  and tx_hr_price_delta < -50 )) \
-                or (not trading and (last + int(10) * limit) < high and ( tx_hr_price_delta < 5 and tx_hr_price_delta > -5 ) and ( tx_10min_price_delta < -20 )):
+            elif (not trading and last < int(high * limit) and ( (tx_10min_price_delta > 3 and tx_10min_price_delta < 10)  and (tx_hr_price_delta < 100 and tx_hr_price_delta > 50 ))) \
+                or (not trading and last < int(high * limit) and ( (tx_10min_price_delta > 3 and tx_10min_price_delta < 5) and (tx_hr_price_delta > -100 and  tx_hr_price_delta < -50 ))) \
+                or (not trading and last < int(high * limit) < high and ( tx_hr_price_delta < 5 and tx_hr_price_delta > -5 ) and (tx_10min_price_delta < -20 )):
                 buy_price = ask
-                sell_price = ask + int(10)
+                sell_price = ask + int(buy_price * 0.01)
                 buy_volume = int(int(money) // ask)
 
                 ### Buy Order
@@ -188,8 +191,9 @@ if __name__ == "__main__":
                 #print "zz1: Buy {} coin at {} won, will be ask at {} won".format(bid_volume, buy_price, sell_price)
             # Aggressive Bidding when trading trend is high, high tx users
 
-            ## Sell Position
-            ##
+            ######################################
+            ## Sell Position                     #
+            ######################################
             if trading and last >= sell_price and bid >= sell_price:
                 myask = {"currency_pair" : currency, "type":"limit", "price": sell_price, "coin_amount": sell_volume, "nonce": getNonce()}
                 stime = time.time() * 1000
