@@ -11,7 +11,7 @@ if __name__ == "__main__":
     ### Vriables
     bid_volume = 10
     trading = False
-    benefit = 15
+    benefit = 20
     total_bidding = 0
     buy_price = 0
     sell_price = 0
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     logger.info('Start Connection Pooling ')
     pooling()
     ## Get Token from API key
-    token = getAccessToken('C:\Users\dongwkim\Keys\korbit_key.csv')
+    token = getAccessToken('/usb/s1/key/korbit_key.csv')
     ## Set HTTP Header for Private API
     header = {"Authorization": "Bearer " + token['access_token']}
 
@@ -35,12 +35,12 @@ if __name__ == "__main__":
     balance = chkUserBalance('krw',header)
 
     while True:
-        time.sleep(0.5)
+        time.sleep(0.3)
 
         # refresh token every 30 min
         if time.strftime("%M", time.gmtime()) in ['00', '30']:
             ## Get Token from API key
-            token = getAccessToken('C:\Users\dongwkim\Keys\korbit_key.csv')
+            token = getAccessToken('/usb/s1/key/korbit_key.csv')
             ## Set HTTP Header for Private API
             header = {"Authorization": "Bearer " + token['access_token']}
 
@@ -98,13 +98,13 @@ if __name__ == "__main__":
             print "{} | Price: p:{}/b:{}/a:{} | Buy: {}/{} |  1Hr: delta: {:3.0f} {}/{}/{} tx: {} | 10Min: delta: {:3.0f} {}/{}/{} |  tx: {:3d} lat: {:4d} ms| bidding ({}) | balance:{}  " \
             .format(ctime, last, bid,ask, buy_price,sell_price,  tx_hr_price_delta,tx_hr_price_min, tx_hr_price_avg,tx_hr_price_max,  hr_tx_len, tx_10min_price_delta,tx_10min_price_min,tx_10min_price_avg, tx_10min_price_max,ten_min_pos,lat,total_bidding,curr_balance)
             # Create HTML for realtime view
-            genHTML(path='index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = curr_balance )
+            genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = curr_balance )
             ## Buy Position
             ## less than 1 hour average AND less than 10min average, but ask price should not be greater than 11min max AND Greater than min(1hr min,10min min)
 
             if not trading and last <= tx_hr_price_avg and last < tx_10min_price_avg  \
                 and ( tx_10min_price_delta < -25 or ( tx_hr_price_delta < -45 and tx_10min_price_delta < -5 )) \
-                and ( last + benefit * 5 < tx_hr_price_max ) and ask == last and last < limit:
+                and ( last + benefit * 5 < tx_hr_price_max ) and ask == last and last < int(low + high)/2:
                 buy_price = ask
                 sell_price = ask + benefit
 
@@ -189,6 +189,7 @@ if __name__ == "__main__":
 
         else:
             continue
+        prev_ticker = ticker
 
 
     #balance = chkUserBalance('krw',header)

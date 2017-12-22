@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"token_type": "Bearer", "access_token": "F1ARXlbrq20U92KANnL6xMg7GjM0l0ccBa4zvqBu4lY6hTbPhhldIbzov04Xd", "expires_in": 1499, "refresh_token": "XVt6Bm1tLJ3I3ciq7MxyJArvlH8pEmN7MeLafGVWA92bntaI4rwLtXBV0ipnC", "timestamp": 1513791304.503}
+=======
+{"token_type": "Bearer", "access_token": "I6KHndASVAXxhecGENm9UPbHQoHtHhYWRk7KwfAYvjC5CgVH8o6Jz1fgEhND6", "expires_in": 3600, "refresh_token": "QZdzXJOgFop86EYApUCra7Bw8PzLPaYZodmZr4FhV0JuBtsKphHWKfwexBTsr", "timestamp": 1513922406.744381}
+>>>>>>> 192b6c778f2775080b569da1ce07fe8893ad4115
