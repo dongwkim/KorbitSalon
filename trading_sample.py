@@ -84,7 +84,7 @@ if __name__ == "__main__":
     time.sleep(2)
     listorder = listOrder(currency, header)
     for i in range(len(listorder)):
-        print("{:15s} | Time:{} id#:{} type:{}:  volume: {}".format('Open Order',getStrTime(listorder[i]['timestamp']), listorder[i]['id'] ,listorder[i]['type'],listorder[i]['open']['value']))
+        print("{:15s} | Time:{} id#:{} type:{}:  volume: {}".format('List Order',getStrTime(listorder[i]['timestamp']), listorder[i]['id'] ,listorder[i]['type'],listorder[i]['open']['value']))
 
     ####################################################
     # Cancel Order
