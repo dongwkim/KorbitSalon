@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "TokenManager.py", line 83, in <module>
+    mySession.readSecFile()
+  File "TokenManager.py", line 20, in readSecFile
+    with open(secFilePath) as csvfile:
+FileNotFoundError: [Errno 2] No such file or directory: '/ikoogit/KorbitSalon/ikoo/mykey.csv'

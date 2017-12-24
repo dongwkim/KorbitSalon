@@ -45,6 +45,7 @@ class UserSessionInfo:
         self.redisCon.set('access_token',self.myToken['access_token'])
         self.redisCon.set('expires_in',self.myToken['expires_in'])
         self.redisCon.set('refresh_token',self.myToken['refresh_token'])
+        time.sleep(3000)
         print("insertTokenRedis")
         
     def updateTokenOnRedis(self):
