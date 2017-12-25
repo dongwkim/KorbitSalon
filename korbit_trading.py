@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from  korbit_api import *
+from  API.korbit_api import *
 import time
 #import logging
 

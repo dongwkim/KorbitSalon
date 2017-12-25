@@ -58,7 +58,19 @@ class algo:
             p4  : high bound of hr delta
         '''
 
-        if self.tx_1min_price_delta > p1 and self.tx_10min_price_delta > p2 and self.tx_hr_price_delta > p3 and self.tx_hr_price_delta < p4 and self.tx_10min_delta > self.tx_1min_delta:
+        if self.tx_1min_price_delta > p1 and self.tx_10min_price_delta > p2 and self.tx_hr_price_delta > p3 and self.tx_hr_price_delta < p4 and self.tx_10min_price_delta > self.tx_1min_price_delta:
+            return True
+        else:
+            return False
+
+    def XX1(self, p1, p2, p3):
+        ''' delta trend is converted from minus to plus
+            p1   : increase point of 1m_delta
+            p2   : increase point of 10m_delta
+            p3   : increase point of hr_delta
+        '''
+
+        if self.tx_1min_price_delta > p1 and self.tx_10min_price_delta < p2 and self.tx_hr_price_delta < p3:
             return True
         else:
             return False

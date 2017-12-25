@@ -36,9 +36,9 @@ if __name__ == "__main__":
         one_min_tx =  hr_tx[0:one_min_pos]
         tx_1min_price_avg = last if one_min_pos is 0 else (sum(int(tx['price']) for tx in one_min_tx)) / one_min_pos
 
-        tx_1min_price_max = max(one_min_tx, key=lambda x:x['price'])['price']
-        tx_1min_price_min = min(one_min_tx, key=lambda x:x['price'])['price']
-        tx_1min_price_delta = float(one_min_tx[0]['price']) - float(one_min_tx[one_min_pos - 1]['price'])
+        tx_1min_price_max = last if one_min_pos is 0 else max(one_min_tx, key=lambda x:x['price'])['price']
+        tx_1min_price_min = last if one_min_pos is 0 else min(one_min_tx, key=lambda x:x['price'])['price']
+        tx_1min_price_delta = 0 if one_min_pos is 0 else float(one_min_tx[0]['price']) - float(one_min_tx[one_min_pos - 1]['price'])
 
         tx_1min_stat = {'tx_1min_price_avg': tx_1min_price_avg,
                         'tx_1min_price_max': tx_1min_price_max,
@@ -70,9 +70,9 @@ if __name__ == "__main__":
                         'tx_hr_price_delta': tx_hr_price_delta}
 
 
-
+        # Create New Algorithm Instance
         myalgo = algo(last, tx_1min_stat, tx_10min_stat, tx_hr_stat, ticker)
 
-        print("{:15s} | Time:{} last:{} delta:{:3.0f}/{:3.0f}/{:3.0f} | basic:{} slump:{} wave:{} rise:{} ".format('Algorithm Test', getStrTime(ticker['timestamp']), ticker['last'], tx_hr_price_delta, tx_10min_price_delta, tx_1min_price_delta \
-         ,myalgo.basic(0.95), myalgo.slump(-50,2), myalgo.wave(2, -20, 0, 30), myalgo.rise(5,10,0,30)))
+        print("{:15s} | Time:{} last:{} delta:{:3.0f}/{:3.0f}/{:3.0f} | basic:{} slump:{} wave:{} rise:{} XX1:{} ".format('Algorithm Test', getStrTime(ticker['timestamp']), ticker['last'], tx_hr_price_delta, tx_10min_price_delta, tx_1min_price_delta \
+         ,myalgo.basic(0.95), myalgo.slump(-50,2), myalgo.wave(2, -20, 0, 30), myalgo.rise(5,10,0,30), myalgo.XX1(2,0,-30)))
         time.sleep(3)
