@@ -4,17 +4,20 @@ import json
 import requests
 import redis
 import time
+import logging
+
+logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='logging/tokenmanager.trc',level=logging.INFO)
+logger = logging.getLogger('TokenManager')
 
 class UserSessionInfo:
-    def __init__(self, pSecFilePath, host = 'localhost', port = '6379' ):
+    def __init__(self, pSecFilePath, myid, host = 'localhost', port = '6379' ):
         ''' redis connection
             pSecFilePath : Cryptocurrency API key/secret filename
             host         : redis host(default=localhost)
             port         : redis port(default=6379)
         '''
         self.secFilePath=pSecFilePath
-        # key/secret/email/passwd for authentication
-        #self.accessInfo = 4 * [None]
+        self.myid = myid
         self.accessInfo = {}
         self.authAtt = ['key','secret','email','password']
         self.urlPrefix = 'https://api.korbit.co.kr/v1'
@@ -27,6 +30,7 @@ class UserSessionInfo:
     def readSecFile(self):
         ''' read API security file and convert to dictinary
         '''
+        logger.info('Read key saved CSV file')
         with open(secFilePath) as csvfile:
             keys = csv.DictReader(csvfile, delimiter=',')
             for secrow in map(dict, keys):
@@ -43,53 +47,54 @@ class UserSessionInfo:
         else:
             raise Exception('{}/{}'.format(restResult.status_code,str(restResult)))
 
-    def insertTokenIntoRedis(self, myid):
+    def insertTokenIntoRedis(self):
         ''' Insert token to redis
-            myid  : unique id for user
         '''
-        self.redisCon.hmset(myid, self.accessInfo)
-        self.redisCon.hmset(myid, self.myToken)
-        print("insertTokenRedis")
+        logger.info('insert token into redis')
+        self.redisCon.hmset(self.myid, self.accessInfo)
+        self.redisCon.hmset(self.myid, self.myToken)
+        print("{} | Insert Token to Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
 
-    def updateTokenOnRedis(self, myid):
+    def updateTokenOnRedis(self):
         ''' Update token on redis
-            myid  : unique id for user
         '''
-        self.redisCon.hmset(myid,self.myToken)
-        print("updateTokenOnRedis")
+        logger.info('update token on redis')
+        self.redisCon.hmset(self.myid,self.myToken)
+        print("{} | Update Token on Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
 
-    def updateToken(self, myid):
+    def updateToken(self):
         ''' Get refresh token from api server
-            myid  : unique id for user
         '''
         while True:
-            print(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()))
-            refreshToken = self.redisCon.hmget(myid,'refresh_token')
+            print("{} | Refresh Token from API Server".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
+            logger.info('get refresh token from redis')
+            refreshToken = self.redisCon.hmget(self.myid,'refresh_token')
+            logger.info('refresh token from api server')
             self.myToken = self.doPost('oauth2/access_token', client_id=self.accessInfo['key'], client_secret=self.accessInfo['secret'], refresh_token=refreshToken, grant_type='refresh_token')
-            self.updateTokenOnRedis(myid)
-            self.myPrint(myid)
-            print(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()))
+            self.updateTokenOnRedis()
+            #self.myPrint()
+            print("{} | Sleep 50min..".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
             time.sleep(3000)
 
 
-    def getRefreshToken(self, myid):
-        return self.redisCon.hmget(myid,'refresh_token')
+    def getRefreshToken(self):
+        return self.redisCon.hmget(self.myid,'refresh_token')
 
-    def getExpiredTime(self, myid):
-        return self.redisCon.hmget(myid,'expires_in')
+    def getExpiredTime(self):
+        return self.redisCon.hmget(self.myid,'expires_in')
 
-    def myPrint(self, myid):
-        print(self.redisCon.hmget(myid, 'access_token'))
-        print(self.redisCon.hmget(myid, 'expires_in'))
-        print(self.redisCon.hmget(myid, 'refresh_token'))
+    def myPrint(self):
+        print(self.redisCon.hmget(self.myid, 'access_token'))
+        print(self.redisCon.hmget(self.myid, 'expires_in'))
+        print(self.redisCon.hmget(self.myid, 'refresh_token'))
 
 if __name__ == "__main__":
     #secFilePath="/usb/s1/key/korbit_key.csv"
     secFilePath="c:/Users/dongwkim/keys/korbit_key.csv"
-    mySession=UserSessionInfo(secFilePath, '39.115.53.33', '16379')
+    mySession=UserSessionInfo(secFilePath, 'dongwkim','39.115.53.33', '16379')
     mySession.readSecFile()
     #print  mySession.accessInfo
 
     mySession.myToken = mySession.doPost('oauth2/access_token', client_id=mySession.accessInfo['key'], client_secret=mySession.accessInfo['secret'], username=mySession.accessInfo['email'], password=mySession.accessInfo['password'], grant_type='password')
-    mySession.insertTokenIntoRedis('dongwkim')
-    mySession.updateToken('dongwkim')
+    mySession.insertTokenIntoRedis()
+    mySession.updateToken()
