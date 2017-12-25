@@ -9,9 +9,9 @@ if __name__ == "__main__":
     logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='trading.trc',level=logging.DEBUG)
     logger = logging.getLogger('korbit_trading')
     ### Vriables
-    money = 50000
+    money = 70000
     trading = False
-    benefit = 0.03
+    benefit = 0.05
     total_bidding = 0
     buy_price = 0
     sell_price = 0
@@ -44,7 +44,8 @@ if __name__ == "__main__":
         # refresh token every 30 min
         if time.strftime("%M", time.gmtime()) in ['00', '30']:
             ## Get Token from API key
-            token = getAccessToken('/usb/s1/key/korbit_key.csv')
+            token = getAccessToken('c:/Users/dongwkim/keys/korbit_key.csv')
+            #token = getAccessToken('/usb/s1/key/korbit_key.csv')
             ## Set HTTP Header for Private API
             header = {"Authorization": "Bearer " + token['access_token']}
 
@@ -116,7 +117,8 @@ if __name__ == "__main__":
             ## Slump Algorithm
 
             if (not trading and last <= tx_hr_price_avg and last < tx_10min_price_avg  \
-                and ( tx_1min_price_delta < -100 or ( tx_hr_price_delta < -200 and tx_10min_price_delta < -100 )) \
+                and ( tx_1min_price_delta < -100 or ( tx_hr_price_delta < tx_10min_price_delta * 1.5 and tx_10min_price_delta < -100 )) \
+                and tx_1min_price_delta > 3 \
                 and ( last < int(high * limit)) and ask <= int(last + 3) ):
             ## Set sell price
                 buy_price = ask
