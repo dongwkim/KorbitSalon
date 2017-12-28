@@ -2,6 +2,7 @@
 from trading.KorbitAPI import *
 import time
 from token.TokenManager import *
+from platform import system
 #import logging
 
 
@@ -22,11 +23,18 @@ if __name__ == "__main__":
     #limit is calculated dynamically based on max
     limit = 0.95
     currency = 'xrp_krw'
-    #API key file dest
-    secFilePath='/usb/s1/key/korbit_key.csv'
+    #Switch Env based on Platform
+    if system() is 'Windows':
+        secFilePath='c:/User/dongwkim/keys/korbit_key.csv'
+        redisHost = '39.115.53.33'
+        redisPort = 16379
+        showhtml = False
+    ## Linux
+    else:
+        secFilePath='/usb/s1/key/korbit_key.csv'
+        redisHost = 'localhost'
+        redisPort = 6379
     redisUser = 'dongwkim'
-    redisHost = 'localhost'
-    redisPort = 6379
 
 
     URL = 'https://api.korbit.co.kr/v1'
@@ -41,9 +49,9 @@ if __name__ == "__main__":
     header = {"Authorization": "Bearer " + token}
 
     ### Fetching Ticker
-    prev_ticker = get('ticker/detailed', currency_pair='xrp_krw')
+    prev_ticker = get('ticker/detailed', currency_pair = currency)
     ### Check Balance
-    balance = chkUserBalance('krw',header)
+    balance = chkUserBalance('krw', header)
 
     while True:
         time.sleep(0.5)
@@ -113,7 +121,9 @@ if __name__ == "__main__":
             print "{} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:3.0f}/{:3.0f}/{:3.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  " \
             .format(getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,lat,total_bidding,int(curr_balance)//10)
             # Create HTML for realtime view
-            genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = int(curr_balance)//10 )
+            if showhtml == True:
+                genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = int(curr_balance)//10 )
+
 
             ######################################
             ## Buy Position                     #
