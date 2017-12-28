@@ -1,7 +1,7 @@
 #!/usr/bin/python
-from  trading.KorbitAPI import *
+from trading.KorbitAPI import *
 import time
-from import redis.TokenManager import *
+from token.TokenManager import *
 #import logging
 
 
@@ -10,7 +10,7 @@ if __name__ == "__main__":
     logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='trading.trc',level=logging.DEBUG)
     logger = logging.getLogger('korbit_trading')
     ### Vriables
-    money = 70000
+    money = 10000
     trading = False
     bidding = False
     benefit = 0.05
@@ -23,8 +23,10 @@ if __name__ == "__main__":
     limit = 0.95
     currency = 'xrp_krw'
     #API key file dest
-    secFilePath="c:/Users/dongwkim/keys/korbit_key.csv"
+    secFilePath='/usb/s1/key/korbit_key.csv'
     redisUser = 'dongwkim'
+    redisHost = 'localhost'
+    redisPort = 6379
 
 
     URL = 'https://api.korbit.co.kr/v1'
@@ -34,8 +36,9 @@ if __name__ == "__main__":
     pooling()
 
     #refresh token by redis
-    myRedis = UserSessionInfo(secFilePath, redisUser,'39.115.53.33', '16379')
-    token = myRedis.getAccessToken
+    myRedis = UserSessionInfo(secFilePath, redisUser, redisHost, redisPort)
+    token = myRedis.getAccessToken()
+    header = {"Authorization": "Bearer " + token}
 
     ### Fetching Ticker
     prev_ticker = get('ticker/detailed', currency_pair='xrp_krw')
@@ -46,16 +49,16 @@ if __name__ == "__main__":
         time.sleep(0.5)
 
         # Get Access token from redis
-        token = myRedis.getAccessToken
+        token = myRedis.getAccessToken()
 
         ## Set HTTP Header for Private API
         header = {"Authorization": "Bearer " + token}
 
 
         start = time.time()
-        ticker = get('ticker/detailed', currency_pair='xrp_krw')
-        #min_tx = get('transactions', currency_pair='xrp_krw', time='minute')
-        hr_tx = get('transactions', currency_pair='xrp_krw', time='hour')
+        ticker = get('ticker/detailed', currency_pair = currency)
+        #min_tx = get('transactions', currency_pair = currency, time='minute')
+        hr_tx = get('transactions', currency_pair = currency, time='hour')
         end = time.time()
 
         lat = int((end - start)*100)
@@ -110,7 +113,7 @@ if __name__ == "__main__":
             print "{} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:3.0f}/{:3.0f}/{:3.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  " \
             .format(getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,lat,total_bidding,int(curr_balance)//10)
             # Create HTML for realtime view
-            #genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = int(curr_balance)//10 )
+            genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = int(curr_balance)//10 )
 
             ######################################
             ## Buy Position                     #
@@ -206,9 +209,6 @@ if __name__ == "__main__":
                             trading = True
             #print "zz2: Sell {} coin at {} won, elapsed:{} , bidding# {}".format(bid_volume,ask,buy_sell_gap,total_bidding)
             ## End Trading
-            ## Generate HTML for mobile
-            #print("Available:{} , Trade:{} ".format(balance["available"], balance["trade_in_use"]))
-            #genHTML()
 
         else:
             continue
