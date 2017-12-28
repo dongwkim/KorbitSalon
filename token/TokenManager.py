@@ -78,22 +78,22 @@ class UserSessionInfo:
 
 
     def getRefreshToken(self):
-        return self.redisCon.hmget(self.myid,'refresh_token')
+        return str(self.redisCon.hmget(self.myid,'refresh_token')[0])
 
     def getAccessToken(self):
-        return self.redisCon.hmget(self.myid,'access_token')[0]
+        return str(self.redisCon.hmget(self.myid,'access_token')[0])
 
     def getExpiredTime(self):
-        return self.redisCon.hmget(self.myid,'expires_in')
+        return str(self.redisCon.hmget(self.myid,'expires_in')[0])
 
     def myPrint(self):
-        print(self.redisCon.hmget(self.myid, 'access_token'))
-        print(self.redisCon.hmget(self.myid, 'expires_in'))
-        print(self.redisCon.hmget(self.myid, 'refresh_token'))
+        print(self.redisCon.hmget(self.myid, 'access_token')[0])
+        print(self.redisCon.hmget(self.myid, 'expires_in')[0])
+        print(self.redisCon.hmget(self.myid, 'refresh_token')[0])
 
 if __name__ == "__main__":
-    #secFilePath="/usb/s1/key/korbit_key.csv"
-    secFilePath="c:/Users/dongwkim/keys/korbit_key.csv"
+    secFilePath="/usb/s1/key/korbit_key.csv"
+    #secFilePath="c:/Users/dongwkim/keys/korbit_key.csv"
     mySession=UserSessionInfo(secFilePath, 'dongwkim','39.115.53.33', '16379')
     # mySession.readSecFile()
     # #print  mySession.accessInfo
