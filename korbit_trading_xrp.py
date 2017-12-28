@@ -34,6 +34,7 @@ if __name__ == "__main__":
         secFilePath='/usb/s1/key/korbit_key.csv'
         redisHost = 'localhost'
         redisPort = 6379
+        showhtml = True
     redisUser = 'dongwkim'
 
 

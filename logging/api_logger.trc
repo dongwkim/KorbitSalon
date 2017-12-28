@@ -5441,3 +5441,20 @@
 2017-12-28 14:56:50,671 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 169
 2017-12-28 14:56:51,145 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 138285
 2017-12-28 14:56:52,358 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 169
+2017-12-28 15:01:43,123 INFO korbit_trading Start Connection Pooling 
+2017-12-28 15:01:43,154 INFO urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-28 15:01:43,547 DEBUG urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
+2017-12-28 15:01:43,802 DEBUG urllib3.connectionpool "GET /v1/user/balances HTTP/1.1" 200 None
+2017-12-28 15:01:44,528 DEBUG urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
+2017-12-28 15:01:44,993 DEBUG urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 133830
+2017-12-28 15:01:46,203 DEBUG urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
+2017-12-28 15:01:46,641 DEBUG urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 133753
+2017-12-28 15:01:47,960 DEBUG urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
+2017-12-28 15:01:48,253 DEBUG urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 133845
+2017-12-28 15:01:49,064 DEBUG urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
+2017-12-28 15:01:49,322 DEBUG urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 133845
+2017-12-28 15:01:51,091 DEBUG urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
+2017-12-28 15:01:51,606 DEBUG urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 133769
+2017-12-28 15:01:52,815 DEBUG urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
+2017-12-28 15:01:53,266 DEBUG urllib3.connectionpool "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 133690
+2017-12-28 15:01:54,471 DEBUG urllib3.connectionpool "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
