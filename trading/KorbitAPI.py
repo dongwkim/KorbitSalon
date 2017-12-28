@@ -4,6 +4,7 @@ import csv
 import json
 import time
 import logging
+import redis
 
 logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='logging/api_logger.trc',level=logging.DEBUG)
 logger = logging.getLogger('api')

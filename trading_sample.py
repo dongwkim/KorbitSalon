@@ -1,4 +1,4 @@
-from  API.korbit_api import *
+from  trading.KorbitAPI import *
 
 if __name__ == "__main__":
 

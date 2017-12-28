@@ -5075,3 +5075,35 @@
 2017-12-26 03:19:31,279 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 7441
 2017-12-26 03:19:31,979 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
 2017-12-26 03:19:32,519 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 7441
+2017-12-26 20:19:31,763 INFO korbit_trading Start Connection Pooling 
+2017-12-26 20:19:31,772 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-26 20:21:12,895 INFO korbit_trading Start Connection Pooling 
+2017-12-26 20:21:12,903 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-26 20:21:14,384 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "POST /v1/oauth2/access_token?client_secret=yX7IoEr33GBydBf8tAFDc6TRK2rIdVom7K0YJTgJnuoEn4IJz4AAxrWreLIQR&grant_type=refresh_token&refresh_token=3vQ3r8t96czVpbwOsBaLI1BolGHbVHDLQYNF9Nwq8ZM9gaaM7ZYPGKXNzf4HY&client_id=Zv2E5vfkBHSYvTplFVukdDrHzwSuIMGmBchgwjVnhJBstTtA05h7kLQypL4B4 HTTP/1.1" 401 56
+2017-12-26 20:26:38,976 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-26 20:26:39,752 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:26:40,187 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23293
+2017-12-26 20:26:43,408 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:26:43,867 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23293
+2017-12-26 20:26:47,117 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:26:47,576 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23374
+2017-12-26 20:26:50,809 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:26:51,023 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23374
+2017-12-26 20:26:54,249 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:26:54,486 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23374
+2017-12-26 20:26:57,733 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:26:58,147 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23374
+2017-12-26 20:27:01,364 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:27:01,608 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23374
+2017-12-26 20:27:05,276 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:27:05,492 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23122
+2017-12-26 20:27:08,713 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:27:08,941 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23042
+2017-12-26 20:27:12,157 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:27:12,611 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23042
+2017-12-26 20:27:15,825 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:27:16,296 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23042
+2017-12-26 20:27:19,573 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:27:20,015 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23135
+2017-12-26 20:27:23,250 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 171
+2017-12-26 20:27:23,694 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?currency_pair=xrp_krw&time=hour HTTP/1.1" 200 23135
