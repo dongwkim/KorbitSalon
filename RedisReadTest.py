@@ -25,6 +25,6 @@ class RedisReadTest:
  
 redis = redis.Redis()
 r = redis
-s=r.zrangebyscore("test11", '-inf', '+inf')
+s=r.zrangebyscore("test12", '-inf', '+inf')
 
 print(s)
