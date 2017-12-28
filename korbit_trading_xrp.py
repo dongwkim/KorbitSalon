@@ -14,6 +14,8 @@ if __name__ == "__main__":
     ### Vriables
     money = 10000
     trading = False
+    slump_trading = False
+    rise_trading = False
     testing = True
     bidding = False
     benefit = 0.05
@@ -153,11 +155,13 @@ if __name__ == "__main__":
                 print("Hit : Big Slump")
                 bidding = True
                 benefit = 0.03
+                money = 50000
             ## Little Slump Algorithm
             elif not testing and trading and myalgo.basic(95) and myalgo.slump(2, 0.03, 2, 1 ):
                 print("Hit : Little Slump")
                 bidding = True
                 benefit = 0.01
+                money = 30000
 
             ## Bid Order
             if bidding:
