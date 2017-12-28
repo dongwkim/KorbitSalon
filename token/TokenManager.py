@@ -81,7 +81,7 @@ class UserSessionInfo:
         return self.redisCon.hmget(self.myid,'refresh_token')
 
     def getAccessToken(self):
-        return self.redisCon.hmget(self.myid,'access_token')
+        return self.redisCon.hmget(self.myid,'access_token')[0]
 
     def getExpiredTime(self):
         return self.redisCon.hmget(self.myid,'expires_in')
@@ -95,9 +95,10 @@ if __name__ == "__main__":
     #secFilePath="/usb/s1/key/korbit_key.csv"
     secFilePath="c:/Users/dongwkim/keys/korbit_key.csv"
     mySession=UserSessionInfo(secFilePath, 'dongwkim','39.115.53.33', '16379')
-    mySession.readSecFile()
-    #print  mySession.accessInfo
-
-    mySession.myToken = mySession.doPost('oauth2/access_token', client_id=mySession.accessInfo['key'], client_secret=mySession.accessInfo['secret'], username=mySession.accessInfo['email'], password=mySession.accessInfo['password'], grant_type='password')
-    mySession.insertTokenIntoRedis()
-    mySession.updateToken()
+    # mySession.readSecFile()
+    # #print  mySession.accessInfo
+    # #
+    # mySession.myToken = mySession.doPost('oauth2/access_token', client_id=mySession.accessInfo['key'], client_secret=mySession.accessInfo['secret'], username=mySession.accessInfo['email'], password=mySession.accessInfo['password'], grant_type='password')
+    # mySession.insertTokenIntoRedis()
+    # mySession.updateToken()
+    print type(str(mySession.getAccessToken()))
