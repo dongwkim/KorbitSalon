@@ -146,7 +146,7 @@ if __name__ == "__main__":
                 and tx_1min_price_delta > 2 \
                 and ( last < high and ask <= int(last + 3)):
                 print("Hit : Rise")
-                bidding = True
+                bidding = False
                 benefit = 0.01
             ## Set sell price
                 buy_price = ask
@@ -158,12 +158,50 @@ if __name__ == "__main__":
                 and tx_1min_price_delta > 0 \
                 and ( last <= high and ask <= int(last + 3)):
                 print("Hit : Curve")
-                bidding = True
+                bidding = False
                 benefit = 0.01
             ## Set sell price
                 buy_price = ask
                 sell_price = ask + int(ask * benefit)
                 buy_volume = int(int(money) // ask)
+
+            ## Bid Order
+            if bidding:
+                ### Buy Order
+                mybid = {"currency_pair" : currency, "type":"limit", "price": buy_price, "coin_amount": buy_volume, "nonce": getNonce()}
+                stime = time.time() * 1000
+                bidorder = bidOrder(mybid, header)
+                elapsed = int(time.time() * 1000 - stime)
+                print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),bidorder['currencyPair'],'Buy',str(bidorder['orderId']) ,bidorder['status'], elapsed)
+
+                ### List Open Order
+                ## Open Order is not queries as soon as ordered, need sleep interval
+                time.sleep(2)
+                listorder = listOrder(currency,header)
+
+                # check bidding was  success.
+                if bidorder['status'] == 'success' and len(listorder) == 0:
+                    xrp_balance = chkUserBalance('xrp',header)
+                    trading = True
+                    buy_time = time.time()
+                    sell_volume = xrp_balance['available']
+                    bidding = False
+                # if open order is exist, cancel all bidding order
+                elif bidorder['status'] == 'success' and len(listorder) > 0:
+                    for i in range(len(listorder)):
+                        print("{} {:7s}: id# {:10s} is {:7s}".format(currency,'List',listorder[i]['id'] ,listorder[i]['type']))
+                        # if failed to buy order , cancel pending order
+                        mycancel = {"currency_pair": currency, "id": listorder[i]['id'],"nonce":getNonce()}
+                        stime = time.time() * 1000
+                        cancelorder = cancelOrder(mycancel, header)
+                        elapsed = int(time.time() * 1000 - stime)
+                        for i in range(len(cancelorder)):
+                            print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancelorder[i]['currencyPair'],'Cancel',str(cancelorder[i]['orderId']) ,cancelorder[i]['status'], elapsed))
+                        if cancelorder[0]['status'] == 'success':
+                            balance = chkUserBalance('krw',header)
+                            trading = False
+                            bidding = False
+
 
             ######################################
             ## Sell Position                     #
