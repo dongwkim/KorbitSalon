@@ -32,11 +32,10 @@ if __name__ == "__main__":
 
     logger.info('Start Connection Pooling ')
     pooling()
-    ## Get Token from API key
-    #token = getAccessToken('/usb/s1/key/korbit_key.csv')
-    token = getAccessToken('c:/Users/dongwkim/keys/korbit_key.csv')
-    ## Set HTTP Header for Private API
-    header = {"Authorization": "Bearer " + token['access_token']}
+
+    #refresh token by redis
+    myRedis = UserSessionInfo(secFilePath, redisUser,'39.115.53.33', '16379')
+    token = myRedis.getAccessToken
 
     ### Fetching Ticker
     prev_ticker = get('ticker/detailed', currency_pair='xrp_krw')
@@ -46,8 +45,7 @@ if __name__ == "__main__":
     while True:
         time.sleep(0.5)
 
-        # refresh token by redis
-        myRedis = UserSessionInfo(secFilePath, redisUser,'39.115.53.33', '16379')
+        # Get Access token from redis
         token = myRedis.getAccessToken
 
         ## Set HTTP Header for Private API

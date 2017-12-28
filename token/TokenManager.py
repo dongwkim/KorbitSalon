@@ -80,6 +80,9 @@ class UserSessionInfo:
     def getRefreshToken(self):
         return self.redisCon.hmget(self.myid,'refresh_token')
 
+    def getAccessToken(self):
+        return self.redisCon.hmget(self.myid,'access_token')
+
     def getExpiredTime(self):
         return self.redisCon.hmget(self.myid,'expires_in')
 
