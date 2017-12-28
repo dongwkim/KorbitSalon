@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from  trading.KorbitAPI import *
 import time
+from import redis.TokenManager import *
 #import logging
 
 
@@ -11,6 +12,7 @@ if __name__ == "__main__":
     ### Vriables
     money = 70000
     trading = False
+    bidding = False
     benefit = 0.05
     total_bidding = 0
     buy_price = 0
@@ -20,6 +22,9 @@ if __name__ == "__main__":
     #limit is calculated dynamically based on max
     limit = 0.95
     currency = 'xrp_krw'
+    #API key file dest
+    secFilePath="c:/Users/dongwkim/keys/korbit_key.csv"
+    redisUser = 'dongwkim'
 
 
     URL = 'https://api.korbit.co.kr/v1'
@@ -41,13 +46,12 @@ if __name__ == "__main__":
     while True:
         time.sleep(0.5)
 
-        # refresh token every 30 min
-        if time.strftime("%M", time.gmtime()) in ['00', '30']:
-            ## Get Token from API key
-            token = getAccessToken('c:/Users/dongwkim/keys/korbit_key.csv')
-            #token = getAccessToken('/usb/s1/key/korbit_key.csv')
-            ## Set HTTP Header for Private API
-            header = {"Authorization": "Bearer " + token['access_token']}
+        # refresh token by redis
+        myRedis = UserSessionInfo(secFilePath, redisUser,'39.115.53.33', '16379')
+        token = myRedis.getAccessToken
+
+        ## Set HTTP Header for Private API
+        header = {"Authorization": "Bearer " + token}
 
 
         start = time.time()
@@ -114,50 +118,54 @@ if __name__ == "__main__":
             ## Buy Position                     #
             ######################################
 
-            ## Slump Algorithm
-
+            ## Big Slump Algorithm
             if (not trading and last <= tx_hr_price_avg and last < tx_10min_price_avg  \
-                and ( tx_1min_price_delta < -100 or ( tx_hr_price_delta < tx_10min_price_delta * 1.5 and tx_10min_price_delta < -100 )) \
-                and tx_1min_price_delta > 3 \
-                and ( last < int(high * limit)) and ask <= int(last + 3) ):
+                and ( tx_1min_price_delta < -(high * 0.05) or ( tx_10min_price_delta <= -(high*0.05) and tx_hr_price_delta < tx_10min_price_delta * 1.5 )) \
+                and tx_1min_price_delta > 4) \
+                and ( last < int(high * limit)) and ask <= int(last + 3) :
+                print("Hit : Big Slump")
+                bidding = True
+                benefit = 0.03
             ## Set sell price
                 buy_price = ask
                 sell_price = ask + int(ask * benefit)
                 buy_volume = int(int(money) // ask)
-
-                ### Buy Order
-                mybid = {"currency_pair" : currency, "type":"limit", "price": buy_price, "coin_amount": buy_volume, "nonce": getNonce()}
-                stime = time.time() * 1000
-                bidorder = bidOrder(mybid, header)
-                elapsed = int(time.time() * 1000 - stime)
-                print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),bidorder['currencyPair'],'Buy',str(bidorder['orderId']) ,bidorder['status'], elapsed)
-
-                ### List Open Order
-                ## Open Order is not queries as soon as ordered, need sleep interval
-                time.sleep(2)
-                listorder = listOrder(currency,header)
-
-                # check bidding was  success.
-                if bidorder['status'] == 'success' and len(listorder) == 0:
-                    xrp_balance = chkUserBalance('xrp',header)
-                    trading = True
-                    buy_time = time.time()
-                    sell_volume = xrp_balance['available']
-                # if open order is exist, cancel all bidding order
-                elif bidorder['status'] == 'success' and len(listorder) > 0:
-                    for i in range(len(listorder)):
-                        print("{} {:7s}: id# {:10s} is {:7s}".format(currency,'List',listorder[i]['id'] ,listorder[i]['type']))
-                        # if failed to buy order , cancel pending order
-                        mycancel = {"currency_pair": currency, "id": listorder[i]['id'],"nonce":getNonce()}
-                        stime = time.time() * 1000
-                        cancelorder = cancelOrder(mycancel, header)
-                        elapsed = int(time.time() * 1000 - stime)
-                        for i in range(len(cancelorder)):
-                            print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancelorder[i]['currencyPair'],'Cancel',str(cancelorder[i]['orderId']) ,cancelorder[i]['status'], elapsed))
-                        if cancelorder[0]['status'] == 'success':
-                            balance = chkUserBalance('krw',header)
-                            trading = False
-
+            ## Little Slump Algorithm
+            elif (not trading and last <= tx_hr_price_avg and last < tx_10min_price_avg  \
+                and ( tx_1min_price_delta < -(high * 0.015) or ( tx_10min_price_delta <= -(high*0.010) and tx_hr_price_delta < tx_10min_price_delta * 1 )) \
+                and tx_1min_price_delta > 0) \
+                and ( last < int(high * limit)) and ask <= int(last + 3):
+                print("Hit : Little Slump")
+                bidding = True
+                benefit = 0.008
+            ## Set sell price
+                buy_price = ask
+                sell_price = ask + int(ask * benefit)
+                buy_volume = int(int(money) // ask)
+            ## Rise Algorithm
+            elif not trading  \
+                and (tx_10min_price_delta > 0 and (tx_hr_price_delta > high * 0.015) and (tx_hr_price_delta < tx_10min_price_delta * 5 and tx_hr_price_delta > tx_10min_price_delta * 1.1)) \
+                and tx_1min_price_delta > 2 \
+                and ( last < high and ask <= int(last + 3)):
+                print("Hit : Rise")
+                bidding = True
+                benefit = 0.01
+            ## Set sell price
+                buy_price = ask
+                sell_price = ask + int(ask * benefit)
+                buy_volume = int(int(money) // ask)
+            ## Curve Algorithm
+            elif not trading  \
+                and ((tx_10min_price_delta > 0 and tx_10min_price_delta < (high * 0.005)) and tx_hr_price_delta < -(high * 0.02)) \
+                and tx_1min_price_delta > 0 \
+                and ( last <= high and ask <= int(last + 3)):
+                print("Hit : Curve")
+                bidding = True
+                benefit = 0.01
+            ## Set sell price
+                buy_price = ask
+                sell_price = ask + int(ask * benefit)
+                buy_volume = int(int(money) // ask)
 
             ######################################
             ## Sell Position                     #
