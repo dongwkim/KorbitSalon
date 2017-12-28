@@ -3,6 +3,7 @@ from trading.KorbitAPI import *
 import time
 from token.TokenManager import *
 from platform import system
+from trading import algo
 #import logging
 
 
@@ -13,6 +14,7 @@ if __name__ == "__main__":
     ### Vriables
     money = 10000
     trading = False
+    testing = True
     bidding = False
     benefit = 0.05
     total_bidding = 0
@@ -100,6 +102,10 @@ if __name__ == "__main__":
             tx_1min_price_max = max(one_min_tx, key=lambda x:x['price'])['price']
             tx_1min_price_min = min(one_min_tx, key=lambda x:x['price'])['price']
             tx_1min_price_delta = last if one_min_pos is 0 else float(one_min_tx[0]['price']) - float(one_min_tx[one_min_pos - 1]['price'])
+            tx_1min_stat = {'tx_1min_price_avg': tx_1min_price_avg,
+                            'tx_1min_price_max': tx_1min_price_max,
+                            'tx_1min_price_min': tx_1min_price_min,
+                            'tx_1min_price_delta': tx_1min_price_delta}
             ## Create new ten miniute List Dictionary
             ten_min_tx =  hr_tx[0:ten_min_pos]
             tx_10min_price_avg = (sum(int(tx['price']) for tx in ten_min_tx)) / ten_min_pos
@@ -107,6 +113,10 @@ if __name__ == "__main__":
             tx_10min_price_max = max(ten_min_tx, key=lambda x:x['price'])['price']
             tx_10min_price_min = min(ten_min_tx, key=lambda x:x['price'])['price']
             tx_10min_price_delta = float(ten_min_tx[0]['price']) - float(ten_min_tx[ten_min_pos - 1]['price'])
+            tx_10min_stat = {'tx_10min_price_avg': tx_10min_price_avg,
+                            'tx_10min_price_max': tx_10min_price_max,
+                            'tx_10min_price_min': tx_10min_price_min,
+                            'tx_10min_price_delta': tx_10min_price_delta}
 
             ## Hour transactions
             hr_tx_len = len(hr_tx)
@@ -115,6 +125,10 @@ if __name__ == "__main__":
             tx_hr_price_delta = float(hr_tx[0]['price']) - float(hr_tx[hr_tx_len - 1]['price'])
             tx_hr_price_max = max(hr_tx, key=lambda x:x['price'])['price']
             tx_hr_price_min = min(hr_tx, key=lambda x:x['price'])['price']
+            tx_hr_stat = {'tx_hr_price_avg': tx_hr_price_avg,
+                          'tx_hr_price_max': tx_hr_price_max,
+                          'tx_hr_price_min': tx_hr_price_min,
+                          'tx_hr_price_delta': tx_hr_price_delta}
 
 
             # print trading stats
@@ -125,96 +139,71 @@ if __name__ == "__main__":
             if showhtml == True:
                 genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = int(curr_balance)//10 )
 
+            ######################################
+            ##  Set Algorithm
+            ######################################
+            myalgo = algo.algo(tx_1min_stat, tx_10min_stat, tx_hr_stat, ticker)
 
             ######################################
             ## Buy Position                     #
             ######################################
 
             ## Big Slump Algorithm
-            if (not trading and last <= tx_hr_price_avg and last < tx_10min_price_avg  \
-                and ( tx_1min_price_delta < -(high * 0.05) or ( tx_10min_price_delta <= -(high*0.05) and tx_hr_price_delta < tx_10min_price_delta * 1.5 )) \
-                and tx_1min_price_delta > 4) \
-                and ( last < int(high * limit)) and ask <= int(last + 3) :
+            if not testing and trading and myalgo.basic(95) and myalgo.slump(5, 0.05, 5, 1.5):
                 print("Hit : Big Slump")
                 bidding = True
                 benefit = 0.03
-            ## Set sell price
-                buy_price = ask
-                sell_price = ask + int(ask * benefit)
-                buy_volume = int(int(money) // ask)
             ## Little Slump Algorithm
-            elif (not trading and last <= tx_hr_price_avg and last < tx_10min_price_avg  \
-                and ( tx_1min_price_delta < -(high * 0.015) or ( tx_10min_price_delta <= -(high*0.010) and tx_hr_price_delta < tx_10min_price_delta * 1 )) \
-                and tx_1min_price_delta > 0) \
-                and ( last < int(high * limit)) and ask <= int(last + 3):
+            elif not testing and trading and myalgo.basic(95) and myalgo.slump(2, 0.03, 2, 1 ):
                 print("Hit : Little Slump")
                 bidding = True
-                benefit = 0.008
-            ## Set sell price
-                buy_price = ask
-                sell_price = ask + int(ask * benefit)
-                buy_volume = int(int(money) // ask)
-            ## Rise Algorithm
-            elif not trading  \
-                and (tx_10min_price_delta > 0 and (tx_hr_price_delta > high * 0.015) and (tx_hr_price_delta < tx_10min_price_delta * 5 and tx_hr_price_delta > tx_10min_price_delta * 1.1)) \
-                and tx_1min_price_delta > 2 \
-                and ( last < high and ask <= int(last + 3)):
-                print("Hit : Rise")
-                bidding = False
                 benefit = 0.01
-            ## Set sell price
-                buy_price = ask
-                sell_price = ask + int(ask * benefit)
-                buy_volume = int(int(money) // ask)
-            ## Curve Algorithm
-            elif not trading  \
-                and ((tx_10min_price_delta > 0 and tx_10min_price_delta < (high * 0.005)) and tx_hr_price_delta < -(high * 0.02)) \
-                and tx_1min_price_delta > 0 \
-                and ( last <= high and ask <= int(last + 3)):
-                print("Hit : Curve")
-                bidding = False
-                benefit = 0.01
-            ## Set sell price
-                buy_price = ask
-                sell_price = ask + int(ask * benefit)
-                buy_volume = int(int(money) // ask)
 
             ## Bid Order
             if bidding:
+                ## Set sell price
+                buy_price = ask
+                sell_price = ask + int(ask * benefit)
+                buy_volume = int(int(money) // ask)
                 ### Buy Order
                 mybid = {"currency_pair" : currency, "type":"limit", "price": buy_price, "coin_amount": buy_volume, "nonce": getNonce()}
                 stime = time.time() * 1000
                 bidorder = bidOrder(mybid, header)
+                order_id = str(bidorder['orderId'])
+                order_status = str(bidorder['status'])
                 elapsed = int(time.time() * 1000 - stime)
-                print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),bidorder['currencyPair'],'Buy',str(bidorder['orderId']) ,bidorder['status'], elapsed)
+                print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),bidorder['currencyPair'],'Buy',str(order_id) ,str(order_status), elapsed)
 
                 ### List Open Order
                 ## Open Order is not queries as soon as ordered, need sleep interval
                 time.sleep(2)
                 listorder = listOrder(currency,header)
+                ## list orderid from listorder
+                myorder = []
+                for orders in listorder:
+                    myorder.append(orders['id'])
 
-                # check bidding was  success.
-                if bidorder['status'] == 'success' and len(listorder) == 0:
+                # if bid order id is not in open orders complete order
+                if  order_status is 'success' and order_id not in myorder:
                     xrp_balance = chkUserBalance('xrp',header)
                     trading = True
                     buy_time = time.time()
                     sell_volume = xrp_balance['available']
                     bidding = False
                 # if open order is exist, cancel all bidding order
-                elif bidorder['status'] == 'success' and len(listorder) > 0:
-                    for i in range(len(listorder)):
-                        print("{} {:7s}: id# {:10s} is {:7s}".format(currency,'List',listorder[i]['id'] ,listorder[i]['type']))
-                        # if failed to buy order , cancel pending order
-                        mycancel = {"currency_pair": currency, "id": listorder[i]['id'],"nonce":getNonce()}
-                        stime = time.time() * 1000
-                        cancelorder = cancelOrder(mycancel, header)
-                        elapsed = int(time.time() * 1000 - stime)
-                        for i in range(len(cancelorder)):
-                            print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancelorder[i]['currencyPair'],'Cancel',str(cancelorder[i]['orderId']) ,cancelorder[i]['status'], elapsed))
-                        if cancelorder[0]['status'] == 'success':
-                            balance = chkUserBalance('krw',header)
-                            trading = False
-                            bidding = False
+                elif order_status is 'success' and order_id in myorder:
+                    # if failed to buy order , cancel pending order
+                    mycancel = {"currency_pair": currency, "id": order_id,"nonce":getNonce()}
+                    stime = time.time() * 1000
+                    cancelorder = cancelOrder(mycancel, header)
+                    elapsed = int(time.time() * 1000 - stime)
+                    mycancel = []
+                    for cancels in cancelorder:
+                        print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancels['currencyPair'],'Cancel',str(cancels['orderId']) ,cancels['status'], elapsed))
+                    if cancelorder[0]['status'] == 'success':
+                        balance = chkUserBalance('krw',header)
+                        trading = False
+                        bidding = False
 
 
             ######################################
@@ -223,39 +212,45 @@ if __name__ == "__main__":
             if trading and last >= sell_price and bid >= sell_price:
                 myask = {"currency_pair" : currency, "type":"limit", "price": sell_price, "coin_amount": sell_volume, "nonce": getNonce()}
                 stime = time.time() * 1000
-                askorder = askOrder(myask,header)
+                askorder = askOrder(myask, header)
+                order_id = askorder['orderId']
+                order_status = askorder['status']
                 elapsed = int(time.time() * 1000 - stime)
-                print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),askorder['currencyPair'],'Sell',str(askorder['orderId']) ,askorder['status'], elapsed)
+                print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),askorder['currencyPair'],'Sell',str(order_id) ,order_status, elapsed)
 
                 # check list open orders
                 time.sleep(2)
                 listorder = listOrder(currency,header)
+                ## list orderid from listorder
+                myorder = []
+                for orders in listorder:
+                    myorder.append(orders['id'])
 
-                # if list open orders is 0 , trading was success
-                if askorder['status'] == 'success' and len(listorder) == 0:
+                # if ask order id is not in open orders complete order
+                if askorder['status'] is 'success' and order_id not in myorder:
                     trading = False
                     # initialize trading price
-                    buy_price = sell_price = 0
+                    buy_price = sell_price = bid_volume = 0
                     sell_time = time.time()
                     buy_sell_gap = sell_time - buy_time
-                    # increase bidding count
+                    # needs to put bidding count to redis
                     total_bidding += 1
                     # check balance
                     balance = chkUserBalance('krw',header)
                 # if failed to sell order , cancel all ask orders
-                elif bidorder['status'] == 'success' and len(listorder) > 0:
-                    for i in range(len(listorder)):
-                        print("{} {:7s}: id# {:10s} is {:7s}".format(currency,'List',listorder[i]['id'] ,listorder[i]['type']))
-                        # if failed to buy order , cancel pending order
-                        mycancel = {"currency_pair": currency, "id": listorder[i]['id'],"nonce":getNonce()}
-                        stime = time.time() * 1000
-                        cancelorder = cancelOrder(mycancel, header)
-                        elapsed = int(time.time() * 1000 - stime)
-                        for i in range(len(cancelorder)):
-                            print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancelorder[i]['currencyPair'],'Cancel',str(cancelorder[i]['orderId']) ,cancelorder[i]['status'], elapsed))
-                        if cancelorder[0]['status'] == 'success':
-                            balance = chkUserBalance('krw',header)
-                            trading = True
+                elif askorder['status'] is 'success' and order_id in myorder:
+                    mycancel = {"currency_pair": currency, "id": order_id,"nonce":getNonce()}
+                    stime = time.time() * 1000
+                    cancelorder = cancelOrder(mycancel, header)
+                    elapsed = int(time.time() * 1000 - stime)
+                    for cancels in cancelorder:
+                        print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancels['currencyPair'],'Cancel',str(cancels['orderId']) ,cancels['status'], elapsed))
+                    if cancelorder[0]['status'] == 'success':
+                        balance = chkUserBalance('krw',header)
+                        trading = True
+                else:
+                    print askorder['status']
+                    trading = False
             #print "zz2: Sell {} coin at {} won, elapsed:{} , bidding# {}".format(bid_volume,ask,buy_sell_gap,total_bidding)
             ## End Trading
 

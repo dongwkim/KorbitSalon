@@ -1,5 +1,5 @@
 from trading.KorbitAPI import *
-from trading.algo import *
+from trading  import algo
 import time
 
 if __name__ == "__main__":
@@ -26,6 +26,8 @@ if __name__ == "__main__":
         ticker = get('ticker/detailed', currency_pair=currency)
         hr_tx = get('transactions', currency_pair=currency, time='hour')
         last = ticker['last']
+        ask = ticker['ask']
+        bid = ticker['bid']
         high = ticker['high']
 
         one_min_time = (time.time() - ( 1 * 60 )) * 1000
@@ -71,8 +73,8 @@ if __name__ == "__main__":
 
 
         # Create New Algorithm Instance
-        myalgo = algo(last, tx_1min_stat, tx_10min_stat, tx_hr_stat, ticker)
+        myalgo = algo.algo(tx_1min_stat, tx_10min_stat, tx_hr_stat, ticker)
 
-        print("{:15s} | Time:{} last:{} delta:{:3.0f}/{:3.0f}/{:3.0f} | basic:{} slump:{} wave:{} rise:{} XX1:{} ".format('Algorithm Test', getStrTime(ticker['timestamp']), ticker['last'], tx_hr_price_delta, tx_10min_price_delta, tx_1min_price_delta \
-         ,myalgo.basic(0.95), myalgo.slump(-50,2), myalgo.wave(2, -20, 0, 30), myalgo.rise(5,10,0,30), myalgo.XX1(2,0,-30)))
+        print("{:15s} | Time:{} last:{} delta:{:3.0f}/{:3.0f}/{:3.0f} | basic:{} slump:{} rise:{} ".format('Algorithm Test', getStrTime(ticker['timestamp']), ticker['last'], tx_hr_price_delta, tx_10min_price_delta, tx_1min_price_delta \
+         ,myalgo.basic(0.95), myalgo.slump(5, 0.05, 5, 1.5), myalgo.rise(0.05, 0.05, 1.5, 1.1, 5)))
         time.sleep(3)
