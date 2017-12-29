@@ -47,12 +47,5 @@ class KorbitBase:
             return {'timestamp':0, 'last':0}
         else:
             raise Exception('{}/{}'.format(restResult.status_code,str(restResult)))
-
-#mkb = KorbitBase()
-#ticker = mkb.doGet('ticker/detailed', currency_pair='xrp_krw')
-#trax=mkb.doGet("https://api.korbit.co.kr/v1/transactions?currency_pair=xrp_krw&time=minute")
-#trax=mkb.doGet('transactions',currency_pair='xrp_krw',time='minute')
-
-#print(ticker)
-#print(trax)        
+          
     
