@@ -6,7 +6,6 @@ from platform import system
 from trademgr import algo
 #import logging
 
-
 if __name__ == "__main__":
 
     logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='tracelog/trading.trc',level=logging.DEBUG)
