@@ -1,5 +1,5 @@
-from trading.KorbitAPI import *
-from trading  import algo
+from tradmgr.KorbitAPI import *
+from tradmgr  import algo
 import time
 
 if __name__ == "__main__":

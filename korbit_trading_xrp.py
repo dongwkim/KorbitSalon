@@ -1,15 +1,15 @@
 #!/usr/bin/python
-from trading.KorbitAPI import *
+from trademgr.KorbitAPI import *
 import time
-from token.TokenManager import *
+from tokenmgr.TokenManager import *
 from platform import system
-from trading import algo
+from trademgr import algo
 #import logging
 
 
 if __name__ == "__main__":
 
-    logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='trading.trc',level=logging.DEBUG)
+    logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='tracelog/trading.trc',level=logging.DEBUG)
     logger = logging.getLogger('korbit_trading')
     ### Vriables
     money = 10000
