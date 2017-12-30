@@ -1,16 +1,20 @@
-
+#!/usr/bin/python
 import requests
 import csv
 import json
 import time
 import logging
+import redis
 
-logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='api.trc',level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='logging/api_logger.trc',level=logging.DEBUG)
 logger = logging.getLogger('api')
 URL = 'https://api.korbit.co.kr/v1'
 
 def get(url_suffix, header='', **params):
-    """ HTTP GET request """
+    ''' RestAPI GET  request
+    url_suffix : api call
+    header     : token for private call
+    params     : parameters for api query '''
 
     url = '{}/{}'.format(URL, url_suffix)
     r = s.get(url, params=params,headers=header)
@@ -61,22 +65,26 @@ def load_token(filename):
     f.close()
 
 def getAccessToken(keydir):
+    ''' Token generator and refresher
+    Token is expired with in hours. need to refresh token every N minute
     '''
-    curl -D - -X POST -d "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&username=$EMAIL&password=$PASSWORD&grant_type=password" https://api.korbit.co.kr/v1/oauth2/access_token
+
+    """
     {
       "token_type":"Bearer",
       "access_token":"1t1LgTslDrGznxPxhYz7RldsNVIbnEK",
       "expires_in":3600,
       "refresh_token":"vn5xoOf4PzckgnqjQSL9Sb3KxWJvYtm"
-   }
-    '''
+    }
+    """
+
     def requestToken():
         client_id,client_secret = getKey(keydir)
         token = post('oauth2/access_token', client_id=client_id, client_secret=client_secret, username='dotorry@gmail.com', password='DDo3145692', grant_type='password')
 
         token['timestamp'] = time.time()
 
-        store_token('korbit_token.json', token)
+        store_token('token/korbit_token.json', token)
 
         return token
 
@@ -85,7 +93,7 @@ def getAccessToken(keydir):
         token = post('oauth2/access_token', client_id=client_id, client_secret=client_secret, refresh_token=token['refresh_token'], grant_type='refresh_token')
 
         token['timestamp'] = time.time()
-        store_token('korbit_token.json', token)
+        store_token('token/korbit_token.json', token)
 
         return token
 
@@ -99,7 +107,7 @@ def getAccessToken(keydir):
 
     #token = None
     try:
-        token = load_token('korbit_token.json')
+        token = load_token('token/korbit_token.json')
     except ValueError:
         token = requestToken()
 
@@ -108,26 +116,23 @@ def getAccessToken(keydir):
 
     return token
 
-def chkUserBalance(currency,header):
-      #token = getAccessToken()
+def chkUserBalance(currency ,header):
       balance = get('user/balances',header)
-      #balance = s.get('https://api.korbit.co.kr/v1/user/balances',headers= {"Authorization":"Bearer " + token['access_token']})
       return balance[currency]
-      #return balance[currency]
-      #print json.loads(balance.text)
+      # if needs to return all currencies
+      #return json.loads(balance.text)
 
 def bidOrder(order,header):
-      #token = getAccessToken()
-      #header = {"Authorization": "Bearer " + token['access_token']}
       bid = post('user/orders/buy', header, currency_pair=order['currency_pair'], type=order['type'], price=order['price'], coin_amount=order['coin_amount'], nonce=order['nonce'])
-      #balance = s.get('https://api.korbit.co.kr/v1/user/balances',headers= {"Authorization":"Bearer " + token['access_token']})
       return bid
-      #return balance[currency]
-      #print json.loads(balance.text)
 
 def cancelOrder(order,header):
     cancel = post('user/orders/cancel', header, id=order['id'], currency_pair=order['currency_pair'],nonce=order['nonce'] )
     return cancel
+
+def listOrder(currency,header):
+    listorder = get('user/orders/open', header,  currency_pair=currency )
+    return listorder
 
 def getNonce():
     return int(time.time() * 1000)
@@ -136,39 +141,25 @@ def askOrder(order,header):
     ask = post('user/orders/sell', header, currency_pair=order['currency_pair'], type=order['type'], price=order['price'], coin_amount=order['coin_amount'], nonce=order['nonce'])
     return ask
 
-def getStrTime(epoch_time):
-    return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(epoch_time))
+def getStrTime(epoch_time = long(time.time() * 1000)):
+    return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(epoch_time//1000))
+
+# Print real-time trading , need to use Flask or Django
+def genHTML(path ,ctime,last, tx_10min_price_delta, tx_hr_price_delta, buy_price, total_bidding, curr_balance, lat ):
+    html = '<meta http-equiv="refresh" content="3"> \
+            <font size="10"> Time : {}<br> \
+            Price : {:,} Delta :{}/{} <br> Buy Price: {} <br> \
+            Deal Count: {} <br> \
+            Balance: {:,} <br> \
+            Latency : {} ms</font>' \
+            .format(ctime, int(last), tx_10min_price_delta, tx_hr_price_delta, int(buy_price), int(total_bidding),int(curr_balance), lat)
+    f = open(path,'w')
+    f.write(html)
+    f.close()
 
 
-
-
-
-### Connection Pooling
-#pooling()
-#s = requests.Session()
-
-
-#get_token = get('access_token', client_id='xrp_krw')
-#print getKey('C:\Users\dongwkim\Korbit\Key\keys.csv')
 if __name__ == "__main__":
-
-    pooling()
-    token = getAccessToken()
-    header = {"Authorization": "Bearer " + token['access_token']}
-    balance = chkUserBalance('krw',header)
-    ticker = get('ticker/detailed', currency_pair='xrp_krw')
-    nonce = int(time.time() * 1000)
-
-    mybid = {"currency_pair" : "xrp_krw", "type":"limit", "price": "700", "coin_amount":"10", "nonce": getNonce()}
-    bidorder = bidOrder(mybid, header)
-    #print order
-    print "{} {:7s}: id# {:10d} is {:7s}".format(bidorder['currencyPair'],'Buy',bidorder['orderId'] ,bidorder['status'])
-
-    myask = {"currency_pair" : "xrp_krw", "type":"limit", "price": "710", "coin_amount":"10", "nonce": getNonce()}
-    askorder = askOrder(myask,header)
-    print "{} {:7s}: id# {:10s} is {:7s}".format(askorder['currencyPair'],'Sell',askorder['orderId'] ,askorder['status'])
-
-    mycancel = {"currency_pair": bidorder['currencyPair'], "id": bidorder['orderId'],"nonce":getNonce()}
-    cancel = cancelOrder(mycancel,header)
-    for i in range(len(cancel)):
-        print("{} {:7s}: id# {:10s} is {:7s}".format(cancel[i]['currencyPair'],'Cancel',cancel[i]['orderId'] ,cancel[i]['status']))
+    '''
+    Main API for Korbit Trading
+    Test API using trading_sample.py
+    '''

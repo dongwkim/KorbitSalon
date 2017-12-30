@@ -2,8 +2,6 @@ from KorbitBase import *
 import threading
 from statistics import mean
 
-
-
 class XRPManager(KorbitBase):
     def __init__(self):
         super().__init__()

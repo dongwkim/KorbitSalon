@@ -1,0 +1,32 @@
+2017-12-26 03:01:16,338 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-26 03:01:18,505 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "POST /v1/oauth2/access_token?username=dotorry%40gmail.com&client_secret=yX7IoEr33GBydBf8tAFDc6TRK2rIdVom7K0YJTgJnuoEn4IJz4AAxrWreLIQR&password=DDo3145692&client_id=Zv2E5vfkBHSYvTplFVukdDrHzwSuIMGmBchgwjVnhJBstTtA05h7kLQypL4B4&grant_type=password HTTP/1.1" 200 200
+2017-12-26 03:01:19,479 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "POST /v1/oauth2/access_token?client_secret=yX7IoEr33GBydBf8tAFDc6TRK2rIdVom7K0YJTgJnuoEn4IJz4AAxrWreLIQR&grant_type=refresh_token&refresh_token=irUOto3zy7oyrlPCjcBBsZt7zCEoA3nQ4FZKWV6lE8936FK2GxK7cFSQGQUta&client_id=Zv2E5vfkBHSYvTplFVukdDrHzwSuIMGmBchgwjVnhJBstTtA05h7kLQypL4B4 HTTP/1.1" 200 200
+2017-12-26 03:04:03,588 INFO TokenManager Read key saved CSV file
+2017-12-26 03:06:01,367 INFO TokenManager Read key saved CSV file
+2017-12-26 03:06:03,413 INFO TokenManager insert token into redis
+2017-12-26 03:06:03,444 INFO TokenManager get refresh token from redis
+2017-12-26 03:06:03,457 INFO TokenManager refresh token from api server
+2017-12-26 03:06:04,365 INFO TokenManager update token on redis
+2017-12-26 03:06:28,924 INFO TokenManager Read key saved CSV file
+2017-12-26 03:06:31,108 INFO TokenManager insert token into redis
+2017-12-26 03:06:31,137 INFO TokenManager get refresh token from redis
+2017-12-26 03:06:32,150 INFO TokenManager update token on redis
+2017-12-26 20:21:56,138 INFO TokenManager Read key saved CSV file
+2017-12-26 20:21:58,196 INFO TokenManager insert token into redis
+2017-12-26 20:21:58,286 INFO TokenManager get refresh token from redis
+2017-12-26 20:21:58,290 INFO TokenManager refresh token from api server
+2017-12-26 20:21:59,260 INFO TokenManager update token on redis
+2017-12-28 14:00:20,853 INFO TokenManager Read key saved CSV file
+2017-12-28 14:02:07,456 INFO TokenManager Read key saved CSV file
+2017-12-28 14:02:32,675 INFO TokenManager Read key saved CSV file
+2017-12-28 14:02:32,700 INFO urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-28 14:02:34,507 INFO TokenManager insert token into redis
+2017-12-28 14:02:34,517 INFO TokenManager get refresh token from redis
+2017-12-28 14:02:34,520 INFO TokenManager refresh token from api server
+2017-12-28 14:02:35,494 INFO TokenManager update token on redis
+2017-12-28 14:05:44,661 INFO TokenManager Read key saved CSV file
+2017-12-28 14:05:44,686 INFO urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2017-12-28 14:05:46,870 INFO TokenManager insert token into redis
+2017-12-28 14:05:46,880 INFO TokenManager get refresh token from redis
+2017-12-28 14:05:46,884 INFO TokenManager refresh token from api server
+2017-12-28 14:05:47,826 INFO TokenManager update token on redis
