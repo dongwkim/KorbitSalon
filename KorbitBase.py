@@ -4,6 +4,8 @@ import requests
 import redis
 import time
 import datetime
+import logging
+import logging.handlers
 
 class KorbitBase:
     def __init__(self):
@@ -47,5 +49,8 @@ class KorbitBase:
             return {'timestamp':0, 'last':0}
         else:
             raise Exception('{}/{}'.format(restResult.status_code,str(restResult)))
+    
+    def printCurrentTime(self, pTimestamp):
+        print(datetime.datetime.fromtimestamp(pTimestamp).strftime('%Y-%m-%d %H:%M:%S'))
           
     
