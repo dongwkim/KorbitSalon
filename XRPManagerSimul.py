@@ -12,8 +12,8 @@ class XRPManager(KorbitBase):
         self.myDictionary = {'timestamp':9999999999999, 'last':'0', 'bid':'0','ask':'0', 'low':'0','high':'0','tx_1min_delta':'0', 'tx_10min_delta':'0' , 
                              'tx_60min_delta':'0','tx_10min_avg':'0', 'tx_60min_avg':'0'}
         
-    def getTicker(self):
-        redisResult=self.redisCon.zrevrangebyscore("xrp", "inf", "-inf", start=0,num=1)
+    def getTicker(self, pTimestamp):
+        redisResult=self.redisCon.zrevrangebyscore("xrp", pTimestamp, pTimestamp, start=0,num=1)
         tickerDetail = redisResult[0].split (':')
         self.myDictionary['last'] = tickerDetail[0]
         self.myDictionary['bid'] = tickerDetail[1]
@@ -59,7 +59,7 @@ class XRPManager(KorbitBase):
         n1=dt.datetime.now()
         #currentTimestamp = int(time.time()*1000) # 1000 for time transition to timestamp format
         currentTimestamp = pTimestamp
-        xrpm.getTicker()
+        xrpm.getTicker(currentTimestamp)
         #self.myDictionary['timestamp'] = currentTimestamp
         self.myDictionary['tx_1min_delta'] = xrpm.getDelta(currentTimestamp,1)
         self.myDictionary['tx_10min_delta'] = xrpm.getDelta(currentTimestamp, 10) 
@@ -73,5 +73,5 @@ class XRPManager(KorbitBase):
     def printCurrentTime(self, pTimestamp):
         print(datetime.datetime.fromtimestamp(pTimestamp).strftime('%Y-%m-%d %H:%M:%S'))
 
-xrpm = XRPManager()
-print(xrpm.getValues())
+#xrpm = XRPManager()
+#print(xrpm.getValues())
