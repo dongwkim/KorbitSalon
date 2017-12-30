@@ -1,17 +1,32 @@
-from  trading.KorbitAPI import *
+from  trademgr.KorbitAPI import *
+from tokenmgr.TokenManager import *
+from platform import system
 
 if __name__ == "__main__":
 
     currency='xrp_krw'
     coin ='xrp'
+    if system() is 'Windows':
+        secFilePath='c:/User/dongwkim/keys/korbit_key.csv'
+        redisHost = '39.115.53.33'
+        redisPort = 16379
+        showhtml = False
+    ## Linux
+    else:
+        secFilePath='/usb/s1/key/korbit_key.csv'
+        redisHost = 'localhost'
+        redisPort = 6379
+        showhtml = True
+    redisUser = 'dongwkim'
+
     pooling()
-    # token in the latop
-    token = getAccessToken('c:/Users/dongwkim/keys/korbit_key.csv')
-    # token in the Server
-    #token = getAccessToken('/usb/s1/key/korbit_key.csv')
+    myRedis = UserSessionInfo(secFilePath, redisUser, redisHost, redisPort)
+    token = myRedis.getAccessToken()
+    header = {"Authorization": "Bearer " + token}
+    print header
+
 
     # set HTTP header for User API
-    header = {"Authorization": "Bearer " + token['access_token']}
 
     ####################################################
     # Wallet Balance
@@ -60,7 +75,7 @@ if __name__ == "__main__":
     "currency_pair":"btc_krw"
     }
     '''
-    bid_price = 100
+    bid_price = 3043
     bid_volume = 10
     mybid = {"currency_pair" : currency, "type":"limit", "price": bid_price, "coin_amount": bid_volume, "nonce": getNonce()}
     bidorder = bidOrder(mybid, header)
@@ -83,8 +98,22 @@ if __name__ == "__main__":
     '''
     time.sleep(2)
     listorder = listOrder(currency, header)
-    for i in range(len(listorder)):
-        print("{:15s} | Time:{} id#:{} type:{}:  volume: {}".format('List Order',getStrTime(listorder[i]['timestamp']), listorder[i]['id'] ,listorder[i]['type'],listorder[i]['open']['value']))
+    myorder = []
+    for orders in listorder:
+        myorder.append(orders['id'].encode('utf-8'))
+    print myorder
+
+    if bidorder['status'] == 'success' and str(bid_orderid) not in myorder:
+        print('Order is complete')
+    elif bidorder['status'] == 'success' and str(bid_orderid)  in myorder:
+        print('Order is Open')
+    else:
+        print('Check Order')
+
+    for i in myorder:
+        print("{:15s} | id#:{} ".format('List Order',i))
+    # for i in range(len(listorder)):
+        # print("{:15s} | Time:{} id#:{} type:{}:  volume: {}".format('List Order',getStrTime(listorder[i]['timestamp']), listorder[i]['id'] ,listorder[i]['type'],listorder[i]['open']['value']))
 
     ####################################################
     # Cancel Order
@@ -101,21 +130,3 @@ if __name__ == "__main__":
         cancel = cancelOrder(mycancel,header)
         for i in range(len(cancel)):
             print("{:15s} | Time:{} currency:{} id# {} status: {}".format('Cancel Order', getStrTime(), cancel[i]['currencyPair'],str(cancel[i]['orderId']) ,cancel[i]['status']))
-
-
-
-    #myask = {"currency_pair" : "xrp_krw", "type":"limit", "price": "1395", "coin_amount":"25.928", "nonce": getNonce()}
-    #askorder = askOrder(myask,header)
-    #print "{} {:7s}: id# {:10s} is {:7s}".format(askorder['currencyPair'],'Sell',askorder['orderId'] ,askorder['status'])
-    #time.sleep(1.5)
-
-
-    # listorder = listOrder(currency, header)
-    # for i in range(len(listorder)):
-    #     print("{} {:7s}: id# {:10s} is {:7s}, volume {}".format(currency,'List',listorder[i]['id'] ,listorder[i]['type'],listorder[i]['open']['value']))
-    #
-    # for i in range(len(listorder)):
-    #     mycancel = {"currency_pair": bidorder['currencyPair'], "id": listorder[i]['id'],"nonce":getNonce()}
-    #     cancel = cancelOrder(mycancel,header)
-    #     for i in range(len(cancel)):
-    #         print("{} {:7s}: id# {:10s} is {:7s}".format(cancel[i]['currencyPair'],'Cancel',str(cancel[i]['orderId']) ,cancel[i]['status']))

@@ -150,17 +150,35 @@ if __name__ == "__main__":
             ######################################
 
             ## Big Slump Algorithm
-            if not testing and trading and myalgo.basic(95) and myalgo.slump(5, 0.05, 5, 1.5):
+            if not testing and not trading and myalgo.basic(95) and  myalgo.slump(15, 0.5, 5, 1):
                 print("Hit : Big Slump")
+                bidding = True
+                benefit = 0.05
+                money = 50000
+            ## Midium Slump Algorithm
+            elif not testing and not trading and myalgo.basic(95) and  myalgo.slump(10, 0.2, 3, 1 ):
+                print("Hit : Midium Slump")
                 bidding = True
                 benefit = 0.03
                 money = 50000
             ## Little Slump Algorithm
-            elif not testing and trading and myalgo.basic(95) and myalgo.slump(2, 0.03, 2, 1 ):
+            elif not testing and not trading and myalgo.basic(95) and myalgo.slump(10, 0.13, 2, 2.0 ):
                 print("Hit : Little Slump")
                 bidding = True
+                benefit = 0.020
+                money = 50000
+            ## Smooth Slump Algorithm
+            elif not testing and not trading and myalgo.basic(98) and myalgo.slump(7, 0.1, 2, -2.1 ):
+                print("Hit : Smooth Slump")
+                bidding = True
+                benefit = 0.020
+                money = 50000
+            elif not testing and not trading and myalgo.basic(98) and myalgo.rise(0.2, 1, 1, 1.0, 3 ):
+            #elif not testing and not trading myalgo.rise(0.2, 1, 1, 1.0, 3 ):
+                print("Hit : Rise")
+                bidding = True
                 benefit = 0.01
-                money = 30000
+                money = 35000
 
             ## Bid Order
             if bidding:
@@ -184,17 +202,19 @@ if __name__ == "__main__":
                 ## list orderid from listorder
                 myorder = []
                 for orders in listorder:
-                    myorder.append(orders['id'])
+                    myorder.append(orders['id'].encode('utf-8'))
 
                 # if bid order id is not in open orders complete order
-                if  order_status is 'success' and order_id not in myorder:
+                if  order_status == 'success' and order_id not in myorder:
                     xrp_balance = chkUserBalance('xrp',header)
                     trading = True
                     buy_time = time.time()
                     sell_volume = xrp_balance['available']
+                    #sell_volume = float(buy_volume * 0.9992)
                     bidding = False
+                    print("Bid Order is complete")
                 # if open order is exist, cancel all bidding order
-                elif order_status is 'success' and order_id in myorder:
+                elif order_status == 'success' and order_id in myorder:
                     # if failed to buy order , cancel pending order
                     mycancel = {"currency_pair": currency, "id": order_id,"nonce":getNonce()}
                     stime = time.time() * 1000
@@ -207,6 +227,18 @@ if __name__ == "__main__":
                         balance = chkUserBalance('krw',header)
                         trading = False
                         bidding = False
+                        print("Bid Order is canceled")
+                        buy_price = sell_price = bid_volume =0
+                    else:
+                        print("Check Bid Orer algorithm")
+                        xrp_balance = chkUserBalance('xrp',header)
+                        trading = True
+                        buy_time = time.time()
+                        sell_volume = xrp_balance['available']
+                        #sell_volume = float(buy_volume * 0.9992)
+                        bidding = False
+                        print("Bid Order is complete")
+
 
 
             ######################################
@@ -216,8 +248,8 @@ if __name__ == "__main__":
                 myask = {"currency_pair" : currency, "type":"limit", "price": sell_price, "coin_amount": sell_volume, "nonce": getNonce()}
                 stime = time.time() * 1000
                 askorder = askOrder(myask, header)
-                order_id = askorder['orderId']
-                order_status = askorder['status']
+                order_id = str(askorder['orderId'])
+                order_status = str(askorder['status'])
                 elapsed = int(time.time() * 1000 - stime)
                 print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),askorder['currencyPair'],'Sell',str(order_id) ,order_status, elapsed)
 
@@ -227,10 +259,10 @@ if __name__ == "__main__":
                 ## list orderid from listorder
                 myorder = []
                 for orders in listorder:
-                    myorder.append(orders['id'])
+                    myorder.append(orders['id'].encode('utf-8'))
 
                 # if ask order id is not in open orders complete order
-                if askorder['status'] is 'success' and order_id not in myorder:
+                if askorder['status'] == 'success' and order_id not in myorder:
                     trading = False
                     # initialize trading price
                     buy_price = sell_price = bid_volume = 0
@@ -241,7 +273,7 @@ if __name__ == "__main__":
                     # check balance
                     balance = chkUserBalance('krw',header)
                 # if failed to sell order , cancel all ask orders
-                elif askorder['status'] is 'success' and order_id in myorder:
+                elif askorder['status'] == 'success' and order_id in myorder:
                     mycancel = {"currency_pair": currency, "id": order_id,"nonce":getNonce()}
                     stime = time.time() * 1000
                     cancelorder = cancelOrder(mycancel, header)

@@ -64,58 +64,6 @@ def load_token(filename):
         return json.loads(f.read())
     f.close()
 
-def getAccessToken(keydir):
-    ''' Token generator and refresher
-    Token is expired with in hours. need to refresh token every N minute
-    '''
-
-    """
-    {
-      "token_type":"Bearer",
-      "access_token":"1t1LgTslDrGznxPxhYz7RldsNVIbnEK",
-      "expires_in":3600,
-      "refresh_token":"vn5xoOf4PzckgnqjQSL9Sb3KxWJvYtm"
-    }
-    """
-
-    def requestToken():
-        client_id,client_secret = getKey(keydir)
-        token = post('oauth2/access_token', client_id=client_id, client_secret=client_secret, username='dotorry@gmail.com', password='DDo3145692', grant_type='password')
-
-        token['timestamp'] = time.time()
-
-        store_token('token/korbit_token.json', token)
-
-        return token
-
-    def refreshToken(token):
-        client_id,client_secret = getKey(keydir)
-        token = post('oauth2/access_token', client_id=client_id, client_secret=client_secret, refresh_token=token['refresh_token'], grant_type='refresh_token')
-
-        token['timestamp'] = time.time()
-        store_token('token/korbit_token.json', token)
-
-        return token
-
-
-
-    def chkTokenExpired(token):
-        issue_time = token['timestamp']
-        expired_in = token['expires_in']
-
-        return issue_time + expired_in < time.time()
-
-    #token = None
-    try:
-        token = load_token('token/korbit_token.json')
-    except ValueError:
-        token = requestToken()
-
-    if chkTokenExpired(token):
-        token = refreshToken(token)
-
-    return token
-
 def chkUserBalance(currency ,header):
       balance = get('user/balances',header)
       return balance[currency]
@@ -144,6 +92,9 @@ def askOrder(order,header):
 def getStrTime(epoch_time = long(time.time() * 1000)):
     return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(epoch_time//1000))
 
+def getEpochTime(str_time):
+    epoch_time = int(time.mktime(time.strptime(str_time, "%Y-%m-%d %H:%M:%S")))
+    return epoch_time
 # Print real-time trading , need to use Flask or Django
 def genHTML(path ,ctime,last, tx_10min_price_delta, tx_hr_price_delta, buy_price, total_bidding, curr_balance, lat ):
     html = '<meta http-equiv="refresh" content="3"> \
