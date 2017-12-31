@@ -58,7 +58,10 @@ class XRPManagerSimul(KorbitBase):
             pPrice=int(redisResult[firstIndex].split (':')[0])
             bucket.append(pPrice)
         
-        return mean(bucket)
+        if not bucket:
+            return 0
+        else:
+            return mean(bucket)
     
     def isDataExist(self, pTimestamp):
         if (self.managerMode == 'ACTUAL'):
@@ -101,6 +104,37 @@ class XRPManagerSimul(KorbitBase):
         print(datetime.datetime.fromtimestamp(pTimestamp).strftime('%Y-%m-%d %H:%M:%S'))
 
 xrpm = XRPManagerSimul('SIMUL')
+
+myTimestamps=xrpm.redisCon.zrangebyscore("xrp_timestamp", '-inf','+inf')
+firstIndex = 0
+lastIndex = len(myTimestamps) - 1
+for firstIndex in range(lastIndex):
+    #myTimestamp=int(myTimestamps[firstIndex].split (':')[5])
+    myTimestamp=int(myTimestamps[firstIndex])
+    vv = xrpm.getValues(myTimestamp)
+    if (vv == 0):
+        #print("NO Data")
+        pass
+    else:
+        print(vv)
+        pass
+
+'''
+myTimestamps=xrpm.redisCon.zrangebyscore("xrp", '-inf','+inf')
+firstIndex = 0
+lastIndex = len(myTimestamps) - 1
+for firstIndex in range(lastIndex):
+    myTimestamp=int(myTimestamps[firstIndex].split (':')[5])
+    vv = xrpm.getValues(myTimestamp)
+    if (vv == 0):
+        #print("NO Data")
+        pass
+    else:
+        print(vv)
+        pass
+'''        
+
+'''
 starttime = xrpm.getEpochTime('2017-12-30 22:17:01')
 endtime = xrpm.getEpochTime('2017-12-30 22:17:21')
 #starttime=1514629818631
@@ -110,7 +144,6 @@ endtime = xrpm.getEpochTime('2017-12-30 22:17:21')
 #print(str(endtime))
 xrpm.printCurrentTime(time.time())
 n1=dt.datetime.now()
-nn1=time.time()
 while starttime < endtime:
     #print("*"*50+str(starttime))
     #print(xrpm.getValues(starttime))
@@ -125,7 +158,6 @@ while starttime < endtime:
     starttime = starttime + 1
 
 n2=dt.datetime.now()
-nn2=time.time()
 xrpm.printCurrentTime(time.time())
 print("Total Elapsed Time:" + str((n2-n1).microseconds))
-print("Total Elapsed Time:{}".format(nn2-nn1))
+'''
