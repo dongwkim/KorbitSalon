@@ -49,6 +49,11 @@ class KorbitBase:
             return {'timestamp':0, 'last':0}
         else:
             raise Exception('{}/{}'.format(restResult.status_code,str(restResult)))
+        
+    def getEpochTime(self,str_time):
+        epoch_time = int(time.mktime(time.strptime(str_time, "%Y-%m-%d %H:%M:%S"))*1000)
+        return epoch_time
+
     
     def printCurrentTime(self, pTimestamp):
         print(datetime.datetime.fromtimestamp(pTimestamp).strftime('%Y-%m-%d %H:%M:%S'))

@@ -61,11 +61,11 @@ class XRPManager(KorbitBase):
         currentTimestamp = pTimestamp
         xrpm.getTicker()
         #self.myDictionary['timestamp'] = currentTimestamp
-        self.myDictionary['tx_1min_delta'] = xrpm.getDelta(currentTimestamp,1)
-        self.myDictionary['tx_10min_delta'] = xrpm.getDelta(currentTimestamp, 10) 
-        self.myDictionary['tx_60min_delta'] = xrpm.getDelta(currentTimestamp, 60)
-        self.myDictionary['tx_10min_avg'] = xrpm.getAverage(currentTimestamp, 10)
-        self.myDictionary['tx_60min_avg'] = xrpm.getAverage(currentTimestamp, 60)
+        self.myDictionary['tx_1min_delta'] = self.getDelta(currentTimestamp,1)
+        self.myDictionary['tx_10min_delta'] = self.getDelta(currentTimestamp, 10) 
+        self.myDictionary['tx_60min_delta'] = self.getDelta(currentTimestamp, 60)
+        self.myDictionary['tx_10min_avg'] = self.getAverage(currentTimestamp, 10)
+        self.myDictionary['tx_60min_avg'] = self.getAverage(currentTimestamp, 60)
         n2=dt.datetime.now()
         print("Elapsed Time:" + str((n2-n1).microseconds))
         return self.myDictionary
