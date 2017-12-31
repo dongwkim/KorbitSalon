@@ -93,7 +93,7 @@ def getStrTime(epoch_time = long(time.time() * 1000)):
     return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(epoch_time//1000))
 
 def getEpochTime(str_time):
-    epoch_time = int(time.mktime(time.strptime(str_time, "%Y-%m-%d %H:%M:%S")))
+    epoch_time = int(time.mktime(time.strptime(str_time, "%Y-%m-%d %H:%M:%S"))*1000)
     return epoch_time
 # Print real-time trading , need to use Flask or Django
 def genHTML(path ,ctime,last, tx_10min_price_delta, tx_hr_price_delta, buy_price, total_bidding, curr_balance, lat ):

@@ -2,7 +2,7 @@
 #last, tx_hr_price_avg , tx_10min_price_avg, tx_1min_price_avg
 import logging
 
-logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='logging/algo_logger.trc',level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='tracelog/algo_logger.trc',level=logging.DEBUG)
 logger = logging.getLogger('algo')
 
 class algo:

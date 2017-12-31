@@ -5,8 +5,9 @@ import requests
 import redis
 import time
 import logging
+from platform import system
 
-logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='logging/tokenmanager.trc',level=logging.INFO)
+logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='tracelog/tokenmanager.trc',level=logging.INFO)
 logger = logging.getLogger('TokenManager')
 
 class UserSessionInfo:
@@ -92,13 +93,18 @@ class UserSessionInfo:
         print(self.redisCon.hmget(self.myid, 'refresh_token')[0])
 
 if __name__ == "__main__":
-    secFilePath="/usb/s1/key/korbit_key.csv"
+    if system() is 'Windows':
+        secFilePath='c:/Users/dongwkim/Keys/korbit_key.csv'
+    ## Linux
+    else:
+        secFilePath='/usb/s1/key/korbit_key.csv'
+    redisUser = 'dongwkim'
     #secFilePath="c:/Users/dongwkim/keys/korbit_key.csv"
-    mySession=UserSessionInfo(secFilePath, 'dongwkim','39.115.53.33', '16379')
-    # mySession.readSecFile()
+    mySession=UserSessionInfo(secFilePath, 'dongwkim','cryptosalon.iptime.org', '6379')
+    mySession.readSecFile()
     # #print  mySession.accessInfo
     # #
-    # mySession.myToken = mySession.doPost('oauth2/access_token', client_id=mySession.accessInfo['key'], client_secret=mySession.accessInfo['secret'], username=mySession.accessInfo['email'], password=mySession.accessInfo['password'], grant_type='password')
-    # mySession.insertTokenIntoRedis()
-    # mySession.updateToken()
+    mySession.myToken = mySession.doPost('oauth2/access_token', client_id=mySession.accessInfo['key'], client_secret=mySession.accessInfo['secret'], username=mySession.accessInfo['email'], password=mySession.accessInfo['password'], grant_type='password')
+    mySession.insertTokenIntoRedis()
+    mySession.updateToken()
     print type(str(mySession.getAccessToken()))
