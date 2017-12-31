@@ -9,7 +9,7 @@ import logging.handlers
 
 class KorbitBase:
     def __init__(self):
-        self.redisHost = 'localhost'
+        self.redisHost = 'cryptosalon.iptime.org'
         self.redisPort = 6379
         self.mySession = requests.Session()
         self.redisCon = redis.StrictRedis(host=self.redisHost, port=self.redisPort, db=0,charset="utf-8", decode_responses=True)

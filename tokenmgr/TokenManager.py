@@ -107,4 +107,4 @@ if __name__ == "__main__":
     mySession.myToken = mySession.doPost('oauth2/access_token', client_id=mySession.accessInfo['key'], client_secret=mySession.accessInfo['secret'], username=mySession.accessInfo['email'], password=mySession.accessInfo['password'], grant_type='password')
     mySession.insertTokenIntoRedis()
     mySession.updateToken()
-    print type(str(mySession.getAccessToken()))
+    #print type(str(mySession.getAccessToken()))

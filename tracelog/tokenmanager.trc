@@ -38,3 +38,8 @@
 2017-12-31 01:29:54,697 INFO TokenManager get refresh token from redis
 2017-12-31 01:29:54,726 INFO TokenManager refresh token from api server
 2017-12-31 01:29:55,654 INFO TokenManager update token on redis
+2018-01-01 00:32:26,001 INFO TokenManager Read key saved CSV file
+2018-01-01 00:32:28,004 INFO TokenManager insert token into redis
+2018-01-01 00:32:28,057 INFO TokenManager get refresh token from redis
+2018-01-01 00:32:28,075 INFO TokenManager refresh token from api server
+2018-01-01 00:32:29,040 INFO TokenManager update token on redis

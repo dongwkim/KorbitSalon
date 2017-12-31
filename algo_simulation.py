@@ -2,9 +2,9 @@
 #from tradmgr.KorbitAPI import *
 from trademgr import algo
 from trademgr import XRPManager as xrpmgr
+from trademgr import XRPManagerSimul as xrpmgrsimul
 from trademgr import KorbitAPI as korbitapi
 import time
-import XRPManagerSimul
 
 def getTxList(tx_list):
     seq = 0
@@ -31,15 +31,19 @@ if __name__ == "__main__":
 
 
 
-    start_time = korbitapi.getEpochTime('2017-12-31 03:30:05')
+    start_time = korbitapi.getEpochTime('2018-01-01 00:10:00')
     #start_time = 1514656699880
-    end_time = korbitapi.getEpochTime('2017-12-31 15:47:06')
+    end_time = korbitapi.getEpochTime('2018-01-01 00:20:00')
     #end_time = 1514656699981
 
-    xrpm = XRPManagerSimul.XRPManagerSimul('SIMUL')
+    xrpm = xrpmgrsimul.XRPManagerSimul('SIMUL')
     myTimestamp = xrpm.redisCon.zrangebyscore('xrp_timestamp', '-inf', '+inf')
-    start_pos = next( i for i,j in enumerate(myTimestamp) if int(j) >= start_time )
-    end_pos = next( i for i,j in enumerate(myTimestamp) if int(j) >= end_time )
+    try:
+        start_pos = next( i for i,j in enumerate(myTimestamp) if int(j) >= start_time )
+        end_pos = next( i for i,j in enumerate(myTimestamp) if int(j) >= end_time )
+    except StopIteration:
+        print("ERROR | End Time is greater than redis data")
+        raise
     print("{} | Total {} tickers will be simulated.".format(korbitapi.getStrTime(time.time() * 1000), end_pos - start_pos))
 
     loop_outsider_timer = time.time()
@@ -53,10 +57,10 @@ if __name__ == "__main__":
         getvalue_stimer = time.time()
         mystat = xrpm.getValues(int(ptime))
         getvalue_etimer = time.time()
-        #print("Timestamp: {}, getValue elapsed: {:2.4f}, one loop elapsed: {:2.4f}".format( int(ptime), getvalue_etimer - getvalue_stimer,loop_time))
+        print("Timestamp: {}, getValue elapsed: {:2.4f}, one loop elapsed: {:2.4f}".format( int(ptime), getvalue_etimer - getvalue_stimer,loop_time))
         if mystat == 0:
             continue
-     
+
         """
         {'timestamp':9999999999999,
         'last':'0',
@@ -104,7 +108,7 @@ if __name__ == "__main__":
 
         # Put your Algorithm here
         if myalgo.slump(7, 0.20, 2, 1.3, -9000)  and not trading :
-            print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{}/{}"\
+            print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
             .format(korbitapi.getStrTime(int(ptime)), "Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
             bidding = True
             benefit = 0.015

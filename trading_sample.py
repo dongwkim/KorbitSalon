@@ -23,7 +23,7 @@ if __name__ == "__main__":
     myRedis = UserSessionInfo(secFilePath, redisUser, redisHost, redisPort)
     token = myRedis.getAccessToken()
     header = {"Authorization": "Bearer " + token}
-    print header
+    print(header)
 
 
     # set HTTP header for User API
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     "currency_pair":"btc_krw"
     }
     '''
-    bid_price = 3043
+    bid_price = 1000
     bid_volume = 10
     mybid = {"currency_pair" : currency, "type":"limit", "price": bid_price, "coin_amount": bid_volume, "nonce": getNonce()}
     bidorder = bidOrder(mybid, header)
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     myorder = []
     for orders in listorder:
         myorder.append(orders['id'].encode('utf-8'))
-    print myorder
+    print(myorder)
 
     if bidorder['status'] == 'success' and str(bid_orderid) not in myorder:
         print('Order is complete')

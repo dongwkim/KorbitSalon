@@ -134,8 +134,7 @@ if __name__ == "__main__":
 
             # print trading stats
             curr_balance = int(balance['available'] + balance['trade_in_use'])
-            print "{} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:3.0f}/{:3.0f}/{:3.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  " \
-            .format(getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,lat,total_bidding,int(curr_balance)//10)
+            print("{} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:3.0f}/{:3.0f}/{:3.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  ".format(getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,lat,total_bidding,int(curr_balance)//10))
             # Create HTML for realtime view
             if showhtml == True:
                 genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = int(curr_balance)//10 )
@@ -193,7 +192,7 @@ if __name__ == "__main__":
                 order_id = str(bidorder['orderId'])
                 order_status = str(bidorder['status'])
                 elapsed = int(time.time() * 1000 - stime)
-                print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),bidorder['currencyPair'],'Buy',str(order_id) ,str(order_status), elapsed)
+                print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),bidorder['currencyPair'],'Buy',str(order_id) ,str(order_status), elapsed))
 
                 ### List Open Order
                 ## Open Order is not queries as soon as ordered, need sleep interval
@@ -251,7 +250,7 @@ if __name__ == "__main__":
                 order_id = str(askorder['orderId'])
                 order_status = str(askorder['status'])
                 elapsed = int(time.time() * 1000 - stime)
-                print "{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),askorder['currencyPair'],'Sell',str(order_id) ,order_status, elapsed)
+                print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),askorder['currencyPair'],'Sell',str(order_id) ,order_status, elapsed))
 
                 # check list open orders
                 time.sleep(2)
@@ -284,7 +283,7 @@ if __name__ == "__main__":
                         balance = chkUserBalance('krw',header)
                         trading = True
                 else:
-                    print askorder['status']
+                    print(askorder['status'])
                     trading = False
             #print "zz2: Sell {} coin at {} won, elapsed:{} , bidding# {}".format(bid_volume,ask,buy_sell_gap,total_bidding)
             ## End Trading
