@@ -13,8 +13,7 @@ if __name__ == "__main__":
     ### Vriables
     money = 10000
     trading = False
-    slump_trading = False
-    rise_trading = False
+    # Set testing True, if you want to run code only for test purpose
     testing = True
     bidding = False
     benefit = 0.05
@@ -100,8 +99,8 @@ if __name__ == "__main__":
             one_min_tx =  hr_tx[0:one_min_pos]
             tx_1min_price_avg = last if one_min_pos is 0 else (sum(int(tx['price']) for tx in one_min_tx)) / one_min_pos
 
-            tx_1min_price_max = max(one_min_tx, key=lambda x:x['price'])['price']
-            tx_1min_price_min = min(one_min_tx, key=lambda x:x['price'])['price']
+            tx_1min_price_max = last if one_min_pos is 0 else max(one_min_tx, key=lambda x:x['price'])['price']
+            tx_1min_price_min = last if one_min_pos is 0 else min(one_min_tx, key=lambda x:x['price'])['price']
             tx_1min_price_delta = last if one_min_pos is 0 else float(one_min_tx[0]['price']) - float(one_min_tx[one_min_pos - 1]['price'])
             tx_1min_stat = {'tx_1min_price_avg': tx_1min_price_avg,
                             'tx_1min_price_max': tx_1min_price_max,
@@ -134,7 +133,9 @@ if __name__ == "__main__":
 
             # print trading stats
             curr_balance = int(balance['available'] + balance['trade_in_use'])
-            print("{} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:3.0f}/{:3.0f}/{:3.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  ".format(getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,lat,total_bidding,int(curr_balance)//10))
+            print( "{} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}/{:4.0f}/{:4.0f} Avg: {:4.0f}/{:4.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  " \
+	            .format(getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,tx_hr_price_avg, tx_10min_price_avg,lat,total_bidding,int(curr_balance)//10))
+            #print("{} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:3.0f}/{:3.0f}/{:3.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  ".format(getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,lat,total_bidding,int(curr_balance)//10))
             # Create HTML for realtime view
             if showhtml == True:
                 genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = int(curr_balance)//10 )
@@ -148,36 +149,43 @@ if __name__ == "__main__":
             ## Buy Position                     #
             ######################################
 
-            ## Big Slump Algorithm
-            if not testing and not trading and myalgo.basic(95) and  myalgo.slump(15, 0.5, 5, 1):
+                        ## Big Slump Algorithm
+            if not testing and not trading and myalgo.basic(95) and  myalgo.slump(15, 0.5, 5, 2.0, -9999):
                 print("Hit : Big Slump")
                 bidding = True
-                benefit = 0.05
-                money = 50000
+                benefit = 0.07
+                money = 70000
             ## Midium Slump Algorithm
-            elif not testing and not trading and myalgo.basic(95) and  myalgo.slump(10, 0.2, 3, 1 ):
+            elif not testing and not trading and myalgo.basic(95) and  myalgo.slump(10, 0.4, 4, 1.5 , -9999 ):
                 print("Hit : Midium Slump")
                 bidding = True
-                benefit = 0.03
-                money = 50000
+                benefit = 0.04
+                money = 70000
             ## Little Slump Algorithm
-            elif not testing and not trading and myalgo.basic(95) and myalgo.slump(10, 0.13, 2, 2.0 ):
+            elif not testing and not trading and myalgo.basic(95) and myalgo.slump(10, 0.3, 3, 1.3 , -9999 ):
                 print("Hit : Little Slump")
                 bidding = True
-                benefit = 0.020
-                money = 50000
-            ## Smooth Slump Algorithm
-            elif not testing and not trading and myalgo.basic(98) and myalgo.slump(7, 0.1, 2, -2.1 ):
-                print("Hit : Smooth Slump")
+                benefit = 0.025
+                money = 70000
+            ## Baby Slump Algorithm
+            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.15, 2.0, 1.3 , -9999 ):
+                print("Hit : Baby Slump")
                 bidding = True
-                benefit = 0.020
+                benefit = 0.015
+                money = 70000
+            ## UpDown Slump Algorithm
+            elif not testing and not trading and myalgo.basic(95) and myalgo.slump(7, 0.2, 2, -2.0 , 0 ):
+                print("Hit : UpDown Slump")
+                bidding = True
+                benefit = 0.012
                 money = 50000
-            elif not testing and not trading and myalgo.basic(98) and myalgo.rise(0.2, 1, 1, 1.0, 3 ):
-            #elif not testing and not trading myalgo.rise(0.2, 1, 1, 1.0, 3 ):
+            elif not testing and not trading and myalgo.basic(95) and myalgo.rise(0.2, 1, 1, 1, 3 ):
+            #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
                 print("Hit : Rise")
                 bidding = True
                 benefit = 0.01
-                money = 35000
+                money = 50000
+
 
             ## Bid Order
             if bidding:
@@ -196,12 +204,13 @@ if __name__ == "__main__":
 
                 ### List Open Order
                 ## Open Order is not queries as soon as ordered, need sleep interval
-                time.sleep(2)
+                time.sleep(2.5)
                 listorder = listOrder(currency,header)
                 ## list orderid from listorder
                 myorder = []
                 for orders in listorder:
                     myorder.append(orders['id'].encode('utf-8'))
+                print("Bid Order List {}".format(myorder))
 
                 # if bid order id is not in open orders complete order
                 if  order_status == 'success' and order_id not in myorder:
@@ -227,16 +236,16 @@ if __name__ == "__main__":
                         trading = False
                         bidding = False
                         print("Bid Order is canceled")
-                        buy_price = sell_price = bid_volume =0
+                        buy_price = sell_price = buy_volume =0
                     else:
-                        print("Check Bid Orer algorithm")
+                        print("Check Bid Orer ")
                         xrp_balance = chkUserBalance('xrp',header)
                         trading = True
                         buy_time = time.time()
                         sell_volume = xrp_balance['available']
                         #sell_volume = float(buy_volume * 0.9992)
                         bidding = False
-                        print("Bid Order is complete")
+                        trading = True
 
 
 
@@ -264,7 +273,7 @@ if __name__ == "__main__":
                 if askorder['status'] == 'success' and order_id not in myorder:
                     trading = False
                     # initialize trading price
-                    buy_price = sell_price = bid_volume = 0
+                    buy_price = sell_price = buy_volume = sell_volume = 0
                     sell_time = time.time()
                     buy_sell_gap = sell_time - buy_time
                     # needs to put bidding count to redis
@@ -285,7 +294,6 @@ if __name__ == "__main__":
                 else:
                     print(askorder['status'])
                     trading = False
-            #print "zz2: Sell {} coin at {} won, elapsed:{} , bidding# {}".format(bid_volume,ask,buy_sell_gap,total_bidding)
             ## End Trading
 
         else:

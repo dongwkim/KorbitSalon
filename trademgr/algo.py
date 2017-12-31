@@ -36,7 +36,7 @@ class algo:
             p2  : 1min jump percentage
             p3  : 10min sump percentage
             p4  : 10min > 1hr ratio
-            p5  : bias on slump type, if up and down set to 0 , if down and down set to -2000
+            p5  : bias on slump type, if up and down set to 0 , if down and down set to -9999
         '''
         if self.tx_1min_price_delta < -(self.tx_hr_price_avg * p1/100) or \
          (self.tx_1min_price_delta > p2/100 and self.tx_10min_price_delta < -(self.tx_hr_price_avg * p3/100) and self.tx_hr_price_delta < self.tx_10min_price_delta * p4 and self.tx_hr_price_delta > p5):
