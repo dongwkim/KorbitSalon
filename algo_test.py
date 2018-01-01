@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 from trading.KorbitAPI import *
 from trading  import algo
+=======
+from trademgr.KorbitAPI import *
+from trademgr  import algo
+>>>>>>> 8cac00a37da5ae4420bb77576a910c8dd95f26ba
 import time
 
 if __name__ == "__main__":
@@ -76,5 +81,9 @@ if __name__ == "__main__":
         myalgo = algo.algo(tx_1min_stat, tx_10min_stat, tx_hr_stat, ticker)
 
         print("{:15s} | Time:{} last:{} delta:{:3.0f}/{:3.0f}/{:3.0f} | basic:{} slump:{} rise:{} ".format('Algorithm Test', getStrTime(ticker['timestamp']), ticker['last'], tx_hr_price_delta, tx_10min_price_delta, tx_1min_price_delta \
+<<<<<<< HEAD
          ,myalgo.basic(0.95), myalgo.slump(5, 0.05, 5, 1.5), myalgo.rise(0.05, 0.05, 1.5, 1.1, 5)))
+=======
+         ,myalgo.basic(0.95), myalgo.slump(5, 0, 0, 0, -9999), myalgo.rise(0.05, 0.05, 1.5, 1.1, 5) ))
+>>>>>>> 8cac00a37da5ae4420bb77576a910c8dd95f26ba
         time.sleep(3)

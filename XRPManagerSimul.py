@@ -18,7 +18,6 @@ class XRPManagerSimul(KorbitBase):
         
     def getTicker(self, pTimestamp, pRedisResult):     
         tickerDetail = pRedisResult[0].split (':')
-        time.sleep(1)
 
         self.myDictionary['last'] = tickerDetail[0]
         self.myDictionary['bid'] = tickerDetail[1]
