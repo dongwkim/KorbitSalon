@@ -31,9 +31,9 @@ if __name__ == "__main__":
 
 
 
-    start_time = korbitapi.getEpochTime('2018-01-01 00:10:00')
+    start_time = korbitapi.getEpochTime('2018-01-01 00:00:00')
     #start_time = 1514656699880
-    end_time = korbitapi.getEpochTime('2018-01-01 00:20:00')
+    end_time = korbitapi.getEpochTime('2018-01-01 02:00:00')
     #end_time = 1514656699981
 
     xrpm = xrpmgrsimul.XRPManagerSimul('SIMUL')
@@ -57,7 +57,7 @@ if __name__ == "__main__":
         getvalue_stimer = time.time()
         mystat = xrpm.getValues(int(ptime))
         getvalue_etimer = time.time()
-        print("Timestamp: {}, getValue elapsed: {:2.4f}, one loop elapsed: {:2.4f}".format( int(ptime), getvalue_etimer - getvalue_stimer,loop_time))
+        #print("Timestamp: {}, getValue elapsed: {:2.4f}, one loop elapsed: {:2.4f}".format( int(ptime), getvalue_etimer - getvalue_stimer,loop_time))
         if mystat == 0:
             continue
 
@@ -107,25 +107,43 @@ if __name__ == "__main__":
         myalgo = algo.algo(tx_1min_stat, tx_10min_stat, tx_hr_stat, ticker)
 
         # Put your Algorithm here
-        if myalgo.slump(7, 0.20, 2, 1.3, -9000)  and not trading :
+        if not trading and myalgo.basic(95) and  myalgo.slump(15, 0.5, 5, 2.0, -9999):
             print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
-            .format(korbitapi.getStrTime(int(ptime)), "Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
+            .format(korbitapi.getStrTime(int(ptime)), "Big Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
+            bidding = True
+            benefit = 0.07
+            ## Midium Slump Algorithm
+        elif not trading and myalgo.basic(95) and  myalgo.slump(10, 0.4, 4, 1.5 , -9999 ):
+            print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
+            .format(korbitapi.getStrTime(int(ptime)), "Midium Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
+            bidding = True
+            benefit = 0.04
+            ## Little Slump Algorithm
+        elif myalgo.basic(95) and myalgo.slump(10, 0.3, 3, 1.3 , -9999 ):
+            print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
+            .format(korbitapi.getStrTime(int(ptime)), "Little Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
+            print("Hit : Little Slump")
+            bidding = True
+            benefit = 0.025
+            ## Baby Slump Algorithm
+        elif not trading and myalgo.basic(97) and myalgo.slump(7, 0.15, 2.0, 1.3 , -9999 ):
+            print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
+            .format(korbitapi.getStrTime(int(ptime)), "Baby Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
             bidding = True
             benefit = 0.015
+            ## UpDown Slump Algorithm
+        elif not trading and myalgo.basic(95) and myalgo.slump(7, 0.2, 2, -2.0 , 0 ):
+            print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
+            .format(korbitapi.getStrTime(int(ptime)), "UpDown Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
+            bidding = True
+            benefit = 0.012
+        elif not trading and myalgo.basic(95) and myalgo.rise(0.2, 1, 1, 1, 3 ):
+            print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
+            .format(korbitapi.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
+            #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
+            bidding = True
+            benefit = 0.01
 
-        #Buy Position
-        if not trading and bidding:
-            buy_price = int(ticker['ask'])
-            sell_price = buy_price + int(buy_price * benefit)
-            # if ask volume is less than my volume what we do next?
-            buy_volume = int(money) // buy_price
-            sell_volume = float(buy_volume - (buy_volume * taker_fee / 100))
-            print("{} | Buy {} coins at price {}, will sell {} won ".format(korbitapi.getStrTime(int(ptime)), buy_volume, ticker['ask'], sell_price))
-
-            ## We are assuming all bid order is success and no open orders are exist
-            trading = True
-            buy_time = int(ptime)
-            bidding = False
 
         #Sell Position
         if trading and int(ticker['last']) >= sell_price and int(ticker['bid']) >= sell_price:
