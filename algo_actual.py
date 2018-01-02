@@ -68,7 +68,7 @@ if __name__ == "__main__":
 
         # Get data from redis
         getvalue_stimer = time.time()
-        mystat = xrpm.getValues(int(time.time() * 1000))
+        mystat = xrpm.getValues(int(time.time() * 1000))[0]
 
         getvalue_etimer = time.time()
 

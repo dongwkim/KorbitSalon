@@ -181,7 +181,7 @@ if __name__ == "__main__":
                 benefit = 0.015
                 money = 70000
             ## UpDown Slump Algorithm
-            elif not testing and not trading and myalgo.basic(95) and myalgo.slump(7, 0.2, 2, -2.0 , 0 ):
+            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 2, -2.0 , 0 ):
                 print("Hit : UpDown Slump")
                 bidding = True
                 benefit = 0.012
