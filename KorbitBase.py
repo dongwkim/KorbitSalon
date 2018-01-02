@@ -10,9 +10,10 @@ import logging.handlers
 class KorbitBase:
     def __init__(self):
         self.redisHost = 'localhost'
-        self.redisPort = 6379
+        self.redisPort = 16379
+        self.redisPassword = 'RlawjddmsrotoRl#12'
         self.mySession = requests.Session()
-        self.redisCon = redis.StrictRedis(host=self.redisHost, port=self.redisPort, db=0,charset="utf-8", decode_responses=True)
+        self.redisCon = redis.StrictRedis(host=self.redisHost, port=self.redisPort, db=0, password=self.redisPassword, charset="utf-8", decode_responses=True)
         self.accessToken = self.redisCon.get('access_token')
         self.urlPrefix = 'https://api.korbit.co.kr/v1'
         self.currencyPair='xrp_krw'

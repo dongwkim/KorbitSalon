@@ -66,7 +66,8 @@ class XRPManagerSimul(KorbitBase):
         if (self.managerMode == 'ACTUAL'):
             redisResult=self.redisCon.zrevrangebyscore("xrp", '+inf', '-inf', start=0,num=1)
         elif (self.managerMode == 'SIMUL'):
-            redisResult=self.redisCon.zrevrangebyscore("xrp", pTimestamp, pTimestamp, start=0,num=1)
+            redisResult=self.redisCon.zrevrangebyscore("xrp", pTimestamp, pTimestamp)
+            #print("LEN:"+str(len(redisResult)))
         else:
             print('CRITICAL ERROR in XRPManagerSimul.py')
             exit()
@@ -79,6 +80,7 @@ class XRPManagerSimul(KorbitBase):
         currentTimestamp = pTimestamp
         
         redisResult = self.isDataExist(currentTimestamp)
+        #print(len(redisResult))
         
         if (redisResult):
             self.getTicker(currentTimestamp, redisResult)
@@ -104,12 +106,12 @@ class XRPManagerSimul(KorbitBase):
 
 xrpm = XRPManagerSimul('SIMUL')
 
-myTimestamps=xrpm.redisCon.zrangebyscore("xrp_timestamp", '-inf','+inf')
+myTimestamps=xrpm.redisCon.zrangebyscore("xrp", 1514896714024,1514896760126)
+
 firstIndex = 0
-lastIndex = len(myTimestamps) - 1
+lastIndex = len(myTimestamps)
 for firstIndex in range(lastIndex):
-    #myTimestamp=int(myTimestamps[firstIndex].split (':')[5])
-    myTimestamp=int(myTimestamps[firstIndex])
+    myTimestamp=int(myTimestamps[firstIndex].split (':')[5])
     vv = xrpm.getValues(myTimestamp)
     if (vv == 0):
         #print("NO Data")
@@ -117,6 +119,27 @@ for firstIndex in range(lastIndex):
     else:
         print(vv)
         pass
+
+        
+'''
+#starttime = xrpm.getEpochTime('2018-01:02 22:17:01')
+#endtime = xrpm.getEpochTime('2017-12-30 22:17:21')
+starttime=1514896714024
+endtime=1514896760126
+while starttime < endtime:
+
+    vv = xrpm.getValues(starttime)
+    if (vv == 0):
+        #print("NO Data")
+        pass
+    else:
+        print(vv)
+        pass
+    
+    starttime = starttime + 1
+
+'''
+
 
 '''
 myTimestamps=xrpm.redisCon.zrangebyscore("xrp", '-inf','+inf')

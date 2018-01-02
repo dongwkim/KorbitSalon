@@ -8,9 +8,10 @@ class MainTest (KorbitBase):
         super().__init__()
 
 mt = MainTest()
-redisResult=mt.redisCon.zrangebyscore("xrp", '-inf','+inf')
+redisResult=mt.redisCon.zrangebyscore("test2", '-inf','+inf')
 firstIndex = 0
-lastIndex = len(redisResult) - 1
+lastIndex = len(redisResult)
 for firstIndex in range(lastIndex):
-    myTimestamp=int(redisResult[firstIndex].split (':')[5])
-    mt.redisCon.zadd('xrp_timestamp',firstIndex, myTimestamp)
+    myPrice=int(redisResult[firstIndex].split (':')[0])
+    print(myPrice)
+    #mt.redisCon.zadd('xrp_timestamp',firstIndex, myTimestamp)
