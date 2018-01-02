@@ -23,7 +23,7 @@ if __name__ == "__main__":
     buy_volume = 0
     sell_volume = 0
     #limit is calculated dynamically based on max
-    limit = 0.95
+    limit = 0.97
     currency = 'xrp_krw'
     debug = False
     #Switch Env based on Platform

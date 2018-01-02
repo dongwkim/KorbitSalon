@@ -28,15 +28,15 @@ if __name__ == "__main__":
     tx_time_list = []
     #increment = 1
     debug_time = False
-    debug_data = True
+    debug_data = False
 
 
 
     kb = KorbitBase()
     #start_time = KorbitBase.getEpochTime('2018-01-01 00:00:00')
-    start_time = kb.getEpochTime('2018-01-02 17:57:00')
+    start_time = kb.getEpochTime('2018-01-02 18:00:00')
     #start_time = 1514656699880
-    end_time = kb.getEpochTime('2018-01-02 17:58:00')
+    end_time = kb.getEpochTime('2018-01-02 21:00:00')
     #end_time = 1514656699981
 
     xrpm = xrpmgrsimul('SIMUL', 'cryptosalon.iptime.org', 16379,'RlawjddmsrotoRl#12', 'xrp')
@@ -142,7 +142,7 @@ if __name__ == "__main__":
             benefit = 0.025
             ## Baby Slump Algorithm
         elif not trading \
-          and myalgo.slump(7, 0.15, 1.0, 1.0 , -9999 ) :
+          and myalgo.slump(7, 0.15, 0.5, 1.0 , -9999 ) :
           #and myalgo.basic(97) :
             print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
             .format(kb.getStrTime(int(ptime)), "Baby Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
