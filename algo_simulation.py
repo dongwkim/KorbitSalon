@@ -26,24 +26,35 @@ if __name__ == "__main__":
     cummulative_earn_money = 0
     bidding = False
     tx_time_list = []
-    increment = 1
+    #increment = 1
+    debug_time = False
+    debug_data = True
 
 
 
     kb = KorbitBase()
     #start_time = KorbitBase.getEpochTime('2018-01-01 00:00:00')
-    start_time = kb.getEpochTime('2018-01-02 00:00:00')
+    start_time = kb.getEpochTime('2018-01-02 17:57:00')
     #start_time = 1514656699880
-    end_time = kb.getEpochTime('2018-01-02 06:00:00')
+    end_time = kb.getEpochTime('2018-01-02 17:58:00')
     #end_time = 1514656699981
 
-    xrpm = xrpmgrsimul('SIMUL', 'cryptosalon.iptime.org', 6379, 'xrp')
+    xrpm = xrpmgrsimul('SIMUL', 'cryptosalon.iptime.org', 16379,'RlawjddmsrotoRl#12', 'xrp')
+    #xrpm = xrpmgrsimul('SIMUL', 'cryptosalon.iptime.org', 36379, 'xrp')
     myTimestamp = xrpm.redisCon.zrangebyscore('xrp_timestamp', '-inf', '+inf')
+    myTimestamp.sort()
+    if debug_data:
+        pass
+        #print("Redis Last Timestamp is {}".format(kb.getStrTime(myTimestamp.sort()[1])))
     try:
         start_pos = next( i for i,j in enumerate(myTimestamp) if int(j) >= start_time )
+        if debug_data:
+            print("start pos:{}".format(start_pos))
         end_pos = next( i for i,j in enumerate(myTimestamp) if int(j) >= end_time )
+        if debug_data:
+            print("end pos:{}".format(end_pos))
     except StopIteration:
-        print("ERROR | End Time is greater than redis data")
+        print("ERROR | Start / End Time is not in redis data")
         raise
     print("{} | Total {} tickers will be simulated.".format(kb.getStrTime(time.time() * 1000), end_pos - start_pos))
 
@@ -58,7 +69,10 @@ if __name__ == "__main__":
         getvalue_stimer = time.time()
         mystat = xrpm.getValues(int(ptime))
         getvalue_etimer = time.time()
-        #print("Timestamp: {}, getValue elapsed: {:2.4f}, one loop elapsed: {:2.4f}".format( int(ptime), getvalue_etimer - getvalue_stimer,loop_time))
+        if debug_time:
+            print("Timestamp: {}, getValue elapsed: {:2.4f}, one loop elapsed: {:2.4f}".format( int(ptime), getvalue_etimer - getvalue_stimer,loop_time))
+        elif debug_data:
+            print("{} | Price: p:{}/b:{}/a:{}/l:{} | Delta: {:3d}/{:3d}/{:3d} | Avg: {:4.0f}/{:4.0f}".format(kb.getStrTime(int(ptime)),mystat['last'], mystat['bid'], mystat['ask'], mystat['high'], mystat['tx_60min_delta'], mystat['tx_10min_delta'], mystat['tx_1min_delta'], mystat['tx_60min_avg'], mystat['tx_10min_avg']))
         if mystat == 0:
             continue
 
@@ -127,7 +141,9 @@ if __name__ == "__main__":
             bidding = True
             benefit = 0.025
             ## Baby Slump Algorithm
-        elif not trading and myalgo.basic(97) and myalgo.slump(7, 0.15, 2.0, 1.3 , -9999 ):
+        elif not trading \
+          and myalgo.slump(7, 0.15, 1.0, 1.0 , -9999 ) :
+          #and myalgo.basic(97) :
             print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
             .format(kb.getStrTime(int(ptime)), "Baby Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
             bidding = True
