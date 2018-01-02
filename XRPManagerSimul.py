@@ -67,7 +67,6 @@ class XRPManagerSimul(KorbitBase):
             redisResult=self.redisCon.zrevrangebyscore("xrp", '+inf', '-inf', start=0,num=1)
         elif (self.managerMode == 'SIMUL'):
             redisResult=self.redisCon.zrevrangebyscore("xrp", pTimestamp, pTimestamp)
-            #print("LEN:"+str(len(redisResult)))
         else:
             print('CRITICAL ERROR in XRPManagerSimul.py')
             exit()
@@ -80,25 +79,36 @@ class XRPManagerSimul(KorbitBase):
         currentTimestamp = pTimestamp
         
         redisResult = self.isDataExist(currentTimestamp)
-        #print(len(redisResult))
+    
+        countRedisResult = len(redisResult)
+
+        myDictionaryList = list()
         
         if (redisResult):
-            self.getTicker(currentTimestamp, redisResult)
-            self.myDictionary['tx_1min_delta'] = self.getDelta(currentTimestamp,1)
-            self.myDictionary['tx_10min_delta'] = self.getDelta(currentTimestamp, 10) 
-            self.myDictionary['tx_60min_delta'] = self.getDelta(currentTimestamp, 60)
-            self.myDictionary['tx_10min_avg'] = self.getAverage(currentTimestamp, 10)
-            self.myDictionary['tx_60min_avg'] = self.getAverage(currentTimestamp, 60)
-            #print('****YE Data : ' + str(self.myDictionary))
-            return self.myDictionary
+            i=0
+            for i in range(countRedisResult):
+                tickerDetail = redisResult[i].split (':')
+    
+                self.myDictionary['last'] = tickerDetail[0]
+                self.myDictionary['bid'] = tickerDetail[1]
+                self.myDictionary['ask'] = tickerDetail[2]
+                self.myDictionary['low'] = tickerDetail[3]
+                self.myDictionary['high'] = tickerDetail[4]
+                self.myDictionary['timestamp'] = tickerDetail[5]
+                
+                self.myDictionary['tx_1min_delta'] = self.getDelta(currentTimestamp,1)
+                self.myDictionary['tx_10min_delta'] = self.getDelta(currentTimestamp, 10) 
+                self.myDictionary['tx_60min_delta'] = self.getDelta(currentTimestamp, 60)
+                self.myDictionary['tx_10min_avg'] = self.getAverage(currentTimestamp, 10)
+                self.myDictionary['tx_60min_avg'] = self.getAverage(currentTimestamp, 60)
+                #print('****YE Data : ' + str(self.myDictionary))
+                myDictionaryList.append(self.myDictionary)
+                #return self.myDictionary
+            return myDictionaryList
         else:
             #print('No Data : ' + str(pTimestamp))
             return 0
         
-        #self.myDictionary['timestamp'] = currentTimestamp
-
-#        n2=dt.datetime.now()
-#        print("Elapsed Time:" + str((n2-n1).microseconds))
         return self.myDictionary
     
     def printCurrentTime(self, pTimestamp):
@@ -119,26 +129,22 @@ for firstIndex in range(lastIndex):
     else:
         print(vv)
         pass
-
-        
 '''
-#starttime = xrpm.getEpochTime('2018-01:02 22:17:01')
-#endtime = xrpm.getEpochTime('2017-12-30 22:17:21')
-starttime=1514896714024
-endtime=1514896760126
+starttime = xrpm.getEpochTime('2017-12-30 22:17:01')
+endtime = xrpm.getEpochTime('2017-12-30 22:17:21')
 while starttime < endtime:
-
+    #print("*"*50+str(starttime))
+    #print(xrpm.getValues(starttime))
     vv = xrpm.getValues(starttime)
     if (vv == 0):
         #print("NO Data")
         pass
     else:
-        print(vv)
+        #print(vv)
         pass
-    
-    starttime = starttime + 1
 
 '''
+
 
 
 '''
@@ -156,30 +162,3 @@ for firstIndex in range(lastIndex):
         pass
 '''        
 
-'''
-starttime = xrpm.getEpochTime('2017-12-30 22:17:01')
-endtime = xrpm.getEpochTime('2017-12-30 22:17:21')
-#starttime=1514629818631
-#endtime=1514629830536
-#endtime = xrpm.getEpochTime('2017-12-31 02:00:00')
-#print(str(starttime))
-#print(str(endtime))
-xrpm.printCurrentTime(time.time())
-n1=dt.datetime.now()
-while starttime < endtime:
-    #print("*"*50+str(starttime))
-    #print(xrpm.getValues(starttime))
-    vv = xrpm.getValues(starttime)
-    if (vv == 0):
-        #print("NO Data")
-        pass
-    else:
-        #print(vv)
-        pass
-        
-    starttime = starttime + 1
-
-n2=dt.datetime.now()
-xrpm.printCurrentTime(time.time())
-print("Total Elapsed Time:" + str((n2-n1).microseconds))
-'''
