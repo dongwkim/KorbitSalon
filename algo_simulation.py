@@ -163,7 +163,7 @@ if __name__ == "__main__":
 
 
         #Sell Position
-        if trading and int(ticker['last']) >= sell_price and int(ticker['bid']) >= sell_price:
+        if bidding and int(ticker['last']) >= sell_price and int(ticker['bid']) >= sell_price:
             earn_money = int(((int(ticker['bid']) - buy_price) * sell_volume) * (1 - marker_fee))
             cummulative_earn_money += earn_money
             bidding_count += 1
@@ -176,10 +176,10 @@ if __name__ == "__main__":
 
 
     ## Simulation Report
-    if trading:
+    if bidding:
         pending_tx_price = int((int(ticker['last']) - buy_price ) * buy_volume)
         print("Simulation Finished! You were bidding {} times and hold unselled order. Earn {} won, pending {} won".format(bidding_count, cummulative_earn_money, pending_tx_price))
         getTxList(tx_time_list)
-    elif not trading:
+    elif not bidding:
         print("Simulation Finished! You were bidding {} times. Earn {} won".format(bidding_count, cummulative_earn_money))
         getTxList(tx_time_list)
