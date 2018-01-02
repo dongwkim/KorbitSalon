@@ -32,9 +32,9 @@ if __name__ == "__main__":
 
     kb = KorbitBase()
     #start_time = KorbitBase.getEpochTime('2018-01-01 00:00:00')
-    start_time = kb.getEpochTime('2018-01-01 00:00:00')
+    start_time = kb.getEpochTime('2018-01-02 00:00:00')
     #start_time = 1514656699880
-    end_time = kb.getEpochTime('2018-01-01 02:00:00')
+    end_time = kb.getEpochTime('2018-01-02 06:00:00')
     #end_time = 1514656699981
 
     xrpm = xrpmgrsimul('SIMUL', 'cryptosalon.iptime.org', 6379, 'xrp')
