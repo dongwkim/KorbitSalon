@@ -1,9 +1,9 @@
 #!/usr/bin/python
-from trademgr.KorbitAPI import *
+from KorbitBase import *
 import time
-from tokenmgr.TokenManager import *
+import TokenManager as tkmgr
 from platform import system
-from trademgr import algo
+import algo
 #import logging
 
 if __name__ == "__main__":
@@ -25,6 +25,7 @@ if __name__ == "__main__":
     #limit is calculated dynamically based on max
     limit = 0.95
     currency = 'xrp_krw'
+    debug = True
     #Switch Env based on Platform
     if system() is 'Windows':
         secFilePath='c:/User/dongwkim/keys/korbit_key.csv'
@@ -42,34 +43,35 @@ if __name__ == "__main__":
 
     URL = 'https://api.korbit.co.kr/v1'
 
+    myorder = KorbitBase()
 
     logger.info('Start Connection Pooling ')
-    pooling()
+
+    # Call tokenmanger
+    tkmgr = tkmgr.UserSessionInfo(secFilePath, 'dongwkim', '39.115.53.33', 16379 )
 
     #refresh token by redis
-    myRedis = UserSessionInfo(secFilePath, redisUser, redisHost, redisPort)
-    token = myRedis.getAccessToken()
-    header = {"Authorization": "Bearer " + token}
+    mytoken = tkmgr.getAccessToken()
+    header = {"Authorization": "Bearer " + mytoken}
 
     ### Fetching Ticker
-    prev_ticker = get('ticker/detailed', currency_pair = currency)
+    prev_ticker = myorder.doGet('ticker/detailed', currency_pair = currency)
     ### Check Balance
-    balance = chkUserBalance('krw', header)
+    balance = myorder.chkUserBalance('krw', header)
+
 
     while True:
         time.sleep(0.5)
 
-        # Get Access token from redis
-        token = myRedis.getAccessToken()
-
-        ## Set HTTP Header for Private API
-        header = {"Authorization": "Bearer " + token}
+        # refresh access token by redis
+        mytoken = tkmgr.getAccessToken()
+        header = {"Authorization": "Bearer " + mytoken}
 
 
         start = time.time()
-        ticker = get('ticker/detailed', currency_pair = currency)
+        ticker = myorder.doGet('ticker/detailed', currency_pair = currency)
         #min_tx = get('transactions', currency_pair = currency, time='minute')
-        hr_tx = get('transactions', currency_pair = currency, time='hour')
+        hr_tx = myorder.doGet('transactions', currency_pair = currency, time='hour')
         end = time.time()
 
         lat = int((end - start)*100)
@@ -83,10 +85,15 @@ if __name__ == "__main__":
 
         if ticker['timestamp'] > prev_ticker['timestamp'] or ticker['bid'] != prev_ticker['bid'] or ticker['ask'] != prev_ticker['ask']:
 
+            if debug:
+                s_order = time.time()
+            # refresh access token by redis
+            mytoken = tkmgr.getAccessToken()
+            header = {"Authorization": "Bearer " + mytoken}
             # Calcuate String Format Timestamp
             #ctime = getStrTime(ticker['timestamp'])
             # Get Current Time
-            ctime = getStrTime(time.time() * 1000)
+            ctime = myorder.getStrTime(time.time() * 1000)
             # Cacculate 10min past timstamps
             ten_min_time = (time.time() - ( 10 * 60 )) * 1000
             # Cacculate 1min past timstamps
@@ -134,7 +141,7 @@ if __name__ == "__main__":
             # print trading stats
             curr_balance = int(balance['available'] + balance['trade_in_use'])
             print( "{} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}/{:4.0f}/{:4.0f} Avg: {:4.0f}/{:4.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  " \
-	            .format(getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,tx_hr_price_avg, tx_10min_price_avg,lat,total_bidding,int(curr_balance)//10))
+	            .format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,tx_hr_price_avg, tx_10min_price_avg,lat,total_bidding,int(curr_balance)//10))
             #print("{} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:3.0f}/{:3.0f}/{:3.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  ".format(getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,lat,total_bidding,int(curr_balance)//10))
             # Create HTML for realtime view
             if showhtml == True:
@@ -196,25 +203,25 @@ if __name__ == "__main__":
                 ### Buy Order
                 mybid = {"currency_pair" : currency, "type":"limit", "price": buy_price, "coin_amount": buy_volume, "nonce": getNonce()}
                 stime = time.time() * 1000
-                bidorder = bidOrder(mybid, header)
+                bidorder = myorder.bidOrder(mybid, header)
                 order_id = str(bidorder['orderId'])
                 order_status = str(bidorder['status'])
                 elapsed = int(time.time() * 1000 - stime)
-                print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),bidorder['currencyPair'],'Buy',str(order_id) ,str(order_status), elapsed))
+                print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),bidorder['currencyPair'],'Buy',str(order_id) ,str(order_status), elapsed))
 
                 ### List Open Order
                 ## Open Order is not queries as soon as ordered, need sleep interval
                 time.sleep(2.5)
-                listorder = listOrder(currency,header)
+                listorder = myorder.listOrder(currency,header)
                 ## list orderid from listorder
-                myorder = []
+                myorderids = []
                 for orders in listorder:
-                    myorder.append(orders['id'].encode('utf-8'))
+                    myorderids.append(orders['id'].encode('utf-8'))
                 print("Bid Order List {}".format(myorder))
 
                 # if bid order id is not in open orders complete order
-                if  order_status == 'success' and order_id not in myorder:
-                    xrp_balance = chkUserBalance('xrp',header)
+                if  order_status == 'success' and order_id not in myorderids:
+                    xrp_balance = myorder.chkUserBalance('xrp',header)
                     trading = True
                     buy_time = time.time()
                     sell_volume = xrp_balance['available']
@@ -222,24 +229,24 @@ if __name__ == "__main__":
                     bidding = False
                     print("Bid Order is complete")
                 # if open order is exist, cancel all bidding order
-                elif order_status == 'success' and order_id in myorder:
+                elif order_status == 'success' and order_id in myorderids:
                     # if failed to buy order , cancel pending order
                     mycancel = {"currency_pair": currency, "id": order_id,"nonce":getNonce()}
                     stime = time.time() * 1000
-                    cancelorder = cancelOrder(mycancel, header)
+                    cancelorder = myorder.cancelOrder(mycancel, header)
                     elapsed = int(time.time() * 1000 - stime)
-                    mycancel = []
+                    mycancelids = []
                     for cancels in cancelorder:
-                        print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancels['currencyPair'],'Cancel',str(cancels['orderId']) ,cancels['status'], elapsed))
+                        print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),cancels['currencyPair'],'Cancel',str(cancels['orderId']) ,cancels['status'], elapsed))
                     if cancelorder[0]['status'] == 'success':
-                        balance = chkUserBalance('krw',header)
+                        balance = myorder.chkUserBalance('krw',header)
                         trading = False
                         bidding = False
                         print("Bid Order is canceled")
                         buy_price = sell_price = buy_volume =0
                     else:
                         print("Check Bid Orer ")
-                        xrp_balance = chkUserBalance('xrp',header)
+                        xrp_balance = myorder.chkUserBalance('xrp',header)
                         trading = True
                         buy_time = time.time()
                         sell_volume = xrp_balance['available']
@@ -255,22 +262,22 @@ if __name__ == "__main__":
             if trading and last >= sell_price and bid >= sell_price:
                 myask = {"currency_pair" : currency, "type":"limit", "price": sell_price, "coin_amount": sell_volume, "nonce": getNonce()}
                 stime = time.time() * 1000
-                askorder = askOrder(myask, header)
+                askorder = myorder.askOrder(myask, header)
                 order_id = str(askorder['orderId'])
                 order_status = str(askorder['status'])
                 elapsed = int(time.time() * 1000 - stime)
-                print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),askorder['currencyPair'],'Sell',str(order_id) ,order_status, elapsed))
+                print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),askorder['currencyPair'],'Sell',str(order_id) ,order_status, elapsed))
 
                 # check list open orders
                 time.sleep(2)
-                listorder = listOrder(currency,header)
+                listorder = myorder.listOrder(currency,header)
                 ## list orderid from listorder
-                myorder = []
+                myorderids = []
                 for orders in listorder:
-                    myorder.append(orders['id'].encode('utf-8'))
+                    myorderids.append(orders['id'].encode('utf-8'))
 
                 # if ask order id is not in open orders complete order
-                if askorder['status'] == 'success' and order_id not in myorder:
+                if askorder['status'] == 'success' and order_id not in myorderids:
                     trading = False
                     # initialize trading price
                     buy_price = sell_price = buy_volume = sell_volume = 0
@@ -281,21 +288,23 @@ if __name__ == "__main__":
                     # check balance
                     balance = chkUserBalance('krw',header)
                 # if failed to sell order , cancel all ask orders
-                elif askorder['status'] == 'success' and order_id in myorder:
+                elif askorder['status'] == 'success' and order_id in myorderids:
                     mycancel = {"currency_pair": currency, "id": order_id,"nonce":getNonce()}
                     stime = time.time() * 1000
-                    cancelorder = cancelOrder(mycancel, header)
+                    cancelorder = myorder.cancelOrder(mycancel, header)
                     elapsed = int(time.time() * 1000 - stime)
                     for cancels in cancelorder:
-                        print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(getStrTime(stime),cancels['currencyPair'],'Cancel',str(cancels['orderId']) ,cancels['status'], elapsed))
+                        print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),cancels['currencyPair'],'Cancel',str(cancels['orderId']) ,cancels['status'], elapsed))
                     if cancelorder[0]['status'] == 'success':
-                        balance = chkUserBalance('krw',header)
+                        balance = myorder.chkUserBalance('krw',header)
                         trading = True
                 else:
                     print(askorder['status'])
                     trading = False
             ## End Trading
+            ## Debug Time lapse
+            if debug:
+                e_order = time.time()
+                print("One Iteration Time is :{:3.1f} ms".format((e_order - s_order) * 1000 ))
 
-        else:
-            continue
         prev_ticker = ticker

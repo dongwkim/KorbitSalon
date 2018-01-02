@@ -5,7 +5,7 @@ from statistics import mean
 
 
 
-class XRPManager(KorbitBase):
+class XRPManager(KorbitBase('cryptosalon.iptime.org', 6379, 'xrp_krw')):
     def __init__(self):
         super().__init__()
         self.myCurrency='xrp_krw'
