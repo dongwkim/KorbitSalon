@@ -25,7 +25,7 @@ if __name__ == "__main__":
     #limit is calculated dynamically based on max
     limit = 0.95
     currency = 'xrp_krw'
-    debug = True
+    debug = False
     #Switch Env based on Platform
     if system() is 'Windows':
         secFilePath='c:/User/dongwkim/keys/korbit_key.csv'

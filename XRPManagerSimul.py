@@ -1,13 +1,14 @@
-from trademgr.KorbitBase import *
+from KorbitBase import *
 import threading
 from statistics import mean
 import datetime as dt
 
 #class XRPManagerSimul(KorbitBase('cryptosalon.iptime.org', 6379, 'xrp_krw')):
 class XRPManagerSimul():
-    def __init__(self, pMode):
-        KorbitBase.__init__(self,'cryptosalon.iptime.org', 6379, 'xrp_krw')
+    def __init__(self, pMode, redisHost, redisPort, currency):
+        #KorbitBase.__init__(self,'cryptosalon.iptime.org', 6379, 'xrp_krw')
         #super().__init__()
+        self.redisCon = redis.StrictRedis(host=redisHost, port=redisPort, db=0,charset="utf-8", decode_responses=True)
         self.myCurrency='xrp_krw'
         self.minuteUnit = 60 #60sec
         self.cTimestamp = int(time.time()*1000) # 1000 for time transition to timestamp format
@@ -17,6 +18,7 @@ class XRPManagerSimul():
                              'tx_60min_delta':'0','tx_10min_avg':'0', 'tx_60min_avg':'0'}
         self.managerMode = pMode
         self.resultSave = []
+        self.curency = currency
 
     def getTicker(self, pTimestamp, pRedisResult):
         tickerDetail = pRedisResult[0].split (':')
@@ -34,7 +36,7 @@ class XRPManagerSimul():
         pTimestamp = cTimestamp - (self.minuteUnit * pTimeDelta * 1000)
         #self.printCurrentTime(pTimestamp)
         # get price from baseline and current time
-        redisResult=self.redisCon.zrangebyscore("xrp", pTimestamp, cTimestamp)
+        redisResult=self.redisCon.zrangebyscore(curreny, pTimestamp, cTimestamp)
         firstIndex = 0
         lastIndex = len(redisResult) - 1
         #print(str(pTimestamp)+":"+str(cTimestamp))
@@ -51,7 +53,7 @@ class XRPManagerSimul():
         #cTimestamp = int(time.time()*1000)
         cTimestamp = pCurrentTime
         pTimestamp = cTimestamp - (self.minuteUnit * pTimeDelta*1000)
-        redisResult=self.redisCon.zrangebyscore("xrp", pTimestamp, cTimestamp)
+        redisResult=self.redisCon.zrangebyscore(currency, pTimestamp, cTimestamp)
         firstIndex = 0
         bucket =[]
         lastIndex = len(redisResult) - 1
@@ -66,9 +68,9 @@ class XRPManagerSimul():
 
     def isDataExist(self, pTimestamp):
         if (self.managerMode == 'ACTUAL'):
-            redisResult=self.redisCon.zrevrangebyscore("xrp", '+inf', '-inf', start=0,num=1)
+            redisResult=self.redisCon.zrevrangebyscore(currency, '+inf', '-inf', start=0,num=1)
         elif (self.managerMode == 'SIMUL'):
-            redisResult=self.redisCon.zrevrangebyscore("xrp", pTimestamp, pTimestamp, start=0,num=1)
+            redisResult=self.redisCon.zrevrangebyscore(currency, pTimestamp, pTimestamp, start=0,num=1)
         else:
             print('CRITICAL ERROR in XRPManagerSimul.py')
             exit()
