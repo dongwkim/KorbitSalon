@@ -108,7 +108,7 @@ if __name__ == "__main__":
 
             tx_1min_price_max = last if one_min_pos is 0 else max(one_min_tx, key=lambda x:x['price'])['price']
             tx_1min_price_min = last if one_min_pos is 0 else min(one_min_tx, key=lambda x:x['price'])['price']
-            tx_1min_price_delta = last if one_min_pos is 0 else float(one_min_tx[0]['price']) - float(one_min_tx[one_min_pos - 1]['price'])
+            tx_1min_price_delta = 0 if one_min_pos is 0 else float(one_min_tx[0]['price']) - float(one_min_tx[one_min_pos - 1]['price'])
             tx_1min_stat = {'tx_1min_price_avg': tx_1min_price_avg,
                             'tx_1min_price_max': tx_1min_price_max,
                             'tx_1min_price_min': tx_1min_price_min,
