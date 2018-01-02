@@ -171,7 +171,7 @@ if __name__ == "__main__":
 
             ## We are assuming all bid order is success and no open orders are exist
             trading = True
-            buy_time = kb.getStrTime(int(ptime))
+            buy_time = int(ptime)
             bidding = False
 
         #Sell Position
