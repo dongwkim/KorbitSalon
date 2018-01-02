@@ -58,16 +58,13 @@ if __name__ == "__main__":
     #     raise
     # print("{} | Total {} tickers will be simulated.".format(kb.getStrTime(time.time() * 1000), end_pos - start_pos))
 
-    loop_outsider_timer = time.time()
     prev_mystat = {'timestamp' : 0, 'bid': '0' , 'ask': '0'}
 
     #for ptime in myTimestamp[start_pos:end_pos]:
     while True:
 
         ptime = int(time.time() * 1000)
-        loop_insider_timer = time.time()
-        loop_time = (loop_insider_timer - loop_outsider_timer) * 1000
-        loop_outsider_timer = loop_insider_timer
+        loop_outsider_timer = time.time()
 
         # Get data from redis
         getvalue_stimer = time.time()
@@ -76,6 +73,10 @@ if __name__ == "__main__":
         getvalue_etimer = time.time()
 
         if int(mystat['timestamp']) > int(prev_mystat['timestamp']) or mystat['bid'] != prev_mystat['bid'] or mystat['ask'] != prev_mystat['ask']:
+
+            loop_insider_timer = time.time()
+            loop_time = (loop_insider_timer - loop_outsider_timer) * 1000
+            loop_outsider_timer = loop_insider_timer
 
 
             if debug_time:

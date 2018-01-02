@@ -34,9 +34,9 @@ if __name__ == "__main__":
 
     kb = KorbitBase()
     #start_time = KorbitBase.getEpochTime('2018-01-01 00:00:00')
-    start_time = kb.getEpochTime('2018-01-02 18:00:00')
+    start_time = kb.getEpochTime('2018-01-02 22:30:00')
     #start_time = 1514656699880
-    end_time = kb.getEpochTime('2018-01-02 21:00:00')
+    end_time = kb.getEpochTime('2018-01-02 23:00:00')
     #end_time = 1514656699981
 
     xrpm = xrpmgrsimul('SIMUL', 'cryptosalon.iptime.org', 16379,'RlawjddmsrotoRl#12', 'xrp')
@@ -149,7 +149,7 @@ if __name__ == "__main__":
             bidding = True
             benefit = 0.015
             ## UpDown Slump Algorithm
-        elif not trading and myalgo.basic(95) and myalgo.slump(7, 0.2, 2, -2.0 , 0 ):
+        elif not trading and myalgo.basic(98) and myalgo.slump(7, 0.2, 2, -2.0 , 0 ):
             print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
             .format(kb.getStrTime(int(ptime)), "UpDown Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
             bidding = True
