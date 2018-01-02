@@ -26,8 +26,8 @@ class XRPDataInsert(KorbitBase):
             self.tickerDetail[1] = ticker['last']
             self.tickerDetail[2] = ticker['bid']
             self.tickerDetail[3] = ticker['ask']
-            self.tickerDetail[4] = ticker['high']
-            self.tickerDetail[5] = ticker['low']
+            self.tickerDetail[4] = ticker['low']
+            self.tickerDetail[5] = ticker['high']
 
             tickerData = self.tickerDetail[1]+':'+self.tickerDetail[2]+':'+self.tickerDetail[3]+':'+self.tickerDetail[4]+':'+self.tickerDetail[5]+':'+str(self.tickerDetail[0])
             if (self.tickerDetail[0] > self.privTimestamp):
