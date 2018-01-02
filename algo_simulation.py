@@ -160,10 +160,22 @@ if __name__ == "__main__":
             #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
             bidding = True
             benefit = 0.01
+        #Buy Position
+        if not trading and bidding:
+            buy_price = int(ticker['ask'])
+            sell_price = buy_price + int(buy_price * benefit)
+            # if ask volume is less than my volume what we do next?
+            buy_volume = int(money) // buy_price
+            sell_volume = float(buy_volume - (buy_volume * taker_fee / 100))
+            print("{} | Buy {} coins at price {}, will sell {} won ".format(kb.getStrTime(int(ptime)), buy_volume, ticker['ask'], sell_price))
 
+            ## We are assuming all bid order is success and no open orders are exist
+            trading = True
+            buy_time = kb.getStrTime(int(ptime))
+            bidding = False
 
         #Sell Position
-        if bidding and int(ticker['last']) >= sell_price and int(ticker['bid']) >= sell_price:
+        if trading and int(ticker['last']) >= sell_price and int(ticker['bid']) >= sell_price:
             earn_money = int(((int(ticker['bid']) - buy_price) * sell_volume) * (1 - marker_fee))
             cummulative_earn_money += earn_money
             bidding_count += 1
