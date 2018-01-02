@@ -18,7 +18,7 @@ class XRPManagerSimul():
                              'tx_60min_delta':'0','tx_10min_avg':'0', 'tx_60min_avg':'0'}
         self.managerMode = pMode
         self.resultSave = []
-        self.curency = currency
+        self.currency = currency
 
     def getTicker(self, pTimestamp, pRedisResult):
         tickerDetail = pRedisResult[0].split (':')
