@@ -36,7 +36,7 @@ if __name__ == "__main__":
     #start_time = KorbitBase.getEpochTime('2018-01-01 00:00:00')
     start_time = kb.getEpochTime('2018-01-02 22:30:00')
     #start_time = 1514656699880
-    end_time = kb.getEpochTime('2018-01-02 23:00:00')
+    end_time = kb.getEpochTime('2018-01-02 22:40:00')
     #end_time = 1514656699981
 
     xrpm = xrpmgrsimul('SIMUL', 'cryptosalon.iptime.org', 16379,'RlawjddmsrotoRl#12', 'xrp')
@@ -188,10 +188,10 @@ if __name__ == "__main__":
 
 
     ## Simulation Report
-    if bidding:
+    if trading:
         pending_tx_price = int((int(ticker['last']) - buy_price ) * buy_volume)
         print("Simulation Finished! You were bidding {} times and hold unselled order. Earn {} won, pending {} won".format(bidding_count, cummulative_earn_money, pending_tx_price))
         getTxList(tx_time_list)
-    elif not bidding:
+    elif not trading:
         print("Simulation Finished! You were bidding {} times. Earn {} won".format(bidding_count, cummulative_earn_money))
         getTxList(tx_time_list)
