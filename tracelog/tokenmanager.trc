@@ -43,3 +43,34 @@
 2018-01-01 00:32:28,057 INFO TokenManager get refresh token from redis
 2018-01-01 00:32:28,075 INFO TokenManager refresh token from api server
 2018-01-01 00:32:29,040 INFO TokenManager update token on redis
+2018-01-03 14:18:15,019 INFO TokenManager Read key saved CSV file
+2018-01-03 14:21:03,110 INFO TokenManager Read key saved CSV file
+2018-01-03 14:21:08,632 INFO TokenManager Read key saved CSV file
+2018-01-03 15:26:34,972 INFO TokenManager Read key saved CSV file
+2018-01-03 15:26:53,169 INFO TokenManager Read key saved CSV file
+2018-01-03 15:27:04,595 INFO TokenManager Read key saved CSV file
+2018-01-03 15:27:24,457 INFO TokenManager Read key saved CSV file
+2018-01-03 15:27:26,023 INFO TokenManager insert token into redis
+2018-01-03 15:27:51,046 INFO TokenManager Read key saved CSV file
+2018-01-03 15:27:52,795 INFO TokenManager insert token into redis
+2018-01-03 15:29:58,341 INFO TokenManager Read key saved CSV file
+2018-01-03 15:29:59,897 INFO TokenManager insert token into redis
+2018-01-03 15:30:17,340 INFO TokenManager Read key saved CSV file
+2018-01-03 15:30:19,172 INFO TokenManager insert token into redis
+2018-01-03 15:31:04,255 INFO TokenManager Read key saved CSV file
+2018-01-03 15:31:05,894 INFO TokenManager insert token into redis
+2018-01-03 15:31:05,896 INFO TokenManager get refresh token from redis
+2018-01-03 15:31:05,899 INFO TokenManager refresh token from api server
+2018-01-03 15:31:06,781 INFO TokenManager update token on redis
+2018-01-03 15:31:28,665 INFO TokenManager Read key saved CSV file
+2018-01-03 15:31:30,282 INFO TokenManager insert token into redis
+2018-01-03 15:31:30,283 INFO TokenManager get refresh token from redis
+2018-01-03 15:31:30,284 INFO TokenManager refresh token from api server
+2018-01-03 15:31:31,153 INFO TokenManager update token on redis
+2018-01-03 15:32:20,461 INFO TokenManager Read key saved CSV file
+2018-01-03 15:32:22,464 INFO TokenManager insert token into redis
+2018-01-03 15:32:22,467 INFO TokenManager get refresh token from redis
+2018-01-03 15:32:22,467 INFO TokenManager refresh token from api server
+2018-01-03 15:32:23,406 INFO TokenManager update token on redis
+2018-01-03 15:33:02,303 INFO TokenManager Read key saved CSV file
+2018-01-03 15:33:03,980 INFO TokenManager insert token into redis
