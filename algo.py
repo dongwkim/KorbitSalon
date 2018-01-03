@@ -59,14 +59,25 @@ class algo:
     def rise(self, p1, p2, p3, p4 ,p5 ):
         ''' if trend is starting to going up
             p1  : 1mim increase  delta percentage
-            p2  : 10min increase delta percentage
-            p3  : hr increase delta percentage
+            p2  : 10min delta max percentage
+            p3  : hr increase max percentage
             p4  : hr delta > 10min delta  ratio
             p5  : hr delta < 10min delta  ratio
         '''
+        if self.tx_1min_price_delta > (self.tx_hr_price_avg * p1/100) and self.tx_10min_price_delta > 0 and self.tx_10min_price_delta < (self.tx_hr_price_avg * p2/100) and self.tx_hr_price_delta > 0 and  self.tx_hr_price_delta < (self.tx_hr_price_avg * p3/100) and (self.tx_hr_price_delta < self.tx_10min_price_delta * p5 and self.tx_hr_price_delta > self.tx_10min_price_delta * p4):
+            return True
+        else:
+            return False
 
-        if self.tx_1min_price_delta > (self.tx_hr_price_avg * p1/100) and self.tx_10min_price_delta > p2/100 and self.tx_hr_price_delta > (self.tx_hr_price_avg * p3/100) \
-         and (self.tx_hr_price_delta < self.tx_10min_price_delta * p5 and self.tx_hr_price_delta > self.tx_10min_price_delta * p4):
+    def zigzag(self, p1, p2, p3, p4  ):
+        ''' if trend is starting to going up
+            p1  : 1mim increase  delta percentage
+            p2  : 10min delta increase percentage
+            p3  : abs(hr delta) increase percentage
+            p4  : abs(hr delta) decrease percentage
+        '''
+
+        if self.tx_1min_price_delta > (self.tx_hr_price_avg * p1/100) and self.tx_10min_price_delta > self.tx_hr_price_avg * p2/100 and abs(self.tx_hr_price_delta) < self.tx_hr_price_avg * p3/100  and abs(self.tx_hr_price_delta) > self.tx_10min_price_delta * p4 :
             return True
         else:
             return False
