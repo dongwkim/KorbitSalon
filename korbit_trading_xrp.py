@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from KorbitBase import *
 import time
-import TokenManager as tkmgr
+import XRPManagerSimul as xrpmgrsimul
 from platform import system
 import algo
 #import logging
@@ -41,18 +41,15 @@ if __name__ == "__main__":
     redisUser = 'dongwkim'
 
 
-    URL = 'https://api.korbit.co.kr/v1'
 
-    myorder = KorbitBase()
-
-    logger.info('Start Connection Pooling ')
-
-    # Call tokenmanger
-    tkmgr = tkmgr.UserSessionInfo(secFilePath, 'dongwkim', '39.115.53.33', 16379 )
+    myorder = xrpmgrsimul.XRPManagerSimul('ACTUAL')
+    #myorder.initConnection(redisHost, redisPort, redisUser, 'RlawjddmsrotoRl#12', 'xrp')
+    myorder.initConnection(redisHost, redisPort, redisUser, None, 'xrp')
 
     #refresh token by redis
-    mytoken = tkmgr.getAccessToken()
+    mytoken = myorder.getAccessToken()
     header = {"Authorization": "Bearer " + mytoken}
+    print(header)
 
     ### Fetching Ticker
     prev_ticker = myorder.doGet('ticker/detailed', currency_pair = currency)
@@ -63,9 +60,6 @@ if __name__ == "__main__":
     while True:
         time.sleep(0.5)
 
-        # refresh access token by redis
-        mytoken = tkmgr.getAccessToken()
-        header = {"Authorization": "Bearer " + mytoken}
 
 
         start = time.time()
@@ -88,7 +82,7 @@ if __name__ == "__main__":
             if debug:
                 s_order = time.time()
             # refresh access token by redis
-            mytoken = tkmgr.getAccessToken()
+            mytoken = myorder.getAccessToken()
             header = {"Authorization": "Bearer " + mytoken}
             # Calcuate String Format Timestamp
             #ctime = getStrTime(ticker['timestamp'])

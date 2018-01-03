@@ -1,7 +1,6 @@
 from KorbitBase import *
-from TokenManager import *
 from platform import system
-import TokenManager
+import XRPManagerSimul as xrpmgrsimul
 
 if __name__ == "__main__":
 
@@ -20,9 +19,11 @@ if __name__ == "__main__":
         showhtml = True
     redisUser = 'dongwkim'
 
-    tkmgr = TokenManager.UserSessionInfo(secFilePath, 'dongwkim', '39.115.53.33', 16379 )
-    mytoken = tkmgr.getAccessToken()
-    myorder = KorbitBase()
+    myorder = xrpmgrsimul.XRPManagerSimul('ACTUAL')
+    #myorder.initConnection(redisHost, redisPort, redisUser, 'RlawjddmsrotoRl#12', 'xrp')
+    myorder.initConnection(redisHost, redisPort, redisUser, None, 'xrp')
+
+    mytoken = myorder.getAccessToken()
     #myRedis = UserSessionInfo(secFilePath, redisUser, redisHost, redisPort)
     #token = mytoken.getAccessToken()
     header = {"Authorization": "Bearer " + mytoken}
@@ -47,7 +48,7 @@ if __name__ == "__main__":
       "withdrawal_in_use" : "0.50280000"
     }
     '''
-    balance = myorder.chkUserBalance('xrp',header)
+    balance = myorder.chkUserBalance('krw',header)
     print("{:15s} | Time:{} Avaliable  {:,} , Trade {:,} Withdrawal {:,} ".format('Balance',myorder.getStrTime(), float(balance['available']), float(balance['trade_in_use']), float(balance['withdrawal_in_use'])))
 
     ####################################################

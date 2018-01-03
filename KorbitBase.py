@@ -13,44 +13,55 @@ URL = 'https://api.korbit.co.kr/v1'
 class KorbitBase:
     def __init__(self):
         self.mySession = requests.Session()
-        #self.myredis = TokenManager.UserSessionInfo(secFilePath, redisUser, redisHost, redisPort)
-        #self.redisCon = redis.StrictRedis(host=redisHost, port=redisPort, db=0,charset="utf-8", decode_responses=True)
-        #self.accessToken = self.redisCon.get('access_token')
-        #self.accessToken = self.myredis.getAccessToken()
         self.urlPrefix = 'https://api.korbit.co.kr/v1'
-        #self.currencyPair= currencyPair
-        #self.header = {"Authorization": "Bearer " + self.accessToken}
 
-    def doGet(self, url_suffix, header='', **params):
+    def initConnection(self, pRedisHost, pRedisPort, pRedisUser, pRedisPassword, pCurrency):
+        self.redisHost = pRedisHost
+        self.redisPort = pRedisPort
+        self.redisUser = pRedisUser
+        self.redisPassword = pRedisPassword
+        self.redisCon = redis.StrictRedis(host=self.redisHost, port=self.redisPort, db=0, password=self.redisPassword, charset="utf-8", decode_responses=True)
+        self.myCurrency = pCurrency
+        self.accessToken = self.redisCon.get('access_token')
+
+    def getAccessToken(self):
+        return str(self.redisCon.hmget(self.redisUser,'access_token')[0])
+    
+    def doPost(self, pUrlPostFix, header='', **params):
+        url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
+        restResult = self.mySession.post(url, params=params, headers=header)
+
+        if restResult.status_code == 200:
+            return json.loads(restResult.text)
+        else:
+            raise Exception('{}/{}'.format(restResult.status_code,str(restResult)))
+
+    def doGet(self, pUrlPostFix, header='', **params):
         ''' RestAPI GET  request
         url_suffix : api call
         header     : token for private call
         params     : parameters for api query '''
 
-        url = '{}/{}'.format(self.urlPrefix, url_suffix)
-        r = self.mySession.get(url, params=params,headers=header)
+        url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
+        restResult = self.mySession.get(url, params=params,headers=header)
 
-        if r.status_code == 200:
-            return json.loads(r.text)
-        if r.status_code == 429:
-            logger.debug('HTTP: %s' , r.status_code)
-            self.mySession.close()
-            self.pooling()
+        if restResult.status_code == 200:
+            return json.loads(restResult.text)
+        if restResult.status_code == 429:
+            logger.debug('HTTP: %s' , restResult.status_code)
+            #s.close()
+            #pooling()
             return {'timestamp':0, 'last':0}
         else:
-            raise Exception('{}/{}'.format(r.status_code,str(r)))
+            raise Exception('{}/{}'.format(restResult.status_code,str(restResult)))
 
-    def doPost(self, url_suffix, header='', **params):
-        url = '{}/{}'.format(URL, url_suffix)
+    def getEpochTime(self,str_time):
+        epoch_time = int(time.mktime(time.strptime(str_time, "%Y-%m-%d %H:%M:%S"))*1000)
+        return epoch_time
 
-        r = self.mySession.post(url, params=params, headers=header)
 
-        if r.status_code == 200:
-            return json.loads(r.text)
-        elif r.status_code == 400:
-            return 'retry'
-        else:
-            raise Exception('{}/{}'.format(r.status_code,str(r)))
+    def printCurrentTime(self, pTimestamp):
+        print(datetime.datetime.fromtimestamp(pTimestamp).strftime('%Y-%m-%d %H:%M:%S'))
 
     def printCurrentTime(self, pTimestamp):
         print(datetime.datetime.fromtimestamp(pTimestamp).strftime('%Y-%m-%d %H:%M:%S'))
