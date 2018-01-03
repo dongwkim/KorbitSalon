@@ -9,15 +9,18 @@ import logging.handlers
 
 class KorbitBase:
     def __init__(self):
-        self.redisHost = 'localhost'
-        self.redisPort = 16379
-        self.redisPassword = 'RlawjddmsrotoRl#12'
         self.mySession = requests.Session()
-        self.redisCon = redis.StrictRedis(host=self.redisHost, port=self.redisPort, db=0, password=self.redisPassword, charset="utf-8", decode_responses=True)
-        self.accessToken = self.redisCon.get('access_token')
         self.urlPrefix = 'https://api.korbit.co.kr/v1'
-        self.currencyPair='xrp_krw'
     
+    def initConnection(self, pRedisHost, pRedisPort, pRedisUser, pRedisPassword, pCurrency):
+        self.redisHost = pRedisHost
+        self.redisPort = pRedisPort
+        self.redisUser = pRedisUser
+        self.redisPassword = pRedisPassword        
+        self.redisCon = redis.StrictRedis(host=self.redisHost, port=self.redisPort, db=0, password=self.redisPassword, charset="utf-8", decode_responses=True)
+        self.myCurrency = pCurrency
+        self.accessToken = self.redisCon.get('access_token')
+
     def getAccessToken(self):
         self.accessToken = self.redisCon.get('access_token')
         return self.accessToken

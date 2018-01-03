@@ -6,7 +6,6 @@ import datetime as dt
 class XRPManagerSimul(KorbitBase):
     def __init__(self, pMode):
         super().__init__()
-        self.myCurrency='xrp_krw'
         self.minuteUnit = 60 #60sec
         self.cTimestamp = int(time.time()*1000) # 1000 for time transition to timestamp format
         self.myDictionary = {'timestamp':9999999999999, 'last':'0', 'bid':'0','ask':'0', 'low':'0','high':'0','tx_1min_delta':'0', 'tx_10min_delta':'0' , 
@@ -74,8 +73,6 @@ class XRPManagerSimul(KorbitBase):
         return redisResult
         
     def getValues(self,pTimestamp):
- #       n1=dt.datetime.now()
-        #currentTimestamp = int(time.time()*1000) # 1000 for time transition to timestamp format
         currentTimestamp = pTimestamp
         
         redisResult = self.isDataExist(currentTimestamp)
@@ -115,6 +112,7 @@ class XRPManagerSimul(KorbitBase):
         print(datetime.datetime.fromtimestamp(pTimestamp).strftime('%Y-%m-%d %H:%M:%S'))
 
 xrpm = XRPManagerSimul('SIMUL')
+xrpm.initConnection('localhost', 16379, 'kiwon.yoon', 'RlawjddmsrotoRl#12', 'xrp_krw')
 
 myTimestamps=xrpm.redisCon.zrangebyscore("xrp", 1514896714024,1514896760126)
 

@@ -1,35 +1,40 @@
-from KorbitBase import *
-import threading
-from statistics import mean
-import datetime as dt
+import csv
+import json
+import requests
+import redis
+import time
+import datetime
+import logging
+import logging.handlers
 
-class MainTest (KorbitBase):
+class MainTest:
     def __init__(self):
-        super().__init__()
-
-people = {'name': "Tom", 'age': 10}
-
-people2 ={'name': "kiwon", 'age': 30}
-
-mylist=list()
-mylist.append(people)
-mylist.append(people2)
-mylist[1]['name']='yoon'
-print(mylist)
-
-i=0
-for i in range(2):
-    print(i)
-
-
-'''
-mt = MainTest()
-redisResult=mt.redisCon.zrangebyscore("test2", '-inf','+inf')
-firstIndex = 0
-lastIndex = len(redisResult)
-for firstIndex in range(lastIndex):
-    myPrice=int(redisResult[firstIndex].split (':')[0])
-    print(myPrice)
-    #mt.redisCon.zadd('xrp_timestamp',firstIndex, myTimestamp)
+        self.urlPrefix = 'https://api.korbit.co.kr/v1'
+            
+    def initConnection(self, pRedisHost, pRedisPort, pRedisUser, pRedisPassword, pCurrency):
+        self.mySession = requests.Session()
+        self.redisHost = pRedisHost
+        self.redisPort = pRedisPort
+        self.redisPassword = pRedisPassword
+        self.myCurrency = pCurrency
+        self.redisCon = redis.StrictRedis(host=self.redisHost, port=self.redisPort, db=0, password=self.redisPassword, charset="utf-8", decode_responses=True)
+        self.accessToken = self.redisCon.get('access_token')
+        
+    def doGet(self, pUrlPostFix, header='', **params):
+        ''' RestAPI GET  request
+        url_suffix : api call
+        header     : token for private call
+        params     : parameters for api query '''
     
-'''
+        url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
+        restResult = self.mySession.get(url, params=params,headers=header)
+    
+        if restResult.status_code == 200:
+            return json.loads(restResult.text)
+        if restResult.status_code == 429:
+            logger.debug('HTTP: %s' , restResult.status_code)
+            #s.close()
+            #pooling()
+            return {'timestamp':0, 'last':0}
+        else:
+            raise Exception('{}/{}'.format(restResult.status_code,str(restResult)))
