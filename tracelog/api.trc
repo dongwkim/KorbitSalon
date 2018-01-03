@@ -1,6 +1,0 @@
-2017-12-22 18:42:34,263 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
-2017-12-22 18:42:35,354 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/user/balances HTTP/1.1" 200 None
-2017-12-22 18:42:35,677 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 173
-2017-12-22 18:42:36,062 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "POST /v1/user/orders/buy?nonce=1513935755680&price=100&type=limit&currency_pair=xrp_krw&coin_amount=10 HTTP/1.1" 200 None
-2017-12-22 18:42:38,443 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/user/orders/open?currency_pair=xrp_krw HTTP/1.1" 200 None
-2017-12-22 18:42:38,996 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "POST /v1/user/orders/cancel?nonce=1513935758445&id=4561639&currency_pair=xrp_krw HTTP/1.1" 200 None

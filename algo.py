@@ -77,7 +77,7 @@ class algo:
             p4  : abs(hr delta) decrease percentage
         '''
 
-        if self.tx_1min_price_delta > (self.tx_hr_price_avg * p1/100) and self.tx_10min_price_delta > self.tx_hr_price_avg * p2/100 and abs(self.tx_hr_price_delta) < self.tx_hr_price_avg * p3/100  and abs(self.tx_hr_price_delta) > self.tx_10min_price_delta * p4 :
+        if self.tx_1min_price_delta < (self.tx_hr_price_avg * p1/100) and self.tx_10min_price_delta > self.tx_hr_price_avg * p2/100 and abs(self.tx_hr_price_delta) < self.tx_hr_price_avg * p3/100  and abs(self.tx_hr_price_delta) > self.tx_10min_price_delta * p4/100 :
             return True
         else:
             return False

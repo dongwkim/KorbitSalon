@@ -4,12 +4,9 @@ import time
 import XRPManagerSimul as xrpmgrsimul
 from platform import system
 import algo
-#import logging
 
 if __name__ == "__main__":
 
-    logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='tracelog/trading.trc',level=logging.DEBUG)
-    logger = logging.getLogger('korbit_trading')
     ### Vriables
     money = 10000
     trading = False
@@ -49,7 +46,7 @@ if __name__ == "__main__":
     #refresh token by redis
     mytoken = myorder.getAccessToken()
     header = {"Authorization": "Bearer " + mytoken}
-    print(header)
+    #print(header)
 
     ### Fetching Ticker
     prev_ticker = myorder.doGet('ticker/detailed', currency_pair = currency)
@@ -150,7 +147,7 @@ if __name__ == "__main__":
             ## Buy Position                     #
             ######################################
 
-                        ## Big Slump Algorithm
+            ## Big Slump Algorithm
             if not testing and not trading and myalgo.basic(95) and  myalgo.slump(15, 0.5, 5, 2.0, -9999):
                 print("Hit : Big Slump")
                 bidding = True
@@ -169,27 +166,27 @@ if __name__ == "__main__":
                 benefit = 0.025
                 money = 70000
             ## Baby Slump Algorithm
-            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.15, 2.0, 1.3 , -9999 ):
+            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.12, 1.3, 1.5 , -9999 ):
                 print("Hit : Baby Slump")
                 bidding = True
                 benefit = 0.015
                 money = 70000
             ## UpDown Slump Algorithm
-            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 2, -2.0 , 0 ):
+            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 1.6, -2.0 , 0 ):
                 print("Hit : UpDown Slump")
                 bidding = True
                 benefit = 0.012
-                money = 50000
-            elif not testing and not trading and myalgo.basic(95) and myalgo.rise(0.2, 1, 1, 1, 3 ):
+                money = 70000
+            elif not testing and not trading and myalgo.basic(95) and myalgo.rise(0.15, 1, 0.8, 1, 3 ):
             #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
                 print("Hit : Rise")
                 bidding = True
                 benefit = 0.01
-                money = 50000
+                money = 70000
 
 
             ## Bid Order
-            if bidding:
+            if bidding :
                 ## Set sell price
                 buy_price = ask
                 sell_price = ask + int(ask * benefit)
@@ -254,6 +251,7 @@ if __name__ == "__main__":
             ## Sell Position                     #
             ######################################
             if trading and last >= sell_price and bid >= sell_price:
+                sell_price = bid
                 myask = {"currency_pair" : currency, "type":"limit", "price": sell_price, "coin_amount": sell_volume, "nonce": getNonce()}
                 stime = time.time() * 1000
                 askorder = myorder.askOrder(myask, header)
