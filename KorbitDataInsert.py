@@ -1,15 +1,14 @@
 from KorbitBase import *
-import threading
 from statistics import mean
 
-class XRPDataInsert(KorbitBase):
+class KorbitDataInsert(KorbitBase):
     def __init__(self):
         super().__init__()
-        self.myCurrency='xrp_krw'
+        self.myCurrency=['eth_krw','etc,krw','bch_krw']
         self.minuteUnit = 60
         self.tickerDetail = [None]*6
         self.privTimestamp = 0
-        self.moduleName = 'XRPDataInsert'
+        self.moduleName = 'KorbitDataInsert'
         self.logger = logging.getLogger(self.moduleName)
         self.fileHandler = logging.FileHandler('/var/log/'+self.moduleName+'.log')
         self.fomatter = logging.Formatter('%(asctime)s > %(message)s')
@@ -20,8 +19,9 @@ class XRPDataInsert(KorbitBase):
     def xrpSecDataInsert(self):
         myindex = 1
         while True:
-            ticker = self.doGet('ticker/detailed', currency_pair='xrp_krw')
-            
+            ticker1 = self.doGet('ticker/detailed', currency_pair='eth_krw')
+            ticker2 = self.doGet('ticker/detailed', currency_pair='etc_krw')
+            '''
             self.tickerDetail[0] = ticker['timestamp']
             self.tickerDetail[1] = ticker['last']
             self.tickerDetail[2] = ticker['bid']
@@ -40,9 +40,13 @@ class XRPDataInsert(KorbitBase):
                 self.redisCon.zadd('xrp_timestamp', myindex, self.tickerDetail[0])                
                 
             self.privTimestamp = self.tickerDetail[0]
+            '''
+            
+            print(ticker1)
+            print(ticker2)
             myindex = myindex + 1
-            time.sleep(0.5)
-    
-xdi = XRPDataInsert()
-xdi.initConnection('localhost', 16379, 'kiwon.yoon', 'RlawjddmsrotoRl#12', 'xrp_krw')
-xdi.xrpSecDataInsert()    
+            time.sleep(1)
+if __name__ == "__main__":
+    xdi = KorbitDataInsert()
+    xdi.xrpSecDataInsert()    
+#test

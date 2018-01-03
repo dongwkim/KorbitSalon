@@ -6,8 +6,8 @@ import time
 import datetime
 import logging
 
-logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='tracelog/korbitbase_logger.trc',level=logging.DEBUG)
-logger = logging.getLogger('korbitbase')
+#logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='tracelog/korbitbase_logger.trc',level=logging.DEBUG)
+#logger = logging.getLogger('korbitbase')
 URL = 'https://api.korbit.co.kr/v1'
 
 class KorbitBase:

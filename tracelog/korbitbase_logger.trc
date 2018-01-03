@@ -1,0 +1,42 @@
+2018-01-03 17:49:40,504 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2018-01-03 17:49:40,731 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 200 185
+2018-01-03 17:49:40,930 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 200 174
+2018-01-03 17:49:41,659 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 200 185
+2018-01-03 17:49:41,853 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 200 174
+2018-01-03 17:49:42,555 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 200 185
+2018-01-03 17:49:42,774 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 200 174
+2018-01-03 17:49:43,467 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 200 185
+2018-01-03 17:49:43,651 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 200 174
+2018-01-03 17:49:44,352 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 200 185
+2018-01-03 17:49:44,564 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 200 174
+2018-01-03 17:49:45,266 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 200 185
+2018-01-03 17:49:45,470 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 200 174
+2018-01-03 17:49:46,234 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 200 185
+2018-01-03 17:49:46,418 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 200 174
+2018-01-03 17:49:47,108 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 200 185
+2018-01-03 17:49:47,310 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 200 174
+2018-01-03 17:49:48,014 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 200 185
+2018-01-03 17:49:48,198 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 200 174
+2018-01-03 17:49:48,715 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 429 None
+2018-01-03 17:49:48,814 DEBUG korbitbase HTTP: 429
+2018-01-03 17:49:48,816 DEBUG urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-03 17:49:48,904 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 429 None
+2018-01-03 17:49:48,996 DEBUG korbitbase HTTP: 429
+2018-01-03 17:49:49,498 DEBUG urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-03 17:49:49,594 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 429 None
+2018-01-03 17:49:49,749 DEBUG korbitbase HTTP: 429
+2018-01-03 17:49:49,751 DEBUG urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-03 17:49:49,809 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 429 None
+2018-01-03 17:49:49,901 DEBUG korbitbase HTTP: 429
+2018-01-03 17:49:50,403 DEBUG urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-03 17:49:50,452 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 429 None
+2018-01-03 17:49:50,546 DEBUG korbitbase HTTP: 429
+2018-01-03 17:49:50,547 DEBUG urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-03 17:49:50,630 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 429 None
+2018-01-03 17:49:50,725 DEBUG korbitbase HTTP: 429
+2018-01-03 17:49:51,227 DEBUG urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-03 17:49:51,309 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=eth_krw HTTP/1.1" 429 None
+2018-01-03 17:49:51,403 DEBUG korbitbase HTTP: 429
+2018-01-03 17:49:51,404 DEBUG urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-03 17:49:51,478 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=etc_krw HTTP/1.1" 429 None
+2018-01-03 17:49:51,571 DEBUG korbitbase HTTP: 429
