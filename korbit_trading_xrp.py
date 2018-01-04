@@ -6,12 +6,12 @@ from platform import system
 import algo
 
 if __name__ == "__main__":
-
+    print("getnonce:" + getNonce())
     ### Vriables
     money = 10000
     trading = False
     # Set testing True, if you want to run code only for test purpose
-    testing = True
+    testing = False
     bidding = False
     benefit = 0.05
     total_bidding = 0
@@ -175,13 +175,13 @@ if __name__ == "__main__":
             ## UpDown Slump Algorithm
             elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 1.6, -2.0 , 0 ):
                 print("Hit : UpDown Slump")
-                bidding = True
+                bidding = false
                 benefit = 0.012
                 money = 70000
             elif not testing and not trading and myalgo.basic(95) and myalgo.rise(0.15, 1, 0.8, 1, 3 ):
             #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
                 print("Hit : Rise")
-                bidding = True
+                bidding = false
                 benefit = 0.01
                 money = 70000
 

@@ -24,10 +24,10 @@ class TokenManager:
         self.authAtt = ['key','secret','email','password']
         self.urlPrefix = 'https://api.korbit.co.kr/v1'
         self.mySession= requests.Session()
-        #self.myToken = 4*[None]
+
         self.myToken = {}
         self.redisCon = redis.StrictRedis(host=pRedisHost, port=pRedisPort, db=0, password=pRedisPassword,charset="utf-8", decode_responses=True)
-        #self.redisCon = redis.StrictRedis(host='localhost', port=6379, db=0,charset="utf-8", decode_responses=True)
+
 
     def readSecFile(self):
         ''' read API security file and convert to dictinary
@@ -52,32 +52,32 @@ class TokenManager:
     def insertTokenIntoRedis(self):
         ''' Insert token to redis
         '''
-        logger.info('insert token into redis')
+        logger.info("insert token into redis || access_token: " + self.myToken['access_token'] + " || RefreshToken: " + self.myToken['refresh_token'] )
         self.redisCon.hmset(self.myid, self.accessInfo)
         self.redisCon.hmset(self.myid, self.myToken)
-        print("{} | Insert Token to Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
-        time.sleep(3000)
+        #print("{} | Insert Token to Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
+        time.sleep(600)
 
     def updateTokenOnRedis(self):
         ''' Update token on redis
         '''
-        logger.info('update token on redis')
+        logger.info("update token on redis || access_token: " + self.myToken['access_token'] + " || RefreshToken: " + self.myToken['refresh_token'] )
         self.redisCon.hmset(self.myid,self.myToken)
-        print("{} | Update Token on Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
+        
 
     def updateToken(self):
         ''' Get refresh token from api server
         '''
         while True:
-            print("{} | Refresh Token from API Server".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
+            
             logger.info('get refresh token from redis')
             refreshToken = self.redisCon.hmget(self.myid,'refresh_token')
+            myKey = self.redisCon.hmget(self.myid,'key')
+            mySecret = self.redisCon.hmget(self.myid,'secret')
             logger.info('refresh token from api server')
-            self.myToken = self.doPost('oauth2/access_token', client_id=self.accessInfo['key'], client_secret=self.accessInfo['secret'], refresh_token=refreshToken, grant_type='refresh_token')
+            self.myToken = self.doPost('oauth2/access_token', client_id=myKey, client_secret=mySecret, refresh_token=refreshToken, grant_type='refresh_token')
             self.updateTokenOnRedis()
-            #self.myPrint()
-            print("{} | Sleep 50min..".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
-            time.sleep(3000)
+            time.sleep(600)
 
 
     def getRefreshToken(self):
@@ -118,6 +118,7 @@ if __name__ == "__main__":
     mySession.readSecFile()
 
     mySession.myToken = mySession.doPost('oauth2/access_token', client_id=mySession.accessInfo['key'], client_secret=mySession.accessInfo['secret'], username=mySession.accessInfo['email'], password=mySession.accessInfo['password'], grant_type='password')
-    print(mySession.myToken)
+    #print(mySession.myToken)
+    #print(mySession.accessInfo)
     mySession.insertTokenIntoRedis()
     mySession.updateToken()
