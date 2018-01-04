@@ -11,7 +11,7 @@ if __name__ == "__main__":
     money = 10000
     trading = False
     # Set testing True, if you want to run code only for test purpose
-    testing = False
+    testing = True
     bidding = False
     benefit = 0.05
     total_bidding = 0

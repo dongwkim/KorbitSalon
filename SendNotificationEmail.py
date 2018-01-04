@@ -1,6 +1,6 @@
 '''
 author             : kiwon.yoon
-purpose            : Sending notificatin email
+purpose            : Sending notification email
 last modified      : 20180105
 pre-requisition    : configuring sendmail
 '''
@@ -18,9 +18,9 @@ class SendNotificationEmail:
         msg["To"] = pToEmail
         msg["Subject"] = pSubject
         
-        print(msg)
-        #myPipe = Popen(["/usr/sbin/sendmail", "-t", "-oi"], stdin=PIPE)
-        #myPipe.communicate(msg.as_string().encode())
+        #print(msg)
+        myPipe = Popen(["/usr/sbin/sendmail", "-t", "-oi"], stdin=PIPE)
+        myPipe.communicate(msg.as_string().encode())
     
     def makeEmailBody(self, pBody):
         myCurrentTime = time.strftime("%H:%M:%S")
@@ -32,10 +32,10 @@ class SendNotificationEmail:
         return emailBody
         
 if __name__ == "__main__":
-    fromEmail = "notification@cryptosalon.org"
+    fromEmail = "CRYPTOSALON@cryptosalon.org"
     toEmail = "ikooyoon@gmail.com"
     emailSubject = "Notification from CRYPTOSALON"
 
     sne = SendNotificationEmail()
-    emailBody = sne.makeEmailBody('BUY XRP 12')
+    emailBody = sne.makeEmailBody('BUY XRP 13')
     sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
