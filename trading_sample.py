@@ -13,11 +13,11 @@ if __name__ == "__main__":
         showhtml = False
     ## Linux
     else:
-        secFilePath='/usb/s1/key/korbit_key.csv'
+        secFilePath='/seckeys/kiwonyoon.csv'
         redisHost = 'localhost'
-        redisPort = 6379
-        showhtml = True
-    redisUser = 'dongwkim'
+        redisPort = 16379
+        showhtml = False
+    redisUser = 'kiwonyoon'
 
     myorder = xrpmgrsimul.XRPManagerSimul('ACTUAL')
     #myorder.initConnection(redisHost, redisPort, redisUser, 'RlawjddmsrotoRl#12', 'xrp')

@@ -11,7 +11,7 @@ if __name__ == "__main__":
     money = 10000
     trading = False
     # Set testing True, if you want to run code only for test purpose
-    testing = True
+    testing = False
     bidding = False
     benefit = 0.05
     total_bidding = 0
@@ -31,17 +31,17 @@ if __name__ == "__main__":
         showhtml = False
     ## Linux
     else:
-        secFilePath='/usb/s1/key/korbit_key.csv'
+        secFilePath='/seckeys/kiwonyoon.csv'
         redisHost = 'localhost'
-        redisPort = 6379
-        showhtml = True
-    redisUser = 'dongwkim'
+        redisPort = 16379
+        showhtml = False
+    redisUser = 'kiwonyoon'
 
 
 
     myorder = xrpmgrsimul.XRPManagerSimul('ACTUAL')
-    #myorder.initConnection(redisHost, redisPort, redisUser, 'RlawjddmsrotoRl#12', 'xrp')
-    myorder.initConnection(redisHost, redisPort, redisUser, None, 'xrp')
+    myorder.initConnection(redisHost, redisPort, redisUser, 'RlawjddmsrotoRl#12', 'xrp')
+    #myorder.initConnection(redisHost, redisPort, redisUser, None, 'xrp')
 
     #refresh token by redis
     mytoken = myorder.getAccessToken()
@@ -55,12 +55,13 @@ if __name__ == "__main__":
 
 
     while True:
-        time.sleep(0.5)
+        time.sleep(0.1)
 
 
 
         start = time.time()
         ticker = myorder.doGet('ticker/detailed', currency_pair = currency)
+        time.sleep(0.1)
         #min_tx = get('transactions', currency_pair = currency, time='minute')
         hr_tx = myorder.doGet('transactions', currency_pair = currency, time='hour')
         end = time.time()
@@ -71,7 +72,7 @@ if __name__ == "__main__":
         ask = int(ticker['ask'])
         low = int(ticker['low'])
         high = int(ticker['high'])
-
+        time.sleep(0.5)
 
 
         if ticker['timestamp'] > prev_ticker['timestamp'] or ticker['bid'] != prev_ticker['bid'] or ticker['ask'] != prev_ticker['ask']:

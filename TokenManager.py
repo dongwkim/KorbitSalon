@@ -8,7 +8,7 @@ import logging
 from platform import system
 import os
 
-logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='tracelog/tokenmanager.trc',level=logging.INFO)
+logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='/var/log/TokenManager.log',level=logging.INFO)
 logger = logging.getLogger('TokenManager')
 
 class TokenManager:

@@ -21,7 +21,7 @@ class XRPDataInsert(KorbitBase):
         myindex = 1
         while True:
             ticker = self.doGet('ticker/detailed', currency_pair='xrp_krw')
-            
+
             self.tickerDetail[0] = ticker['timestamp']
             self.tickerDetail[1] = ticker['last']
             self.tickerDetail[2] = ticker['bid']
@@ -33,16 +33,15 @@ class XRPDataInsert(KorbitBase):
             if (self.tickerDetail[0] > self.privTimestamp):
                 self.logger.info('NEW Timestamp:  ' + tickerData)
                 self.redisCon.zadd('xrp', self.tickerDetail[0], tickerData)
-                self.redisCon.zadd('xrp_timestamp', myindex, self.tickerDetail[0])
             else:
                 self.logger.info('DUP Timestamp:  ' + tickerData)
                 self.redisCon.zadd('xrp', self.tickerDetail[0], tickerData)
-                self.redisCon.zadd('xrp_timestamp', myindex, self.tickerDetail[0])                
                 
             self.privTimestamp = self.tickerDetail[0]
             myindex = myindex + 1
             time.sleep(0.5)
-    
-xdi = XRPDataInsert()
-xdi.initConnection('localhost', 16379, 'kiwon.yoon', 'RlawjddmsrotoRl#12', 'xrp_krw')
-xdi.xrpSecDataInsert()    
+
+if __name__ == "__main__":    
+    xdi = XRPDataInsert()
+    xdi.initConnection('localhost', 16379, 'kiwon.yoon', 'RlawjddmsrotoRl#12', 'xrp_krw')
+    xdi.xrpSecDataInsert()    

@@ -1,0 +1,4 @@
+2018-01-03 21:41:09,724 INFO TokenManager Read key saved CSV file
+2018-01-03 21:41:11,464 INFO TokenManager insert token into redis
+2018-01-03 21:41:23,197 INFO TokenManager Read key saved CSV file
+2018-01-03 21:41:24,880 INFO TokenManager insert token into redis
