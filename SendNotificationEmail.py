@@ -2,6 +2,7 @@
 author             : kiwon.yoon
 purpose            : Sending notificatin email
 last modified      : 20180105
+pre-requisition    : configuring sendmail
 '''
 from email.mime.text import MIMEText
 from subprocess import Popen, PIPE
