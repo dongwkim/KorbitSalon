@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from KorbitBase import *
 import threading
 from statistics import mean

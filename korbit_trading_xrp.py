@@ -1,9 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 from KorbitBase import *
 import time
 import XRPManagerSimul as xrpmgrsimul
 from platform import system
 import algo
+import SendNotificationEmail
 
 if __name__ == "__main__":
 
@@ -11,7 +12,7 @@ if __name__ == "__main__":
     money = 10000
     trading = False
     # Set testing True, if you want to run code only for test purpose
-    testing = True
+    testing = False
     bidding = False
     benefit = 0.05
     total_bidding = 0
@@ -20,9 +21,15 @@ if __name__ == "__main__":
     buy_volume = 0
     sell_volume = 0
     #limit is calculated dynamically based on max
-    limit = 0.97
+    limit = 0.90
     currency = 'xrp_krw'
+    coin = 'xrp'
     debug = False
+    algorithm = ''
+    # Set Email notification
+    fromEmail = 'notofication@cryptosalon.org'
+    toEmail = 'tairu.kim@gmail.com'
+    emailSubject = "ORDER Notification"
     #Switch Env based on Platform
     if system() is 'Windows':
         secFilePath='c:/User/dongwkim/keys/korbit_key.csv'
@@ -32,13 +39,15 @@ if __name__ == "__main__":
     ## Linux
     else:
         secFilePath='/usb/s1/key/korbit_key.csv'
-        redisHost = 'localhost'
-        redisPort = 6379
+        redisHost = '39.115.53.33'
+        redisPort = 16379
         showhtml = True
     redisUser = 'dongwkim'
 
 
 
+    # Email Setup
+    sne = SendNotificationEmail.SendNotificationEmail()
     myorder = xrpmgrsimul.XRPManagerSimul('ACTUAL')
     #myorder.initConnection(redisHost, redisPort, redisUser, 'RlawjddmsrotoRl#12', 'xrp')
     myorder.initConnection(redisHost, redisPort, redisUser, None, 'xrp')
@@ -52,10 +61,12 @@ if __name__ == "__main__":
     prev_ticker = myorder.doGet('ticker/detailed', currency_pair = currency)
     ### Check Balance
     balance = myorder.chkUserBalance('krw', header)
+    coin_balance = myorder.chkUserBalance(coin, header)
+    print("You have {} {} coin".format(float(coin_balance['trade_in_use']), coin))
 
 
     while True:
-        time.sleep(0.5)
+        time.sleep(0.8)
 
 
 
@@ -136,7 +147,7 @@ if __name__ == "__main__":
             #print("{} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:3.0f}/{:3.0f}/{:3.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  ".format(getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,lat,total_bidding,int(curr_balance)//10))
             # Create HTML for realtime view
             if showhtml == True:
-                genHTML(path='/usb/s1/nginx/html/index.html',ctime = ctime, last = last,tx_10min_price_delta = tx_10min_price_delta, tx_hr_price_delta = tx_hr_price_delta,buy_price = buy_price, total_bidding = total_bidding, lat = lat ,curr_balance = int(curr_balance)//10 )
+                myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_10min_price_delta, tx_hr_price_delta,buy_price, algorithm, total_bidding, int(curr_balance)//10 , lat)
 
             ######################################
             ##  Set Algorithm
@@ -151,38 +162,43 @@ if __name__ == "__main__":
             if not testing and not trading and myalgo.basic(95) and  myalgo.slump(15, 0.5, 5, 2.0, -9999):
                 print("Hit : Big Slump")
                 bidding = True
-                benefit = 0.07
-                money = 70000
+                benefit = 0.06
+                algorithm = 'Big Slump'
+                money = 300000
             ## Midium Slump Algorithm
             elif not testing and not trading and myalgo.basic(95) and  myalgo.slump(10, 0.4, 4, 1.5 , -9999 ):
                 print("Hit : Midium Slump")
                 bidding = True
                 benefit = 0.04
-                money = 70000
+                algorithm = 'Midium Slump'
+                money = 300000
             ## Little Slump Algorithm
             elif not testing and not trading and myalgo.basic(95) and myalgo.slump(10, 0.3, 3, 1.3 , -9999 ):
                 print("Hit : Little Slump")
                 bidding = True
                 benefit = 0.025
-                money = 70000
+                algorithm = 'Little Slump'
+                money = 150000
             ## Baby Slump Algorithm
-            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.12, 1.3, 1.5 , -9999 ):
+            elif not testing and not trading and myalgo.basic(95) and myalgo.slump(7, 0.1, 2.0, 1.0 , -9999 ):
                 print("Hit : Baby Slump")
                 bidding = True
-                benefit = 0.015
-                money = 70000
+                benefit = 0.012
+                algorithm = 'Baby Slump'
+                money = 100000
             ## UpDown Slump Algorithm
-            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 1.6, -2.0 , 0 ):
+            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 1.6, -2.5 , 100 ):
                 print("Hit : UpDown Slump")
                 bidding = True
-                benefit = 0.012
-                money = 70000
-            elif not testing and not trading and myalgo.basic(95) and myalgo.rise(0.15, 1, 0.8, 1, 3 ):
-            #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
+                benefit = 0.015
+                algorithm = 'UpDown Slump'
+                money = 200000
+            ## Rise Slump Algorithm
+            elif not testing and not trading and last < high * limit and   myalgo.rise(0.1, 1, 0.8, 1.0, 3 ):
                 print("Hit : Rise")
-                bidding = True
-                benefit = 0.01
-                money = 70000
+                bidding = False
+                benefit = 0.012
+                money = 100000
 
 
             ## Bid Order
@@ -192,7 +208,7 @@ if __name__ == "__main__":
                 sell_price = ask + int(ask * benefit)
                 buy_volume = int(int(money) // ask)
                 ### Buy Order
-                mybid = {"currency_pair" : currency, "type":"limit", "price": buy_price, "coin_amount": buy_volume, "nonce": getNonce()}
+                mybid = {"currency_pair" : currency, "type":"limit", "price": buy_price, "coin_amount": buy_volume, "nonce": myorder.getNonce()}
                 stime = time.time() * 1000
                 bidorder = myorder.bidOrder(mybid, header)
                 order_id = str(bidorder['orderId'])
@@ -208,7 +224,7 @@ if __name__ == "__main__":
                 myorderids = []
                 for orders in listorder:
                     myorderids.append(orders['id'].encode('utf-8'))
-                print("Bid Order List {}".format(myorder))
+                print("Bid Order List {}".format(myorderids))
 
                 # if bid order id is not in open orders complete order
                 if  order_status == 'success' and order_id not in myorderids:
@@ -219,10 +235,12 @@ if __name__ == "__main__":
                     #sell_volume = float(buy_volume * 0.9992)
                     bidding = False
                     print("Bid Order is complete")
+                    emailBody = sne.makeEmailBody("{} BUY AT {} won".format(currency, sell_price))
+                    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
                 # if open order is exist, cancel all bidding order
                 elif order_status == 'success' and order_id in myorderids:
                     # if failed to buy order , cancel pending order
-                    mycancel = {"currency_pair": currency, "id": order_id,"nonce":getNonce()}
+                    mycancel = {"currency_pair": currency, "id": order_id,"nonce":myorder.getNonce()}
                     stime = time.time() * 1000
                     cancelorder = myorder.cancelOrder(mycancel, header)
                     elapsed = int(time.time() * 1000 - stime)
@@ -252,7 +270,7 @@ if __name__ == "__main__":
             ######################################
             if trading and last >= sell_price and bid >= sell_price:
                 sell_price = bid
-                myask = {"currency_pair" : currency, "type":"limit", "price": sell_price, "coin_amount": sell_volume, "nonce": getNonce()}
+                myask = {"currency_pair" : currency, "type":"limit", "price": sell_price, "coin_amount": sell_volume, "nonce": myorder.getNonce()}
                 stime = time.time() * 1000
                 askorder = myorder.askOrder(myask, header)
                 order_id = str(askorder['orderId'])
@@ -267,21 +285,26 @@ if __name__ == "__main__":
                 myorderids = []
                 for orders in listorder:
                     myorderids.append(orders['id'].encode('utf-8'))
+                print("Ask Order List {}".format(myorderids))
 
                 # if ask order id is not in open orders complete order
                 if askorder['status'] == 'success' and order_id not in myorderids:
                     trading = False
                     # initialize trading price
                     buy_price = sell_price = buy_volume = sell_volume = 0
+                    algorithm = ''
                     sell_time = time.time()
                     buy_sell_gap = sell_time - buy_time
                     # needs to put bidding count to redis
                     total_bidding += 1
                     # check balance
-                    balance = chkUserBalance('krw',header)
+                    balance = myorder.chkUserBalance('krw',header)
+                    # Email Send
+                    emailBody = sne.makeEmailBody("{} SOLD AT {} won".format(currency, sell_price))
+                    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
                 # if failed to sell order , cancel all ask orders
                 elif askorder['status'] == 'success' and order_id in myorderids:
-                    mycancel = {"currency_pair": currency, "id": order_id,"nonce":getNonce()}
+                    mycancel = {"currency_pair": currency, "id": order_id,"nonce":myorder.getNonce()}
                     stime = time.time() * 1000
                     cancelorder = myorder.cancelOrder(mycancel, header)
                     elapsed = int(time.time() * 1000 - stime)

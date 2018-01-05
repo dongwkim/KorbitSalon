@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import csv
 import json
 import requests
@@ -110,14 +111,14 @@ class KorbitBase:
         epoch_time = int(time.mktime(time.strptime(str_time, "%Y-%m-%d %H:%M:%S"))*1000)
         return epoch_time
     # Print real-time trading , need to use Flask or Django
-    def genHTML(path ,ctime,last, tx_10min_price_delta, tx_hr_price_delta, buy_price, total_bidding, curr_balance, lat ):
+    def genHTML(self,path ,ctime,last, tx_10min_price_delta, tx_hr_price_delta, buy_price, algorithm, total_bidding, curr_balance, lat ):
         html = '<meta http-equiv="refresh" content="3"> \
                 <font size="10"> Time : {}<br> \
-                Price : {:,} Delta :{}/{} <br> Buy Price: {} <br> \
+                Price : {:,} Delta :{}/{} <br> Buy Price: {} Algo: {}<br> \
                 Deal Count: {} <br> \
                 Balance: {:,} <br> \
                 Latency : {} ms</font>' \
-                .format(ctime, int(last), tx_10min_price_delta, tx_hr_price_delta, int(buy_price), int(total_bidding),int(curr_balance), lat)
+                .format(ctime, int(last), tx_10min_price_delta, tx_hr_price_delta, int(buy_price), algorithm, int(total_bidding),int(curr_balance), lat)
         f = open(path,'w')
         f.write(html)
         f.close()

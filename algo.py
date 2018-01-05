@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #last, tx_hr_price_avg , tx_10min_price_avg, tx_1min_price_avg
 import logging
 

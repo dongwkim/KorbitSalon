@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #from tradmgr.KorbitAPI import *
 from KorbitBase import *
 import algo

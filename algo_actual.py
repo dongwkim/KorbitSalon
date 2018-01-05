@@ -1,9 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #from tradmgr.KorbitAPI import *
 from KorbitBase import *
 import algo
 from XRPManagerSimul import XRPManagerSimul as xrpmgrsimul
 import time
+import redis
 
 if __name__ == "__main__":
 
