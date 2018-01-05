@@ -1,0 +1,75 @@
+2018-01-05 11:48:59,853 INFO TokenManager Read key saved CSV file
+2018-01-05 11:48:59,898 INFO urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2018-01-05 11:49:01,776 INFO TokenManager insert token into redis
+2018-01-05 11:49:21,993 INFO TokenManager Read key saved CSV file
+2018-01-05 11:49:22,034 INFO urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2018-01-05 11:49:23,942 INFO TokenManager insert token into redis
+2018-01-05 11:50:10,765 INFO TokenManager Read key saved CSV file
+2018-01-05 11:50:10,804 INFO urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2018-01-05 11:50:12,654 INFO TokenManager insert token into redis
+2018-01-05 11:51:55,392 INFO TokenManager Read key saved CSV file
+2018-01-05 11:51:55,432 INFO urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2018-01-05 11:51:57,348 INFO TokenManager insert token into redis
+2018-01-05 12:13:29,644 INFO TokenManager Read key saved CSV file
+2018-01-05 12:13:29,683 INFO urllib3.connectionpool Starting new HTTPS connection (1): api.korbit.co.kr
+2018-01-05 12:13:31,550 INFO TokenManager insert token into redis
+2018-01-05 13:03:31,657 INFO TokenManager get refresh token from redis
+2018-01-05 13:03:31,660 INFO TokenManager refresh token from api server
+2018-01-05 13:03:31,669 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 13:03:32,916 INFO TokenManager update token on redis
+2018-01-05 13:53:33,012 INFO TokenManager get refresh token from redis
+2018-01-05 13:53:33,014 INFO TokenManager refresh token from api server
+2018-01-05 13:53:33,023 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 13:53:34,188 INFO TokenManager update token on redis
+2018-01-05 14:43:34,292 INFO TokenManager get refresh token from redis
+2018-01-05 14:43:34,294 INFO TokenManager refresh token from api server
+2018-01-05 14:43:34,303 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 14:43:35,463 INFO TokenManager update token on redis
+2018-01-05 15:33:35,530 INFO TokenManager get refresh token from redis
+2018-01-05 15:33:35,533 INFO TokenManager refresh token from api server
+2018-01-05 15:33:35,542 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 15:33:36,690 INFO TokenManager update token on redis
+2018-01-05 16:23:36,794 INFO TokenManager get refresh token from redis
+2018-01-05 16:23:36,796 INFO TokenManager refresh token from api server
+2018-01-05 16:23:36,805 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 16:23:37,984 INFO TokenManager update token on redis
+2018-01-05 17:13:38,024 INFO TokenManager get refresh token from redis
+2018-01-05 17:13:38,026 INFO TokenManager refresh token from api server
+2018-01-05 17:13:38,035 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 17:13:39,243 INFO TokenManager update token on redis
+2018-01-05 18:03:39,314 INFO TokenManager get refresh token from redis
+2018-01-05 18:03:39,317 INFO TokenManager refresh token from api server
+2018-01-05 18:03:39,326 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 18:03:40,533 INFO TokenManager update token on redis
+2018-01-05 18:53:40,602 INFO TokenManager get refresh token from redis
+2018-01-05 18:53:40,604 INFO TokenManager refresh token from api server
+2018-01-05 18:53:40,613 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 18:53:41,795 INFO TokenManager update token on redis
+2018-01-05 19:43:41,852 INFO TokenManager get refresh token from redis
+2018-01-05 19:43:41,854 INFO TokenManager refresh token from api server
+2018-01-05 19:43:41,863 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 19:43:43,048 INFO TokenManager update token on redis
+2018-01-05 20:33:43,123 INFO TokenManager get refresh token from redis
+2018-01-05 20:33:43,128 INFO TokenManager refresh token from api server
+2018-01-05 20:33:43,137 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 20:33:44,297 INFO TokenManager update token on redis
+2018-01-05 21:23:44,374 INFO TokenManager get refresh token from redis
+2018-01-05 21:23:44,378 INFO TokenManager refresh token from api server
+2018-01-05 21:23:44,387 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 21:23:45,547 INFO TokenManager update token on redis
+2018-01-05 22:13:45,642 INFO TokenManager get refresh token from redis
+2018-01-05 22:13:45,644 INFO TokenManager refresh token from api server
+2018-01-05 22:13:45,663 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 22:13:46,868 INFO TokenManager update token on redis
+2018-01-05 23:03:46,972 INFO TokenManager get refresh token from redis
+2018-01-05 23:03:46,975 INFO TokenManager refresh token from api server
+2018-01-05 23:03:46,983 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 23:03:48,193 INFO TokenManager update token on redis
+2018-01-05 23:53:48,297 INFO TokenManager get refresh token from redis
+2018-01-05 23:53:48,300 INFO TokenManager refresh token from api server
+2018-01-05 23:53:48,309 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-05 23:53:49,479 INFO TokenManager update token on redis
+2018-01-06 00:43:49,492 INFO TokenManager get refresh token from redis
+2018-01-06 00:43:49,495 INFO TokenManager refresh token from api server
+2018-01-06 00:43:49,504 INFO urllib3.connectionpool Resetting dropped connection: api.korbit.co.kr
+2018-01-06 00:43:50,680 INFO TokenManager update token on redis

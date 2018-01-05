@@ -1,0 +1,49 @@
+{'access_token': 't2q0jVvnx90beblRDxo1PS8hUWsRuxNoZQe0aSC9ayIhb7TIT4Cl3hrudtRLI', 'expires_in': 1082, 'token_type': 'Bearer', 'refresh_token': 'ZeNiAds56LR3d2e8xGJrcD6nvNAOFucJ6nlieMf5tgFFq7tNTlrHWAZGGrlM7'}
+2018-01-05 02:51:57 | Insert Token to Redis
+{'access_token': '6SPEHBzLwan8sV7C7oRbnS23z6wfoP74q0YcNnnHZ9n1qmAEwZgU6bLegkk9Q', 'refresh_token': 'Yym8pHyVve8HuNm1Tw9ghgmNjucWXWVrryh31FJeHF6TRvEz2bkU3HBUyxbzC', 'expires_in': 3600, 'token_type': 'Bearer'}
+2018-01-05 03:13:31 | Insert Token to Redis
+2018-01-05 04:03:31 | Refresh Token from API Server
+2018-01-05 04:03:32 | Update Token on Redis
+2018-01-05 04:03:32 | Sleep 50min..
+2018-01-05 04:53:33 | Refresh Token from API Server
+2018-01-05 04:53:34 | Update Token on Redis
+2018-01-05 04:53:34 | Sleep 50min..
+2018-01-05 05:43:34 | Refresh Token from API Server
+2018-01-05 05:43:35 | Update Token on Redis
+2018-01-05 05:43:35 | Sleep 50min..
+2018-01-05 06:33:35 | Refresh Token from API Server
+2018-01-05 06:33:36 | Update Token on Redis
+2018-01-05 06:33:36 | Sleep 50min..
+2018-01-05 07:23:36 | Refresh Token from API Server
+2018-01-05 07:23:37 | Update Token on Redis
+2018-01-05 07:23:37 | Sleep 50min..
+2018-01-05 08:13:38 | Refresh Token from API Server
+2018-01-05 08:13:39 | Update Token on Redis
+2018-01-05 08:13:39 | Sleep 50min..
+2018-01-05 09:03:39 | Refresh Token from API Server
+2018-01-05 09:03:40 | Update Token on Redis
+2018-01-05 09:03:40 | Sleep 50min..
+2018-01-05 09:53:40 | Refresh Token from API Server
+2018-01-05 09:53:41 | Update Token on Redis
+2018-01-05 09:53:41 | Sleep 50min..
+2018-01-05 10:43:41 | Refresh Token from API Server
+2018-01-05 10:43:43 | Update Token on Redis
+2018-01-05 10:43:43 | Sleep 50min..
+2018-01-05 11:33:43 | Refresh Token from API Server
+2018-01-05 11:33:44 | Update Token on Redis
+2018-01-05 11:33:44 | Sleep 50min..
+2018-01-05 12:23:44 | Refresh Token from API Server
+2018-01-05 12:23:45 | Update Token on Redis
+2018-01-05 12:23:45 | Sleep 50min..
+2018-01-05 13:13:45 | Refresh Token from API Server
+2018-01-05 13:13:46 | Update Token on Redis
+2018-01-05 13:13:46 | Sleep 50min..
+2018-01-05 14:03:46 | Refresh Token from API Server
+2018-01-05 14:03:48 | Update Token on Redis
+2018-01-05 14:03:48 | Sleep 50min..
+2018-01-05 14:53:48 | Refresh Token from API Server
+2018-01-05 14:53:49 | Update Token on Redis
+2018-01-05 14:53:49 | Sleep 50min..
+2018-01-05 15:43:49 | Refresh Token from API Server
+2018-01-05 15:43:50 | Update Token on Redis
+2018-01-05 15:43:50 | Sleep 50min..

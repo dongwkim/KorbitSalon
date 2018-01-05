@@ -92,9 +92,13 @@ class KorbitBase:
         cancel = self.doPost('user/orders/cancel', header, id=order['id'], currency_pair=order['currency_pair'],nonce=order['nonce'] )
         return cancel
 
-    def listOrder(self, currency,header):
+    def listOpenOrder(self, currency,header):
         listorder = self.doGet('user/orders/open', header,  currency_pair=currency )
         return listorder
+
+    def listOrders(self, currency,header):
+        orders = self.doGet('user/orders', header,  currency_pair=currency )
+        return orders
 
     def getNonce(self):
         return int(time.time() * 1000)

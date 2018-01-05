@@ -12,7 +12,7 @@ if __name__ == "__main__":
     money = 10000
     trading = False
     # Set testing True, if you want to run code only for test purpose
-    testing = False
+    testing = True
     bidding = False
     benefit = 0.05
     total_bidding = 0
@@ -39,8 +39,8 @@ if __name__ == "__main__":
     ## Linux
     else:
         secFilePath='/usb/s1/key/korbit_key.csv'
-        redisHost = '39.115.53.33'
-        redisPort = 16379
+        redisHost = 'localhost'
+        redisPort = 6379
         showhtml = True
     redisUser = 'dongwkim'
 
@@ -59,13 +59,33 @@ if __name__ == "__main__":
 
     ### Fetching Ticker
     prev_ticker = myorder.doGet('ticker/detailed', currency_pair = currency)
+
     ### Check Balance
     balance = myorder.chkUserBalance('krw', header)
     coin_balance = myorder.chkUserBalance(coin, header)
-    print("You have {} {} coin".format(float(coin_balance['trade_in_use']), coin))
+    # trainding coins 
+    print("{:7s} | trade_in_use {} coin".format(coin, float(coin_balance['trade_in_use'])))
+    # available coins, not need when restartable
+    #print("{:7s} | available {} coin".format(coin, float(coin_balance['available'])))
+    # query open orders
+    listopenorder = myorder.listOpenOrder(currency,header)
+    myorderids = []
+    for orders in listopenorder:
+        myorderids.append(orders['id'].encode('utf-8'))
+        print("{:7s} | open_orders | id:  {} type: {} ".format(coin, int(orders['id']), orders['type']))
+    # query recent bid  orders
+    listorders = myorder.listOrders(currency,header)
+    mypending_bids = []
+    for orders in listorders:
+        if orders['side'] == 'bid' and orders['status'] ==  'filled':
+            myfilled_amount = float(orders['filled_amount']) - float(orders['fee'])
+            myorderids.append(orders['id'].encode('utf-8'))
+            print("{:7s} | orders | id:  {} type: {} filled_amount: {} price: {} status: {} fee: {} myfill: {} ".format(coin, int(orders['id']), orders['side'], orders['filled_amount'], orders['price'], orders['status'], orders['fee'], myfilled_amount))
+            mypending_bids.append(tuple([int(orders['id']),float(myfilled_amount)]))
+    print(mypending_bids)
 
 
-    while True:
+    while False:
         time.sleep(0.8)
 
 
@@ -219,7 +239,7 @@ if __name__ == "__main__":
                 ### List Open Order
                 ## Open Order is not queries as soon as ordered, need sleep interval
                 time.sleep(2.5)
-                listorder = myorder.listOrder(currency,header)
+                listorder = myorder.listOpenOrder(currency,header)
                 ## list orderid from listorder
                 myorderids = []
                 for orders in listorder:
@@ -280,7 +300,7 @@ if __name__ == "__main__":
 
                 # check list open orders
                 time.sleep(2)
-                listorder = myorder.listOrder(currency,header)
+                listorder = myorder.listOpenOrder(currency,header)
                 ## list orderid from listorder
                 myorderids = []
                 for orders in listorder:
