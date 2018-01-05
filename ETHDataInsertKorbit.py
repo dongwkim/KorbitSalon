@@ -1,5 +1,5 @@
 '''
-version : 20180105-01
+version : 20180105-02
 '''
 from KorbitBase import *
 import threading
@@ -45,6 +45,6 @@ class ETHDataInsertKorbit(KorbitBase):
             time.sleep(0.5)
 
 if __name__ == "__main__":    
-    xdi = XRPDataInsert()
-    xdi.initConnection('localhost', 16379, 'kiwon.yoon', 'RlawjddmsrotoRl#12', 'xrp_krw')
-    xdi.dataInsert()    
+    edi = ETHDataInsertKorbit()
+    edi.initConnection('localhost', 16379, 'kiwon.yoon', 'RlawjddmsrotoRl#12', 'eth_krw')
+    edi.dataInsert()    
