@@ -13930,3 +13930,15 @@ Hit : UpDown Slump
 2018-01-05 22:21:06 | Price: p:4281/b:4281/a:4295/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -44/  -6/   1 Avg: 4284/4277 |  lat:   59 ms| bidding (0) | balance:502134  
 2018-01-05 22:21:16 | Price: p:4280/b:4280/a:4295/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -11/   8/  15 Avg: 4284/4277 |  lat:   59 ms| bidding (0) | balance:502134  
 2018-01-05 22:21:18 | Price: p:4295/b:4280/a:4295/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -10/   8/  15 Avg: 4284/4277 |  lat:   59 ms| bidding (0) | balance:502134  
+2018-01-05 22:21:25 | Price: p:4295/b:4280/a:4295/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -10/   8/  15 Avg: 4284/4277 |  lat:  115 ms| bidding (0) | balance:502134  
+2018-01-05 22:21:30 | Price: p:4280/b:4275/a:4280/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -43/  -9/   0 Avg: 4284/4277 |  lat:   80 ms| bidding (0) | balance:502134  
+2018-01-05 22:21:33 | Price: p:4280/b:4282/a:4295/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -43/   0/ -15 Avg: 4284/4277 |  lat:   74 ms| bidding (0) | balance:502134  
+2018-01-05 22:21:46 | Price: p:4282/b:4282/a:4295/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -23/  -6/ -13 Avg: 4283/4277 |  lat:   53 ms| bidding (0) | balance:502134  
+2018-01-05 22:21:46 | Price: p:4282/b:4281/a:4295/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -23/  -6/ -13 Avg: 4283/4277 |  lat:  112 ms| bidding (0) | balance:502134  
+2018-01-05 22:21:46 | Price: p:4282/b:4282/a:4295/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -23/  -6/ -13 Avg: 4283/4277 |  lat:   59 ms| bidding (0) | balance:502134  
+2018-01-05 22:21:46 | Price: p:4282/b:4285/a:4294/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -24/  -4/   1 Avg: 4283/4277 |  lat:   59 ms| bidding (0) | balance:502134  
+2018-01-05 22:22:07 | Price: p:4294/b:4285/a:4294/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -11/   8/  13 Avg: 4283/4277 |  lat:   54 ms| bidding (0) | balance:502134  
+2018-01-05 22:22:07 | Price: p:4294/b:4285/a:4293/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -26/   8/  -1 Avg: 4283/4277 |  lat:   58 ms| bidding (0) | balance:502134  
+2018-01-05 22:22:23 | Price: p:4293/b:4285/a:4293/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -26/  20/  13 Avg: 4283/4277 |  lat:   60 ms| bidding (0) | balance:502134  
+2018-01-05 22:22:26 | Price: p:4293/b:4285/a:4293/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -26/  20/  13 Avg: 4283/4277 |  lat:  114 ms| bidding (0) | balance:502134  
+2018-01-05 22:22:26 | Price: p:4293/b:4285/a:4292/l:4573 | Buy/Sell/Vol: 0/0/0 |  Delta:  -26/  19/  11 Avg: 4283/4278 |  lat:   81 ms| bidding (0) | balance:502134  

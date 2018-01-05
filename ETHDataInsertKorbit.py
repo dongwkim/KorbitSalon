@@ -1,5 +1,5 @@
 '''
-version : 20180105-02
+version : 20180105-03
 '''
 from KorbitBase import *
 import threading
@@ -33,6 +33,7 @@ class ETHDataInsertKorbit(KorbitBase):
             self.tickerDetail[5] = ticker['high']
 
             tickerData = self.tickerDetail[1]+':'+self.tickerDetail[2]+':'+self.tickerDetail[3]+':'+self.tickerDetail[4]+':'+self.tickerDetail[5]+':'+str(self.tickerDetail[0])
+            print(tickerData)
             if (self.tickerDetail[0] > self.privTimestamp):
                 self.logger.info('NEW Timestamp:  ' + tickerData)
                 #self.redisCon.zadd('eth-korbit', self.tickerDetail[0], tickerData)
