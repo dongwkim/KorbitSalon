@@ -4,9 +4,9 @@ import time
 import XRPManagerSimul as xrpmgrsimul
 from platform import system
 import algo
+from SendNotificationEmail import *
 
 if __name__ == "__main__":
-    print("getnonce:" + getNonce())
     ### Vriables
     money = 10000
     trading = False
@@ -23,6 +23,15 @@ if __name__ == "__main__":
     limit = 0.97
     currency = 'xrp_krw'
     debug = False
+    
+    fromEmail = "CRYPTOSALON@cryptosalon.org"
+    toEmail = "ikooyoon@gmail.com"
+    emailSubject = "Notification from CRYPTOSALON"
+    sne = SendNotificationEmail()
+    emailBody = sne.makeEmailBody('Start Korbit_trading')
+    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
+    
+    
     #Switch Env based on Platform
     if system() is 'Windows':
         secFilePath='c:/User/dongwkim/keys/korbit_key.csv'
@@ -86,6 +95,7 @@ if __name__ == "__main__":
             #ctime = getStrTime(ticker['timestamp'])
             # Get Current Time
             ctime = myorder.getStrTime(time.time() * 1000)
+            
             # Cacculate 10min past timstamps
             ten_min_time = (time.time() - ( 10 * 60 )) * 1000
             # Cacculate 1min past timstamps
@@ -167,7 +177,7 @@ if __name__ == "__main__":
                 benefit = 0.025
                 money = 70000
             ## Baby Slump Algorithm
-            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.12, 1.3, 1.5 , -9999 ):
+            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.12, 2, 1.5 , -9999 ):
                 print("Hit : Baby Slump")
                 bidding = True
                 benefit = 0.015
@@ -175,13 +185,13 @@ if __name__ == "__main__":
             ## UpDown Slump Algorithm
             elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 1.6, -2.0 , 0 ):
                 print("Hit : UpDown Slump")
-                bidding = false
+                bidding = False
                 benefit = 0.012
                 money = 70000
             elif not testing and not trading and myalgo.basic(95) and myalgo.rise(0.15, 1, 0.8, 1, 3 ):
             #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
                 print("Hit : Rise")
-                bidding = false
+                bidding = False
                 benefit = 0.01
                 money = 70000
 
@@ -193,7 +203,7 @@ if __name__ == "__main__":
                 sell_price = ask + int(ask * benefit)
                 buy_volume = int(int(money) // ask)
                 ### Buy Order
-                mybid = {"currency_pair" : currency, "type":"limit", "price": buy_price, "coin_amount": buy_volume, "nonce": getNonce()}
+                mybid = {"currency_pair" : currency, "type":"limit", "price": buy_price, "coin_amount": buy_volume, "nonce": myorder.getNonce()}
                 stime = time.time() * 1000
                 bidorder = myorder.bidOrder(mybid, header)
                 order_id = str(bidorder['orderId'])
@@ -220,10 +230,12 @@ if __name__ == "__main__":
                     #sell_volume = float(buy_volume * 0.9992)
                     bidding = False
                     print("Bid Order is complete")
+                    emailBody = sne.makeEmailBody('Bid Order is complete')
+                    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
                 # if open order is exist, cancel all bidding order
                 elif order_status == 'success' and order_id in myorderids:
                     # if failed to buy order , cancel pending order
-                    mycancel = {"currency_pair": currency, "id": order_id,"nonce":getNonce()}
+                    mycancel = {"currency_pair": currency, "id": order_id,"nonce":myorder.getNonce()}
                     stime = time.time() * 1000
                     cancelorder = myorder.cancelOrder(mycancel, header)
                     elapsed = int(time.time() * 1000 - stime)
@@ -235,6 +247,8 @@ if __name__ == "__main__":
                         trading = False
                         bidding = False
                         print("Bid Order is canceled")
+                        emailBody = sne.makeEmailBody('Bid Order is canceled')
+                        sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
                         buy_price = sell_price = buy_volume =0
                     else:
                         print("Check Bid Orer ")
@@ -253,7 +267,7 @@ if __name__ == "__main__":
             ######################################
             if trading and last >= sell_price and bid >= sell_price:
                 sell_price = bid
-                myask = {"currency_pair" : currency, "type":"limit", "price": sell_price, "coin_amount": sell_volume, "nonce": getNonce()}
+                myask = {"currency_pair" : currency, "type":"limit", "price": sell_price, "coin_amount": sell_volume, "nonce": myorder.getNonce()}
                 stime = time.time() * 1000
                 askorder = myorder.askOrder(myask, header)
                 order_id = str(askorder['orderId'])
@@ -279,10 +293,12 @@ if __name__ == "__main__":
                     # needs to put bidding count to redis
                     total_bidding += 1
                     # check balance
-                    balance = chkUserBalance('krw',header)
+                    balance = myorder.chkUserBalance('krw',header)
+                    emailBody = sne.makeEmailBody('"Sell is complete')
+                    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
                 # if failed to sell order , cancel all ask orders
                 elif askorder['status'] == 'success' and order_id in myorderids:
-                    mycancel = {"currency_pair": currency, "id": order_id,"nonce":getNonce()}
+                    mycancel = {"currency_pair": currency, "id": order_id,"nonce":myorder.getNonce()}
                     stime = time.time() * 1000
                     cancelorder = myorder.cancelOrder(mycancel, header)
                     elapsed = int(time.time() * 1000 - stime)

@@ -32,7 +32,7 @@ class SendNotificationEmail:
         return emailBody
         
 if __name__ == "__main__":
-    fromEmail = "CRYPTOSALON@cryptosalon.org"
+    fromEmail = "cryptosalon@cryptosalon.org"
     toEmail = "ikooyoon@gmail.com"
     emailSubject = "Notification from CRYPTOSALON"
 
