@@ -27,7 +27,7 @@ class KorbitBase:
 
     def getAccessToken(self):
         return str(self.redisCon.hmget(self.redisUser,'access_token')[0])
-    
+
     def doPost(self, pUrlPostFix, header='', **params):
         url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
         restResult = self.mySession.post(url, params=params, headers=header)
@@ -126,10 +126,16 @@ class KorbitBase:
         f = open(path,'w')
         f.write(html)
         f.close()
+    def saveTradingtoRedis(self,trader,trading):
+        ''' Insert Orders to redis
+        '''
+        logger.info('insert order into redis')
+        self.redisCon.hmset(trader, trading)
+        print("{} | Insert Order into Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
 
-
-if __name__ == "__main__":
-    '''
-    Main API for Korbit Trading
-    Test API using trading_sample.py
-    '''
+    def readTradingfromRedis(self,trader):
+        ''' Get Orders to redis
+        '''
+        logger.info('read orders from redis')
+        print("{} | Get Last Order from Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
+        return self.redisCon.hgetall(trader)

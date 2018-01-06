@@ -8,8 +8,9 @@ import SendNotificationEmail
 
 if __name__ == "__main__":
 
+    ## Select Ticker source
+    use_exchange_inquiry = True
     ### Vriables
-    money = 10000
     trading = False
     # Set testing True, if you want to run code only for test purpose
     testing = True
@@ -26,10 +27,12 @@ if __name__ == "__main__":
     coin = 'xrp'
     debug = False
     algorithm = ''
+
     # Set Email notification
     fromEmail = 'notofication@cryptosalon.org'
     toEmail = 'tairu.kim@gmail.com'
     emailSubject = "ORDER Notification"
+
     #Switch Env based on Platform
     if system() is 'Windows':
         secFilePath='c:/User/dongwkim/keys/korbit_key.csv'
@@ -63,7 +66,7 @@ if __name__ == "__main__":
     ### Check Balance
     balance = myorder.chkUserBalance('krw', header)
     coin_balance = myorder.chkUserBalance(coin, header)
-    # trainding coins 
+    # trainding coins
     print("{:7s} | trade_in_use {} coin".format(coin, float(coin_balance['trade_in_use'])))
     # available coins, not need when restartable
     #print("{:7s} | available {} coin".format(coin, float(coin_balance['available'])))
@@ -73,35 +76,38 @@ if __name__ == "__main__":
     for orders in listopenorder:
         myorderids.append(orders['id'].encode('utf-8'))
         print("{:7s} | open_orders | id:  {} type: {} ".format(coin, int(orders['id']), orders['type']))
-    # query recent bid  orders
-    listorders = myorder.listOrders(currency,header)
-    mypending_bids = []
-    for orders in listorders:
-        if orders['side'] == 'bid' and orders['status'] ==  'filled':
-            myfilled_amount = float(orders['filled_amount']) - float(orders['fee'])
-            myorderids.append(orders['id'].encode('utf-8'))
-            print("{:7s} | orders | id:  {} type: {} filled_amount: {} price: {} status: {} fee: {} myfill: {} ".format(coin, int(orders['id']), orders['side'], orders['filled_amount'], orders['price'], orders['status'], orders['fee'], myfilled_amount))
-            mypending_bids.append(tuple([int(orders['id']),float(myfilled_amount)]))
-    print(mypending_bids)
 
+    ##############################################
+    # Restartable Trading
+    ##############################################
 
-    while False:
+    while True:
         time.sleep(0.8)
 
 
 
-        start = time.time()
-        ticker = myorder.doGet('ticker/detailed', currency_pair = currency)
-        #min_tx = get('transactions', currency_pair = currency, time='minute')
-        hr_tx = myorder.doGet('transactions', currency_pair = currency, time='hour')
-        end = time.time()
+        ############################################
+        # Use exchage Price inquiry
+        ############################################
+        if use_exchange_inquiry:
+            start = time.time()
+            ticker = myorder.doGet('ticker/detailed', currency_pair = currency)
+            #min_tx = get('transactions', currency_pair = currency, time='minute')
+            hr_tx = myorder.doGet('transactions', currency_pair = currency, time='hour')
+            end = time.time()
 
-        lat = int((end - start)*100)
-        last = int(ticker['last'])
-        bid = int(ticker['bid'])
-        ask = int(ticker['ask'])
-        low = int(ticker['low'])
-        high = int(ticker['high'])
+            lat = int((end - start)*100)
+            last = int(ticker['last'])
+            bid = int(ticker['bid'])
+            ask = int(ticker['ask'])
+            low = int(ticker['low'])
+            high = int(ticker['high'])
+
+        ############################################
+        # Use Redis Price inquiry
+        ############################################
+        else:
+            pass
 
 
 
@@ -116,48 +122,52 @@ if __name__ == "__main__":
             #ctime = getStrTime(ticker['timestamp'])
             # Get Current Time
             ctime = myorder.getStrTime(time.time() * 1000)
-            # Cacculate 10min past timstamps
-            ten_min_time = (time.time() - ( 10 * 60 )) * 1000
-            # Cacculate 1min past timstamps
-            one_min_time = (time.time() - ( 1 * 60 )) * 1000
 
-            one_min_pos = next(i for i,tx in enumerate(hr_tx) if tx['timestamp'] < one_min_time)
-            ten_min_pos = next(i for i,tx in enumerate(hr_tx) if tx['timestamp'] < ten_min_time)
+            if use_exchange_inquiry:
+                # Cacculate 10min past timstamps
+                ten_min_time = (time.time() - ( 10 * 60 )) * 1000
+                # Cacculate 1min past timstamps
+                one_min_time = (time.time() - ( 1 * 60 )) * 1000
 
-            ## Create new one miniute List Dictionary
-            one_min_tx =  hr_tx[0:one_min_pos]
-            tx_1min_price_avg = last if one_min_pos is 0 else (sum(int(tx['price']) for tx in one_min_tx)) / one_min_pos
+                one_min_pos = next(i for i,tx in enumerate(hr_tx) if tx['timestamp'] < one_min_time)
+                ten_min_pos = next(i for i,tx in enumerate(hr_tx) if tx['timestamp'] < ten_min_time)
 
-            tx_1min_price_max = last if one_min_pos is 0 else max(one_min_tx, key=lambda x:x['price'])['price']
-            tx_1min_price_min = last if one_min_pos is 0 else min(one_min_tx, key=lambda x:x['price'])['price']
-            tx_1min_price_delta = 0 if one_min_pos is 0 else float(one_min_tx[0]['price']) - float(one_min_tx[one_min_pos - 1]['price'])
-            tx_1min_stat = {'tx_1min_price_avg': tx_1min_price_avg,
-                            'tx_1min_price_max': tx_1min_price_max,
-                            'tx_1min_price_min': tx_1min_price_min,
-                            'tx_1min_price_delta': tx_1min_price_delta}
-            ## Create new ten miniute List Dictionary
-            ten_min_tx =  hr_tx[0:ten_min_pos]
-            tx_10min_price_avg = (sum(int(tx['price']) for tx in ten_min_tx)) / ten_min_pos
+                ## Create new one miniute List Dictionary
+                one_min_tx =  hr_tx[0:one_min_pos]
+                tx_1min_price_avg = last if one_min_pos is 0 else (sum(int(tx['price']) for tx in one_min_tx)) / one_min_pos
 
-            tx_10min_price_max = max(ten_min_tx, key=lambda x:x['price'])['price']
-            tx_10min_price_min = min(ten_min_tx, key=lambda x:x['price'])['price']
-            tx_10min_price_delta = float(ten_min_tx[0]['price']) - float(ten_min_tx[ten_min_pos - 1]['price'])
-            tx_10min_stat = {'tx_10min_price_avg': tx_10min_price_avg,
-                            'tx_10min_price_max': tx_10min_price_max,
-                            'tx_10min_price_min': tx_10min_price_min,
-                            'tx_10min_price_delta': tx_10min_price_delta}
+                tx_1min_price_max = last if one_min_pos is 0 else max(one_min_tx, key=lambda x:x['price'])['price']
+                tx_1min_price_min = last if one_min_pos is 0 else min(one_min_tx, key=lambda x:x['price'])['price']
+                tx_1min_price_delta = 0 if one_min_pos is 0 else float(one_min_tx[0]['price']) - float(one_min_tx[one_min_pos - 1]['price'])
+                tx_1min_stat = {'tx_1min_price_avg': tx_1min_price_avg,
+                                'tx_1min_price_max': tx_1min_price_max,
+                                'tx_1min_price_min': tx_1min_price_min,
+                                'tx_1min_price_delta': tx_1min_price_delta}
+                ## Create new ten miniute List Dictionary
+                ten_min_tx =  hr_tx[0:ten_min_pos]
+                tx_10min_price_avg = (sum(int(tx['price']) for tx in ten_min_tx)) / ten_min_pos
 
-            ## Hour transactions
-            hr_tx_len = len(hr_tx)
-            tx_hr_price_avg = (sum(int(tx['price']) for tx in hr_tx) / hr_tx_len)
-            tx_hr_time_delta = (float(hr_tx[0]['timestamp']) - float(hr_tx[hr_tx_len - 1]['timestamp']))//1000
-            tx_hr_price_delta = float(hr_tx[0]['price']) - float(hr_tx[hr_tx_len - 1]['price'])
-            tx_hr_price_max = max(hr_tx, key=lambda x:x['price'])['price']
-            tx_hr_price_min = min(hr_tx, key=lambda x:x['price'])['price']
-            tx_hr_stat = {'tx_hr_price_avg': tx_hr_price_avg,
-                          'tx_hr_price_max': tx_hr_price_max,
-                          'tx_hr_price_min': tx_hr_price_min,
-                          'tx_hr_price_delta': tx_hr_price_delta}
+                tx_10min_price_max = max(ten_min_tx, key=lambda x:x['price'])['price']
+                tx_10min_price_min = min(ten_min_tx, key=lambda x:x['price'])['price']
+                tx_10min_price_delta = float(ten_min_tx[0]['price']) - float(ten_min_tx[ten_min_pos - 1]['price'])
+                tx_10min_stat = {'tx_10min_price_avg': tx_10min_price_avg,
+                                'tx_10min_price_max': tx_10min_price_max,
+                                'tx_10min_price_min': tx_10min_price_min,
+                                'tx_10min_price_delta': tx_10min_price_delta}
+
+                ## Hour transactions
+                hr_tx_len = len(hr_tx)
+                tx_hr_price_avg = (sum(int(tx['price']) for tx in hr_tx) / hr_tx_len)
+                tx_hr_time_delta = (float(hr_tx[0]['timestamp']) - float(hr_tx[hr_tx_len - 1]['timestamp']))//1000
+                tx_hr_price_delta = float(hr_tx[0]['price']) - float(hr_tx[hr_tx_len - 1]['price'])
+                tx_hr_price_max = max(hr_tx, key=lambda x:x['price'])['price']
+                tx_hr_price_min = min(hr_tx, key=lambda x:x['price'])['price']
+                tx_hr_stat = {'tx_hr_price_avg': tx_hr_price_avg,
+                              'tx_hr_price_max': tx_hr_price_max,
+                              'tx_hr_price_min': tx_hr_price_min,
+                              'tx_hr_price_delta': tx_hr_price_delta}
+            else:
+                pass
 
 
             # print trading stats
@@ -218,6 +228,7 @@ if __name__ == "__main__":
                 print("Hit : Rise")
                 bidding = False
                 benefit = 0.012
+                algorithm = 'Rise'
                 money = 100000
 
 
@@ -236,25 +247,35 @@ if __name__ == "__main__":
                 elapsed = int(time.time() * 1000 - stime)
                 print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),bidorder['currencyPair'],'Buy',str(order_id) ,str(order_status), elapsed))
 
+                ###################################
                 ### List Open Order
+                ###################################
+
                 ## Open Order is not queries as soon as ordered, need sleep interval
                 time.sleep(2.5)
-                listorder = myorder.listOpenOrder(currency,header)
+                listopenorder = myorder.listOpenOrder(currency,header)
+
                 ## list orderid from listorder
                 myorderids = []
-                for orders in listorder:
-                    myorderids.append(orders['id'].encode('utf-8'))
+                for orders in listopenorder:
+                    myorderids.append(orders['id'])
                 print("Bid Order List {}".format(myorderids))
 
                 # if bid order id is not in open orders complete order
                 if  order_status == 'success' and order_id not in myorderids:
                     xrp_balance = myorder.chkUserBalance('xrp',header)
-                    trading = True
                     buy_time = time.time()
-                    sell_volume = xrp_balance['available']
-                    #sell_volume = float(buy_volume * 0.9992)
+                    ## Query Order history  to find sell_volume
+                    listorders = myorder.listOrders(currency,header)
+                    for orders in listorders:
+                        if orders['side'] == 'bid' and orders['status'] == 'filled' and str(orders['id']) == order_id:
+                            sell_volume = float(orders['filled_amount']) - float(orders['fee'])
                     bidding = False
+                    trading = True
+                    order_savepoint = {"type": "bid", "orderid" : order_id, "sell_volume" : sell_volume, "sell_price": sell_price, "currency_pair": currency, "trading": True, "bidding": False }
+                    myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
                     print("Bid Order is complete")
+                    #Email Notification
                     emailBody = sne.makeEmailBody("{} BUY AT {} won".format(currency, sell_price))
                     sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
                 # if open order is exist, cancel all bidding order
@@ -271,17 +292,26 @@ if __name__ == "__main__":
                         balance = myorder.chkUserBalance('krw',header)
                         trading = False
                         bidding = False
+                        order_savepoint = {"type": "reset", "orderid" :'' , "sell_volume" : 0, "sell_price": 0, "currency_pair": currency, "trading": False, "bidding": False }
+                        myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
                         print("Bid Order is canceled")
-                        buy_price = sell_price = buy_volume =0
+                        buy_price = sell_price = buy_volume = sell_volume = 0
                     else:
-                        print("Check Bid Orer ")
-                        xrp_balance = myorder.chkUserBalance('xrp',header)
-                        trading = True
-                        buy_time = time.time()
-                        sell_volume = xrp_balance['available']
-                        #sell_volume = float(buy_volume * 0.9992)
-                        bidding = False
-                        trading = True
+                        ## need to check bid history  to check pending bid is sold
+                        print("Order Cancel Failed, check bid history to check wether bid is not pending")
+                        listorders = myorder.listOrders(currency,header)
+                        for orders in listorders:
+                            if orders['side'] == 'bid' and orders['status'] ==  'filled' and str(orders['id']) == order_id:
+                                bidding = False
+                                trading = True
+                                print("Your bid order# {} is success".format(order_id))
+                                order_savepoint = {"type": "bid", "orderid" : order_id, "sell_volume" : sell_volume, "sell_price": sell_price, "currency_pair": currency, "trading": True, "bidding": False }
+                                myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
+                        ## Assume internal error, but continue trading
+                        if not trading:
+                            print("WARNING !! : Bid order is not in order history, Call to Korbit Support. continue trading...")
+                            trading = False
+                            bidding = False
 
 
 
@@ -300,10 +330,10 @@ if __name__ == "__main__":
 
                 # check list open orders
                 time.sleep(2)
-                listorder = myorder.listOpenOrder(currency,header)
+                listopenorder = myorder.listOpenOrder(currency,header)
                 ## list orderid from listorder
                 myorderids = []
-                for orders in listorder:
+                for orders in listopenorder:
                     myorderids.append(orders['id'].encode('utf-8'))
                 print("Ask Order List {}".format(myorderids))
 

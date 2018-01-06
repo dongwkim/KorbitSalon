@@ -83,8 +83,13 @@ if __name__ == "__main__":
     bid_volume = 10
     mybid = {"currency_pair" : currency, "type":"limit", "price": bid_price, "coin_amount": bid_volume, "nonce": myorder.getNonce()}
     bidorder = myorder.bidOrder(mybid, header)
-    bid_orderid = bidorder['orderId']
-    print("{:15s} | Time:{} currency:{} id# {} status: {}".format('Bid Order',myorder.getStrTime(), bidorder['currencyPair'],bid_orderid, bidorder['status']))
+    order_id = bidorder['orderId']
+    print("{:15s} | Time:{} currency:{} id# {} status: {}".format('Bid Order',myorder.getStrTime(), bidorder['currencyPair'], order_id, bidorder['status']))
+
+    # Restartable trader
+    redis_savepoint = {"type": "bid", "orderid" : order_id, "sell_volume" : sell_volume, "sell_price": sell_price, "currrency_pair": currency }
+    myorder.insertOrdertoRedis(redisUser + 'bidorders', redis_savepoint)
+
 
     ####################################################
     # List Open Order
