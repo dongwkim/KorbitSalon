@@ -131,11 +131,11 @@ class KorbitBase:
         '''
         logger.info('insert order into redis')
         self.redisCon.hmset(trader, trading)
-        print("{} | Insert Order into Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
+        print("{:20s} | Insert Order into Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
 
     def readTradingfromRedis(self,trader):
         ''' Get Orders to redis
         '''
         logger.info('read orders from redis')
-        print("{} | Get Last Order from Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
+        print("{:20s} | Get Last Order from Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
         return self.redisCon.hgetall(trader)

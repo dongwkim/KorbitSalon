@@ -51,23 +51,30 @@ if __name__ == "__main__":
 
     # Email Setup
     sne = SendNotificationEmail.SendNotificationEmail()
+
+    # Korbit order class
     myorder = xrpmgrsimul.XRPManagerSimul('ACTUAL')
+
+    # Redis initialize
     #myorder.initConnection(redisHost, redisPort, redisUser, 'RlawjddmsrotoRl#12', 'xrp')
     myorder.initConnection(redisHost, redisPort, redisUser, None, 'xrp')
 
     #refresh token by redis
     mytoken = myorder.getAccessToken()
     header = {"Authorization": "Bearer " + mytoken}
-    #print(header)
 
     ### Fetching Ticker
     prev_ticker = myorder.doGet('ticker/detailed', currency_pair = currency)
 
-    ### Check Balance
+    ### Check Balance, check again after order,sell,cancel
+    # krw balance
     balance = myorder.chkUserBalance('krw', header)
+    # coin balance
     coin_balance = myorder.chkUserBalance(coin, header)
-    # trainding coins
-    print("{:7s} | trade_in_use {} coin".format(coin, float(coin_balance['trade_in_use'])))
+
+    # heading message
+    print("{:20s} | Welcome to Korbit Salon ^^".format(myorder.getStrTime(time.time()*1000)))
+    print("{:20s} | trade_in_use {} coins | available {} coins ".format(coin, float(coin_balance['trade_in_use']), float(coin_balance['available'])))
     # available coins, not need when restartable
     #print("{:7s} | available {} coin".format(coin, float(coin_balance['available'])))
     # query open orders
@@ -75,12 +82,34 @@ if __name__ == "__main__":
     myorderids = []
     for orders in listopenorder:
         myorderids.append(orders['id'].encode('utf-8'))
-        print("{:7s} | open_orders | id:  {} type: {} ".format(coin, int(orders['id']), orders['type']))
+        print("{:20s} | open_orders | id:  {} type: {} ".format(coin, int(orders['id']), orders['type']))
 
     ##############################################
     # Restartable Trading
     ##############################################
 
+    recall_savepoint = dict(myorder.readTradingfromRedis('dongwkim-trader1'))
+    print(recall_savepoint)
+    order_type = str(recall_savepoint['type'])
+    # if previous order type is bid , recall all variables
+    if order_type == 'bid':
+        order_id = str(recall_savepoint['orderid'])
+        # Redis can not recognize boolen type , need to convert to python boolena
+        trading = eval(recall_savepoint['trading'])
+        bidding = eval(recall_savepoint['bidding'])
+        sell_price = int(recall_savepoint['sell_price'])
+        sell_volume = float(recall_savepoint['sell_volume'])
+        algorithm = str(recall_savepoint['algorithm'])
+        currency_pair = str(recall_savepoint['currency_pair'])
+        money = int(recall_savepoint['money'])
+
+
+
+
+
+    ##############################################
+    # Start Looping
+    ##############################################
     while True:
         time.sleep(0.8)
 
@@ -170,11 +199,10 @@ if __name__ == "__main__":
                 pass
 
 
-            # print trading stats
-            curr_balance = int(balance['available'] + balance['trade_in_use'])
-            print( "{} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}/{:4.0f}/{:4.0f} Avg: {:4.0f}/{:4.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  " \
-	            .format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,tx_hr_price_avg, tx_10min_price_avg,lat,total_bidding,int(curr_balance)//10))
-            #print("{} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:3.0f}/{:3.0f}/{:3.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  ".format(getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,lat,total_bidding,int(curr_balance)//10))
+            # print trading stats to text
+            curr_balance = int(balance['available']) + float(coin_balance['available']) * last
+            print( "{:20s} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}/{:4.0f}/{:4.0f} Avg: {:4.0f}/{:4.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  " \
+	            .format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,tx_10min_price_delta, tx_1min_price_delta,tx_hr_price_avg, tx_10min_price_avg,lat,total_bidding,int(curr_balance)))
             # Create HTML for realtime view
             if showhtml == True:
                 myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_10min_price_delta, tx_hr_price_delta,buy_price, algorithm, total_bidding, int(curr_balance)//10 , lat)
@@ -240,78 +268,89 @@ if __name__ == "__main__":
                 buy_volume = int(int(money) // ask)
                 ### Buy Order
                 mybid = {"currency_pair" : currency, "type":"limit", "price": buy_price, "coin_amount": buy_volume, "nonce": myorder.getNonce()}
-                stime = time.time() * 1000
-                bidorder = myorder.bidOrder(mybid, header)
-                order_id = str(bidorder['orderId'])
-                order_status = str(bidorder['status'])
-                elapsed = int(time.time() * 1000 - stime)
-                print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),bidorder['currencyPair'],'Buy',str(order_id) ,str(order_status), elapsed))
+                if not testing:
+                    stime = time.time() * 1000
+                    bidorder = myorder.bidOrder(mybid, header)
+                    order_id = str(bidorder['orderId'])
+                    order_status = str(bidorder['status'])
+                    elapsed = int(time.time() * 1000 - stime)
+                    print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),bidorder['currencyPair'],'Buy',str(order_id) ,str(order_status), elapsed))
+                elif testing:
+                    print("{} | {} {:7s}".format(myorder.getStrTime(time.time()*1000),currency_pair,'Buy'))
+
 
                 ###################################
                 ### List Open Order
                 ###################################
 
-                ## Open Order is not queries as soon as ordered, need sleep interval
-                time.sleep(2.5)
-                listopenorder = myorder.listOpenOrder(currency,header)
+                if not testing:
+                    ## Open Order is not queries as soon as ordered, need sleep interval
+                    time.sleep(2.5)
+                    listopenorder = myorder.listOpenOrder(currency,header)
 
-                ## list orderid from listorder
-                myorderids = []
-                for orders in listopenorder:
-                    myorderids.append(orders['id'])
-                print("Bid Order List {}".format(myorderids))
+                    ## list orderid from listorder
+                    myorderids = []
+                    for orders in listopenorder:
+                        myorderids.append(orders['id'])
+                    print("Bid Order List {}".format(myorderids))
 
-                # if bid order id is not in open orders complete order
-                if  order_status == 'success' and order_id not in myorderids:
-                    xrp_balance = myorder.chkUserBalance('xrp',header)
-                    buy_time = time.time()
-                    ## Query Order history  to find sell_volume
-                    listorders = myorder.listOrders(currency,header)
-                    for orders in listorders:
-                        if orders['side'] == 'bid' and orders['status'] == 'filled' and str(orders['id']) == order_id:
-                            sell_volume = float(orders['filled_amount']) - float(orders['fee'])
-                    bidding = False
-                    trading = True
-                    order_savepoint = {"type": "bid", "orderid" : order_id, "sell_volume" : sell_volume, "sell_price": sell_price, "currency_pair": currency, "trading": True, "bidding": False }
-                    myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
-                    print("Bid Order is complete")
-                    #Email Notification
-                    emailBody = sne.makeEmailBody("{} BUY AT {} won".format(currency, sell_price))
-                    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
-                # if open order is exist, cancel all bidding order
-                elif order_status == 'success' and order_id in myorderids:
-                    # if failed to buy order , cancel pending order
-                    mycancel = {"currency_pair": currency, "id": order_id,"nonce":myorder.getNonce()}
-                    stime = time.time() * 1000
-                    cancelorder = myorder.cancelOrder(mycancel, header)
-                    elapsed = int(time.time() * 1000 - stime)
-                    mycancelids = []
-                    for cancels in cancelorder:
-                        print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),cancels['currencyPair'],'Cancel',str(cancels['orderId']) ,cancels['status'], elapsed))
-                    if cancelorder[0]['status'] == 'success':
-                        balance = myorder.chkUserBalance('krw',header)
-                        trading = False
-                        bidding = False
-                        order_savepoint = {"type": "reset", "orderid" :'' , "sell_volume" : 0, "sell_price": 0, "currency_pair": currency, "trading": False, "bidding": False }
-                        myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
-                        print("Bid Order is canceled")
-                        buy_price = sell_price = buy_volume = sell_volume = 0
-                    else:
-                        ## need to check bid history  to check pending bid is sold
-                        print("Order Cancel Failed, check bid history to check wether bid is not pending")
+                    # if bid order id is not in open orders complete order
+                    if  order_status == 'success' and order_id not in myorderids:
+                        buy_time = time.time()
+                        ## Query Order history  to find sell_volume
                         listorders = myorder.listOrders(currency,header)
                         for orders in listorders:
-                            if orders['side'] == 'bid' and orders['status'] ==  'filled' and str(orders['id']) == order_id:
-                                bidding = False
-                                trading = True
-                                print("Your bid order# {} is success".format(order_id))
-                                order_savepoint = {"type": "bid", "orderid" : order_id, "sell_volume" : sell_volume, "sell_price": sell_price, "currency_pair": currency, "trading": True, "bidding": False }
-                                myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
-                        ## Assume internal error, but continue trading
-                        if not trading:
-                            print("WARNING !! : Bid order is not in order history, Call to Korbit Support. continue trading...")
+                            if orders['side'] == 'bid' and orders['status'] == 'filled' and str(orders['id']) == order_id:
+                                sell_volume = float(orders['filled_amount']) - float(orders['fee'])
+                        balance = myorder.chkUserBalance('krw',header)
+                        coin_balance = myorder.chkUserBalance(coin,header)
+                        bidding = False
+                        trading = True
+                        order_savepoint = {"type": "bid", "orderid" : order_id, "sell_volume" : sell_volume, "sell_price": sell_price, "currency_pair": currency, "algorithm" : algorithm, "trading": trading, "bidding": bidding }
+                        myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
+                        print("Bid Order is complete")
+                        #Email Notification
+                        emailBody = sne.makeEmailBody("{} BUY AT {} won".format(currency, sell_price))
+                        sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
+                    # if open order is exist, cancel all bidding order
+                    elif order_status == 'success' and order_id in myorderids:
+                        # if failed to buy order , cancel pending order
+                        mycancel = {"currency_pair": currency, "id": order_id,"nonce":myorder.getNonce()}
+                        stime = time.time() * 1000
+                        cancelorder = myorder.cancelOrder(mycancel, header)
+                        elapsed = int(time.time() * 1000 - stime)
+                        mycancelids = []
+                        for cancels in cancelorder:
+                            print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),cancels['currencyPair'],'Cancel',str(cancels['orderId']) ,cancels['status'], elapsed))
+                        if cancelorder[0]['status'] == 'success':
+                            #balance = myorder.chkUserBalance('krw',header)
                             trading = False
                             bidding = False
+                            buy_price = sell_price = buy_volume = sell_volume = 0
+                            algorithm = ''
+                            order_savepoint = {"type": "reset", "orderid" :'' , "sell_volume" : sell_volume, "sell_price": sell_price, "currency_pair": currency, "algorithm": algorithm, "trading": trading, "bidding": bidding }
+                            myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
+                            print("Bid Order is canceled")
+                        else:
+                            ## need to check bid history  to check pending bid is sold
+                            print("Order Cancel Failed, check bid history to check wether bid is not pending")
+                            listorders = myorder.listOrders(currency,header)
+                            for orders in listorders:
+                                if orders['side'] == 'bid' and orders['status'] ==  'filled' and str(orders['id']) == order_id:
+                                    bidding = False
+                                    trading = True
+                                    print("Your bid order# {} is success".format(order_id))
+                                    balance = myorder.chkUserBalance('krw',header)
+                                    coin_balance = myorder.chkUserBalance(coin,header)
+                                    order_savepoint = {"type": "bid", "orderid" : order_id, "sell_volume" : sell_volume, "sell_price": sell_price, "currency_pair": currency, "algorithm" : algorithm, "trading": trading, "bidding": bidding }
+                                    myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
+                            ## Assume internal error, but continue trading
+                            if not trading:
+                                print("WARNING !! : Bid order is not in order history, Call to Korbit Support. continue trading...")
+                                trading = False
+                                bidding = False
+                                order_savepoint = {"type": "bid", "orderid" : order_id, "sell_volume" : sell_volume, "sell_price": sell_price, "currency_pair": currency, "algorithm" : algorithm, "trading": trading, "bidding": bidding }
+                                myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
 
 
 
@@ -340,15 +379,22 @@ if __name__ == "__main__":
                 # if ask order id is not in open orders complete order
                 if askorder['status'] == 'success' and order_id not in myorderids:
                     trading = False
-                    # initialize trading price
-                    buy_price = sell_price = buy_volume = sell_volume = 0
-                    algorithm = ''
+                    bidding = False
                     sell_time = time.time()
                     buy_sell_gap = sell_time - buy_time
                     # needs to put bidding count to redis
                     total_bidding += 1
                     # check balance
+                    coin_balance = myorder.chkUserBalance(coin,header)
                     balance = myorder.chkUserBalance('krw',header)
+                    # Save state to Redis
+                    order_savepoint = {"type": "ask", "orderid" : order_id, "sell_volume" : sell_volume, "sell_price": sell_price, "currency_pair": currency, "algorithm": algorithm, "trading": bidding, "bidding": bidding }
+                    myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
+
+                    # initialize trading price
+                    buy_price = sell_price = buy_volume = sell_volume = 0
+                    algorithm = ''
+
                     # Email Send
                     emailBody = sne.makeEmailBody("{} SOLD AT {} won".format(currency, sell_price))
                     sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
@@ -362,9 +408,11 @@ if __name__ == "__main__":
                         print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),cancels['currencyPair'],'Cancel',str(cancels['orderId']) ,cancels['status'], elapsed))
                     if cancelorder[0]['status'] == 'success':
                         balance = myorder.chkUserBalance('krw',header)
+                        coin_balance = myorder.chkUserBalance(coin,header)
                         trading = True
+                        print("ask Order is canceled")
                 else:
-                    print(askorder['status'])
+                    print("WARNING: Call to KorbitSalon Support : {} ".format(askorder['status']))
                     trading = False
             ## End Trading
             ## Debug Time lapse

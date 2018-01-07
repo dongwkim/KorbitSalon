@@ -63,7 +63,9 @@ if __name__ == "__main__":
     }
     '''
     bid_price = 1000
-    bid_volume = 10
+    money = 10000
+    bid_volume = int(money // bid_price)
+    algorithm = 'Baby Slump'
     mybid = {"currency_pair" : currency, "type":"limit", "price": bid_price, "coin_amount": bid_volume, "nonce": myorder.getNonce()}
     bidorder = myorder.bidOrder(mybid, header)
     order_id = str(bidorder['orderId'])
@@ -105,7 +107,9 @@ if __name__ == "__main__":
         print('Order is complete')
         # Restartable trader
         sell_price = bid_price + 10000
-        order_savepoint = {"type": "bid", "orderid" : order_id, "sell_volume" : sell_volume, "sell_price": sell_price, "currency_pair": currency, "trading": True, "bidding": False }
+        bidding = False
+        trading = True
+        order_savepoint = {"type": "bid", "orderid" : order_id, "money": money, "sell_volume" : sell_volume, "sell_price": sell_price, "currency_pair": currency,"algorithm": algorithm, "trading": trading, "bidding": bidding }
         myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
     elif bidorder['status'] == 'success' and order_id in  myorderids:
         print('Order is Open')
@@ -120,6 +124,7 @@ if __name__ == "__main__":
     bidding = recall_savepoint['bidding']
     sell_price = recall_savepoint['sell_price']
     sell_volume = recall_savepoint['sell_volume']
+    print(trading,bidding,sell_price,sell_volume)
 
 
 
