@@ -177,10 +177,10 @@ if __name__ == "__main__":
                 benefit = 0.025
                 money = 70000
             ## Baby Slump Algorithm
-            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.12, 2, 1.5 , -9999 ):
+            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.1, 2, 1 , -9999 ):
                 print("Hit : Baby Slump")
                 bidding = True
-                benefit = 0.015
+                benefit = 0.012
                 money = 70000
             ## UpDown Slump Algorithm
             elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 1.6, -2.0 , 0 ):
