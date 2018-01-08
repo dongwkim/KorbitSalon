@@ -32,19 +32,34 @@ if __name__ == "__main__":
 
     xrpm = xrpmgrsimul('SIMUL')
     #xrpm = xrpmgrsimul('SIMUL', 'cryptosalon.iptime.org', 16379,'RlawjddmsrotoRl#12', 'xrp')
-    xrpm.initConnection('cryptosalon.iptime.org', 16379, 'dongwkim', 'RlawjddmsrotoRl#12', 'xrp')
-    myTimestamp = xrpm.redisCon.zrangebyscore('xrp_timestamp', '-inf', '+inf')
-    start_time = xrpm.getEpochTime('2018-01-03 10:00:00')
-    end_time = xrpm.getEpochTime('2018-01-03 10:10:00')
-    myTimestamp.sort()
+    xrpm.initConnection('localhost', 16379, 'kiwonyoon', 'RlawjddmsrotoRl#12', 'xrp')
+    #myTimestamp = xrpm.redisCon.zrangebyscore('xrp_timestamp', '-inf', '+inf')
+    myTimestamp = list()
+    timestampBucker = list()
+    tTimestamp = xrpm.redisCon.zrangebyscore('xrp', '-inf', '+inf')
+    for ttt in tTimestamp:
+        tickerDetail = ttt.split (':')
+        myTimestamp.append(tickerDetail[5])
+
+    #myTimestamp = xrpm.redisCon.zrangebyscore('xrp_timestamp', '-inf', '+inf')
+    myTimestamp = xrpm.redisCon.zrangebyscore('xrp', '-inf', '+inf')
+    
+    for tempStamp in myTimestamp:
+        sTimestamp = tempStamp.split(":")
+        iTimestamp = sTimestamp[5]
+        timestampBucker.append(iTimestamp)
+    
+    start_time = xrpm.getEpochTime('2018-01-06 00:00:00')
+    end_time = xrpm.getEpochTime('2018-01-08 01:10:00')
+    timestampBucker.sort()
     if debug_data:
         pass
         #print("Redis Last Timestamp is {}".format(kb.getStrTime(myTimestamp.sort()[1])))
     try:
-        start_pos = next( i for i,j in enumerate(myTimestamp) if int(j) >= start_time )
+        start_pos = next( i for i,j in enumerate(timestampBucker) if int(j) >= start_time )
         if debug_data:
             print("start pos:{}".format(start_pos))
-        end_pos = next( i for i,j in enumerate(myTimestamp) if int(j) >= end_time )
+        end_pos = next( i for i,j in enumerate(timestampBucker) if int(j) >= end_time )
         if debug_data:
             print("end pos:{}".format(end_pos))
     except StopIteration:
@@ -54,7 +69,7 @@ if __name__ == "__main__":
 
     loop_outsider_timer = time.time()
 
-    for ptime in myTimestamp[start_pos:end_pos]:
+    for ptime in timestampBucker[start_pos:end_pos]:
     #while start_time <= end_time:
 
         loop_insider_timer = time.time()
