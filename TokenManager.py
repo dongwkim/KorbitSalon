@@ -22,6 +22,7 @@ class TokenManager:
             port         : redis port(default=6379)
         '''
         self.secFilePath=pSecFilePath
+        self.redisUser = pRedisUser
         self.myid = pRedisUser
         self.accessInfo = {}
         self.authAtt = ['key','secret','email','password']
@@ -41,6 +42,25 @@ class TokenManager:
             for secrow in map(dict, keys):
                 self.accessInfo = secrow
             csvfile.close()
+            
+    def doGet(self, pUrlPostFix, header='', **params):
+        ''' RestAPI GET  request
+        url_suffix : api call
+        header     : token for private call
+        params     : parameters for api query '''
+
+        url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
+        restResult = self.mySession.get(url, params=params,headers=header)
+
+        if restResult.status_code == 200:
+            return json.loads(restResult.text)
+        if restResult.status_code == 429:
+            logger.debug('HTTP: %s' , restResult.status_code)
+            #s.close()
+            #pooling()
+            return {'timestamp':0, 'last':0}
+        else:
+            raise Exception('{}/{}'.format(restResult.status_code,str(restResult)))
 
     def doPost(self, pUrlPostFix, header='', **params):
         url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
@@ -59,7 +79,7 @@ class TokenManager:
         self.redisCon.hmset(self.myid, self.accessInfo)
         self.redisCon.hmset(self.myid, self.myToken)
         #print("{} | Insert Token to Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
-        time.sleep(600)
+        time.sleep(10)
 
     def updateTokenOnRedis(self):
         ''' Update token on redis
@@ -72,7 +92,6 @@ class TokenManager:
         ''' Get refresh token from api server
         '''
         while True:
-            
             logger.info('get refresh token from redis')
             refreshToken = self.redisCon.hmget(self.myid,'refresh_token')
             myKey = self.redisCon.hmget(self.myid,'key')
@@ -80,7 +99,15 @@ class TokenManager:
             logger.info('refresh token from api server')
             self.myToken = self.doPost('oauth2/access_token', client_id=myKey, client_secret=mySecret, refresh_token=refreshToken, grant_type='refresh_token')
             self.updateTokenOnRedis()
-            time.sleep(600)
+            
+            i = 0
+            while ( i < 160 ):
+                header = {"Authorization": "Bearer " + self.getAccessToken()}
+                listorder = self.doGet('user/orders/open', header,  currency_pair='xrp_krw' )
+                print(listorder)
+                time.sleep(10)
+                i = i + 1
+
 
 
     def getRefreshToken(self):
