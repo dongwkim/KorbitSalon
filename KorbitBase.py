@@ -6,6 +6,9 @@ import redis
 import time
 import datetime
 import logging
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
+
 
 logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='tracelog/korbitbase_logger.trc',level=logging.DEBUG)
 logger = logging.getLogger('korbitbase')
@@ -15,6 +18,25 @@ class KorbitBase:
     def __init__(self):
         self.mySession = requests.Session()
         self.urlPrefix = 'https://api.korbit.co.kr/v1'
+        self.type =''
+        self.orderid =''
+        self.sell_volume =''
+        self.sell_price =''
+        self.buy_price =''
+        self.buy_volume =''
+        self.currency_pair ='xrp_krw'
+        self.algorithm =''
+        self.trading = False
+        self.bidding = False
+        self.currency = ''
+        self.money =''
+
+    def requests_retry_session(self,retries=3, backoff_factor=0.3, status_forcelist=(400,429,500), session=None):
+        session = session
+        retry = Retry( total=retries, read=retries, connect=retries, backoff_factor = backoff_factor, status_forcelist = status_forcelist)
+        adapter = HTTPAdapter(max_retries=retry)
+        session.mount('https://', adapter)
+        return session
 
     def initConnection(self, pRedisHost, pRedisPort, pRedisUser, pRedisPassword, pCurrency):
         self.redisHost = pRedisHost
@@ -30,7 +52,7 @@ class KorbitBase:
 
     def doPost(self, pUrlPostFix, header='', **params):
         url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
-        restResult = self.mySession.post(url, params=params, headers=header)
+        restResult = self.requests_retry_session(session=self.mySession).post(url, params=params, headers=header)
 
         if restResult.status_code == 200:
             return json.loads(restResult.text)
@@ -44,15 +66,10 @@ class KorbitBase:
         params     : parameters for api query '''
 
         url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
-        restResult = self.mySession.get(url, params=params,headers=header)
+        restResult = self.requests_retry_session(session=self.mySession).get(url, params=params,headers=header,timeout=5)
 
         if restResult.status_code == 200:
             return json.loads(restResult.text)
-        if restResult.status_code == 429:
-            logger.debug('HTTP: %s' , restResult.status_code)
-            #s.close()
-            #pooling()
-            return {'timestamp':0, 'last':0}
         else:
             raise Exception('{}/{}'.format(restResult.status_code,str(restResult)))
 
@@ -81,12 +98,12 @@ class KorbitBase:
         return CLIENT_ID,CLIENT_SECRET
 
     def chkUserBalance(self, currency ,header):
-          balance = self.doGet('user/balances',header)
-          return balance[currency]
+        balance = self.doGet('user/balances',header)
+        return balance[currency]
 
     def bidOrder(self, order,header):
-          bid = self.doPost('user/orders/buy', header, currency_pair=order['currency_pair'], type=order['type'], price=order['price'], coin_amount=order['coin_amount'], nonce=order['nonce'])
-          return bid
+        bid = self.doPost('user/orders/buy', header, currency_pair=order['currency_pair'], type=order['type'], price=order['price'], coin_amount=order['coin_amount'], nonce=order['nonce'])
+        return bid
 
     def cancelOrder(self, order,header):
         cancel = self.doPost('user/orders/cancel', header, id=order['id'], currency_pair=order['currency_pair'],nonce=order['nonce'] )
@@ -131,11 +148,11 @@ class KorbitBase:
         '''
         logger.info('insert order into redis')
         self.redisCon.hmset(trader, trading)
-        print("{:20s} | Insert Order into Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
+        print("{:20s} | Insert savepoint into Redis".format(self.getStrTime(time.time()*1000)))
 
     def readTradingfromRedis(self,trader):
         ''' Get Orders to redis
         '''
         logger.info('read orders from redis')
-        print("{:20s} | Get Last Order from Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
+        print("{:20s} | Get Last Order from Redis".format(self.getStrTime(time.time()*1000)))
         return self.redisCon.hgetall(trader)

@@ -29,13 +29,29 @@ if __name__ == "__main__":
     #increment = 1
     debug_time = False
     debug_data = False
+    traders = 2
 
     xrpm = xrpmgrsimul('SIMUL')
     #xrpm = xrpmgrsimul('SIMUL', 'cryptosalon.iptime.org', 16379,'RlawjddmsrotoRl#12', 'xrp')
-    xrpm.initConnection('cryptosalon.iptime.org', 16379, 'dongwkim', 'RlawjddmsrotoRl#12', 'xrp')
-    myTimestamp = xrpm.redisCon.zrangebyscore('xrp_timestamp', '-inf', '+inf')
-    start_time = xrpm.getEpochTime('2018-01-03 10:00:00')
-    end_time = xrpm.getEpochTime('2018-01-03 10:10:00')
+    xrpm.initConnection('gazua.iptime.org', 16379, 'dongwkim', 'RlawjddmsrotoRl#12', 'xrp')
+    # myTimestamp = xrpm.redisCon.zrangebyscore('xrp_timestamp', '-inf', '+inf')
+    myTimestamp = list()
+    timestampBucker = list()
+    tTimestamp = xrpm.redisCon.zrangebyscore('xrp', '-inf', '+inf')
+    for ttt in tTimestamp:
+        tickerDetail = ttt.split (':')
+        myTimestamp.append(tickerDetail[5])
+
+    #myTimestamp = xrpm.redisCon.zrangebyscore('xrp_timestamp', '-inf', '+inf')
+    myTimestamp = xrpm.redisCon.zrangebyscore('xrp', '-inf', '+inf')
+
+    for tempStamp in myTimestamp:
+        sTimestamp = tempStamp.split(":")
+        iTimestamp = sTimestamp[5]
+        timestampBucker.append(iTimestamp)
+
+    start_time = xrpm.getEpochTime('2018-01-06 10:00:00')
+    end_time = xrpm.getEpochTime('2018-01-06 10:10:00')
     myTimestamp.sort()
     if debug_data:
         pass
