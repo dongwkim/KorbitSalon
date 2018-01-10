@@ -79,34 +79,36 @@ class TokenManager:
         self.redisCon.hmset(self.myid, self.accessInfo)
         self.redisCon.hmset(self.myid, self.myToken)
         #print("{} | Insert Token to Redis".format(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())))
-        time.sleep(10)
+        time.sleep(5)
 
     def updateTokenOnRedis(self):
         ''' Update token on redis
         '''
-        logger.info("update token on redis || access_token: " + self.myToken['access_token'] + " || RefreshToken: " + self.myToken['refresh_token'] )
+        logger.info("Try to update token on redis || access_token: " + self.myToken['access_token'] + " || RefreshToken: " + self.myToken['refresh_token'] )
         self.redisCon.hmset(self.myid,self.myToken)
+        logger.info("Completed update token on redis || access_token: " + self.myToken['access_token'] + " || RefreshToken: " + self.myToken['refresh_token'] )
+        time.sleep(10)
         
 
     def updateToken(self):
         ''' Get refresh token from api server
         '''
         while True:
+
+            i = 0
+            while ( i < 20 ):
+                header = {"Authorization": "Bearer " + self.getAccessToken()}
+                listorder = self.doGet('user/balances', header )
+                time.sleep(12)
+                i = i + 1
+            
             logger.info('get refresh token from redis')
             refreshToken = self.redisCon.hmget(self.myid,'refresh_token')
             myKey = self.redisCon.hmget(self.myid,'key')
             mySecret = self.redisCon.hmget(self.myid,'secret')
-            logger.info('refresh token from api server')
+            logger.info('refresh token --from api server')
             self.myToken = self.doPost('oauth2/access_token', client_id=myKey, client_secret=mySecret, refresh_token=refreshToken, grant_type='refresh_token')
             self.updateTokenOnRedis()
-            
-            i = 0
-            while ( i < 160 ):
-                header = {"Authorization": "Bearer " + self.getAccessToken()}
-                listorder = self.doGet('user/orders/open', header,  currency_pair='xrp_krw' )
-                print(listorder)
-                time.sleep(10)
-                i = i + 1
 
 
 
