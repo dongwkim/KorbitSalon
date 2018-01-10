@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+####################################################
+# 2018/1/10 savepoint to redis, use class variables
+####################################################
 from KorbitBase import *
 import time
 import XRPManagerSimul as xrpmgrsimul
@@ -11,22 +14,24 @@ if __name__ == "__main__":
     ## Select Ticker source
     use_exchange_inquiry = True
     ### Vriables
+    testing = True
+    """
     trading = False
     # Set testing True, if you want to run code only for test purpose
-    testing = True
     bidding = False
     benefit = 0.05
-    total_bidding = 0
     buy_price = 0
     sell_price = 0
     buy_volume = 0
     sell_volume = 0
     #limit is calculated dynamically based on max
+    algorithm = ''
+    """
+    coin = 'xrp'
     limit = 0.90
     currency = 'xrp_krw'
-    coin = 'xrp'
     debug = False
-    algorithm = ''
+    total_bidding = 0
 
     # Set Email notification
     fromEmail = 'notofication@cryptosalon.org'
@@ -42,8 +47,8 @@ if __name__ == "__main__":
     ## Linux
     else:
         secFilePath='/usb/s1/key/korbit_key.csv'
-        redisHost = 'localhost'
-        redisPort = 6379
+        redisHost = '39.115.53.33'
+        redisPort = 16379
         showhtml = True
     redisUser = 'dongwkim'
 
@@ -206,10 +211,10 @@ if __name__ == "__main__":
             # print trading stats to text
             curr_balance = int(balance['available']) + float(coin_balance['available']) * last
             print( "{:20s} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}({:2d}%)/{:4.0f}({:2d}%)/{:4.0f}({:2.1f}%) Avg: {:4.0f}/{:4.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  " \
-	            .format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), buy_price, sell_price, sell_volume, tx_hr_price_delta,int(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,int(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,lat,total_bidding,int(curr_balance)))
+	            .format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,int(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,int(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,lat,total_bidding,int(curr_balance)))
             # Create HTML for realtime view
             if showhtml == True:
-                myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_10min_price_delta, tx_hr_price_delta,buy_price, algorithm, total_bidding, int(curr_balance)//10 , lat)
+                myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_10min_price_delta, tx_hr_price_delta,myorder.buy_price, algorithm, total_bidding, int(curr_balance)//10 , lat)
 
             ######################################
             ##  Set Algorithm
@@ -221,40 +226,40 @@ if __name__ == "__main__":
             ######################################
 
             ## Big Slump Algorithm
-            if not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(15, 0.5, 5, 2.0, -9999):
+            if not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 5, 1.3, -9999):
                 print("{:20s} |  Hit: Big Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.06
                 myorder.algorithm = 'Big Slump'
                 myorder.money = 300000
             ## Midium Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(10, 0.4, 4, 1.5 , -9999 ):
+        elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 4, 1.2 , -9999 ):
                 print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.04
+                myorder.benefit = 0.042
                 myorder.algorithm = 'Midium Slump'
                 myorder.money = 300000
             ## Little Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(10, 0.3, 3, 1.3 , -9999 ):
+        elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 3, 1.1 , -9999 ):
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.025
+                myorder.benefit = 0.032
                 myorder.algorithm = 'Little Slump'
-                myorder.money = 150000
+                myorder.money = 300000
             ## Baby Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.1, 2.0, 1.0 , -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.1, 1.5, 1.0 , -9999 ):
                 print("{:20s} |  Hit: Baby Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = False
-                myorder.benefit = 0.012
+                myorder.benefit = 0.015
                 myorder.algorithm = 'Baby Slump'
                 myorder.money = 100000
             ## UpDown Slump Algorithm
             elif not testing and not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 1.6, -2.5 , 100 ):
                 print("{:20s} |  Hit: UpDown Slump".format(myorder.getStrTime(time.time()*1000)))
-                myorder.bidding = True
+                myorder.bidding = False
                 myorder.benefit = 0.015
                 myorder.algorithm = 'UpDown Slump'
-                myorder.money = 200000
+                myorder.money = 150000
             ## Rise Slump Algorithm
             elif not testing and not myorder.trading and last < high * limit and   myalgo.rise(0.1, 1, 0.8, 1.0, 3 ):
                 print("{:20s} |  Hit: Rise".format(myorder.getStrTime(time.time()*1000)))
@@ -263,7 +268,7 @@ if __name__ == "__main__":
                 myorder.algorithm = 'Rise'
                 myorder.money = 100000
             ## Restartable Testing
-            elif not myorder.trading and last > 3505:
+            elif testing and not myorder.trading and last > 3505:
                 print("{:20s} | Hit Restartable Test".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.012
@@ -368,6 +373,7 @@ if __name__ == "__main__":
                 myorder.bidding = False
                 order_savepoint = {"type": "bid", "orderid" : '12345', "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money }
                 myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
+                print("{:20s} | bid Order is completed".format(myorder.getStrTime(time.time()*1000)))
                 time.sleep(2)
 
 
@@ -434,10 +440,10 @@ if __name__ == "__main__":
                     myorder.trading = False
 
             elif testing and myorder.trading and last >= myorder.sell_price and bid >= myorder.sell_price:
-                print("{:20s} |  ask Order is completed".format(myorder.getStrTime(time.time()*1000)))
                 myorder.trading = False
                 order_savepoint = {"type": "ask", "orderid" :'54321' , "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm": myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding }
                 myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
+                print("{:20s} | ask Order is completed".format(myorder.getStrTime(time.time()*1000)))
 
             ## End Trading
             ## Debug Time lapse

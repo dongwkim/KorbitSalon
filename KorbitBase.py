@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+####################################################
+# 2018/1/10 add requests_retry_session
+####################################################
 import csv
 import json
 import requests
@@ -148,7 +151,7 @@ class KorbitBase:
         '''
         logger.info('insert order into redis')
         self.redisCon.hmset(trader, trading)
-        print("{:20s} | Insert savepoint into Redis".format(self.getStrTime(time.time()*1000)))
+        print("{:20s} | Insert Savepoint into Redis".format(self.getStrTime(time.time()*1000)))
 
     def readTradingfromRedis(self,trader):
         ''' Get Orders to redis

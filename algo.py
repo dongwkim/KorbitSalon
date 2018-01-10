@@ -25,7 +25,7 @@ class algo:
         ''' Prevent Buy call when last price is less than hr/10min average
             limit : Buy position price limitation pecentage
         '''
-        if self.last < int(self.high) * limit/100 and self.last <= self.tx_hr_price_avg and self.last <= self.tx_10min_price_avg and self.ask <= int(self.last * 1.001 ):
+        if self.last < int(self.high) * limit/100 and self.last <= self.tx_hr_price_avg and self.last <= self.tx_10min_price_avg and self.ask <= int(self.last + 5 ):
             return True
         else:
             return False
