@@ -20,25 +20,30 @@ URL = 'https://api.korbit.co.kr/v1'
 class KorbitBase:
     def __init__(self):
         self.mySession = requests.Session()
+        retry = Retry( total=3, read=3, connect=3, backoff_factor = 0.3, status_forcelist = (400,429,500))
+        adapter = HTTPAdapter(max_retries=retry, pool_connections = 2, pool_maxsize = 2)
+        self.mySession.mount('https://', adapter)
         self.urlPrefix = 'https://api.korbit.co.kr/v1'
         self.type =''
         self.orderid =''
-        self.sell_volume =''
-        self.sell_price =''
-        self.buy_price =''
-        self.buy_volume =''
+        self.order_id =''
+        self.sell_volume = 0
+        self.sell_price = 0
+        self.buy_price = 0
+        self.buy_volume = 0
         self.currency_pair ='xrp_krw'
         self.algorithm =''
         self.trading = False
         self.bidding = False
         self.currency = ''
-        self.money =''
+        self.money = 0
 
-    def requests_retry_session(self,retries=3, backoff_factor=0.3, status_forcelist=(400,429,500), session=None):
-        session = session
+    def requests_retry_session(self,retries=3, backoff_factor=0.3, status_forcelist=(400,429,500)):
+        session = self.mySession
         retry = Retry( total=retries, read=retries, connect=retries, backoff_factor = backoff_factor, status_forcelist = status_forcelist)
-        adapter = HTTPAdapter(max_retries=retry)
+        adapter = HTTPAdapter(max_retries=retry, pool_connections = 2, pool_maxsize = 2)
         session.mount('https://', adapter)
+        session.mount('http://', adapter)
         return session
 
     def initConnection(self, pRedisHost, pRedisPort, pRedisUser, pRedisPassword, pCurrency):
@@ -55,7 +60,8 @@ class KorbitBase:
 
     def doPost(self, pUrlPostFix, header='', **params):
         url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
-        restResult = self.requests_retry_session(session=self.mySession).post(url, params=params, headers=header)
+        #restResult = self.requests_retry_session().post(url, params=params, headers=header)
+        restResult = self.mySession.post(url, params=params, headers=header)
 
         if restResult.status_code == 200:
             return json.loads(restResult.text)
@@ -69,7 +75,8 @@ class KorbitBase:
         params     : parameters for api query '''
 
         url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
-        restResult = self.requests_retry_session(session=self.mySession).get(url, params=params,headers=header,timeout=5)
+        #restResult = self.requests_retry_session().get(url, params=params,headers=header,timeout=5)
+        restResult = self.mySession.get(url, params=params,headers=header,timeout=5)
 
         if restResult.status_code == 200:
             return json.loads(restResult.text)
@@ -142,7 +149,7 @@ class KorbitBase:
                 Deal Count: {} <br> \
                 Balance: {:,} <br> \
                 Latency : {} ms</font>' \
-                .format(ctime, int(last), tx_10min_price_delta, tx_hr_price_delta, int(buy_price), algorithm, int(total_bidding),int(curr_balance), lat)
+                .format(ctime, int(last), tx_10min_price_delta, tx_hr_price_delta, buy_price, algorithm, total_bidding,int(curr_balance), lat)
         f = open(path,'w')
         f.write(html)
         f.close()
