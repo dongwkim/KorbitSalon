@@ -20,12 +20,11 @@ URL = 'https://api.korbit.co.kr/v1'
 class KorbitBase:
     def __init__(self):
         self.mySession = requests.Session()
-        retry = Retry( total=3, read=3, connect=3, backoff_factor = 0.3, status_forcelist = (400,429,500))
+        retry = Retry( total=6, read=3, connect=3, backoff_factor = 0.3, status_forcelist = (400,429,500,503,504))
         adapter = HTTPAdapter(max_retries=retry, pool_connections = 2, pool_maxsize = 2)
         self.mySession.mount('https://', adapter)
         self.urlPrefix = 'https://api.korbit.co.kr/v1'
         self.type =''
-        self.orderid =''
         self.order_id =''
         self.sell_volume = 0
         self.sell_price = 0
@@ -38,7 +37,7 @@ class KorbitBase:
         self.currency = ''
         self.money = 0
 
-    def requests_retry_session(self,retries=3, backoff_factor=0.3, status_forcelist=(400,429,500)):
+    def requests_retry_session(self,retries=5, backoff_factor=0.5, status_forcelist=(400,429,500)):
         session = self.mySession
         retry = Retry( total=retries, read=retries, connect=retries, backoff_factor = backoff_factor, status_forcelist = status_forcelist)
         adapter = HTTPAdapter(max_retries=retry, pool_connections = 2, pool_maxsize = 2)
@@ -76,7 +75,7 @@ class KorbitBase:
 
         url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
         #restResult = self.requests_retry_session().get(url, params=params,headers=header,timeout=5)
-        restResult = self.mySession.get(url, params=params,headers=header,timeout=5)
+        restResult = self.mySession.get(url, params=params,headers=header,timeout=10)
 
         if restResult.status_code == 200:
             return json.loads(restResult.text)
@@ -142,14 +141,14 @@ class KorbitBase:
         epoch_time = int(time.mktime(time.strptime(str_time, "%Y-%m-%d %H:%M:%S"))*1000)
         return epoch_time
     # Print real-time trading , need to use Flask or Django
-    def genHTML(self,path ,ctime,last, tx_10min_price_delta, tx_hr_price_delta, buy_price, algorithm, total_bidding, curr_balance, lat ):
+    def genHTML(self,path ,ctime,last, tx_10min_price_delta, tx_hr_price_delta, buy_price,sell_price, algorithm, total_bidding, curr_balance, lat ):
         html = '<meta http-equiv="refresh" content="3"> \
                 <font size="10"> Time : {}<br> \
-                Price : {:,} Delta :{}/{} <br> Buy Price: {} Algo: {}<br> \
+                Price : {:,} Delta :{}/{} <br> Buy/Sell Price: {}/{} Algo: {}<br> \
                 Deal Count: {} <br> \
                 Balance: {:,} <br> \
                 Latency : {} ms</font>' \
-                .format(ctime, int(last), tx_10min_price_delta, tx_hr_price_delta, buy_price, algorithm, total_bidding,int(curr_balance), lat)
+                .format(ctime, int(last), tx_10min_price_delta, tx_hr_price_delta, buy_price, sell_price, algorithm, total_bidding,int(curr_balance), lat)
         f = open(path,'w')
         f.write(html)
         f.close()

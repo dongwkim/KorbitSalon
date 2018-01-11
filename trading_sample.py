@@ -86,9 +86,6 @@ if __name__ == "__main__":
     order_id = bidorder['orderId']
     print("{:15s} | Time:{} currency:{} id# {} status: {}".format('Bid Order',myorder.getStrTime(), bidorder['currencyPair'], order_id, bidorder['status']))
 
-    # Restartable trader
-    redis_savepoint = {"type": "bid", "orderid" : order_id, "sell_volume" : sell_volume, "sell_price": sell_price, "currrency_pair": currency }
-    myorder.insertOrdertoRedis(redisUser + 'bidorders', redis_savepoint)
 
 
     ####################################################
@@ -106,15 +103,15 @@ if __name__ == "__main__":
     ]
     '''
     time.sleep(2)
-    listorder = myorder.listOrder(currency, header)
+    listorder = myorder.listOpenOrder(currency, header)
     myorderids = []
     for orders in listorder:
         myorderids.append(orders['id'].encode('utf-8'))
     #print(myorder)
 
-    if bidorder['status'] == 'success' and str(bid_orderid) not in myorderids:
+    if bidorder['status'] == 'success' and str(order_id) not in myorderids:
         print('Order is complete')
-    elif bidorder['status'] == 'success' and str(bid_orderid)  in myorderids:
+    elif bidorder['status'] == 'success' and str(order_id)  in myorderids:
         print('Order is Open')
     else:
         print('Check Order')
@@ -134,8 +131,9 @@ if __name__ == "__main__":
     {"orderId":"1002","status":"success"}
     ]
     '''
-    for i in range(len(listorder)):
-        mycancel = {"currency_pair": currency, "id": bid_orderid ,"nonce":myorder.getNonce()}
+    for i in listorder:
+        mycancel = {"currency_pair": currency, "id": i['id'] ,"nonce":myorder.getNonce()}
         cancel = myorder.cancelOrder(mycancel,header)
         for i in range(len(cancel)):
             print("{:15s} | Time:{} currency:{} id# {} status: {}".format('Cancel Order', myorder.getStrTime(), cancel[i]['currencyPair'],str(cancel[i]['orderId']) ,cancel[i]['status']))
+

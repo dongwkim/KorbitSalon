@@ -106,6 +106,7 @@ if __name__ == "__main__":
         myorder.trading = eval(recall_savepoint['trading'])
         myorder.bidding = eval(recall_savepoint['bidding'])
         myorder.sell_price = int(recall_savepoint['sell_price'])
+        myorder.buy_price = int(recall_savepoint['buy_price'])
         myorder.sell_volume = float(recall_savepoint['sell_volume'])
         myorder.algorithm = str(recall_savepoint['algorithm'])
         myorder.currency_pair = str(recall_savepoint['currency_pair'])
@@ -215,7 +216,7 @@ if __name__ == "__main__":
 	            .format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,lat,total_bidding,int(curr_balance)))
             # Create HTML for realtime view
             if showhtml == True:
-                myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_10min_price_delta, tx_hr_price_delta,myorder.buy_price, myorder.algorithm, total_bidding, int(curr_balance) , lat)
+                myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_10min_price_delta, tx_hr_price_delta,myorder.buy_price, myorder.sell_price, myorder.algorithm, total_bidding, int(curr_balance) , lat)
 
             ######################################
             ##  Set Algorithm
@@ -227,38 +228,38 @@ if __name__ == "__main__":
             ######################################
 
             ## Big Slump Algorithm
-            if not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 5, 1.3, -9999):
+            if not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 6.5, 1.5, -9999):
                 print("{:20s} |  Hit: Big Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.062
                 myorder.algorithm = 'Big Slump'
-                myorder.money = 400000
+                myorder.money = 800000
             ## Midium Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 4, 1.2 , -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 5.2, 1.4 , -9999 ):
                 print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.042
                 myorder.algorithm = 'Midium Slump'
-                myorder.money = 400000
+                myorder.money = 700000
             ## Little Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 3, 1.1 , -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 4.0, 1.4, -9999 ):
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.032
+                myorder.benefit = 0.030
                 myorder.algorithm = 'Little Slump'
-                myorder.money = 400000
+                myorder.money = 600000
             ## Baby Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.1, 1.5, 5.0 , -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.1, 1.5, 4.0 , -9999 ):
                 print("{:20s} |  Hit: Baby Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = False
-                myorder.benefit = 0.015
+                myorder.benefit = 0.022
                 myorder.algorithm = 'Baby Slump'
-                myorder.money = 100000
+                myorder.money = 300000
             ## UpDown Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 4.0, -4.0 , 100 ):
+            elif not testing and not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 4.0, -3.0 , 100 ):
                 print("{:20s} |  Hit: UpDown Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = False
-                myorder.benefit = 0.022
+                myorder.benefit = 0.012
                 myorder.algorithm = 'UpDown Slump'
                 myorder.money = 200000
             ## Rise Slump Algorithm
@@ -314,17 +315,17 @@ if __name__ == "__main__":
                     listorders = myorder.listOrders(currency,header)
                     for orders in listorders:
                         if orders['side'] == 'bid' and orders['status'] == 'filled' and str(orders['id']) == myorder.order_id:
-                            sell_volume = float(orders['filled_amount']) - float(orders['fee'])
+                            myorder.sell_volume = float(orders['filled_amount']) - float(orders['fee'])
                     balance = myorder.chkUserBalance('krw',header)
                     coin_balance = myorder.chkUserBalance(coin,header)
                     myorder.bidding = False
                     myorder.trading = True
-                    order_savepoint = {"type": "bid", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money }
+                    order_savepoint = {"type": "bid", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price": myorder.buy_price }
                     myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
                     print("{:20s} |  Bid Order# {} is completed.".format(myorder.getStrTime(time.time()*1000),myorder.order_id))
                     #Email Notification
-                    emailBody = sne.makeEmailBody("{} BUY AT {} won".format(currency, sell_price))
-                    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
+                    #emailBody = sne.makeEmailBody("{} BUY AT {} won, algo: {}".format(currency, myorder.buy_price, myorder.algorithm)
+                   # sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
                 # if open order is exist, cancel all bidding order
                 elif order_status == 'success' and myorder.order_id in myorderids:
                     # if failed to buy order , cancel pending order
@@ -341,7 +342,7 @@ if __name__ == "__main__":
                         myorder.bidding = False
                         myorder.buy_price = myorder.sell_price = myorder.buy_volume = myorder.sell_volume = 0
                         algorithm = ''
-                        order_savepoint = {"type": "reset", "orderid" :'', "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money }
+                        order_savepoint = {"type": "reset", "orderid" :'', "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price }
                         myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
                         print("{:20s} |  Bid Order# {} is Canceled.".format(myorder.getStrTime(time.time()*1000), myorder.order_id))
                     else:
@@ -362,7 +363,7 @@ if __name__ == "__main__":
                             print("WARNING !! : Bid order is not in order history, Call to Korbit Support. continue trading...")
                             myorder.trading = False
                             myorder.bidding = False
-                            order_savepoint = {"type": "bid", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money }
+                            order_savepoint = {"type": "bid", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money,"buy_price": myorder.buy_price }
                             myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
             elif testing and myorder.bidding:
                 myorder.buy_price = ask
@@ -372,7 +373,7 @@ if __name__ == "__main__":
                 myorder.sell_volume = 100
                 myorder.trading = True
                 myorder.bidding = False
-                order_savepoint = {"type": "bid", "orderid" : '12345', "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money }
+                order_savepoint = {"type": "bid", "orderid" : '12345', "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money,"buy_price":myorder.buy_price }
                 myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
                 print("{:20s} | bid Order is completed".format(myorder.getStrTime(time.time()*1000)))
                 time.sleep(2)
@@ -405,23 +406,23 @@ if __name__ == "__main__":
                 if askorder['status'] == 'success' and myorder.order_id not in myorderids:
                     myorder.trading = False
                     myorder.bidding = False
-                    sell_time = time.time()
-                    buy_sell_gap = sell_time - buy_time
+                    #sell_time = time.time()
+                    #buy_sell_gap = sell_time - buy_time
                     # needs to put bidding count to redis
                     total_bidding += 1
                     # check balance
                     coin_balance = myorder.chkUserBalance(coin,header)
                     balance = myorder.chkUserBalance('krw',header)
                     # Save state to Redis
-                    order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "hell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money }
+                    order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "hell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price }
                     myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
 
                     # initialize trading price
-                    buy_price = sell_price = buy_volume = sell_volume = 0
+                    myorder.buy_price = myorder.sell_price = myorder.buy_volume = myorder.sell_volume = 0
                     algorithm = ''
 
                     # Email Send
-                    emailBody = sne.makeEmailBody("{} SOLD AT {} won".format(currency, sell_price))
+                    emailBody = sne.makeEmailBody("{} SOLD AT {} won".format(currency, myorder.sell_price))
                     sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
                 # if failed to sell order , cancel all ask orders
                 elif askorder['status'] == 'success' and myorder.order_id in myorderids:
@@ -442,7 +443,7 @@ if __name__ == "__main__":
 
             elif testing and myorder.trading and last >= myorder.sell_price and bid >= myorder.sell_price:
                 myorder.trading = False
-                order_savepoint = {"type": "ask", "orderid" :'54321' , "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm": myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding }
+                order_savepoint = {"type": "ask", "orderid" :'54321' , "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm": myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money":myorder.money, "buy_price": myorder.buy_price }
                 myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
                 print("{:20s} | ask Order is completed".format(myorder.getStrTime(time.time()*1000)))
 

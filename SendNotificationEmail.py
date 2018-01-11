@@ -19,8 +19,8 @@ class SendNotificationEmail:
         msg["Subject"] = pSubject
         
         #print(msg)
-        #myPipe = Popen(["/usr/sbin/sendmail", "-t", "-oi"], stdin=PIPE)
-        #myPipe.communicate(msg.as_string().encode())
+        myPipe = Popen(["/usr/sbin/sendmail", "-t", "-oi"], stdin=PIPE)
+        myPipe.communicate(msg.as_string().encode())
     
     def makeEmailBody(self, pBody):
         myCurrentTime = time.strftime("%H:%M:%S")

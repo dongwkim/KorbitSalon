@@ -14,8 +14,8 @@ if __name__ == "__main__":
     ## Linux
     else:
         secFilePath='/usb/s1/key/korbit_key.csv'
-        redisHost = 'localhost'
-        redisPort = 6379
+        redisPort = 16379
+        redisHost = '39.115.53.33'
         showhtml = True
     redisUser = 'dongwkim'
 
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     '''
     #bid_price = 1000
     #bid_volume = 10
-    mybid = {"currency_pair" : currency, "type":"limit", "price": 3850, "coin_amount": 100, "nonce": myorder.getNonce()}
-    askorder = myorder.askOrder(mybid, header)
+    mybid = {"currency_pair" : currency, "type":"limit", "price": 2401, "coin_amount": 10, "nonce": myorder.getNonce()}
+    #askorder = myorder.askOrder(mybid, header)
     # mybid = {"currency_pair" : currency, "type":"limit", "price": 2200, "coin_amount": 100, "nonce": myorder.getNonce()}
-    # bidorder = myorder.bidOrder(mybid, header)
+    bidorder = myorder.bidOrder(mybid, header)
