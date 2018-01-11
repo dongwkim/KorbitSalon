@@ -37,5 +37,5 @@ if __name__ == "__main__":
     emailSubject = "Notification from CRYPTOSALON"
 
     sne = SendNotificationEmail()
-    emailBody = sne.makeEmailBody('BUY XRP 13')
+    emailBody = sne.makeEmailBody('SendNotificationEmail Test Body')
     sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)

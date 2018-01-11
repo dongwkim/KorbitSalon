@@ -164,29 +164,29 @@ if __name__ == "__main__":
                 bidding = True
                 #benefit = 0.07
                 benefit = 0.05
-                money = 100000
+                money = 500000
             ## Midium Slump Algorithm
             elif not testing and not trading and myalgo.basic(95) and  myalgo.slump(10, 0.4, 4, 1.5 , -9999 ):
                 print("Hit : Midium Slump")
                 bidding = True
                 #benefit = 0.04
                 benefit = 0.03
-                money = 100000
+                money = 500000
             ## Little Slump Algorithm
             elif not testing and not trading and myalgo.basic(95) and myalgo.slump(10, 0.3, 3, 1.3 , -9999 ):
                 print("Hit : Little Slump")
                 bidding = True
                 #benefit = 0.025
                 benefit = 0.02
-                money = 100000
+                money = 500000
             ## Baby Slump Algorithm
             elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.1, 2, 1 , -9999 ):
                 print("Hit : Baby Slump")
                 bidding = False
                 benefit = 0.012
-                money = 70000
+                money = 500000
             ## UpDown Slump Algorithm
-            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 1.6, -2.0 , 0 ):
+            elif not testing and not trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 3, -2.0 , 0 ):
                 print("Hit : UpDown Slump")
                 bidding = False
                 benefit = 0.012
