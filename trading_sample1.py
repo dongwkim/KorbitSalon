@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from KorbitBase import *
 from platform import system
 import XRPManagerSimul as xrpmgrsimul
@@ -61,9 +62,14 @@ if __name__ == "__main__":
     "currency_pair":"btc_krw"
     }
     '''
-    #bid_price = 1000
-    #bid_volume = 10
-    mybid = {"currency_pair" : currency, "type":"limit", "price": 2401, "coin_amount": 10, "nonce": myorder.getNonce()}
+    bid_price = 2850
+    bid_volume = 0
+    mybid = {"currency_pair" : currency, "type":"limit", "price": bid_price, "coin_amount": bid_volume, "nonce": myorder.getNonce()}
+    #mybid = {"currency_pair" : currency, "type":"limit", "price": 2900, "coin_amount": 39.932, "nonce": myorder.getNonce()}
     #askorder = myorder.askOrder(mybid, header)
-    # mybid = {"currency_pair" : currency, "type":"limit", "price": 2200, "coin_amount": 100, "nonce": myorder.getNonce()}
-    bidorder = myorder.bidOrder(mybid, header)
+    for i in range(1):
+        try:
+            bidorder = myorder.bidOrder(mybid, header)
+        except: 
+            print("pass {}".format(i))
+            pass

@@ -20,9 +20,9 @@ URL = 'https://api.korbit.co.kr/v1'
 class KorbitBase:
     def __init__(self):
         self.mySession = requests.Session()
-        retry = Retry( total=6, read=3, connect=3, backoff_factor = 0.3, status_forcelist = (400,429,500,503,504))
-        adapter = HTTPAdapter(max_retries=retry, pool_connections = 2, pool_maxsize = 2)
-        self.mySession.mount('https://', adapter)
+        self.retry = Retry( total=6, read=3, connect=3, backoff_factor = 0.3, status_forcelist = [400,429,500,503,504])
+        self.adapter = HTTPAdapter(max_retries=self.retry, pool_connections = 2, pool_maxsize = 2)
+        self.mySession.mount('https://', self.adapter)
         self.urlPrefix = 'https://api.korbit.co.kr/v1'
         self.type =''
         self.order_id =''

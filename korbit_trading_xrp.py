@@ -228,35 +228,35 @@ if __name__ == "__main__":
             ######################################
 
             ## Big Slump Algorithm
-            if not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 6.5, 1.5, -9999):
+            if not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 10, 1.5, -9999):
                 print("{:20s} |  Hit: Big Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.062
                 myorder.algorithm = 'Big Slump'
                 myorder.money = 800000
             ## Midium Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 5.2, 1.4 , -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 5.0, 1.5 , -9999 ):
                 print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.042
                 myorder.algorithm = 'Midium Slump'
                 myorder.money = 700000
             ## Little Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 4.0, 1.4, -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 3.0, 1.3, -9999 ):
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.030
+                myorder.benefit = 0.032
                 myorder.algorithm = 'Little Slump'
                 myorder.money = 600000
             ## Baby Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.1, 1.5, 4.0 , -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 2.5, 4.0 , -9999 ):
                 print("{:20s} |  Hit: Baby Slump".format(myorder.getStrTime(time.time()*1000)))
-                myorder.bidding = False
-                myorder.benefit = 0.022
+                myorder.bidding = True
+                myorder.benefit = 0.020
                 myorder.algorithm = 'Baby Slump'
                 myorder.money = 300000
             ## UpDown Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 4.0, -3.0 , 100 ):
+            elif not testing and not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 5.0, -4.0 , 200 ):
                 print("{:20s} |  Hit: UpDown Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = False
                 myorder.benefit = 0.012
@@ -287,7 +287,14 @@ if __name__ == "__main__":
                 ### Buy Order
                 mybid = {"currency_pair" : currency, "type":"limit", "price": myorder.buy_price, "coin_amount": myorder.buy_volume, "nonce": myorder.getNonce()}
                 stime = time.time() * 1000
-                bidorder = myorder.bidOrder(mybid, header)
+                try:
+                    bidorder = myorder.bidOrder(mybid, header)
+                except:
+                    print("Order Failed, Pass...")
+                    myorder.buy_price = 0
+                    myorder.sell_price = 0
+                    myorder.buy_volume = 0
+                    pass
                 myorder.order_id = str(bidorder['orderId'])
                 order_status = str(bidorder['status'])
                 elapsed = int(time.time() * 1000 - stime)
@@ -324,8 +331,8 @@ if __name__ == "__main__":
                     myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
                     print("{:20s} |  Bid Order# {} is completed.".format(myorder.getStrTime(time.time()*1000),myorder.order_id))
                     #Email Notification
-                    #emailBody = sne.makeEmailBody("{} BUY AT {} won, algo: {}".format(currency, myorder.buy_price, myorder.algorithm)
-                   # sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
+                    emailBody = sne.makeEmailBody("{} BUY AT {} won, algo: {}".format(currency, myorder.buy_price, myorder.algorithm))
+                    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
                 # if open order is exist, cancel all bidding order
                 elif order_status == 'success' and myorder.order_id in myorderids:
                     # if failed to buy order , cancel pending order
@@ -387,7 +394,11 @@ if __name__ == "__main__":
                 myorder.sell_price = bid
                 myask = {"currency_pair" : currency, "type":"limit", "price": myorder.sell_price, "coin_amount": myorder.sell_volume, "nonce": myorder.getNonce()}
                 stime = time.time() * 1000
-                askorder = myorder.askOrder(myask, header)
+                try:
+                    askorder = myorder.askOrder(myask, header)
+                except:
+                    print("Ask Order Failed, Pass..")
+                    pass
                 myorder.order_id = str(askorder['orderId'])
                 order_status = str(askorder['status'])
                 elapsed = int(time.time() * 1000 - stime)
@@ -417,13 +428,14 @@ if __name__ == "__main__":
                     order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "hell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price }
                     myorder.saveTradingtoRedis('dongwkim-trader1',order_savepoint)
 
+                    # Email Send
+                    emailBody = sne.makeEmailBody("{} SOLD AT {} won".format(currency, myorder.sell_price))
+                    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
+
                     # initialize trading price
                     myorder.buy_price = myorder.sell_price = myorder.buy_volume = myorder.sell_volume = 0
                     algorithm = ''
 
-                    # Email Send
-                    emailBody = sne.makeEmailBody("{} SOLD AT {} won".format(currency, myorder.sell_price))
-                    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
                 # if failed to sell order , cancel all ask orders
                 elif askorder['status'] == 'success' and myorder.order_id in myorderids:
                     mycancel = {"currency_pair": currency, "id": myorder.order_id,"nonce":myorder.getNonce()}
