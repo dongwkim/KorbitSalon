@@ -63,7 +63,7 @@ if __name__ == "__main__":
     '''
     #bid_price = 1000
     #bid_volume = 10
-    mybid = {"currency_pair" : currency, "type":"limit", "price": 3850, "coin_amount": 100, "nonce": myorder.getNonce()}
-    askorder = myorder.askOrder(mybid, header)
-    # mybid = {"currency_pair" : currency, "type":"limit", "price": 2200, "coin_amount": 100, "nonce": myorder.getNonce()}
-    # bidorder = myorder.bidOrder(mybid, header)
+    #mybid = {"currency_pair" : currency, "type":"limit", "price": 2760, "coin_amount": 20, "nonce": myorder.getNonce()}
+    #askorder = myorder.askOrder(mybid, header)
+    mybid = {"currency_pair" : currency, "type":"limit", "price": 2760, "coin_amount": 20, "nonce": myorder.getNonce()}
+    bidorder = myorder.bidOrder(mybid, header)

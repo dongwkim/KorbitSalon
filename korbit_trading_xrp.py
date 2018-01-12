@@ -233,14 +233,14 @@ if __name__ == "__main__":
                 myorder.algorithm = 'Big Slump'
                 myorder.money = 300000
             ## Midium Slump Algorithm
-        elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 4, 1.2 , -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 4, 1.2 , -9999 ):
                 print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.042
                 myorder.algorithm = 'Midium Slump'
                 myorder.money = 300000
             ## Little Slump Algorithm
-        elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 3, 1.1 , -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 3, 1.1 , -9999 ):
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.032

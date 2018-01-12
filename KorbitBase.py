@@ -34,10 +34,10 @@ class KorbitBase:
         self.currency = ''
         self.money =''
 
-    def requests_retry_session(self,retries=3, backoff_factor=0.3, status_forcelist=(400,429,500), session=None):
-        session = session
+    def requests_retry_session(self,retries=3, backoff_factor=0.3, status_forcelist=(400,429,500)):
+        session = self.mySession
         retry = Retry( total=retries, read=retries, connect=retries, backoff_factor = backoff_factor, status_forcelist = status_forcelist)
-        adapter = HTTPAdapter(max_retries=retry)
+        adapter = HTTPAdapter(max_retries=retry, pool_connections= 2)
         session.mount('https://', adapter)
         return session
 
@@ -55,7 +55,7 @@ class KorbitBase:
 
     def doPost(self, pUrlPostFix, header='', **params):
         url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
-        restResult = self.requests_retry_session(session=self.mySession).post(url, params=params, headers=header)
+        restResult = self.requests_retry_session().post(url, params=params, headers=header)
 
         if restResult.status_code == 200:
             return json.loads(restResult.text)
@@ -69,7 +69,7 @@ class KorbitBase:
         params     : parameters for api query '''
 
         url = '{}/{}'.format(self.urlPrefix, pUrlPostFix)
-        restResult = self.requests_retry_session(session=self.mySession).get(url, params=params,headers=header,timeout=5)
+        restResult = self.requests_retry_session().get(url, params=params,headers=header,timeout=5)
 
         if restResult.status_code == 200:
             return json.loads(restResult.text)
