@@ -1,5 +1,6 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 #from tradmgr.KorbitAPI import *
+##
 from KorbitBase import *
 import algo
 from XRPManagerSimul import XRPManagerSimul as xrpmgrsimul
@@ -18,7 +19,7 @@ if __name__ == "__main__":
 
     currency = 'xrp_krw'
     coin = 'xrp'
-    money = 50000
+    money = 70000
     trading = False
     marker_fee = 0.08
     taker_fee = 0.2
@@ -29,12 +30,11 @@ if __name__ == "__main__":
     #increment = 1
     debug_time = False
     debug_data = False
-    traders = 2
 
     xrpm = xrpmgrsimul('SIMUL')
     #xrpm = xrpmgrsimul('SIMUL', 'cryptosalon.iptime.org', 16379,'RlawjddmsrotoRl#12', 'xrp')
-    xrpm.initConnection('gazua.iptime.org', 16379, 'dongwkim', 'RlawjddmsrotoRl#12', 'xrp')
-    # myTimestamp = xrpm.redisCon.zrangebyscore('xrp_timestamp', '-inf', '+inf')
+    xrpm.initConnection('localhost', 16379, 'kiwonyoon', 'RlawjddmsrotoRl#12', 'xrp')
+    #myTimestamp = xrpm.redisCon.zrangebyscore('xrp_timestamp', '-inf', '+inf')
     myTimestamp = list()
     timestampBucker = list()
     tTimestamp = xrpm.redisCon.zrangebyscore('xrp', '-inf', '+inf')
@@ -44,23 +44,24 @@ if __name__ == "__main__":
 
     #myTimestamp = xrpm.redisCon.zrangebyscore('xrp_timestamp', '-inf', '+inf')
     myTimestamp = xrpm.redisCon.zrangebyscore('xrp', '-inf', '+inf')
-
+  
+    
     for tempStamp in myTimestamp:
         sTimestamp = tempStamp.split(":")
         iTimestamp = sTimestamp[5]
         timestampBucker.append(iTimestamp)
-
-    start_time = xrpm.getEpochTime('2018-01-06 10:00:00')
-    end_time = xrpm.getEpochTime('2018-01-06 10:10:00')
-    myTimestamp.sort()
+    
+    start_time = xrpm.getEpochTime('2018-01-10 00:00:00')
+    end_time = xrpm.getEpochTime('2018-01-10 23:59:01')
+    timestampBucker.sort()
     if debug_data:
         pass
         #print("Redis Last Timestamp is {}".format(kb.getStrTime(myTimestamp.sort()[1])))
     try:
-        start_pos = next( i for i,j in enumerate(myTimestamp) if int(j) >= start_time )
+        start_pos = next( i for i,j in enumerate(timestampBucker) if int(j) >= start_time )
         if debug_data:
             print("start pos:{}".format(start_pos))
-        end_pos = next( i for i,j in enumerate(myTimestamp) if int(j) >= end_time )
+        end_pos = next( i for i,j in enumerate(timestampBucker) if int(j) >= end_time )
         if debug_data:
             print("end pos:{}".format(end_pos))
     except StopIteration:
@@ -70,7 +71,7 @@ if __name__ == "__main__":
 
     loop_outsider_timer = time.time()
 
-    for ptime in myTimestamp[start_pos:end_pos]:
+    for ptime in timestampBucker[start_pos:end_pos]:
     #while start_time <= end_time:
 
         loop_insider_timer = time.time()
@@ -154,35 +155,35 @@ if __name__ == "__main__":
                 benefit = 0.025
                 ## Baby Slump Algorithm
             elif not bidding and not trading \
-              and myalgo.slump(7, 0.15, 0.5, 1.0 , -9999 ) :
+              and myalgo.slump(9, 0.15, 0.5, 1.0 , -9999 ) :
               #and myalgo.basic(97) :
-                print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
-                .format(xrpm.getStrTime(int(ptime)), "Baby Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
-                bidding = True
+                #print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
+                #.format(xrpm.getStrTime(int(ptime)), "Baby Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
+                bidding = False
                 benefit = 0.015
                 ## UpDown Slump Algorithm
             elif not bidding and not trading and myalgo.basic(98) and myalgo.slump(7, 0.2, 2, -2.0 , 0 ):
-                print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
-                .format(xrpm.getStrTime(int(ptime)), "UpDown Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
-                bidding = True
+                #print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
+                #.format(xrpm.getStrTime(int(ptime)), "UpDown Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
+                bidding = False
                 benefit = 0.012
             elif not bidding and not trading and myalgo.basic(95) and myalgo.rise(0.2, 1, 1, 1, 3 ):
                 print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
-                bidding = True
+                bidding = False
                 benefit = 0.01
             elif not bidding and not trading and myalgo.basic(95) and myalgo.zigzag( -0.07, 0.2, 0.5, 0.5 ):
                 print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
-                bidding = True
+                bidding = False
                 benefit = 0.01
             elif not bidding and not trading and myalgo.rise(0.2, 1, 1, 1, 3 ):
                 print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
-                bidding = True
+                bidding = False
                 benefit = 0.01
 
 
