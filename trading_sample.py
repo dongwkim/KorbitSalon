@@ -136,3 +136,4 @@ if __name__ == "__main__":
         cancel = myorder.cancelOrder(mycancel,header)
         for i in range(len(cancel)):
             print("{:15s} | Time:{} currency:{} id# {} status: {}".format('Cancel Order', myorder.getStrTime(), cancel[i]['currencyPair'],str(cancel[i]['orderId']) ,cancel[i]['status']))
+

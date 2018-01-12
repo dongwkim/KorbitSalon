@@ -50,8 +50,8 @@ if __name__ == "__main__":
         iTimestamp = sTimestamp[5]
         timestampBucker.append(iTimestamp)
 
-    start_time = xrpm.getEpochTime('2018-01-06 10:00:00')
-    end_time = xrpm.getEpochTime('2018-01-06 10:10:00')
+    start_time = xrpm.getEpochTime('2018-01-11 20:00:00')
+    end_time = xrpm.getEpochTime('2018-01-11 20:20:00')
     myTimestamp.sort()
     if debug_data:
         pass
@@ -154,7 +154,7 @@ if __name__ == "__main__":
                 benefit = 0.025
                 ## Baby Slump Algorithm
             elif not bidding and not trading \
-              and myalgo.slump(7, 0.15, 0.5, 1.0 , -9999 ) :
+              and myalgo.slump(7, 0.15, 2.5, 4.0 , -9999 ) :
               #and myalgo.basic(97) :
                 print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Baby Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
@@ -164,25 +164,25 @@ if __name__ == "__main__":
             elif not bidding and not trading and myalgo.basic(98) and myalgo.slump(7, 0.2, 2, -2.0 , 0 ):
                 print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "UpDown Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
-                bidding = True
+                bidding = False
                 benefit = 0.012
             elif not bidding and not trading and myalgo.basic(95) and myalgo.rise(0.2, 1, 1, 1, 3 ):
                 print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
-                bidding = True
+                bidding = False
                 benefit = 0.01
             elif not bidding and not trading and myalgo.basic(95) and myalgo.zigzag( -0.07, 0.2, 0.5, 0.5 ):
                 print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
-                bidding = True
+                bidding = False
                 benefit = 0.01
             elif not bidding and not trading and myalgo.rise(0.2, 1, 1, 1, 3 ):
                 print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
-                bidding = True
+                bidding = False
                 benefit = 0.01
 
 
