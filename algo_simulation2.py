@@ -49,7 +49,7 @@ for tempStamp in myTimestamp:
     timestampBucker.append(iTimestamp)
 
 start_time = xrpm.getEpochTime('2018-01-11 00:00:00')
-end_time = xrpm.getEpochTime('2018-01-12 01:00:00')
+end_time = xrpm.getEpochTime('2018-01-11 06:00:00')
 timestampBucker.sort()
 if debug_data:
     pass

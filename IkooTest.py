@@ -1,10 +1,10 @@
 import logging
-import threading
 import time
 from KorbitBase import *
 import algo
 from XRPManagerSimul import XRPManagerSimul as xrpmgrsimul
-import time
+import multiprocessing
+import os
 
 
 def getTxList(tx_list):
@@ -15,10 +15,10 @@ def getTxList(tx_list):
         seq += 1
         print("{:3d} | {:20s} | {:20s}".format(seq, tx[0],tx[1]))
 
-def run(start_time, end_time):
+def simulRun(start_time, end_time):
     currency = 'xrp_krw'
     coin = 'xrp'
-    money = 70000
+    money = 500000
     trading = False
     marker_fee = 0.08
     taker_fee = 0.2
@@ -147,17 +147,16 @@ def run(start_time, end_time):
             elif not bidding and myalgo.basic(95) and myalgo.slump(10, 0.3, 3, 1.3 , -9999 ):
                 print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Little Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
-                print("Hit : Little Slump")
+                #print("Hit : Little Slump")
                 bidding = True
                 benefit = 0.025
                 ## Baby Slump Algorithm
             elif not bidding and not trading \
-              and myalgo.slump(9, 0.15, 0.5, 1.0 , -9999 ) :
-              #and myalgo.basic(97) :
-                #print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
-                #.format(xrpm.getStrTime(int(ptime)), "Baby Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
-                bidding = False
-                benefit = 0.015
+              and myalgo.slump(9, 0.15, 1.0, 3.0 , -9999 ) and myalgo.basic(97) :
+                print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
+                .format(xrpm.getStrTime(int(ptime)), "Baby Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
+                bidding = True
+                benefit = 0.022
                 ## UpDown Slump Algorithm
             elif not bidding and not trading and myalgo.basic(98) and myalgo.slump(7, 0.2, 2, -2.0 , 0 ):
                 #print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
@@ -165,20 +164,17 @@ def run(start_time, end_time):
                 bidding = False
                 benefit = 0.012
             elif not bidding and not trading and myalgo.basic(95) and myalgo.rise(0.2, 1, 1, 1, 3 ):
-                print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
-                .format(xrpm.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
+                #print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}".format(xrpm.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
                 bidding = False
                 benefit = 0.01
             elif not bidding and not trading and myalgo.basic(95) and myalgo.zigzag( -0.07, 0.2, 0.5, 0.5 ):
-                print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
-                .format(xrpm.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
+                #print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}".format(xrpm.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
                 bidding = False
                 benefit = 0.01
             elif not bidding and not trading and myalgo.rise(0.2, 1, 1, 1, 3 ):
-                print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
-                .format(xrpm.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
+                #print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}".format(xrpm.getStrTime(int(ptime)), "Rise", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 #elif not testing and not trading and last < high * limit and   myalgo.rise(0.2, 1, 1, 1.0, 3 ):
                 bidding = False
                 benefit = 0.01
@@ -219,15 +215,24 @@ def run(start_time, end_time):
     elif not trading:
         print("Simulation Finished! You were bidding {} times. Earn {} won".format(bidding_count, cummulative_earn_money))
         getTxList(tx_time_list)
+        
 
-start_time = xrpm.getEpochTime('2018-01-11 00:00:00')
-end_time = xrpm.getEpochTime('2018-01-11 12:00:00')
+procs = []        
+simulProcessCount = 6
+myProcs = []
+kb = KorbitBase()
+start_time = kb.getEpochTime('2018-01-13 00:00:00')
+end_time = kb.getEpochTime('2018-01-14 00:00:00')
+time_gap = end_time - start_time
+gap_slice = time_gap / simulProcessCount
+startTimeList = [None]*simulProcessCount
+endTimeList = [None]*simulProcessCount
 
-t1 = threading.Thread(name='simul1', target=run, args=(start_time,end_time))
-start_time = xrpm.getEpochTime('2018-01-11 12:00:00')
-end_time = xrpm.getEpochTime('2018-01-12 01:00:00')
+i = 0
+for i in range(simulProcessCount):
+    startTimeList[i] = start_time + (gap_slice * i)
+    endTimeList[i] = start_time + (gap_slice * (i+1))
+    myProcs = multiprocessing.Process(target=simulRun, args=(startTimeList[i], endTimeList[i]))
+    procs.append(myProcs)
+    myProcs.start()
 
-t2 = threading.Thread(name='simul2', target=run, args=(start_time,end_time))
-
-t1.start()
-t2.start()
