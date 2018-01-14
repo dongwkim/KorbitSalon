@@ -220,12 +220,13 @@ def run(start_time, end_time):
         print("Simulation Finished! You were bidding {} times. Earn {} won".format(bidding_count, cummulative_earn_money))
         getTxList(tx_time_list)
 
-start_time = xrpm.getEpochTime('2018-01-11 00:00:00')
-end_time = xrpm.getEpochTime('2018-01-11 12:00:00')
+aaa = xrpmgrsimul('SIMUL')
+start_time = aaa.getEpochTime('2018-01-11 00:00:00')
+end_time = aaa.getEpochTime('2018-01-11 12:00:00')
 
 t1 = threading.Thread(name='simul1', target=run, args=(start_time,end_time))
-start_time = xrpm.getEpochTime('2018-01-11 12:00:00')
-end_time = xrpm.getEpochTime('2018-01-12 01:00:00')
+start_time = aaa.getEpochTime('2018-01-11 12:00:00')
+end_time = aaa.getEpochTime('2018-01-12 01:00:00')
 
 t2 = threading.Thread(name='simul2', target=run, args=(start_time,end_time))
 
