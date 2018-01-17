@@ -132,24 +132,24 @@ def run(start_time, end_time):
             myalgo = algo.algo(tx_1min_stat, tx_10min_stat, tx_hr_stat, ticker)
     
             # Put your Algorithm here
-            if not bidding and not trading and myalgo.basic(95) and  myalgo.slump(15, 0.5, 5, 2.0, -9999):
+            if not bidding and not trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 6.5, 1.5, -9999):
                 print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Big Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 bidding = True
                 benefit = 0.07
                 ## Midium Slump Algorithm
-            elif not bidding and not trading and myalgo.basic(95) and  myalgo.slump(10, 0.4, 4, 1.5 , -9999 ):
+            elif not bidding and not trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 5.2, 1.4 , -9999 ):
                 print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Midium Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 bidding = True
                 benefit = 0.04
                 ## Little Slump Algorithm
-            elif not bidding and myalgo.basic(95) and myalgo.slump(10, 0.3, 3, 1.3 , -9999 ):
+            elif not bidding and myalgo.basic(95) and myalgo.slump(7, 0.3, 4.0, 1.4, -9999 ):
                 print("{} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Little Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 print("Hit : Little Slump")
                 bidding = True
-                benefit = 0.025
+                benefit = 0.03
                 ## Baby Slump Algorithm
             elif not bidding and not trading \
               and myalgo.slump(9, 0.15, 0.5, 1.0 , -9999 ) :

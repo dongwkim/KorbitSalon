@@ -33,9 +33,9 @@ class SendNotificationEmail:
         
 if __name__ == "__main__":
     fromEmail = "notification@cryptosalon.org"
-    toEmail = "tairu.kim@gmail.com"
+    toEmail = "korbitnotification@gmail.com"
     emailSubject = "Notification from CRYPTOSALON"
 
     sne = SendNotificationEmail()
-    emailBody = sne.makeEmailBody('BUY XRP 12')
+    emailBody = sne.makeEmailBody('Test Email Sending')
     sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)

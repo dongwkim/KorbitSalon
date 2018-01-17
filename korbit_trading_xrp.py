@@ -34,8 +34,8 @@ if __name__ == "__main__":
     total_bidding = 0
 
     # Set Email notification
-    fromEmail = "CRYPTOSALON@cryptosalon.org"
-    toEmail = "ikooyoon@gmail.com"
+    fromEmail = "notification@cryptosalon.org"
+    toEmail = "korbitnotification@gmail.com"
     emailSubject = "Notification from CRYPTOSALON"
     
     #Switch Env based on Platform
@@ -228,28 +228,36 @@ if __name__ == "__main__":
             ######################################
 
             ## Big Slump Algorithm
-            if not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 6.5, 1.5, -9999):
+            if not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 15.0, 1.5, -9999):
+            #if not testing and not trading and myalgo.basic(95) and  myalgo.slump(15, 0.5, 5, 2.0, -9999):
                 print("{:20s} |  Hit: Big Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.062
+                #myorder.benefit = 0.052
+                myorder.benefit = 0.05
                 myorder.algorithm = 'Big Slump'
                 myorder.money = 500000
             ## Midium Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 5.2, 1.4 , -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 10.0, 1.4 , -9999 ):
+            #elif not testing and not trading and myalgo.basic(95) and  myalgo.slump(10, 0.4, 4, 1.5 , -9999 ):
+
                 print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.042
+                #myorder.benefit = 0.042
+                myorder.benefit = 0.035
                 myorder.algorithm = 'Midium Slump'
                 myorder.money = 500000
             ## Little Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 4.0, 1.4, -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 7.0, 1.4, -9999 ):
+            #elif not testing and not trading and myalgo.basic(95) and myalgo.slump(10, 0.3, 3, 1.3 , -9999 ):
+                
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.030
+                #myorder.benefit = 0.030
+                myorder.benefit = 0.022
                 myorder.algorithm = 'Little Slump'
                 myorder.money = 500000
             ## Baby Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.1, 1.5, 4.0 , -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 2.5, 4.0 , -9999 ):
                 print("{:20s} |  Hit: Baby Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = False
                 myorder.benefit = 0.022
@@ -316,6 +324,8 @@ if __name__ == "__main__":
                     for orders in listorders:
                         if orders['side'] == 'bid' and orders['status'] == 'filled' and str(orders['id']) == myorder.order_id:
                             myorder.sell_volume = float(orders['filled_amount']) - float(orders['fee'])
+                            print("{:20s} |  CHECK SELL_VOLUME# : {}  is completed.".format(myorder.getStrTime(time.time()*1000),myorder.sell_volume))
+                            
                     balance = myorder.chkUserBalance('krw',header)
                     coin_balance = myorder.chkUserBalance(coin,header)
                     myorder.bidding = False
@@ -324,8 +334,8 @@ if __name__ == "__main__":
                     myorder.saveTradingtoRedis('kiwonyoon-trader1',order_savepoint)
                     print("{:20s} |  Bid Order# {} is completed.".format(myorder.getStrTime(time.time()*1000),myorder.order_id))
                     #Email Notification
-                    #emailBody = sne.makeEmailBody("{} BUY AT {} won, algo: {}".format(currency, myorder.buy_price, myorder.algorithm)
-                   # sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
+                    emailBody = sne.makeEmailBody("{} BUY AT {} won, algo: {}".format(currency, myorder.buy_price, myorder.algorithm))
+                    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
                 # if open order is exist, cancel all bidding order
                 elif order_status == 'success' and myorder.order_id in myorderids:
                     # if failed to buy order , cancel pending order
