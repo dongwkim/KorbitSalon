@@ -8,6 +8,7 @@ import XRPManagerSimul as xrpmgrsimul
 from platform import system
 import algo
 import SendNotificationEmail
+from collections import OrderedDict
 
 if __name__ == "__main__":
 
@@ -20,14 +21,19 @@ if __name__ == "__main__":
     currency = 'xrp_krw'
     debug = False
     total_bidding = 0
+    redisUser = 'dongwkim'
 
     ## Algorithm Priority
     algo_priority = {"Big Slump":10, "Midium Slump":9, "Little Slump": 8, "Baby Slump":7}
     ## multi trader for water ride
-    traders = {'dongwkim-trader1':False, 'dongwkim-trader2':False,'dongwkim-trader3': False}
+    #traders = {'dongwkim-trader1':False, 'dongwkim-trader2':False,'dongwkim-trader3': False}
+    num_traders = 3
+    traders = OrderedDict()
+    for i in range(num_traders):
+        traders[redisUser+'-trader'+str(i+1)] = False
     c_trader = 0
     water_ride_enable = True
-    water_ride_ratio = 0.95
+    water_ride_ratio = 0.99
     myorderlist = []
 
 
@@ -208,8 +214,8 @@ if __name__ == "__main__":
 
             # print trading stats to text
             curr_balance = int(balance['available']) + float(coin_balance['available']) * last
-            print( "{:20s} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  " \
-	            .format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,lat,total_bidding,int(curr_balance)))
+            #print( "{:20s} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  ".format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,lat,total_bidding,int(curr_balance)))
+            print( "{:20s} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} | bidding ({}) | balance:{}  ".format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,total_bidding,int(curr_balance)))
             # Create HTML for realtime view
             if showhtml == True:
                 myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_10min_price_delta, tx_hr_price_delta,myorder.buy_price, myorder.sell_price, myorder.algorithm, total_bidding, int(curr_balance) , lat)
@@ -251,21 +257,21 @@ if __name__ == "__main__":
             elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 5.0, 1.5 , -9999 ):
                 print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.042
+                myorder.benefit = 0.012
                 myorder.algorithm = 'Midium Slump'
                 myorder.money = 100000
             ## Little Slump Algorithm
             elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 3.0, 1.3, -9999 ):
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.032
+                myorder.benefit = 0.012
                 myorder.algorithm = 'Little Slump'
                 myorder.money = 100000
             ## Baby Slump Algorithm
             elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 2.5, 4.0 , -9999 ):
                 print("{:20s} |  Hit: Baby Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.020
+                myorder.benefit = 0.010
                 myorder.algorithm = 'Baby Slump'
                 myorder.money = 100000
             ## UpDown Slump Algorithm
@@ -306,7 +312,7 @@ if __name__ == "__main__":
                     if not testing:
                         bidorder = myorder.bidOrder(mybid, header)
                     elif testing:
-                        bidorder = {"orderId": 12345, "status": "success" }
+                        bidorder = {"orderId": 12345, "status": "success", "currencyPair" : "xrp_krw" }
                 except:
                     print("Order Failed, Pass...")
                     myorder.buy_price = 0
@@ -434,7 +440,7 @@ if __name__ == "__main__":
                     if not testing:
                         askorder = myorder.askOrder(myask, header)
                     elif testing:
-                        askorder = {'orderId':'54321', 'status':'success'}
+                        askorder = {'orderId':'54321', 'status':'success','currencyPair': 'xrp_krw'}
                 except:
                     print("Ask Order Failed, Pass..")
                     pass
