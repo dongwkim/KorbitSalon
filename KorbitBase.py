@@ -24,6 +24,7 @@ class KorbitBase:
         self.adapter = HTTPAdapter(max_retries=self.retry, pool_connections = 2, pool_maxsize = 2)
         self.mySession.mount('https://', self.adapter)
         self.urlPrefix = 'https://api.korbit.co.kr/v1'
+    def initParam(self):
         self.type =''
         self.order_id =''
         self.sell_volume = 0
@@ -157,7 +158,7 @@ class KorbitBase:
         '''
         logger.info('insert order into redis')
         self.redisCon.hmset(trader, trading)
-        print("{:20s} | Insert Savepoint into Redis".format(self.getStrTime(time.time()*1000)))
+        #print("{:20s} | Insert Savepoint into Redis".format(self.getStrTime(time.time()*1000)))
 
     def readTradingfromRedis(self,trader):
         ''' Get Orders to redis
@@ -165,3 +166,42 @@ class KorbitBase:
         logger.info('read orders from redis')
         print("{:20s} | Get Last Order from Redis".format(self.getStrTime(time.time()*1000)))
         return self.redisCon.hgetall(trader)
+
+    def recall_savepoint(self, trader):
+
+        savepoint = dict(self.readTradingfromRedis(trader))
+        # if previous order type is bid , recall all variables
+        """
+        order_savepoint = {"type": "bid", "orderid" :'12345' , "sell_volume" : self.sell_volume, "sell_price": self.sell_price, "currency_pair": self.currency, "algorithm": self.algorithm, "trading": self.trading, "bidding": self.bidding }
+        """
+        if len(savepoint) == 0 or str(savepoint['type']) != 'bid':
+            self.initParam()
+        elif str(savepoint['type']) == 'bid':
+            self.order_id = str(savepoint['orderid'])
+            # Redis can not recognize boolen type , need to convert to python boolena
+            self.trading = eval(savepoint['trading'])
+            self.bidding = eval(savepoint['bidding'])
+            self.sell_price = int(savepoint['sell_price'])
+            self.buy_price = int(savepoint['buy_price'])
+            self.sell_volume = float(savepoint['sell_volume'])
+            self.algorithm = str(savepoint['algorithm'])
+            self.currency_pair = str(savepoint['currency_pair'])
+            self.money = int(savepoint['money'])
+            print("{:20s} | {} last trading type was {} | sell_price is {}".format(self.getStrTime(time.time()*1000),trader,savepoint['type'], self.sell_price))
+            print("{:20s} | trading: {} bidding: {} ".format(self.getStrTime(time.time()*1000),self.trading, self.bidding))
+    def setSellTrader(self,traders,myorderlist):
+            try:
+                if len(myorderlist) == 0:
+                    c_trader = 0
+                    traders[list(traders)[c_trader]] = True
+                else:
+                    sell_tx = min(myorderlist, key=lambda x:x['sell_price'])
+                    #self.sell_price = sell_tx['sell_price']
+                    #self.sell_volume = sell_tx['sell_volume']
+                    c_trader = list(traders).index(sell_tx['trader'])
+                    self.recall_savepoint(list(traders)[c_trader])
+                    traders[list(traders)[c_trader]] = True
+            except ValueError:
+                print("{:20s} | Nothing to Sell".format(self.getStrTime(time.time()*1000)))
+            print("{:20s} | Current Trader is {}".format(self.getStrTime(time.time()*1000), list(traders)[c_trader]))
+            return c_trader

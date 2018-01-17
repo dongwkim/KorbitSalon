@@ -95,12 +95,14 @@ class TokenManager:
         print(self.redisCon.hmget(self.myid, 'refresh_token')[0])
 
 if __name__ == "__main__":
-    redisUser = os.environ['redisUser']
-    #redisPassword = 'RlawjddmsrotoRl#12'
-    redisPassword = None
+    #redisUser = os.environ['redisUser']
+    redisPassword = 'RlawjddmsrotoRl#12'
+    redisUser = 'dongwkim'
 
     if system() is 'Windows':
         secFilePath='c:/Users/dongwkim/Keys/korbit_key.csv'
+        redisHost = 'ec2-52-79-91-211.ap-northeast-2.compute.amazonaws.com'
+        redisPort = 16379
         print("windows")
     ## Linux
     else:

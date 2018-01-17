@@ -62,8 +62,8 @@ if __name__ == "__main__":
     "currency_pair":"btc_krw"
     }
     '''
-    bid_price = 2850
-    bid_volume = 0
+    bid_price = 2870
+    bid_volume = 10
     mybid = {"currency_pair" : currency, "type":"limit", "price": bid_price, "coin_amount": bid_volume, "nonce": myorder.getNonce()}
     #mybid = {"currency_pair" : currency, "type":"limit", "price": 2900, "coin_amount": 39.932, "nonce": myorder.getNonce()}
     #askorder = myorder.askOrder(mybid, header)
