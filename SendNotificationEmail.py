@@ -24,11 +24,11 @@ class SendNotificationEmail:
     
     def makeEmailBody(self, pBody):
         myCurrentTime = time.strftime("%H:%M:%S")
-        emailBody = "*" * 80 + "\n"
+        emailBody = "*" * 10 + "\n"
         emailBody = emailBody + "* DEAL MADE => " + myCurrentTime + "\n"
-        emailBody = emailBody + "*" * 80 + "\n"
+        emailBody = emailBody + "*" * 10 + "\n"
         emailBody = emailBody + "* " + pBody + "\n"
-        emailBody = emailBody + "*" * 80 + "\n"
+        emailBody = emailBody + "*" * 10 + "\n"
         return emailBody
         
 if __name__ == "__main__":

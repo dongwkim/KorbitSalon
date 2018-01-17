@@ -19,7 +19,7 @@ if __name__ == "__main__":
     coin = 'xrp'
     limit = 0.95
     currency = 'xrp_krw'
-    debug = False
+    debug = True
     total_bidding = 0
     redisUser = 'dongwkim'
 
@@ -153,9 +153,9 @@ if __name__ == "__main__":
 
 
         if ticker['timestamp'] > prev_ticker['timestamp'] or ticker['bid'] != prev_ticker['bid'] or ticker['ask'] != prev_ticker['ask']:
-            print(myorderlist,traders)
 
             if debug:
+                print("{:20s} | DEBUG | {} {} ".format(myorder.getStrTime(time.time()*1000),myorderlist,traders))
                 s_order = time.time()
             # refresh access token by redis
             mytoken = myorder.getAccessToken()
@@ -214,8 +214,10 @@ if __name__ == "__main__":
 
             # print trading stats to text
             curr_balance = int(balance['available']) + float(coin_balance['available']) * last
-            #print( "{:20s} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} |  lat: {:4d} ms| bidding ({}) | balance:{}  ".format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,lat,total_bidding,int(curr_balance)))
-            print( "{:20s} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} | bidding ({}) | balance:{}  ".format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,total_bidding,int(curr_balance)))
+            if testing:
+                print( "{:20s} | TEST  | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} | bidding ({}) | balance:{}  ".format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,total_bidding,int(curr_balance)))
+            else:
+                print( "{:20s} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} | bidding ({}) | balance:{}  ".format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,total_bidding,int(curr_balance)))
             # Create HTML for realtime view
             if showhtml == True:
                 myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_10min_price_delta, tx_hr_price_delta,myorder.buy_price, myorder.sell_price, myorder.algorithm, total_bidding, int(curr_balance) , lat)
@@ -233,7 +235,8 @@ if __name__ == "__main__":
                     myorder.trading = False
                     myorder.bidding = False
                 except StopIteration:
-                    #print("{:20s} | No more avalilable traders".format(myorder.getStrTime(time.time()*1000)))
+                    if debug:
+                        print("{:20s} | DEBUG | No more avalilable traders".format(myorder.getStrTime(time.time()*1000)))
                     pass
 
 
@@ -257,21 +260,21 @@ if __name__ == "__main__":
             elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 5.0, 1.5 , -9999 ):
                 print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.012
+                myorder.benefit = 0.032
                 myorder.algorithm = 'Midium Slump'
                 myorder.money = 100000
             ## Little Slump Algorithm
             elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 3.0, 1.3, -9999 ):
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.012
+                myorder.benefit = 0.020
                 myorder.algorithm = 'Little Slump'
                 myorder.money = 100000
             ## Baby Slump Algorithm
             elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 2.5, 4.0 , -9999 ):
                 print("{:20s} |  Hit: Baby Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.010
+                myorder.benefit = 0.020
                 myorder.algorithm = 'Baby Slump'
                 myorder.money = 100000
             ## UpDown Slump Algorithm
@@ -529,6 +532,6 @@ if __name__ == "__main__":
             ## Debug Time lapse
             if debug:
                 e_order = time.time()
-                print("DEBUG | One Iteration Time is :{:3.1f} ms".format((e_order - s_order) * 1000 ))
+                print("{:20s} | DEBUG | One Iteration Time is :{:3.1f} ms".format(myorder.getStrTime(time.time()*1000),(e_order - s_order) * 1000 ))
 
         prev_ticker = ticker
