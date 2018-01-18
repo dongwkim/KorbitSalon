@@ -56,6 +56,9 @@ if __name__ == "__main__":
 
     # Email Setup
     sne = SendNotificationEmail.SendNotificationEmail()
+    emailBody = sne.makeEmailBody('Trading Agent Started')
+    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
+    
 
     # Korbit order class
     myorder = xrpmgrsimul.XRPManagerSimul('ACTUAL')
@@ -228,34 +231,34 @@ if __name__ == "__main__":
             ######################################
 
             ## Big Slump Algorithm
-            if not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 15.0, 1.5, -9999):
+            if not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 10.0, 1.6, -9999):
             #if not testing and not trading and myalgo.basic(95) and  myalgo.slump(15, 0.5, 5, 2.0, -9999):
                 print("{:20s} |  Hit: Big Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 #myorder.benefit = 0.052
-                myorder.benefit = 0.05
+                myorder.benefit = 0.04
                 myorder.algorithm = 'Big Slump'
-                myorder.money = 500000
+                myorder.money = 1000000
             ## Midium Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 10.0, 1.4 , -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 5.0, 1.5 , -9999 ):
             #elif not testing and not trading and myalgo.basic(95) and  myalgo.slump(10, 0.4, 4, 1.5 , -9999 ):
 
                 print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 #myorder.benefit = 0.042
-                myorder.benefit = 0.035
+                myorder.benefit = 0.03
                 myorder.algorithm = 'Midium Slump'
-                myorder.money = 500000
+                myorder.money = 1000000
             ## Little Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 7.0, 1.4, -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 3.0, 1.2, -9999 ):
             #elif not testing and not trading and myalgo.basic(95) and myalgo.slump(10, 0.3, 3, 1.3 , -9999 ):
                 
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 #myorder.benefit = 0.030
-                myorder.benefit = 0.022
+                myorder.benefit = 0.015
                 myorder.algorithm = 'Little Slump'
-                myorder.money = 500000
+                myorder.money = 1000000
             ## Baby Slump Algorithm
             elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 2.5, 4.0 , -9999 ):
                 print("{:20s} |  Hit: Baby Slump".format(myorder.getStrTime(time.time()*1000)))
