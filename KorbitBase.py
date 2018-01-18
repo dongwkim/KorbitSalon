@@ -13,14 +13,14 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
 
-logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='tracelog/korbitbase_logger.trc',level=logging.INFO)
+logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s %(message)s',filename='tracelog/korbitbase_logger.trc',level=logging.DEBUG)
 logger = logging.getLogger('korbitbase')
 URL = 'https://api.korbit.co.kr/v1'
 
 class KorbitBase:
     def __init__(self):
         self.mySession = requests.Session()
-        self.retry = Retry( total=6, read=3, connect=3, backoff_factor = 0.3, status_forcelist = [400,429,500,503,504])
+        self.retry = Retry( total=6, read=3, connect=3, backoff_factor = 0.3, status_forcelist = [400,401,429,500,503,504])
         self.adapter = HTTPAdapter(max_retries=self.retry, pool_connections = 2, pool_maxsize = 2)
         self.mySession.mount('https://', self.adapter)
         self.urlPrefix = 'https://api.korbit.co.kr/v1'

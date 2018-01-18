@@ -15,7 +15,7 @@ if __name__ == "__main__":
     ## Select Ticker source
     use_exchange_inquiry = True
     ### Vriables
-    testing = True
+    testing = False
     coin = 'xrp'
     limit = 0.95
     currency = 'xrp_krw'
@@ -33,13 +33,14 @@ if __name__ == "__main__":
         traders[redisUser+'-trader'+str(i+1)] = False
     c_trader = 0
     water_ride_enable = True
-    water_ride_ratio = 0.99
+    water_ride_ratio = 0.95
     myorderlist = []
 
 
     # Set Email notification
     fromEmail = 'notofication@cryptosalon.org'
-    toEmail = 'tairu.kim@gmail.com'
+    #toEmail = 'tairu.kim@gmail.com'
+    toEmail = 'korbitnotification@gmail.com'
     emailSubject = "ORDER Notification"
 
     #Switch Env based on Platform
@@ -253,21 +254,21 @@ if __name__ == "__main__":
             if not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 10, 1.5, -9999):
                 print("{:20s} |  Hit: Big Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.062
+                myorder.benefit = 0.032
                 myorder.algorithm = 'Big Slump'
-                myorder.money = 200000
+                myorder.money = 100000
             ## Midium Slump Algorithm
             elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 5.0, 1.5 , -9999 ):
                 print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.032
+                myorder.benefit = 0.022
                 myorder.algorithm = 'Midium Slump'
                 myorder.money = 100000
             ## Little Slump Algorithm
             elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 3.0, 1.3, -9999 ):
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.020
+                myorder.benefit = 0.012
                 myorder.algorithm = 'Little Slump'
                 myorder.money = 100000
             ## Baby Slump Algorithm
@@ -278,12 +279,12 @@ if __name__ == "__main__":
                 myorder.algorithm = 'Baby Slump'
                 myorder.money = 100000
             ## UpDown Slump Algorithm
-            elif not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.2, 5.0, -4.0 , 200 ):
+            elif not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.5, 5.0, -4.0 , 70 ):
                 print("{:20s} |  Hit: UpDown Slump".format(myorder.getStrTime(time.time()*1000)))
-                myorder.bidding = False
+                myorder.bidding = True
                 myorder.benefit = 0.012
                 myorder.algorithm = 'UpDown Slump'
-                myorder.money = 200000
+                myorder.money = 100000
             ## Rise Slump Algorithm
             elif not myorder.trading and last < high * limit and   myalgo.rise(0.1, 1, 0.8, 1.0, 3 ):
                 print("{:20s} |  Hit: Rise".format(myorder.getStrTime(time.time()*1000)))
@@ -314,18 +315,20 @@ if __name__ == "__main__":
                 try:
                     if not testing:
                         bidorder = myorder.bidOrder(mybid, header)
+                        myorder.order_id = str(bidorder['orderId'])
+                        order_status = str(bidorder['status'])
+                        elapsed = int(time.time() * 1000 - stime)
+                        print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),bidorder['currencyPair'],'Buy',str(myorder.order_id) ,str(order_status), elapsed))
                     elif testing:
                         bidorder = {"orderId": 12345, "status": "success", "currencyPair" : "xrp_krw" }
                 except:
                     print("Order Failed, Pass...")
+                    print(bidorder['status'])
                     myorder.buy_price = 0
                     myorder.sell_price = 0
                     myorder.buy_volume = 0
+                    myorder.order_status = 'failed'
                     pass
-                myorder.order_id = str(bidorder['orderId'])
-                order_status = str(bidorder['status'])
-                elapsed = int(time.time() * 1000 - stime)
-                print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),bidorder['currencyPair'],'Buy',str(myorder.order_id) ,str(order_status), elapsed))
 
 
                 ###################################
@@ -442,15 +445,17 @@ if __name__ == "__main__":
                 try:
                     if not testing:
                         askorder = myorder.askOrder(myask, header)
+                        myorder.order_id = str(askorder['orderId'])
+                        order_status = str(askorder['status'])
+                        elapsed = int(time.time() * 1000 - stime)
+                        print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),askorder['currencyPair'],'Sell',str(myorder.order_id) ,order_status, elapsed))
                     elif testing:
                         askorder = {'orderId':'54321', 'status':'success','currencyPair': 'xrp_krw'}
                 except:
+                    print(askorder['status'])
                     print("Ask Order Failed, Pass..")
+                    order_status = 'failed'
                     pass
-                myorder.order_id = str(askorder['orderId'])
-                order_status = str(askorder['status'])
-                elapsed = int(time.time() * 1000 - stime)
-                print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),askorder['currencyPair'],'Sell',str(myorder.order_id) ,order_status, elapsed))
 
                 # check list open orders
                 time.sleep(2)
@@ -509,7 +514,7 @@ if __name__ == "__main__":
                         print("{:20s} |  Ask Order# {} is canceled.".format(myorder.getStrTime(time.time()*1000),myorder.order_id))
                 else:
                     print("WARNING: Call to KorbitSalon Support : {} ".format(askorder['status']))
-                    myorder.trading = False
+                    myorder.trading = True
 
             #elif testing and myorder.trading and last >= myorder.sell_price :
             """
