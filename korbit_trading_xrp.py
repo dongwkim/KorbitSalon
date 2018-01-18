@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 ####################################################
-# 2018/1/10 savepoint to redis, use class variables
+# 2018/1/18 Multi orderable Traders
 ####################################################
 from KorbitBase import *
 import time
@@ -33,14 +33,14 @@ if __name__ == "__main__":
         traders[redisUser+'-trader'+str(i+1)] = False
     c_trader = 0
     water_ride_enable = True
-    water_ride_ratio = 0.95
+    water_ride_ratio = 0.93
     myorderlist = []
 
 
     # Set Email notification
     fromEmail = 'notofication@cryptosalon.org'
-    #toEmail = 'tairu.kim@gmail.com'
-    toEmail = 'korbitnotification@gmail.com'
+    toEmail = 'tairu.kim@gmail.com'
+    #toEmail = 'korbitnotification@gmail.com'
     emailSubject = "ORDER Notification"
 
     #Switch Env based on Platform
@@ -214,7 +214,7 @@ if __name__ == "__main__":
 
 
             # print trading stats to text
-            curr_balance = int(balance['available']) + float(coin_balance['available']) * last
+            curr_balance = int(balance['trade_in_use']) + int(balance['available']) + float(coin_balance['available']) * last + float(coin_balance['trade_in_use']) * last
             if testing:
                 print( "{:20s} | TEST  | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {}/{}/{} |  Delta: {:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} | bidding ({}) | balance:{}  ".format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,total_bidding,int(curr_balance)))
             else:
@@ -251,24 +251,24 @@ if __name__ == "__main__":
             ######################################
 
             ## Big Slump Algorithm
-            if not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 10, 1.5, -9999):
+            if not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 10, 1.7, -9999):
                 print("{:20s} |  Hit: Big Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.032
+                myorder.benefit = 0.042
                 myorder.algorithm = 'Big Slump'
                 myorder.money = 100000
             ## Midium Slump Algorithm
             elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 5.0, 1.5 , -9999 ):
                 print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.022
+                myorder.benefit = 0.032
                 myorder.algorithm = 'Midium Slump'
                 myorder.money = 100000
             ## Little Slump Algorithm
-            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 3.0, 1.3, -9999 ):
+            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 3.0, 1.2, -9999 ):
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.012
+                myorder.benefit = 0.022
                 myorder.algorithm = 'Little Slump'
                 myorder.money = 100000
             ## Baby Slump Algorithm
@@ -359,6 +359,8 @@ if __name__ == "__main__":
                     for orders in listorders:
                         if orders['side'] == 'bid' and orders['status'] == 'filled' and str(orders['id']) == myorder.order_id:
                             myorder.sell_volume = float(orders['filled_amount']) - float(orders['fee'])
+                            if myorder.sell_volume == 0:
+                                myorder.sell_volume = float(myorder.buy_volume) * 0.97
                     balance = myorder.chkUserBalance('krw',header)
                     coin_balance = myorder.chkUserBalance(coin,header)
                     myorder.bidding = False
@@ -371,11 +373,12 @@ if __name__ == "__main__":
                     ## Multi Trader
                     myorderlist.append({"trader": list(traders)[c_trader], "sell_price": myorder.sell_price, "sell_volume": myorder.sell_volume})
                     print("{:20s} | {} : Bid Order# {} is completed.".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader], myorder.order_id))
-                    ## Set Trader
-                    c_trader = myorder.setSellTrader(traders,myorderlist)
                     #Email Notification
                     emailBody = sne.makeEmailBody("{} BUY AT {} won, algo: {}".format(currency, myorder.buy_price, myorder.algorithm))
                     sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
+
+                    ## Set Trader
+                    c_trader = myorder.setSellTrader(traders,myorderlist)
                 # if open order is exist, cancel all bidding order
                 elif order_status == 'success' and myorder.order_id in myorderids:
                     # if failed to buy order , cancel pending order
@@ -391,7 +394,7 @@ if __name__ == "__main__":
                         myorder.trading = False
                         myorder.bidding = False
                         myorder.buy_price = myorder.sell_price = myorder.buy_volume = myorder.sell_volume = 0
-                        algorithm = ''
+                        myorder.algorithm = ''
                         order_savepoint = {"type": "reset", "orderid" :'', "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price }
                         myorder.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
                         print("{:20s} | {} : Bid Order# {} is Canceled.".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader], myorder.order_id))
@@ -497,7 +500,7 @@ if __name__ == "__main__":
 
                     # initialize trading price
                     myorder.buy_price = myorder.sell_price = myorder.buy_volume = myorder.sell_volume = 0
-                    algorithm = ''
+                    myorder.algorithm = ''
 
                 # if failed to sell order , cancel all ask orders
                 elif askorder['status'] == 'success' and myorder.order_id in myorderids:
