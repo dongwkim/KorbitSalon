@@ -34,6 +34,7 @@ class SendNotificationEmail:
 if __name__ == "__main__":
     fromEmail = "notification@cryptosalon.org"
     toEmail = "tairu.kim@gmail.com"
+    #toEmail = "korbitnotification@gmail.com"
     emailSubject = "Notification from CRYPTOSALON"
 
     sne = SendNotificationEmail()
