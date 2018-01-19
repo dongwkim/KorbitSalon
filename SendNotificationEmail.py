@@ -35,7 +35,7 @@ if __name__ == "__main__":
     fromEmail = "notification@cryptosalon.org"
     toEmail = "tairu.kim@gmail.com"
     #toEmail = "korbitnotification@gmail.com"
-    emailSubject = "Notification from CRYPTOSALON"
+    emailSubject = "Buy {} Coin at price {}".format(10,2500)
 
     sne = SendNotificationEmail()
     emailBody = sne.makeEmailBody('BUY XRP 12')
