@@ -175,7 +175,9 @@ class KorbitBase:
         """
         order_savepoint = {"type": "bid", "orderid" :'12345' , "sell_volume" : self.sell_volume, "sell_price": self.sell_price, "currency_pair": self.currency, "algorithm": self.algorithm, "trading": self.trading, "bidding": self.bidding }
         """
-        if len(savepoint) == 0 or str(savepoint['type']) != 'bid':
+        if len(savepoint) == 0:
+            self.initParam()
+        elif str(savepoint['type']) != 'bid':
             self.initParam()
             self.total_bidding = int(savepoint['deal_count'])
         elif str(savepoint['type']) == 'bid':

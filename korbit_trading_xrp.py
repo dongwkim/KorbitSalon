@@ -53,7 +53,8 @@ if __name__ == "__main__":
     ## Linux
     else:
         secFilePath='/usb/s1/key/korbit_key.csv'
-        redisHost = '39.115.53.33'
+        #redisHost = '39.115.53.33'
+        redisHost = 'localhost'
         redisPort = 16379
         showhtml = True
     redisUser = 'dongwkim'
@@ -265,7 +266,7 @@ if __name__ == "__main__":
                 myorder.benefit = 0.052
                 myorder.algorithm = 'Big Slump'
                 if c_trader == 0:
-                    myorder.money = 40000
+                    myorder.money = 50000
                 else: 
                     myorder.money = 40000
             ## Midium Slump Algorithm
@@ -275,7 +276,7 @@ if __name__ == "__main__":
                 myorder.benefit = 0.032
                 myorder.algorithm = 'Midium Slump'
                 if c_trader == 0:
-                    myorder.money = 40000
+                    myorder.money = 50000
                 else: 
                     myorder.money = 40000
                     myorder.benefit = 0.042
@@ -286,7 +287,7 @@ if __name__ == "__main__":
                 myorder.benefit = 0.022
                 myorder.algorithm = 'Little Slump'
                 if c_trader == 0:
-                    myorder.money = 40000
+                    myorder.money = 50000
                 else: 
                     myorder.money = 40000
                     myorder.benefit = 0.032
@@ -308,6 +309,7 @@ if __name__ == "__main__":
                 myorder.algorithm = 'UpDown Slump'
                 myorder.money = 40000
             ## Rise Slump Algorithm
+            """
             elif not myorder.trading and last < high * limit and   myalgo.rise(0.1, 1, 0.8, 1.0, 3 ):
                 print("{:20s} |  Hit: Rise".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = False
@@ -315,7 +317,6 @@ if __name__ == "__main__":
                 myorder.algorithm = 'Rise'
                 myorder.money = 100000
             ## Restartable Testing
-            """
             elif testing and not myorder.trading and last < 1500:
                 print("{:20s} | Hit Restartable Test".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True

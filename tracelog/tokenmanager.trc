@@ -76,3 +76,14 @@
 2018-01-16 15:48:10,923 INFO TokenManager Read key saved CSV file
 2018-01-16 15:48:49,152 INFO TokenManager Read key saved CSV file
 2018-01-16 15:48:51,207 INFO TokenManager insert token into redis
+2018-01-22 18:00:21,023 INFO TokenManager Read key saved CSV file
+2018-01-22 18:00:22,795 INFO TokenManager insert token into redis
+2018-01-22 18:01:10,045 INFO TokenManager Read key saved CSV file
+2018-01-22 18:01:10,666 INFO TokenManager Read key saved CSV file
+2018-01-22 18:01:12,467 INFO TokenManager insert token into redis
+2018-01-22 18:04:47,331 INFO TokenManager Read key saved CSV file
+2018-01-22 18:04:49,134 INFO TokenManager insert token into redis
+2018-01-22 18:04:59,075 INFO TokenManager Read key saved CSV file
+2018-01-22 18:05:00,866 INFO TokenManager insert token into redis
+2018-01-22 18:26:51,945 INFO TokenManager Read key saved CSV file
+2018-01-22 18:26:53,707 INFO TokenManager insert token into redis

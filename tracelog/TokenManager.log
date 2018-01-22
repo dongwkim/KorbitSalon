@@ -47,3 +47,81 @@
 2018-01-05 15:43:49 | Refresh Token from API Server
 2018-01-05 15:43:50 | Update Token on Redis
 2018-01-05 15:43:50 | Sleep 50min..
+Traceback (most recent call last):
+  File "./TokenManager.py", line 98, in <module>
+    redisUser = os.environ['redisUser']
+  File "/opt/python3/lib/python3.4/os.py", line 633, in __getitem__
+    raise KeyError(key) from None
+KeyError: 'redisUser'
+{'refresh_token': 'rKhcdElTBiJRVTaKykzwYoSpbj73u7SB9zK11kkfj3wImX3Cxd3di9cE6uD9x', 'access_token': 'xGeC5YC3iWrZQwtwyUC5FfwPsYoSGlTHzNFmZu7ENmwTTvmwsHhGbl2gkuvVX', 'expires_in': 1142, 'token_type': 'Bearer'}
+Traceback (most recent call last):
+  File "/opt/python3/lib/python3.4/site-packages/redis/connection.py", line 484, in connect
+    sock = self._connect()
+  File "/opt/python3/lib/python3.4/site-packages/redis/connection.py", line 541, in _connect
+    raise err
+  File "/opt/python3/lib/python3.4/site-packages/redis/connection.py", line 529, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/python3/lib/python3.4/site-packages/redis/client.py", line 667, in execute_command
+    connection.send_command(*args)
+  File "/opt/python3/lib/python3.4/site-packages/redis/connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+  File "/opt/python3/lib/python3.4/site-packages/redis/connection.py", line 585, in send_packed_command
+    self.connect()
+  File "/opt/python3/lib/python3.4/site-packages/redis/connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to localhost:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/python3/lib/python3.4/site-packages/redis/connection.py", line 484, in connect
+    sock = self._connect()
+  File "/opt/python3/lib/python3.4/site-packages/redis/connection.py", line 541, in _connect
+    raise err
+  File "/opt/python3/lib/python3.4/site-packages/redis/connection.py", line 529, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "./TokenManager.py", line 123, in <module>
+    mySession.insertTokenIntoRedis()
+  File "./TokenManager.py", line 56, in insertTokenIntoRedis
+    self.redisCon.hmset(self.myid, self.accessInfo)
+  File "/opt/python3/lib/python3.4/site-packages/redis/client.py", line 2011, in hmset
+    return self.execute_command('HMSET', name, *items)
+  File "/opt/python3/lib/python3.4/site-packages/redis/client.py", line 673, in execute_command
+    connection.send_command(*args)
+  File "/opt/python3/lib/python3.4/site-packages/redis/connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+  File "/opt/python3/lib/python3.4/site-packages/redis/connection.py", line 585, in send_packed_command
+    self.connect()
+  File "/opt/python3/lib/python3.4/site-packages/redis/connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to localhost:6379. Connection refused.
+{'access_token': 'xGeC5YC3iWrZQwtwyUC5FfwPsYoSGlTHzNFmZu7ENmwTTvmwsHhGbl2gkuvVX', 'refresh_token': 'rKhcdElTBiJRVTaKykzwYoSpbj73u7SB9zK11kkfj3wImX3Cxd3di9cE6uD9x', 'expires_in': 1092, 'token_type': 'Bearer'}
+2018-01-22 09:01:12 | Insert Token to Redis
+Traceback (most recent call last):
+  File "./TokenManager.py", line 98, in <module>
+    redisUser = os.environ['redisUser']
+  File "/opt/python3/lib/python3.4/os.py", line 633, in __getitem__
+    raise KeyError(key) from None
+KeyError: 'redisUser'
+{'token_type': 'Bearer', 'refresh_token': 'rKhcdElTBiJRVTaKykzwYoSpbj73u7SB9zK11kkfj3wImX3Cxd3di9cE6uD9x', 'access_token': 'xGeC5YC3iWrZQwtwyUC5FfwPsYoSGlTHzNFmZu7ENmwTTvmwsHhGbl2gkuvVX', 'expires_in': 876}
+2018-01-22 09:04:49 | Insert Token to Redis
+{'expires_in': 864, 'access_token': 'xGeC5YC3iWrZQwtwyUC5FfwPsYoSGlTHzNFmZu7ENmwTTvmwsHhGbl2gkuvVX', 'refresh_token': 'rKhcdElTBiJRVTaKykzwYoSpbj73u7SB9zK11kkfj3wImX3Cxd3di9cE6uD9x', 'token_type': 'Bearer'}
+2018-01-22 09:05:00 | Insert Token to Redis
+Traceback (most recent call last):
+  File "./TokenManager.py", line 98, in <module>
+    redisUser = os.environ['redisUser']
+  File "/opt/python3/lib/python3.4/os.py", line 633, in __getitem__
+    raise KeyError(key) from None
+KeyError: 'redisUser'
+{'access_token': '86Rm8A35WXXEpF0GxiV9L5c6gDLIfkq8t4NV3s3vaJrcs1xliFKCsSh8chbuI', 'token_type': 'Bearer', 'refresh_token': 'xz0zyWa3b877ky90z81lVeKgH9vMijNzbkT79C8RSG7vanuMl0AhPXCDvG4d9', 'expires_in': 3600}
+2018-01-22 09:26:53 | Insert Token to Redis
