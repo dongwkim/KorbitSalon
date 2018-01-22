@@ -177,7 +177,7 @@ class KorbitBase:
         """
         if len(savepoint) == 0 or str(savepoint['type']) != 'bid':
             self.initParam()
-            self.total_bidding = int(savepoint['total_bidding'])
+            self.total_bidding = int(savepoint['deal_count'])
         elif str(savepoint['type']) == 'bid':
             self.order_id = str(savepoint['orderid'])
             # Redis can not recognize boolen type , need to convert to python boolena
@@ -189,7 +189,7 @@ class KorbitBase:
             self.algorithm = str(savepoint['algorithm'])
             self.currency_pair = str(savepoint['currency_pair'])
             self.money = int(savepoint['money'])
-            self.total_bidding = int(savepoint['total_bidding'])
+            self.total_bidding = int(savepoint['deal_count'])
             print("{:20s} | {} last trading type was {} | sell_price is {}".format(self.getStrTime(time.time()*1000),trader,savepoint['type'], self.sell_price))
             print("{:20s} | trading: {} bidding: {} ".format(self.getStrTime(time.time()*1000),self.trading, self.bidding))
     def setSellTrader(self,traders,myorderlist):
