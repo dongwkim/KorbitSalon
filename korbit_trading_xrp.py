@@ -89,7 +89,7 @@ if __name__ == "__main__":
     listopenorder = myorder.listOpenOrder(currency,header)
     myorderids = []
     for orders in listopenorder:
-        myorderids.append(orders['id'].encode('utf-8'))
+        myorderids.append(orders['id'])
         print("{:20s} | open_orders | id:  {} type: {} ".format(coin, int(orders['id']), orders['type']))
 
     ##############################################
@@ -239,6 +239,8 @@ if __name__ == "__main__":
                 myorder.benefit = 0.04
                 myorder.algorithm = 'Big Slump'
                 myorder.money = 1000000
+                emailBody = sne.makeEmailBody("Big Slump Hit")
+                sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
             ## Midium Slump Algorithm
             elif not testing and not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.4, 5.0, 1.5 , -9999 ):
             #elif not testing and not trading and myalgo.basic(95) and  myalgo.slump(10, 0.4, 4, 1.5 , -9999 ):
@@ -249,8 +251,10 @@ if __name__ == "__main__":
                 myorder.benefit = 0.03
                 myorder.algorithm = 'Midium Slump'
                 myorder.money = 1000000
+                emailBody = sne.makeEmailBody("Midium Slump Hit")
+                sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
             ## Little Slump Algorithm
-            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 3.0, 1.2, -9999 ):
+            elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 4.0, 1.2, -9999 ):
             #elif not testing and not trading and myalgo.basic(95) and myalgo.slump(10, 0.3, 3, 1.3 , -9999 ):
                 
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
@@ -259,6 +263,8 @@ if __name__ == "__main__":
                 myorder.benefit = 0.015
                 myorder.algorithm = 'Little Slump'
                 myorder.money = 1000000
+                emailBody = sne.makeEmailBody("Little Slump Hit")
+                sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
             ## Baby Slump Algorithm
             elif not testing and not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.3, 2.5, 4.0 , -9999 ):
                 print("{:20s} |  Hit: Baby Slump".format(myorder.getStrTime(time.time()*1000)))
@@ -292,7 +298,7 @@ if __name__ == "__main__":
             ## Bid Order
             if not testing and myorder.bidding :
                 ## Set sell price
-                myorder.buy_price = ask
+                myorder.buy_price = ask+4
                 myorder.sell_price = ask + int(ask * myorder.benefit)
                 myorder.buy_volume = int(int(myorder.money) // ask)
                 ### Buy Order
@@ -327,7 +333,9 @@ if __name__ == "__main__":
                     for orders in listorders:
                         if orders['side'] == 'bid' and orders['status'] == 'filled' and str(orders['id']) == myorder.order_id:
                             myorder.sell_volume = float(orders['filled_amount']) - float(orders['fee'])
-                            print("{:20s} |  CHECK SELL_VOLUME# : {}  is completed.".format(myorder.getStrTime(time.time()*1000),myorder.sell_volume))
+                            if myorder.sell_volume == 0:
+                                myorder.sell_volume = float(myorder.buy_volume) * 0.97
+                                print("{:20s} |  CHECK SELL_VOLUME# : {}  is completed.".format(myorder.getStrTime(time.time()*1000),myorder.sell_volume))
                             
                     balance = myorder.chkUserBalance('krw',header)
                     coin_balance = myorder.chkUserBalance(coin,header)
@@ -412,7 +420,7 @@ if __name__ == "__main__":
                 ## list orderid from listorder
                 myorderids = []
                 for orders in listopenorder:
-                    myorderids.append(orders['id'].encode('utf-8'))
+                    myorderids.append(orders['id'])
                 print("Ask Order List {}".format(myorderids))
 
                 # if ask order id is not in open orders complete order

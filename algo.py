@@ -18,7 +18,7 @@ class algo:
         self.high = int(ticker['high'])
         self.low = int(ticker['low'])
         self.last = int(ticker['last'])
-        self.bid = int(ticker['last'])
+        self.bid = int(ticker['bid'])
         self.ask = int(ticker['ask'])
 
     def basic(self, limit):
