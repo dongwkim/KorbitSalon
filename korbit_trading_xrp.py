@@ -27,14 +27,14 @@ if __name__ == "__main__":
     algo_priority = {"Big Slump":10, "Midium Slump":9, "Little Slump": 8, "Baby Slump":7}
     ## multi trader for water ride
     #traders = {'dongwkim-trader1':False, 'dongwkim-trader2':False,'dongwkim-trader3': False}
-    num_traders = 3
+    num_traders = 5
     traders = OrderedDict()
     for i in range(num_traders):
         traders[redisUser+'-trader'+str(i+1)] = False
     c_trader = 0
     water_ride_enable = True
     pre_sell_price = 0
-    water_ride_ratio = 0.97
+    water_ride_ratio = 0.95
     myorderlist = []
 
 
@@ -229,6 +229,8 @@ if __name__ == "__main__":
             ######################################
             ##  Switch Traders
             ######################################
+
+            #Spawn trader if last is lower than prior buy_price * ratio
             if water_ride_enable and myorder.trading and myorder.buy_price * water_ride_ratio >= ask :
                 try:
                     pre_sell_price = myorder.sell_price
@@ -243,7 +245,8 @@ if __name__ == "__main__":
                     if debug:
                         print("{:20s} | DEBUG | No more avalilable traders".format(myorder.getStrTime(time.time()*1000)))
                     pass
-            elif water_ride_enable and c_trader != 0 and not myorder.trading and pre_sell_price <= bid :
+            #release spawned trader if last is greater than prior pre_sell_price * ratio
+            elif water_ride_enable and c_trader != 0 and not myorder.trading and pre_sell_price * 0.97 <= bid :
                     traders[list(traders)[c_trader]] = False
                     print("\033[91m{:20s} | Turn off Spawned Water Rider trader\033[0m".format(myorder.getStrTime(time.time()*1000)))
                     ## Set Trader
@@ -256,75 +259,60 @@ if __name__ == "__main__":
             ######################################
             myalgo = algo.algo(tx_1min_stat, tx_10min_stat, tx_hr_stat, ticker)
 
+            ######################################
             ## Buy Position                     #
             ######################################
 
             ## Big Slump Algorithm
-            if not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 7.0, 2.0, -99):
+            if not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 9.0, 2.0, -99):
                 print("{:20s} |  Hit: Big Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.052
+                myorder.benefit = 0.042
                 myorder.algorithm = 'Big Slump'
                 if c_trader == 0:
                     myorder.money = 50000
                 else: 
-                    myorder.money = 40000
+                    myorder.money = 50000
             ## Midium Slump Algorithm
-            elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.5, 5.0, 1.3 , -99 ):
+            elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.5, 6.5, 1.3 , -99 ):
                 print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.032
+                myorder.benefit = 0.022
                 myorder.algorithm = 'Midium Slump'
                 if c_trader == 0:
                     myorder.money = 50000
                 else: 
-                    myorder.money = 40000
-                    myorder.benefit = 0.042
+                    myorder.money = 50000
+                    myorder.benefit = 0.022
             ## Little Slump Algorithm
-            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.5, 3.0, 1.2, -99 ):
+            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.5, 4.5, 1.2, -99 ):
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.022
+                myorder.benefit = 0.012
                 myorder.algorithm = 'Little Slump'
                 if c_trader == 0:
                     myorder.money = 50000
                 else: 
-                    myorder.money = 40000
-                    myorder.benefit = 0.032
+                    myorder.money = 50000
+                    myorder.benefit = 0.012
             ## Baby Slump Algorithm
-            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.1, 2.0, 4.0 , -99 ):
+            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.1, 3.0, 4.0 , -99 ):
                 print("{:20s} |  Hit: Baby Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.032
+                myorder.benefit = 0.012
                 myorder.algorithm = 'Baby Slump'
                 if c_trader == 0:
-                    myorder.money = 40000
+                    myorder.money = 50000
                 else: 
                     myorder.bidding = True
             ## UpDown Slump Algorithm
-            elif not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.5, 3.0, -3.0 , 5 ):
+            elif not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.5, 3.0, -3.0 , 7 ):
                 print("{:20s} |  Hit: UpDown Slump".format(myorder.getStrTime(time.time()*1000)))
-                myorder.bidding = True
+                myorder.bidding = False
                 myorder.benefit = 0.012
                 myorder.algorithm = 'UpDown Slump'
                 myorder.money = 40000
             ## Rise Slump Algorithm
-            """
-            elif not myorder.trading and last < high * limit and   myalgo.rise(0.1, 1, 0.8, 1.0, 3 ):
-                print("{:20s} |  Hit: Rise".format(myorder.getStrTime(time.time()*1000)))
-                myorder.bidding = False
-                myorder.benefit = 0.012
-                myorder.algorithm = 'Rise'
-                myorder.money = 100000
-            ## Restartable Testing
-            elif testing and not myorder.trading and last < 1500:
-                print("{:20s} | Hit Restartable Test".format(myorder.getStrTime(time.time()*1000)))
-                myorder.bidding = True
-                myorder.benefit = 0.012
-                myorder.algorithm = 'Restartable Test'
-                myorder.money = 10000
-            """
-
 
             ## Bid Order
             if myorder.bidding:
@@ -374,6 +362,10 @@ if __name__ == "__main__":
                 # if bid order id is not in open orders complete order
                 if  order_status == 'success' and myorder.order_id not in myorderids:
                     buy_time = time.time()
+                    ###################################
+                    ### List Order History
+                    ###################################
+
                     ## Query Order history  to find sell_volume
                     if not testing:
                         listorders = myorder.listOrders(currency,header)
@@ -411,6 +403,11 @@ if __name__ == "__main__":
                     #
                     #
                     # if failed to buy order , cancel pending order
+
+                    ###################################
+                    ### Cancel unfilled orders
+                    ###################################
+
                     mycancel = {"currency_pair": currency, "id": myorder.order_id,"nonce":myorder.getNonce()}
                     stime = time.time() * 1000
                     cancelorder = myorder.cancelOrder(mycancel, header)
@@ -515,7 +512,7 @@ if __name__ == "__main__":
                     coin_balance = myorder.chkUserBalance(coin,header)
                     balance = myorder.chkUserBalance('krw',header)
                     # Save state to Redis
-                    order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "hell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price, "deal_count": myorder.total_bidding }
+                    order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price, "deal_count": myorder.total_bidding }
                     myorder.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
 
                     ## Remove element from myorderlist
