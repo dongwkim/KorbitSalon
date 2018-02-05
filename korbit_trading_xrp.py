@@ -19,7 +19,7 @@ if __name__ == "__main__":
     coin = 'xrp'
     limit = 0.95
     currency = 'xrp_krw'
-    debug = True
+    debug = False
     total_bidding = 0
     redisUser = 'dongwkim'
 
@@ -267,52 +267,53 @@ if __name__ == "__main__":
             if not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.5, 9.0, 2.0, -99):
                 print("{:20s} |  Hit: Big Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.042
+                myorder.benefit = 0.052
                 myorder.algorithm = 'Big Slump'
                 if c_trader == 0:
-                    myorder.money = 50000
+                    myorder.money = 300000
                 else: 
-                    myorder.money = 50000
+                    myorder.money = 200000
+                    myorder.benefit = 0.062
             ## Midium Slump Algorithm
-            elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.5, 6.5, 1.3 , -99 ):
+            elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.5, 7.0, 1.3 , -99 ):
                 print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.022
+                myorder.benefit = 0.032
                 myorder.algorithm = 'Midium Slump'
                 if c_trader == 0:
-                    myorder.money = 50000
+                    myorder.money = 200000
                 else: 
-                    myorder.money = 50000
-                    myorder.benefit = 0.022
+                    myorder.money = 200000
+                    myorder.benefit = 0.042
             ## Little Slump Algorithm
-            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.5, 4.5, 1.2, -99 ):
+            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.5, 3.0, 1.2, -99 ):
                 print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.012
+                myorder.benefit = 0.022
                 myorder.algorithm = 'Little Slump'
                 if c_trader == 0:
-                    myorder.money = 50000
+                    myorder.money = 200000
                 else: 
-                    myorder.money = 50000
-                    myorder.benefit = 0.012
+                    myorder.money = 200000
+                    myorder.benefit = 0.032
             ## Baby Slump Algorithm
-            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.1, 3.0, 4.0 , -99 ):
+            elif not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.1, 2.0, 5.0 , -99 ):
                 print("{:20s} |  Hit: Baby Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.012
+                myorder.benefit = 0.042
                 myorder.algorithm = 'Baby Slump'
-                if c_trader == 0:
-                    myorder.money = 50000
-                else: 
+                myorder.money = 200000
+            ## Avg Regresssion
+            elif not myorder.trading and myalgo.basic(97) and myalgo.reg(3,-2):
+                print("{:20s} |  Hit: Avg Reg".format(myorder.getStrTime(time.time()*1000)))
+                if c_trader >= 3:
+                    myorder.bidding = False
+                else:
                     myorder.bidding = True
-            ## UpDown Slump Algorithm
-            elif not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.5, 3.0, -3.0 , 7 ):
-                print("{:20s} |  Hit: UpDown Slump".format(myorder.getStrTime(time.time()*1000)))
-                myorder.bidding = False
-                myorder.benefit = 0.012
-                myorder.algorithm = 'UpDown Slump'
-                myorder.money = 40000
-            ## Rise Slump Algorithm
+                    myorder.benefit = 0.015
+                    myorder.algorithm = 'Avg Reg'
+                    myorder.money = 100000
+
 
             ## Bid Order
             if myorder.bidding:

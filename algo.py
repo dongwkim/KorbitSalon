@@ -44,40 +44,13 @@ class algo:
         else:
             return False
 
-    def wave(self, p1, p2, p3, p4 ):
-        ''' if trend is wave bid at the bottom
-            p1  : increase point of 1m_delta
-            p2  : increase point of 10m_delta
-            p3  : low bound of hr delta
-            p4  : high bound of hr delta
+    def reg(self, p1, p2):
+        ''' if price is dropped suddenly, bid at the time of starting increase
+            p1  : distance from 1hr avg
+            p2  : 10min slump percentage
         '''
-        if self.tx_1min_price_delta > p1 and self.tx_10min_price_delta < p2 and self.tx_hr_price_delta > p3 and self.tx_hr_price_delta < p4:
-            return True
-        else:
-            return False
-
-    def rise(self, p1, p2, p3, p4 ,p5 ):
-        ''' if trend is starting to going up
-            p1  : 1mim increase  delta percentage
-            p2  : 10min delta max percentage
-            p3  : hr increase max percentage
-            p4  : hr delta > 10min delta  ratio
-            p5  : hr delta < 10min delta  ratio
-        '''
-        if self.tx_1min_price_delta > (self.tx_hr_price_avg * p1/100) and self.tx_10min_price_delta > 0 and self.tx_10min_price_delta < (self.tx_hr_price_avg * p2/100) and self.tx_hr_price_delta > 0 and  self.tx_hr_price_delta < (self.tx_hr_price_avg * p3/100) and (self.tx_hr_price_delta < self.tx_10min_price_delta * p5 and self.tx_hr_price_delta > self.tx_10min_price_delta * p4):
-            return True
-        else:
-            return False
-
-    def zigzag(self, p1, p2, p3, p4  ):
-        ''' if trend is starting to going up
-            p1  : 1mim increase  delta percentage
-            p2  : 10min delta increase percentage
-            p3  : abs(hr delta) increase percentage
-            p4  : abs(hr delta) decrease percentage
-        '''
-
-        if self.tx_1min_price_delta < (self.tx_hr_price_avg * p1/100) and self.tx_10min_price_delta > self.tx_hr_price_avg * p2/100 and abs(self.tx_hr_price_delta) < self.tx_hr_price_avg * p3/100  and abs(self.tx_hr_price_delta) > self.tx_10min_price_delta * p4/100 :
+        #if (self.last < self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_1min_price_delta > -(p2/100 * self.tx_hr_price_avg)) :
+        if (self.last < self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_10min_price_delta > (p2/100 * self.tx_hr_price_avg)) and (self.tx_1min_price_delta > -5):
             return True
         else:
             return False
