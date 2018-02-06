@@ -274,7 +274,7 @@ if __name__ == "__main__":
                 if c_trader == 0:
                     myorder.money = 300000
                 else: 
-                    myorder.money = 200000
+                    myorder.money = 50000
                     myorder.benefit = 0.062
             ## Midium Slump Algorithm
             elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.9, 7.0, 1.3 , -99 ):
@@ -285,7 +285,7 @@ if __name__ == "__main__":
                 if c_trader == 0:
                     myorder.money = 200000
                 else: 
-                    myorder.money = 200000
+                    myorder.money = 50000
                     myorder.benefit = 0.042
             ## Little Slump Algorithm
             elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.9, 3.0, 1.1, -99 ):
@@ -296,7 +296,7 @@ if __name__ == "__main__":
                 if c_trader == 0:
                     myorder.money = 200000
                 else: 
-                    myorder.money = 200000
+                    myorder.money = 50000
                     myorder.benefit = 0.032
             ## Baby Slump Algorithm
             elif not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.9, 2.0, 4.0 , -99 ):
@@ -314,7 +314,7 @@ if __name__ == "__main__":
                     myorder.bidding = True
                     myorder.benefit = 0.015
                     myorder.algorithm = 'Avg Reg'
-                    myorder.money = 100000
+                    myorder.money = 150000
 
 
             ## Bid Order

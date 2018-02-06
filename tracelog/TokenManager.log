@@ -1410,3 +1410,9 @@ KeyError: 'redisUser'
 2018-02-06 06:02:23 | Refresh Token from API Server
 2018-02-06 06:02:24 | Update Token on Redis
 2018-02-06 06:02:24 | Sleep 50min..
+2018-02-06 06:52:24 | Refresh Token from API Server
+2018-02-06 06:52:26 | Update Token on Redis
+2018-02-06 06:52:26 | Sleep 50min..
+2018-02-06 07:42:26 | Refresh Token from API Server
+2018-02-06 07:42:27 | Update Token on Redis
+2018-02-06 07:42:27 | Sleep 50min..
