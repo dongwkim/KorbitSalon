@@ -25,7 +25,7 @@ class algo:
         ''' Prevent Buy call when last price is less than hr/10min average
             limit : Buy position price limitation pecentage
         '''
-        if self.last < int(self.high) * limit/100 and self.last <= self.tx_hr_price_avg and self.last <= self.tx_10min_price_avg and self.ask <= int(self.last + 5 ) and self.ask - self.bid < 5:
+        if self.last < int(self.high) * limit/100 and self.last <= self.tx_hr_price_avg and self.last <= self.tx_10min_price_avg and self.ask <= int(self.last + 5 ) and self.ask - self.bid < 4:
             return True
         else:
             return False
@@ -39,18 +39,18 @@ class algo:
             p5  : bias on slump type, if up and down set to 0 , if down and down set to -9999
         '''
         if self.tx_1min_price_delta < -(self.tx_hr_price_avg * p1/100) or \
-         (self.tx_1min_price_delta > 3 and self.tx_1min_price_delta < (p2/100 * self.tx_hr_price_avg) and self.tx_10min_price_delta < -(self.tx_hr_price_avg * p3/100) and self.tx_hr_price_delta < self.tx_10min_price_delta * p4 and self.tx_hr_price_delta > p5/100 * self.tx_hr_price_avg):
+         (self.tx_1min_price_delta > -1 and self.tx_1min_price_delta < (p2/100 * self.tx_hr_price_avg) and self.tx_10min_price_delta < -(self.tx_hr_price_avg * p3/100) and self.tx_hr_price_delta < self.tx_10min_price_delta * p4 and self.tx_hr_price_delta > p5/100 * self.tx_hr_price_avg):
             return True
         else:
             return False
 
     def reg(self, p1, p2):
-        ''' if price is dropped suddenly, bid at the time of starting increase
+        ''' last price is under p1*hr_avg and 10min delta is greater than p2*hr_avg
             p1  : distance from 1hr avg
             p2  : 10min slump percentage
         '''
         #if (self.last < self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_1min_price_delta > -(p2/100 * self.tx_hr_price_avg)) :
-        if (self.last < self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_10min_price_delta > (p2/100 * self.tx_hr_price_avg)) and (self.tx_1min_price_delta > -5):
+        if (self.last <= self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_10min_price_delta >= (p2/100 * self.tx_hr_price_avg)) and (self.tx_1min_price_delta > -5):
             return True
         else:
             return False

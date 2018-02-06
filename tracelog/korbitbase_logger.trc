@@ -1,16 +1,30 @@
 
-2018-02-05 13:38:27,497 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
-2018-02-05 13:38:27,910 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?time=hour&currency_pair=xrp_krw HTTP/1.1" 200 34835
-2018-02-05 13:38:28,747 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
-2018-02-05 13:38:29,162 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?time=hour&currency_pair=xrp_krw HTTP/1.1" 200 34835
-2018-02-05 13:38:29,995 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
-2018-02-05 13:38:30,233 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?time=hour&currency_pair=xrp_krw HTTP/1.1" 200 34835
-2018-02-05 13:38:31,082 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 169
-2018-02-05 13:38:31,319 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?time=hour&currency_pair=xrp_krw HTTP/1.1" 200 34835
-2018-02-05 13:38:32,176 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
-2018-02-05 13:38:32,422 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?time=hour&currency_pair=xrp_krw HTTP/1.1" 200 34835
-2018-02-05 13:38:33,292 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 169
-2018-02-05 13:38:33,609 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?time=hour&currency_pair=xrp_krw HTTP/1.1" 200 34755
-2018-02-05 13:38:34,619 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
-2018-02-05 13:38:34,972 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/transactions?time=hour&currency_pair=xrp_krw HTTP/1.1" 200 34755
-2018-02-05 13:38:36,122 DEBUG urllib3.connectionpool https://api.korbit.co.kr:443 "GET /v1/ticker/detailed?currency_pair=xrp_krw HTTP/1.1" 200 170
+2018-02-06 15:36:05,454 INFO 2018-02-06 15:36:03  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:08,843 INFO 2018-02-06 15:36:05  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:09,973 INFO 2018-02-06 15:36:08  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:15,575 INFO 2018-02-06 15:36:13  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:16,658 INFO 2018-02-06 15:36:14  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:17,809 INFO 2018-02-06 15:36:15  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:19,050 INFO 2018-02-06 15:36:18  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:22,632 INFO 2018-02-06 15:36:21  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:23,757 INFO 2018-02-06 15:36:22  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:26,040 INFO 2018-02-06 15:36:24  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:27,195 INFO 2018-02-06 15:36:24  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:30,622 INFO 2018-02-06 15:36:28  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:31,693 INFO 2018-02-06 15:36:30  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:34,610 INFO 2018-02-06 15:36:33  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:36,014 INFO 2018-02-06 15:36:33  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:38,349 INFO 2018-02-06 15:36:33  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:41,850 INFO 2018-02-06 15:36:33  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:44,099 INFO 2018-02-06 15:36:33  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:46,337 INFO 2018-02-06 15:36:33  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:47,474 INFO 2018-02-06 15:36:33  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:48,656 INFO 2018-02-06 15:36:46  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:36:56,570 INFO 2018-02-06 15:36:46  | DEBUG | [{'sell_price': 698, 'sell_volume': 144.71, 'trader': 'dongwkim-trader1'}] {'dongwkim-trader4': False, 'dongwkim-trader2': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader5': False} 
+2018-02-06 15:37:00,036 INFO read orders from redis
+2018-02-06 15:37:00,037 INFO read orders from redis
+2018-02-06 15:37:00,037 INFO read orders from redis
+2018-02-06 15:37:00,038 INFO read orders from redis
+2018-02-06 15:37:00,038 INFO read orders from redis
+2018-02-06 15:37:00,039 INFO read orders from redis
+2018-02-06 15:37:05,947 INFO 2018-02-06 15:36:46  | DEBUG | [{'sell_price': 698, 'trader': 'dongwkim-trader1', 'sell_volume': 144.71}] {'dongwkim-trader4': False, 'dongwkim-trader3': False, 'dongwkim-trader1': True, 'dongwkim-trader2': False, 'dongwkim-trader5': False} 

@@ -9,7 +9,7 @@ from subprocess import Popen, PIPE
 import time
 
 class SendNotificationEmail:
-    def __init(self):
+    def __init__(self):
         pass
     
     def sendEmail(self, pFromEmail, pToEmail, pSubject, pBody):
