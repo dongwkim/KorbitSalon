@@ -12,10 +12,11 @@ class SendNotificationEmail:
     def __init__(self):
         pass
     
-    def sendEmail(self, pFromEmail, pToEmail, pSubject, pBody):
+    def sendEmail(self, pFromEmail, pToEmail, pCcEmail, pSubject, pBody):
         msg = MIMEText(pBody)
         msg["From"] = pFromEmail
         msg["To"] = pToEmail
+        msg["Cc"] = pCcEmail
         msg["Subject"] = pSubject
         
         #print(msg)
@@ -24,19 +25,19 @@ class SendNotificationEmail:
     
     def makeEmailBody(self, pBody):
         myCurrentTime = time.strftime("%H:%M:%S")
-        emailBody = "*" * 10 + "\n"
+        emailBody = "*" * 20 + "\n"
         emailBody = emailBody + "* DEAL MADE => " + myCurrentTime + "\n"
-        emailBody = emailBody + "*" * 10 + "\n"
+        emailBody = emailBody + "*" * 20 + "\n"
         emailBody = emailBody + "* " + pBody + "\n"
-        emailBody = emailBody + "*" * 10 + "\n"
+        emailBody = emailBody + "*" * 20 + "\n"
         return emailBody
         
 if __name__ == "__main__":
     fromEmail = "notification@cryptosalon.org"
     toEmail = "tairu.kim@gmail.com"
-    #toEmail = "korbitnotification@gmail.com"
-    emailSubject = "Buy {} Coin at price {}".format(10,2500)
+    ccEmail = "korbitnotification@gmail.com"
+    emailSubject = "Test {} Coin at price {}".format('X','Y')
 
     sne = SendNotificationEmail()
     emailBody = sne.makeEmailBody('BUY XRP 12')
-    sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
+    sne.sendEmail(fromEmail, toEmail, ccEmail, emailSubject, emailBody)

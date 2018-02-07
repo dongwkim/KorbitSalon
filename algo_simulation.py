@@ -183,7 +183,7 @@ if __name__ == "__main__":
                     pre_sell_price = xrpm.sell_price
                     # find available trader from dictionary, search values is False
                     c_trader = next(i for i in range(len(traders)) if list(traders.values())[i] is False)
-                    print("{:20s} | Spawn Water Rider trader. Current Trader is {}".format(xrpm.getStrTime(int(ptime)), list(traders)[c_trader]))
+                    print("{:20s} | \033[90mSpawn Water Rider trader. Current Trader is {}\033[0m".format(xrpm.getStrTime(int(ptime)), list(traders)[c_trader]))
                     traders[list(traders)[c_trader]] = True
                     # set trading and xrpm.bidding to False
                     xrpm.trading = False
@@ -195,7 +195,7 @@ if __name__ == "__main__":
             #release spawned trader if last is greater than prior pre_sell_price * ratio
             elif water_ride_enable and c_trader != 0 and not xrpm.trading and pre_sell_price * 0.97 <= int(ticker['bid']) :
                     traders[list(traders)[c_trader]] = False
-                    print("\033[90m{:20s} | Turn off Spawned Water Rider trader\033[0m".format(xrpm.getStrTime(time.time()*1000)))
+                    print("{:20s} | \033[90mTurn off Spawned Water Rider trader\033[0m".format(xrpm.getStrTime(int(ptime))))
                     ## Set Trader
                     c_trader = xrpm.setSellTrader(traders,myorderlist)
 

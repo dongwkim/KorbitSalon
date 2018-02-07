@@ -199,8 +199,11 @@ class KorbitBase:
             try:
                 if len(myorderlist) == 0:
                     c_trader = 0
-                    self.initParam()
+                    #self.initParam()
                     traders[list(traders)[c_trader]] = True
+                    self.sell_volume = 0
+                    self.sell_price = 0
+                    self.algorithm =''
                 else:
                     sell_tx = min(myorderlist, key=lambda x:x['sell_price'])
                     #self.sell_price = sell_tx['sell_price']

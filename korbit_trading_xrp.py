@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 ####################################################
 # 2018/1/18 Multi orderable Traders
+# 2018/2/06 minor fixes
 ####################################################
 from KorbitBase import *
 import time
@@ -27,7 +28,7 @@ if __name__ == "__main__":
     algo_priority = {"Big Slump":10, "Midium Slump":9, "Little Slump": 8, "Baby Slump":7}
     ## multi trader for water ride
     #traders = {'dongwkim-trader1':False, 'dongwkim-trader2':False,'dongwkim-trader3': False}
-    num_traders = 5
+    num_traders = 3
     traders = OrderedDict()
     for i in range(num_traders):
         traders[redisUser+'-trader'+str(i+1)] = False
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     # Set Email notification
     fromEmail = 'notification@cryptosalon.org'
     toEmail = 'tairu.kim@gmail.com'
-    #toEmail = 'korbitnotification@gmail.com'
+    #ccEmail = 'korbitnotification@gmail.com'
     emailSubject = "ORDER Notification"
 
     #Switch Env based on Platform
@@ -85,7 +86,7 @@ if __name__ == "__main__":
     coin_balance = myorder.chkUserBalance(coin, header)
 
     # heading message
-    print("\033[93m{:20s} | Welcome to Korbit Salon ^^\033[0m".format(myorder.getStrTime(time.time()*1000)))
+    print("{:20s} | \033[93mWelcome to Korbit Salon ^^\033[0m".format(myorder.getStrTime(time.time()*1000)))
     print("{:20s} | trade_in_use {} coins | available {} coins ".format(coin, float(coin_balance['trade_in_use']), float(coin_balance['available'])))
     # available coins, not need when restartable
     #print("{:7s} | available {} coin".format(coin, float(coin_balance['available'])))
@@ -237,7 +238,7 @@ if __name__ == "__main__":
                     pre_sell_price = myorder.sell_price
                     # find available trader from dictionary, search values is False
                     c_trader = next(i for i in range(len(traders)) if list(traders.values())[i] is False)
-                    print("\033[91m{:20s} | Spawn Water Rider trader. Current Trader is {}\033[0m".format(myorder.getStrTime(time.time()*1000), list(traders)[c_trader]))
+                    print("{:20s} | \033[91mSpawn Water Rider trader. Current Trader is {}\033[0m".format(myorder.getStrTime(time.time()*1000), list(traders)[c_trader]))
                     traders[list(traders)[c_trader]] = True
                     # set trading and bidding to False
                     myorder.trading = False
@@ -250,7 +251,7 @@ if __name__ == "__main__":
             #release spawned trader if last is greater than prior pre_sell_price * ratio
             elif water_ride_enable and c_trader != 0 and not myorder.trading and pre_sell_price * 0.97 <= bid :
                     traders[list(traders)[c_trader]] = False
-                    print("\033[91m{:20s} | Turn off Spawned Water Rider trader\033[0m".format(myorder.getStrTime(time.time()*1000)))
+                    print("{:20s} | \033[91mTurn off Spawned Water Rider trader\033[0m".format(myorder.getStrTime(time.time()*1000)))
                     ## Set Trader
                     c_trader = myorder.setSellTrader(traders,myorderlist)
 
@@ -272,54 +273,55 @@ if __name__ == "__main__":
                 myorder.benefit = 0.052
                 myorder.algorithm = 'Big Slump'
                 if c_trader == 0:
-                    myorder.money = 300000
+                    myorder.money = 200000
                 else: 
-                    myorder.money = 50000
+                    myorder.money = 100000
                     myorder.benefit = 0.062
             ## Midium Slump Algorithm
             elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.9, 7.0, 1.3 , -99 ):
-                print("{:20s} |  Hit: Midium Slump".format(myorder.getStrTime(time.time()*1000)))
+                print("{:20s} |  \033[95mHit: Midium Slump\033[0m".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.032
                 myorder.algorithm = 'Midium Slump'
                 if c_trader == 0:
                     myorder.money = 200000
                 else: 
-                    myorder.money = 50000
+                    myorder.money = 100000
                     myorder.benefit = 0.042
             ## Little Slump Algorithm
             elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.9, 3.0, 1.1, -99 ):
-                print("{:20s} |  Hit: Little Slump".format(myorder.getStrTime(time.time()*1000)))
+                print("{:20s} |  \033[95mHit: Little Slump\033[0m".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.022
                 myorder.algorithm = 'Little Slump'
                 if c_trader == 0:
                     myorder.money = 200000
                 else: 
-                    myorder.money = 50000
+                    myorder.money = 100000
                     myorder.benefit = 0.032
             ## Baby Slump Algorithm
             elif not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.9, 2.0, 4.0 , -99 ):
-                print("{:20s} |  Hit: Baby Slump".format(myorder.getStrTime(time.time()*1000)))
+                print("{:20s} |  \033[95mHit: Baby Slump\033[0m".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.022
+                myorder.benefit = 0.032
                 myorder.algorithm = 'Baby Slump'
                 myorder.money = 200000
             ## Avg Regresssion
-            elif not myorder.trading and myalgo.basic(97) and myalgo.reg(3,-2):
-                print("{:20s} |  Hit: Avg Reg".format(myorder.getStrTime(time.time()*1000)))
+            elif not myorder.trading and myalgo.basic(97) and myalgo.reversion(3,-2):
+                print("{:20s} |  \033[95mHit: Mean Regression\033[0m".format(myorder.getStrTime(time.time()*1000)))
                 if c_trader >= 3:
                     myorder.bidding = False
                 else:
                     myorder.bidding = True
                     myorder.benefit = 0.015
-                    myorder.algorithm = 'Avg Reg'
-                    myorder.money = 150000
+                    myorder.algorithm = 'Mean Reversion'
+                    myorder.money = 200000
 
 
             ## Bid Order
             if myorder.bidding:
                 ## Set sell price
+                # add +1 won to prevent bid missing
                 myorder.buy_price = ask + 1
                 myorder.sell_price = myorder.buy_price + int(ask * myorder.benefit)
                 myorder.buy_volume = int(int(myorder.money) // ask)
@@ -390,10 +392,11 @@ if __name__ == "__main__":
 
                     ## For Water Ride Trader
                     myorderlist.append({"trader": list(traders)[c_trader], "sell_price": myorder.sell_price, "sell_volume": myorder.sell_volume})
-                    print("\033[93m{:20s} | {} : Bid Order# {} is completed.\033[0m".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader], myorder.order_id))
+                    print("{:20s} | \033[93m{} : Bid Order# {} is completed.\033[0m".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader], myorder.order_id))
                     #Email Notification
-                    emailBody = sne.makeEmailBody("{} BUY AT {} won, algo: {}, sell_volume {}".format(currency, myorder.buy_price, myorder.algorithm, myorder.sell_volume))
+                    emailBody = sne.makeEmailBody("{} BUY AT {} won\n algo: {}\n sell_volume {}\n".format(currency, myorder.buy_price, myorder.algorithm, myorder.sell_volume))
                     emailSubject = "{} BUY AT {} won, algo: {}".format(currency, myorder.buy_price, myorder.algorithm)
+                    #sne.sendEmail(fromEmail, toEmail, ccEmail, emailSubject, emailBody)
                     sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
 
                     ## Set Trader
@@ -427,7 +430,7 @@ if __name__ == "__main__":
                         myorder.algorithm = ''
                         order_savepoint = {"type": "reset", "orderid" :'', "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price }
                         myorder.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
-                        print("\033[93m{:20s} | {} : Bid Order# {} is Canceled.\033[0m".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader], myorder.order_id))
+                        print("{:20s} | \033[93m{} : Bid Order# {} is Canceled.\033[0m".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader], myorder.order_id))
                     else:
                         ## need to check bid history  to check pending bid is sold
                         print("Order Cancel Failed, check bid history to check wether bid is not pending")
@@ -437,7 +440,7 @@ if __name__ == "__main__":
                                 myorder.sell_volume = float(orders['filled_amount']) - float(orders['fee'])
                                 myorder.bidding = False
                                 myorder.trading = True
-                                print("\033[93m{:20s} | {} : Bid Order# {} is completed.\033[0m".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader], myorder.order_id))
+                                print("{:20s} | \033[93m{} : Bid Order# {} is completed.\033[0m".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader], myorder.order_id))
                                 balance = myorder.chkUserBalance('krw',header)
                                 coin_balance = myorder.chkUserBalance(coin,header)
                                 order_savepoint = {"type": "bid", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money }
@@ -508,11 +511,12 @@ if __name__ == "__main__":
                     del myorderlist[next(index for index,d in enumerate(myorderlist) if d['trader'] == list(traders)[c_trader])]
                     ## Set trader free
                     traders[list(traders)[c_trader]] = False
-                    print("\033[93m{:20s} | {} : Ask Order is completed\033[0m".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader]))
+                    print("{:20s} | \033[93m{} : Ask Order is completed\033[0m".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader]))
 
                     # Email Send
                     emailBody = sne.makeEmailBody("{} SOLD AT {} won".format(currency, myorder.sell_price))
                     emailSubject = "{} SOLD AT {} won, algo: {}".format(currency, myorder.sell_price, myorder.algorithm)
+                    #sne.sendEmail(fromEmail, toEmail, ccEmail, emailSubject, emailBody)
                     sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
 
                     # Switch trader
@@ -532,7 +536,7 @@ if __name__ == "__main__":
                         balance = myorder.chkUserBalance('krw',header)
                         coin_balance = myorder.chkUserBalance(coin,header)
                         myorder.trading = True
-                        print("\033[93m{:20s} |  Ask Order# {} is canceled.\033[0m".format(myorder.getStrTime(time.time()*1000),myorder.order_id))
+                        print("{:20s} |  \033[93mAsk Order# {} is canceled.\033[0m".format(myorder.getStrTime(time.time()*1000),myorder.order_id))
                 else:
                     print("WARNING: Call to KorbitSalon Support : {} ".format(askorder['status']))
                     myorder.trading = True
