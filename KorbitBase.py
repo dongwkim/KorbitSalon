@@ -203,6 +203,7 @@ class KorbitBase:
                     traders[list(traders)[c_trader]] = True
                     self.sell_volume = 0
                     self.sell_price = 0
+                    self.buy_price = 0
                     self.algorithm =''
                 else:
                     sell_tx = min(myorderlist, key=lambda x:x['sell_price'])

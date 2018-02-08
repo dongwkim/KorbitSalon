@@ -1479,3 +1479,114 @@ KeyError: 'redisUser'
 2018-02-07 01:12:50 | Refresh Token from API Server
 2018-02-07 01:12:51 | Update Token on Redis
 2018-02-07 01:12:51 | Sleep 50min..
+2018-02-07 02:02:51 | Refresh Token from API Server
+2018-02-07 02:02:52 | Update Token on Redis
+2018-02-07 02:02:52 | Sleep 50min..
+2018-02-07 02:52:52 | Refresh Token from API Server
+2018-02-07 02:52:54 | Update Token on Redis
+2018-02-07 02:52:54 | Sleep 50min..
+2018-02-07 03:42:54 | Refresh Token from API Server
+2018-02-07 03:42:55 | Update Token on Redis
+2018-02-07 03:42:55 | Sleep 50min..
+2018-02-07 04:32:55 | Refresh Token from API Server
+2018-02-07 04:32:56 | Update Token on Redis
+2018-02-07 04:32:56 | Sleep 50min..
+2018-02-07 05:22:56 | Refresh Token from API Server
+2018-02-07 05:22:57 | Update Token on Redis
+2018-02-07 05:22:57 | Sleep 50min..
+2018-02-07 06:12:57 | Refresh Token from API Server
+2018-02-07 06:12:58 | Update Token on Redis
+2018-02-07 06:12:58 | Sleep 50min..
+2018-02-07 07:02:58 | Refresh Token from API Server
+2018-02-07 07:02:59 | Update Token on Redis
+2018-02-07 07:02:59 | Sleep 50min..
+2018-02-07 07:52:59 | Refresh Token from API Server
+2018-02-07 07:53:00 | Update Token on Redis
+2018-02-07 07:53:00 | Sleep 50min..
+2018-02-07 08:43:01 | Refresh Token from API Server
+2018-02-07 08:43:02 | Update Token on Redis
+2018-02-07 08:43:02 | Sleep 50min..
+2018-02-07 09:33:02 | Refresh Token from API Server
+2018-02-07 09:33:03 | Update Token on Redis
+2018-02-07 09:33:03 | Sleep 50min..
+2018-02-07 10:23:03 | Refresh Token from API Server
+2018-02-07 10:23:04 | Update Token on Redis
+2018-02-07 10:23:04 | Sleep 50min..
+2018-02-07 11:13:04 | Refresh Token from API Server
+2018-02-07 11:13:05 | Update Token on Redis
+2018-02-07 11:13:05 | Sleep 50min..
+2018-02-07 12:03:05 | Refresh Token from API Server
+2018-02-07 12:03:06 | Update Token on Redis
+2018-02-07 12:03:06 | Sleep 50min..
+2018-02-07 12:53:06 | Refresh Token from API Server
+2018-02-07 12:53:08 | Update Token on Redis
+2018-02-07 12:53:08 | Sleep 50min..
+2018-02-07 13:43:08 | Refresh Token from API Server
+2018-02-07 13:43:09 | Update Token on Redis
+2018-02-07 13:43:09 | Sleep 50min..
+2018-02-07 14:33:09 | Refresh Token from API Server
+2018-02-07 14:33:10 | Update Token on Redis
+2018-02-07 14:33:10 | Sleep 50min..
+2018-02-07 15:23:10 | Refresh Token from API Server
+2018-02-07 15:23:11 | Update Token on Redis
+2018-02-07 15:23:11 | Sleep 50min..
+2018-02-07 16:13:11 | Refresh Token from API Server
+2018-02-07 16:13:12 | Update Token on Redis
+2018-02-07 16:13:12 | Sleep 50min..
+2018-02-07 17:03:13 | Refresh Token from API Server
+2018-02-07 17:03:14 | Update Token on Redis
+2018-02-07 17:03:14 | Sleep 50min..
+2018-02-07 17:53:14 | Refresh Token from API Server
+2018-02-07 17:53:15 | Update Token on Redis
+2018-02-07 17:53:15 | Sleep 50min..
+2018-02-07 18:43:15 | Refresh Token from API Server
+2018-02-07 18:43:16 | Update Token on Redis
+2018-02-07 18:43:16 | Sleep 50min..
+2018-02-07 19:33:16 | Refresh Token from API Server
+2018-02-07 19:33:17 | Update Token on Redis
+2018-02-07 19:33:17 | Sleep 50min..
+2018-02-07 20:23:17 | Refresh Token from API Server
+2018-02-07 20:23:18 | Update Token on Redis
+2018-02-07 20:23:18 | Sleep 50min..
+2018-02-07 21:13:18 | Refresh Token from API Server
+2018-02-07 21:13:19 | Update Token on Redis
+2018-02-07 21:13:19 | Sleep 50min..
+2018-02-07 22:03:20 | Refresh Token from API Server
+2018-02-07 22:03:21 | Update Token on Redis
+2018-02-07 22:03:21 | Sleep 50min..
+2018-02-07 22:53:21 | Refresh Token from API Server
+2018-02-07 22:53:22 | Update Token on Redis
+2018-02-07 22:53:22 | Sleep 50min..
+2018-02-07 23:43:22 | Refresh Token from API Server
+2018-02-07 23:43:23 | Update Token on Redis
+2018-02-07 23:43:23 | Sleep 50min..
+2018-02-08 00:33:23 | Refresh Token from API Server
+2018-02-08 00:33:24 | Update Token on Redis
+2018-02-08 00:33:24 | Sleep 50min..
+2018-02-08 01:23:25 | Refresh Token from API Server
+2018-02-08 01:23:26 | Update Token on Redis
+2018-02-08 01:23:26 | Sleep 50min..
+2018-02-08 02:13:26 | Refresh Token from API Server
+2018-02-08 02:13:27 | Update Token on Redis
+2018-02-08 02:13:27 | Sleep 50min..
+2018-02-08 03:03:27 | Refresh Token from API Server
+2018-02-08 03:03:28 | Update Token on Redis
+2018-02-08 03:03:28 | Sleep 50min..
+2018-02-08 03:53:28 | Refresh Token from API Server
+2018-02-08 03:53:29 | Update Token on Redis
+2018-02-08 03:53:29 | Sleep 50min..
+2018-02-08 04:43:29 | Refresh Token from API Server
+2018-02-08 04:43:30 | Update Token on Redis
+2018-02-08 04:43:30 | Sleep 50min..
+2018-02-08 05:33:31 | Refresh Token from API Server
+2018-02-08 05:33:32 | Update Token on Redis
+2018-02-08 05:33:32 | Sleep 50min..
+2018-02-08 06:23:32 | Refresh Token from API Server
+2018-02-08 06:23:33 | Update Token on Redis
+2018-02-08 06:23:33 | Sleep 50min..
+2018-02-08 07:13:33 | Refresh Token from API Server
+2018-02-08 07:13:34 | Update Token on Redis
+2018-02-08 07:13:34 | Sleep 50min..
+2018-02-08 08:03:34 | Refresh Token from API Server
+2018-02-08 08:03:35 | Update Token on Redis
+2018-02-08 08:03:35 | Sleep 50min..

@@ -12,11 +12,12 @@ class SendNotificationEmail:
     def __init__(self):
         pass
     
-    def sendEmail(self, pFromEmail, pToEmail, pCcEmail, pSubject, pBody):
+    #def sendEmail(self, pFromEmail, pToEmail, pCcEmail, pSubject, pBody):
+    def sendEmail(self, pFromEmail, pToEmail, pSubject, pBody):
         msg = MIMEText(pBody)
         msg["From"] = pFromEmail
         msg["To"] = pToEmail
-        msg["Cc"] = pCcEmail
+        #msg["Cc"] = pCcEmail
         msg["Subject"] = pSubject
         
         #print(msg)

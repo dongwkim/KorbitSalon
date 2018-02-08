@@ -50,7 +50,7 @@ class algo:
             p2  : 10min slump percentage
         '''
         #if (self.last < self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_1min_price_delta > -(p2/100 * self.tx_hr_price_avg)) :
-        if (self.last <= self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_10min_price_delta >= (p2/100 * self.tx_hr_price_avg)) and (self.tx_1min_price_delta > -5):
+        if (self.last <= self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_10min_price_delta >= (p2/100 * self.tx_hr_price_avg)) and (self.tx_1min_price_delta > -3):
             return True
         else:
             return False
