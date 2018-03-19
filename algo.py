@@ -44,13 +44,14 @@ class algo:
         else:
             return False
 
-    def reversion(self, p1, p2):
+    def reversion(self, p1, p2, p3):
         ''' last price is under p1*hr_avg and 10min delta is greater than p2*hr_avg
             p1  : distance from 1hr avg
             p2  : 10min slump percentage
+            p3  : 1h slump percentage
         '''
         #if (self.last < self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_1min_price_delta > -(p2/100 * self.tx_hr_price_avg)) :
-        if (self.last <= self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_10min_price_delta >= (p2/100 * self.tx_hr_price_avg)) and (self.tx_1min_price_delta > -3):
+        if (self.last <= self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_10min_price_delta > (p2/100 * self.tx_hr_price_avg)) and (self.tx_1min_price_delta > -3) and (self.tx_hr_price_delta > self.tx_hr_price_avg * p3/100):
             return True
         else:
             return False

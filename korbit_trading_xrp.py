@@ -18,7 +18,7 @@ if __name__ == "__main__":
     ### Vriables
     testing = False
     coin = 'xrp'
-    limit = 0.95
+    limit = 0.97
     currency = 'xrp_krw'
     debug = True
     total_bidding = 0
@@ -28,14 +28,14 @@ if __name__ == "__main__":
     algo_priority = {"Big Slump":10, "Midium Slump":9, "Little Slump": 8, "Baby Slump":7}
     ## multi trader for water ride
     #traders = {'dongwkim-trader1':False, 'dongwkim-trader2':False,'dongwkim-trader3': False}
-    num_traders = 4
+    num_traders = 7
     traders = OrderedDict()
     for i in range(num_traders):
         traders[redisUser+'-trader'+str(i+1)] = False
     c_trader = 0
     water_ride_enable = True
     pre_sell_price = 0
-    water_ride_ratio = 0.95
+    water_ride_ratio = 0.97
     myorderlist = []
 
 
@@ -193,11 +193,11 @@ if __name__ == "__main__":
                                 'tx_1min_price_delta': tx_1min_price_delta}
                 ## Create new ten miniute List Dictionary
                 ten_min_tx =  hr_tx[0:ten_min_pos]
-                tx_10min_price_avg = (sum(int(tx['price']) for tx in ten_min_tx)) / ten_min_pos
+                tx_10min_price_avg = last if ten_min_pos is 0 else (sum(int(tx['price']) for tx in ten_min_tx)) / ten_min_pos
 
-                tx_10min_price_max = max(ten_min_tx, key=lambda x:x['price'])['price']
-                tx_10min_price_min = min(ten_min_tx, key=lambda x:x['price'])['price']
-                tx_10min_price_delta = float(ten_min_tx[0]['price']) - float(ten_min_tx[ten_min_pos - 1]['price'])
+                tx_10min_price_max = last if ten_min_pos is 0 else max(ten_min_tx, key=lambda x:x['price'])['price']
+                tx_10min_price_min = last if ten_min_pos is 0 else min(ten_min_tx, key=lambda x:x['price'])['price']
+                tx_10min_price_delta = 0 if ten_min_pos is 0 else float(ten_min_tx[0]['price']) - float(ten_min_tx[ten_min_pos - 1]['price'])
                 tx_10min_stat = {'tx_10min_price_avg': tx_10min_price_avg,
                                 'tx_10min_price_max': tx_10min_price_max,
                                 'tx_10min_price_min': tx_10min_price_min,
@@ -226,7 +226,8 @@ if __name__ == "__main__":
                 print( "{:20s} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {:4d}/{:4d}/{:4.3f} | Delta: {:3.0f}({:3.1f}%)/{:3.0f}({:3.1f}%)/{:3.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} | deal ({}) | bal:{:,d}  ".format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,myorder.total_bidding,int(curr_balance)))
             # Create HTML for realtime view
             if showhtml == True:
-                myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_10min_price_delta, tx_hr_price_delta,myorder.buy_price, myorder.sell_price, myorder.algorithm, myorder.total_bidding, int(curr_balance) , lat)
+                #myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_10min_price_delta, tx_hr_price_delta,myorder.buy_price, myorder.sell_price, myorder.algorithm, myorder.total_bidding, int(curr_balance) , lat)
+                myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_hr_price_avg,tx_10min_price_delta, tx_hr_price_delta,myorder.buy_price, myorder.sell_price, myorder.algorithm,list(traders)[c_trader] , int(curr_balance) , lat)
 
             ######################################
             ##  Switch Traders
@@ -267,67 +268,73 @@ if __name__ == "__main__":
             ######################################
 
             ## Big Slump Algorithm
-            if not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.9, 9.0, 1.5, -99):
+            if not myorder.trading and myalgo.basic(95) and  myalgo.slump(9, 0.6, 9.0, 2.0, -99):
                 print("{:20s} |  Hit: Big Slump".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.052
+                myorder.benefit = 0.054
                 myorder.algorithm = 'Big Slump'
-                myorder.money = 100000
-                if c_trader >= 3:
+                myorder.money = 150000
+                if c_trader >= 2:
                     myorder.money = 100000
-                    myorder.benefit = 0.072
+                    myorder.benefit = 0.074
             ## Midium Slump Algorithm
-            elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.9, 7.0, 1.3 , -99 ):
+            elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.6, 7.0, 1.3 , -99 ):
                 print("{:20s} |  \033[95mHit: Midium Slump\033[0m".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.032
+                myorder.benefit = 0.034
                 myorder.algorithm = 'Midium Slump'
-                myorder.money = 100000
-                if c_trader >= 3:
+                myorder.money = 150000
+                if c_trader >= 2:
                     myorder.money = 100000
-                    myorder.benefit = 0.052
+                    myorder.benefit = 0.054
             ## Little Slump Algorithm
-            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.9, 3.0, 1.1, -99 ):
+            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.6, 3.0, 1.2, -99 ):
                 print("{:20s} |  \033[95mHit: Little Slump\033[0m".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.022
                 myorder.algorithm = 'Little Slump'
-                myorder.money = 100000
-                if c_trader >= 3:
+                myorder.money = 150000
+                if c_trader >= 4:
+                    myorder.money = 50000
+                    myorder.benefit = 0.042
+                elif c_trader >= 2:
                     myorder.money = 100000
                     myorder.benefit = 0.032
             ## Baby Slump Algorithm
-            elif not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.9, 2.0, 4.0 , -99 ):
+            elif not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.6, 2.0, 4.0 , -99 ):
                 print("{:20s} |  \033[95mHit: Baby Slump\033[0m".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.032
                 myorder.algorithm = 'Baby Slump'
-                myorder.money = 200000
-                if c_trader >= 3:
+                myorder.money = 150000
+                if c_trader >= 2:
                     myorder.money = 100000
+                elif c_trader >= 4:
+                    myorder.money = 50000
                     myorder.benefit = 0.042
             ## Avg Regresssion
             #elif not myorder.trading and myalgo.basic(97) and myalgo.reversion(3,-2):
             #(2,-1) is 40~50% more hit ratio than (3,-2)
-            #elif not myorder.trading and myalgo.basic(97) and myalgo.reversion(2,-1):
-            #(1,-1) is 40~50% more hit ratio than (2,-2)
-            elif not myorder.trading and myalgo.basic(97) and myalgo.reversion(1,-1):
+            elif not myorder.trading and myalgo.basic(97) and myalgo.reversion(2.0,-2.0,-4):
                 print("{:20s} |  \033[95mHit: Mean Regression\033[0m".format(myorder.getStrTime(time.time()*1000)))
-                myorder.benefit = 0.012
+                myorder.benefit = 0.014
                 myorder.algorithm = 'Mean Reversion'
-                myorder.money = 150000
+                myorder.money = 100000
                 myorder.bidding = True
                 if c_trader >= 2:
-                    myorder.benefit = 0.020
+                    myorder.benefit = 0.016
                     myorder.algorithm = 'Mean Reversion'
                     myorder.money = 100000
+                elif c_trader >= 5:
+                    myorder.money = 50000
+                    myorder.benefit = 0.024
 
 
             ## Bid Order
             if myorder.bidding:
                 ## Set sell price
                 # add +1 won to prevent bid missing
-                myorder.buy_price = ask + 1
+                myorder.buy_price = ask + 0
                 myorder.sell_price = myorder.buy_price + int(ask * myorder.benefit)
                 myorder.buy_volume = int(int(myorder.money) // ask)
                 ### Buy Order
@@ -436,6 +443,8 @@ if __name__ == "__main__":
                         order_savepoint = {"type": "reset", "orderid" :'', "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price }
                         myorder.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
                         print("{:20s} | \033[93m{} : Bid Order# {} is Canceled.\033[0m".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader], myorder.order_id))
+                        ## Set Trader
+                        c_trader = myorder.setSellTrader(traders,myorderlist)
                     else:
                         ## need to check bid history  to check pending bid is sold
                         print("Order Cancel Failed, check bid history to check wether bid is not pending")
@@ -548,6 +557,37 @@ if __name__ == "__main__":
                         coin_balance = myorder.chkUserBalance(coin,header)
                         myorder.trading = True
                         print("{:20s} |  \033[93mAsk Order# {} is canceled.\033[0m".format(myorder.getStrTime(time.time()*1000),myorder.order_id))
+                    elif cancelorder[0]['status'] == 'not_authorized':
+                        myorder.trading = False
+                        myorder.bidding = False
+                        #sell_time = time.time()
+                        #buy_sell_gap = sell_time - buy_time
+                        # needs to put bidding count to redis
+                        myorder.total_bidding += 1
+                        # check balance
+                        coin_balance = myorder.chkUserBalance(coin,header)
+                        balance = myorder.chkUserBalance('krw',header)
+                        # Save state to Redis
+                        #order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price, "deal_count": myorder.total_bidding }
+                        order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "sell_volume" : 0, "sell_price": 0, "currency_pair": currency, "algorithm" : 0,"trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price, "deal_count": myorder.total_bidding }
+                        myorder.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
+    
+                        ## Remove element from myorderlist
+                        del myorderlist[next(index for index,d in enumerate(myorderlist) if d['trader'] == list(traders)[c_trader])]
+                        ## Set trader free
+                        traders[list(traders)[c_trader]] = False
+                        print("{:20s} | \033[93m{} : Ask Order is completed\033[0m".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader]))
+    
+                        # Email Send
+                        emailBody = sne.makeEmailBody("{} SOLD AT {} won".format(currency, myorder.sell_price))
+                        emailSubject = "{} SOLD AT {} won, algo: {}".format(currency, myorder.sell_price, myorder.algorithm)
+                        #sne.sendEmail(fromEmail, toEmail, ccEmail, emailSubject, emailBody)
+                        sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
+    
+                        # Switch trader
+                        #myorder.buy_price = myorder.sell_price = myorder.buy_volume = myorder.sell_volume = 0
+                        #myorder.algorithm = ''
+                        c_trader = myorder.setSellTrader(traders,myorderlist)
                 else:
                     print("WARNING: Call to KorbitSalon Support : {} ".format(askorder['status']))
                     myorder.trading = True

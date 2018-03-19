@@ -144,14 +144,15 @@ class KorbitBase:
         epoch_time = int(time.mktime(time.strptime(str_time, "%Y-%m-%d %H:%M:%S"))*1000)
         return epoch_time
     # Print real-time trading , need to use Flask or Django
-    def genHTML(self,path ,ctime,last, tx_10min_price_delta, tx_hr_price_delta, buy_price,sell_price, algorithm, total_bidding, curr_balance, lat ):
+    def genHTML(self,path,ctime,last, tx_hr_price_avg, tx_10min_price_delta, tx_hr_price_delta, buy_price,sell_price, algorithm, trader, curr_balance, lat ):
         html = '<meta http-equiv="refresh" content="3"> \
+                <title>price: {}</title> \
                 <font size="10"> Time : {}<br> \
-                Price : {:,} Delta :{}/{} <br> Buy/Sell Price: {}/{} Algo: {}<br> \
-                Deal Count: {} <br> \
+                Price : {:,} <br> 1H Avg: {:,} <br> Delta :{}/{} <br> Buy/Sell Price: {}/{}<br> Algo: {}<br> \
+                Trader: {} <br> \
                 Balance: {:,} <br> \
                 Latency : {} ms</font>' \
-                .format(ctime, int(last), tx_10min_price_delta, tx_hr_price_delta, buy_price, sell_price, algorithm, total_bidding,int(curr_balance), lat)
+                .format(int(last),ctime, int(last), int(tx_hr_price_avg),tx_10min_price_delta, tx_hr_price_delta, buy_price, sell_price, algorithm, trader ,int(curr_balance), lat)
         f = open(path,'w')
         f.write(html)
         f.close()
