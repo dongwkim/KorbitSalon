@@ -9,6 +9,7 @@ import redis
 import time
 import datetime
 import logging
+import pymongo
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
@@ -57,6 +58,12 @@ class KorbitBase:
         self.myCurrency = pCurrency
         self.accessToken = self.redisCon.get('access_token')
 
+    def initMongo(self, pMongoHost, pMongoPort, pMongoDb, pMongoCol):
+        self.mongoUri = "mongodb://%s:%s" % (pMongoHost, pMongoPort)
+        self.mongoCli = pymongo.MongoClient(self.mongoUri)
+        self.mongoDb = self.mongoCli[pMongoDb]
+        self.mongoCol = self.mongoDb[pMongoCol]
+        
     def getAccessToken(self):
         return str(self.redisCon.hmget(self.redisUser,'access_token')[0])
 

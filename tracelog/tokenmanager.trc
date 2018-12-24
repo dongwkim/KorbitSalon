@@ -5783,3 +5783,42 @@
 2018-12-24 15:31:58,635 INFO TokenManager get refresh token from redis
 2018-12-24 15:31:58,636 INFO TokenManager refresh token from api server
 2018-12-24 15:31:59,519 INFO TokenManager update token on redis
+2018-12-24 16:21:59,620 INFO TokenManager get refresh token from redis
+2018-12-24 16:21:59,622 INFO TokenManager refresh token from api server
+2018-12-24 16:22:00,558 INFO TokenManager update token on redis
+2018-12-24 17:12:00,611 INFO TokenManager get refresh token from redis
+2018-12-24 17:12:00,612 INFO TokenManager refresh token from api server
+2018-12-24 17:12:01,537 INFO TokenManager update token on redis
+2018-12-24 18:02:01,639 INFO TokenManager get refresh token from redis
+2018-12-24 18:02:01,639 INFO TokenManager refresh token from api server
+2018-12-24 18:02:02,784 INFO TokenManager update token on redis
+2018-12-24 18:52:02,885 INFO TokenManager get refresh token from redis
+2018-12-24 18:52:02,887 INFO TokenManager refresh token from api server
+2018-12-24 18:52:03,740 INFO TokenManager update token on redis
+2018-12-24 19:42:03,759 INFO TokenManager get refresh token from redis
+2018-12-24 19:42:03,761 INFO TokenManager refresh token from api server
+2018-12-24 19:42:04,645 INFO TokenManager update token on redis
+2018-12-24 20:32:04,743 INFO TokenManager get refresh token from redis
+2018-12-24 20:32:04,744 INFO TokenManager refresh token from api server
+2018-12-24 20:32:05,728 INFO TokenManager update token on redis
+2018-12-24 21:22:05,829 INFO TokenManager get refresh token from redis
+2018-12-24 21:22:05,831 INFO TokenManager refresh token from api server
+2018-12-24 21:22:06,693 INFO TokenManager update token on redis
+2018-12-24 22:12:06,787 INFO TokenManager get refresh token from redis
+2018-12-24 22:12:06,788 INFO TokenManager refresh token from api server
+2018-12-24 22:12:07,649 INFO TokenManager update token on redis
+2018-12-24 23:02:07,750 INFO TokenManager get refresh token from redis
+2018-12-24 23:02:07,751 INFO TokenManager refresh token from api server
+2018-12-24 23:02:08,779 INFO TokenManager update token on redis
+2018-12-24 23:52:08,880 INFO TokenManager get refresh token from redis
+2018-12-24 23:52:08,881 INFO TokenManager refresh token from api server
+2018-12-24 23:52:09,754 INFO TokenManager update token on redis
+2018-12-25 00:42:09,855 INFO TokenManager get refresh token from redis
+2018-12-25 00:42:09,856 INFO TokenManager refresh token from api server
+2018-12-25 00:42:10,793 INFO TokenManager update token on redis
+2018-12-25 01:32:10,871 INFO TokenManager get refresh token from redis
+2018-12-25 01:32:10,873 INFO TokenManager refresh token from api server
+2018-12-25 01:32:11,781 INFO TokenManager update token on redis
+2018-12-25 02:22:11,811 INFO TokenManager get refresh token from redis
+2018-12-25 02:22:11,813 INFO TokenManager refresh token from api server
+2018-12-25 02:22:12,676 INFO TokenManager update token on redis

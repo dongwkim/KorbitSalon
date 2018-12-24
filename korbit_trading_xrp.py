@@ -349,6 +349,7 @@ if __name__ == "__main__":
                         print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),bidorder['currencyPair'],'Buy',str(myorder.order_id) ,str(order_status), elapsed))
                     elif testing:
                         bidorder = {"orderId": 12345, "status": "success", "currencyPair" : "xrp_krw" }
+                        order_status == 'success' 
                 except:
                     print("{} | {}, Order status is {} ".format(myorder.getStrTime(stime),'Order Failed, Pass..',bidorder['status']))
                     print("{} | {}".format(myorder.getStrTime(stime),'Reset parameter to zero and mark order_status to failed'))
