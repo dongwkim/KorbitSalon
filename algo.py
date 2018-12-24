@@ -15,17 +15,17 @@ class algo:
         self.tx_hr_price_delta = int(tx_hr_stat['tx_hr_price_delta'])
         self.tx_1min_price_delta = int(tx_1min_stat['tx_1min_price_delta'])
         self.tx_10min_price_delta = int(tx_10min_stat['tx_10min_price_delta'])
-        self.high = int(ticker['high'])
-        self.low = int(ticker['low'])
-        self.last = int(ticker['last'])
-        self.bid = int(ticker['bid'])
-        self.ask = int(ticker['ask'])
+        self.high = float(ticker['high'])
+        self.low = float(ticker['low'])
+        self.last = float(ticker['last'])
+        self.bid = float(ticker['bid'])
+        self.ask = float(ticker['ask'])
 
     def basic(self, limit):
         ''' Prevent Buy call when last price is less than hr/10min average
             limit : Buy position price limitation pecentage
         '''
-        if self.last < int(self.high) * limit/100 and self.last <= self.tx_hr_price_avg and self.last <= self.tx_10min_price_avg and self.ask <= int(self.last + 4 ) and self.ask - self.bid < 4:
+        if self.last < float(self.high) * limit/100 and self.last <= self.tx_hr_price_avg and self.last <= self.tx_10min_price_avg and self.ask <= float(self.last + 4 ) and self.ask - self.bid < 4:
             return True
         else:
             return False

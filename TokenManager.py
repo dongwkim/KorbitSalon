@@ -97,7 +97,7 @@ class TokenManager:
 if __name__ == "__main__":
     redisUser = os.environ['redisUser']
     #redisPassword = 'RlawjddmsrotoRl#12'
-    redisPassword = None
+    redisPassword = 'We$come!'
 
     if system() is 'Windows':
         secFilePath='c:/Users/dongwkim/Keys/korbit_key.csv'
@@ -109,9 +109,9 @@ if __name__ == "__main__":
             redisHost = 'localhost'
             redisPort = 16379
         elif (redisUser == "dongwkim"):
-            secFilePath='/usb/s1/key/korbit_key.csv'
-            redisHost = 'localhost'
-            redisPort = 16379
+            secFilePath='/korbit_key.csv'
+            redisHost = 'crypto-redis-1'
+            redisPort = 6379
         else:
             print("Critical Error")
 

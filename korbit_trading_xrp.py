@@ -16,7 +16,7 @@ if __name__ == "__main__":
     ## Select Ticker source
     use_exchange_inquiry = True
     ### Vriables
-    testing = False
+    testing = True
     coin = 'xrp'
     limit = 0.97
     currency = 'xrp_krw'
@@ -28,7 +28,7 @@ if __name__ == "__main__":
     algo_priority = {"Big Slump":10, "Midium Slump":9, "Little Slump": 8, "Baby Slump":7}
     ## multi trader for water ride
     #traders = {'dongwkim-trader1':False, 'dongwkim-trader2':False,'dongwkim-trader3': False}
-    num_traders = 7
+    num_traders = 5
     traders = OrderedDict()
     for i in range(num_traders):
         traders[redisUser+'-trader'+str(i+1)] = False
@@ -53,11 +53,11 @@ if __name__ == "__main__":
         showhtml = False
     ## Linux
     else:
-        secFilePath='/usb/s1/key/korbit_key.csv'
+        secFilePath='/korbit_key.csv'
         #redisHost = '39.115.53.33'
-        redisHost = 'localhost'
-        redisPort = 16379
-        showhtml = True
+        redisHost = 'crypto-redis-1'
+        redisPort = 6379
+        showhtml = False
     redisUser = 'dongwkim'
 
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
     # Redis initialize
     #myorder.initConnection(redisHost, redisPort, redisUser, 'RlawjddmsrotoRl#12', 'xrp')
-    myorder.initConnection(redisHost, redisPort, redisUser, None, 'xrp')
+    myorder.initConnection(redisHost, redisPort, redisUser, 'We$come!', 'xrp')
 
     #refresh token by redis
     mytoken = myorder.getAccessToken()
@@ -143,11 +143,11 @@ if __name__ == "__main__":
             end = time.time()
 
             lat = int((end - start)*100)
-            last = int(ticker['last'])
-            bid = int(ticker['bid'])
-            ask = int(ticker['ask'])
-            low = int(ticker['low'])
-            high = int(ticker['high'])
+            last = float(ticker['last'])
+            bid = float(ticker['bid'])
+            ask = float(ticker['ask'])
+            low = float(ticker['low'])
+            high = float(ticker['high'])
 
         ############################################
         # Use Redis Price inquiry
@@ -182,7 +182,7 @@ if __name__ == "__main__":
 
                 ## Create new one miniute List Dictionary
                 one_min_tx =  hr_tx[0:one_min_pos]
-                tx_1min_price_avg = last if one_min_pos is 0 else (sum(int(tx['price']) for tx in one_min_tx)) / one_min_pos
+                tx_1min_price_avg = last if one_min_pos is 0 else (sum(float(tx['price']) for tx in one_min_tx)) / one_min_pos
 
                 tx_1min_price_max = last if one_min_pos is 0 else max(one_min_tx, key=lambda x:x['price'])['price']
                 tx_1min_price_min = last if one_min_pos is 0 else min(one_min_tx, key=lambda x:x['price'])['price']
@@ -193,7 +193,7 @@ if __name__ == "__main__":
                                 'tx_1min_price_delta': tx_1min_price_delta}
                 ## Create new ten miniute List Dictionary
                 ten_min_tx =  hr_tx[0:ten_min_pos]
-                tx_10min_price_avg = last if ten_min_pos is 0 else (sum(int(tx['price']) for tx in ten_min_tx)) / ten_min_pos
+                tx_10min_price_avg = last if ten_min_pos is 0 else (sum(float(tx['price']) for tx in ten_min_tx)) / ten_min_pos
 
                 tx_10min_price_max = last if ten_min_pos is 0 else max(ten_min_tx, key=lambda x:x['price'])['price']
                 tx_10min_price_min = last if ten_min_pos is 0 else min(ten_min_tx, key=lambda x:x['price'])['price']
@@ -205,7 +205,7 @@ if __name__ == "__main__":
 
                 ## Hour transactions
                 hr_tx_len = len(hr_tx)
-                tx_hr_price_avg = (sum(int(tx['price']) for tx in hr_tx) / hr_tx_len)
+                tx_hr_price_avg = (sum(float(tx['price']) for tx in hr_tx) / hr_tx_len)
                 tx_hr_time_delta = (float(hr_tx[0]['timestamp']) - float(hr_tx[hr_tx_len - 1]['timestamp']))//1000
                 tx_hr_price_delta = float(hr_tx[0]['price']) - float(hr_tx[hr_tx_len - 1]['price'])
                 tx_hr_price_max = max(hr_tx, key=lambda x:x['price'])['price']
@@ -221,13 +221,13 @@ if __name__ == "__main__":
             # print trading stats to text
             curr_balance = int(balance['trade_in_use']) + int(balance['available']) + float(coin_balance['available']) * last + float(coin_balance['trade_in_use']) * last
             if testing:
-                print( "{:20s} | TEST  | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {:4d}/{:4d}/{:4.3f} | Delta: {:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} | deal ({}) | bal:{,:d}  ".format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,myorder.total_bidding,int(curr_balance)))
+                print( "{:20s} | TEST  | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {:4f}/{:4f}/{:4.3f} | Delta: {:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} | deal ({}) | bal:{:,d}  ".format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,myorder.total_bidding,int(curr_balance)))
             else:
                 print( "{:20s} | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {:4d}/{:4d}/{:4.3f} | Delta: {:3.0f}({:3.1f}%)/{:3.0f}({:3.1f}%)/{:3.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} | deal ({}) | bal:{:,d}  ".format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,myorder.total_bidding,int(curr_balance)))
             # Create HTML for realtime view
             if showhtml == True:
                 #myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_10min_price_delta, tx_hr_price_delta,myorder.buy_price, myorder.sell_price, myorder.algorithm, myorder.total_bidding, int(curr_balance) , lat)
-                myorder.genHTML('/usb/s1/nginx/html/index.html',ctime, last,tx_hr_price_avg,tx_10min_price_delta, tx_hr_price_delta,myorder.buy_price, myorder.sell_price, myorder.algorithm,list(traders)[c_trader] , int(curr_balance) , lat)
+                myorder.genHTML('/nginx/html/index.html',ctime, last,tx_hr_price_avg,tx_10min_price_delta, tx_hr_price_delta,myorder.buy_price, myorder.sell_price, myorder.algorithm,list(traders)[c_trader] , int(curr_balance) , lat)
 
             ######################################
             ##  Switch Traders
