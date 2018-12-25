@@ -9,6 +9,7 @@ import XRPManagerSimul as xrpmgrsimul
 from platform import system
 import algo
 import SendNotificationEmail
+import PushTicker
 from collections import OrderedDict
 
 if __name__ == "__main__":
@@ -20,7 +21,8 @@ if __name__ == "__main__":
     coin = 'xrp'
     limit = 0.97
     currency = 'xrp_krw'
-    debug = True
+    debug = False
+    mongopush = True
     total_bidding = 0
     redisUser = 'dongwkim'
 
@@ -67,6 +69,11 @@ if __name__ == "__main__":
 
     # Korbit order class
     myorder = xrpmgrsimul.XRPManagerSimul('ACTUAL')
+
+    # Mongo push class
+    if mongopush:
+        mymongo = PushTicker.ToMongo()
+        mymongo.initMongo('crypto-mongo-1', 27017, 'crypto', 'korbit_ticker')
 
     # Redis initialize
     #myorder.initConnection(redisHost, redisPort, redisUser, 'RlawjddmsrotoRl#12', 'xrp')
@@ -148,6 +155,7 @@ if __name__ == "__main__":
             ask = float(ticker['ask'])
             low = float(ticker['low'])
             high = float(ticker['high'])
+            volume = float(ticker['volume'])
 
         ############################################
         # Use Redis Price inquiry
@@ -163,6 +171,11 @@ if __name__ == "__main__":
                 #print("{:20s} | DEBUG | {} {} ".format(myorder.getStrTime(ticker['timestamp']),myorderlist,dict(traders)))
                 logging.info("{:20s} | DEBUG | {} {} ".format(myorder.getStrTime(ticker['timestamp']),myorderlist,dict(traders)))
                 s_order = time.time()
+
+            # Push tickers to mongo
+            if mongopush:
+                myticker = {"timestamp" : ticker['timestamp'], "last": last, "bid": bid ,"ask" : ask, "low": low, "high": high, "volume": volume}
+                mymongo.insertOne(myticker)
             # refresh access token by redis
             mytoken = myorder.getAccessToken()
             header = {"Authorization": "Bearer " + mytoken}
@@ -349,7 +362,7 @@ if __name__ == "__main__":
                         print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),bidorder['currencyPair'],'Buy',str(myorder.order_id) ,str(order_status), elapsed))
                     elif testing:
                         bidorder = {"orderId": 12345, "status": "success", "currencyPair" : "xrp_krw" }
-                        order_status == 'success' 
+                        order_status = 'success' 
                 except:
                     print("{} | {}, Order status is {} ".format(myorder.getStrTime(stime),'Order Failed, Pass..',bidorder['status']))
                     print("{} | {}".format(myorder.getStrTime(stime),'Reset parameter to zero and mark order_status to failed'))
