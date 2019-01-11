@@ -10,6 +10,7 @@ import time
 import datetime
 import logging
 import pymongo
+import pytz
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
@@ -96,6 +97,14 @@ class KorbitBase:
         epoch_time = int(time.mktime(time.strptime(str_time, "%Y-%m-%d %H:%M:%S"))*1000)
         return epoch_time
 
+    def getEpochUtc(self,str_time):
+        source_timestamp = datetime.datetime.strptime(str_time,'%Y-%m-%d %H:%M:%S')
+        target_timestamp = source_timestamp - datetime.timedelta(hours=9)
+        print(target_timestamp)
+        utc_epoch = int(target_timestamp.strftime('%s'))*1000
+        print(utc_epoch)
+        return int(utc_epoch)
+
 
     def printCurrentTime(self, pTimestamp):
         print(datetime.datetime.fromtimestamp(pTimestamp).strftime('%Y-%m-%d %H:%M:%S'))
@@ -147,9 +156,6 @@ class KorbitBase:
         str_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(epoch_time//1000))
         return str_time
 
-    def getEpochTime(self,str_time):
-        epoch_time = int(time.mktime(time.strptime(str_time, "%Y-%m-%d %H:%M:%S"))*1000)
-        return epoch_time
     # Print real-time trading , need to use Flask or Django
     def genHTML(self,path,ctime,last, tx_hr_price_avg, tx_10min_price_delta, tx_hr_price_delta, buy_price,sell_price, algorithm, trader, curr_balance, lat ):
         html = '<meta http-equiv="refresh" content="3"> \

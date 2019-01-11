@@ -72,8 +72,11 @@ if __name__ == "__main__":
 
     # Mongo push class
     if mongopush:
-        mymongo = PushTicker.ToMongo()
-        mymongo.initMongo('crypto-mongo-1', 27017, 'crypto', 'korbit_ticker')
+        try:
+            mymongo = PushTicker.ToMongo()
+            mymongo.initMongo('crypto-mongo-1', 27017, 'crypto', 'korbit_ticker')
+        except:
+            print("Could not connect to Mongo!")
 
     # Redis initialize
     #myorder.initConnection(redisHost, redisPort, redisUser, 'RlawjddmsrotoRl#12', 'xrp')
@@ -140,22 +143,23 @@ if __name__ == "__main__":
         # Use exchage Price inquiry
         ############################################
         if use_exchange_inquiry:
-            start = time.time()
+            t_start = time.time()
             try:
                 ticker = myorder.doGet('ticker/detailed', currency_pair = currency)
                 #min_tx = get('transactions', currency_pair = currency, time='minute')
                 hr_tx = myorder.doGet('transactions', currency_pair = currency, time='hour')
             except:
                 pass
-            end = time.time()
+            t_end = time.time()
 
-            lat = int((end - start)*100)
+            lat = int((t_end - t_start)*100)
             last = float(ticker['last'])
             bid = float(ticker['bid'])
             ask = float(ticker['ask'])
             low = float(ticker['low'])
             high = float(ticker['high'])
             volume = float(ticker['volume'])
+
 
         ############################################
         # Use Redis Price inquiry
@@ -171,11 +175,9 @@ if __name__ == "__main__":
                 #print("{:20s} | DEBUG | {} {} ".format(myorder.getStrTime(ticker['timestamp']),myorderlist,dict(traders)))
                 logging.info("{:20s} | DEBUG | {} {} ".format(myorder.getStrTime(ticker['timestamp']),myorderlist,dict(traders)))
                 s_order = time.time()
+            if debug:
+                logging.info("{:20s} | DEBUG | Ticker Query time is :{:3.1f} ms".format(myorder.getStrTime(time.time()*1000),(t_end- t_start) * 1000 ))
 
-            # Push tickers to mongo
-            if mongopush:
-                myticker = {"timestamp" : ticker['timestamp'], "last": last, "bid": bid ,"ask" : ask, "low": low, "high": high, "volume": volume}
-                mymongo.insertOne(myticker)
             # refresh access token by redis
             mytoken = myorder.getAccessToken()
             header = {"Authorization": "Bearer " + mytoken}
@@ -230,8 +232,23 @@ if __name__ == "__main__":
             else:
                 pass
 
+            # Push tickers to mongo
+            if mongopush:
 
-            # print trading stats to text
+                mongo_s = time.time()
+                try:
+                    myticker = {"timestamp" : ticker['timestamp'], "last": last, "bid": bid ,"ask" : ask, "low": low, "high": high, "volume": volume}
+                    mymongo.insertOne(myticker)
+                except: 
+                    print("Mongo Server not available")
+                mongo_e = time.time()
+                if debug:
+                    mongo_e = time.time()
+                    mongo_elap = mongo_e - mongo_s
+                    logging.info("{:20s} | DEBUG | Mongo Ticker Insert Time | {:3.2f} ms ".format(myorder.getStrTime(time.time()*1000), mongo_elap*1000))
+                    
+
+            # Print trading stats to text
             curr_balance = int(balance['trade_in_use']) + int(balance['available']) + float(coin_balance['available']) * last + float(coin_balance['trade_in_use']) * last
             if testing:
                 print( "{:20s} | TEST  | Price: p:{}/b:{}/a:{}/l:{} | Buy/Sell/Vol: {:4f}/{:4f}/{:4.3f} | Delta: {:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%)/{:4.0f}({:3.1f}%) Avg: {:4.0f}/{:4.0f} | deal ({}) | bal:{:,d}  ".format(myorder.getStrTime(ticker['timestamp']), last, bid,ask, int(high * limit), myorder.buy_price, myorder.sell_price, myorder.sell_volume, tx_hr_price_delta,float(tx_hr_price_delta/tx_hr_price_avg*100),tx_10min_price_delta,float(tx_10min_price_delta/tx_hr_price_avg*100), tx_1min_price_delta,float(tx_1min_price_delta/tx_hr_price_avg*100),tx_hr_price_avg, tx_10min_price_avg,myorder.total_bidding,int(curr_balance)))
@@ -362,7 +379,10 @@ if __name__ == "__main__":
                         print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),bidorder['currencyPair'],'Buy',str(myorder.order_id) ,str(order_status), elapsed))
                     elif testing:
                         bidorder = {"orderId": 12345, "status": "success", "currencyPair" : "xrp_krw" }
+                        myorder.order_id = "12345"
                         order_status = 'success' 
+                        elapsed = int(time.time() * 1000 - stime)
+                        print("{} | {} {:7s}: id# {:10s} is {:15s} {:3d}ms".format(myorder.getStrTime(stime),bidorder['currencyPair'],'Buy',str(myorder.order_id) ,str(order_status), elapsed))
                 except:
                     print("{} | {}, Order status is {} ".format(myorder.getStrTime(stime),'Order Failed, Pass..',bidorder['status']))
                     print("{} | {}".format(myorder.getStrTime(stime),'Reset parameter to zero and mark order_status to failed'))
@@ -611,6 +631,6 @@ if __name__ == "__main__":
             ## Debug Time lapse
             if debug:
                 e_order = time.time()
-                #print("{:20s} | DEBUG | One Iteration Time is :{:3.1f} ms".format(myorder.getStrTime(time.time()*1000),(e_order - s_order) * 1000 ))
+                logging.info("{:20s} | DEBUG | One Iteration Time is :{:3.1f} ms".format(myorder.getStrTime(time.time()*1000),(e_order - s_order) * 1000 ))
 
         prev_ticker = ticker
