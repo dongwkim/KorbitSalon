@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 from KorbitBase import *
+from ToMongo import *
 import threading
 from statistics import mean
 import datetime as dt
 
-class XRPManagerSimul(KorbitBase):
+class simul(ToMongo):
     def __init__(self, pMode):
         super().__init__()
         self.minuteUnit = 60 #60sec
@@ -16,15 +17,14 @@ class XRPManagerSimul(KorbitBase):
         self.managerMode = pMode
         self.resultSave = []
 
-    def getTicker(self, pTimestamp, pRedisResult):
-        tickerDetail = pRedisResult[0].split (':')
+    def getTicker(self, pTimestamp, pMongoResult):
 
-        self.myDictionary['last'] = tickerDetail[0]
-        self.myDictionary['bid'] = tickerDetail[1]
-        self.myDictionary['ask'] = tickerDetail[2]
-        self.myDictionary['low'] = tickerDetail[3]
-        self.myDictionary['high'] = tickerDetail[4]
-        self.myDictionary['timestamp'] = tickerDetail[5]
+        self.myDictionary['last'] = pMongoResult['last']
+        self.myDictionary['bid'] = pMongoResult['bid']
+        self.myDictionary['ask'] = pMongoResult['ask']
+        self.myDictionary['low'] = pMongoResult['low']
+        self.myDictionary['high'] = pMongoResult['high'] 
+        self.myDictionary['timestamp'] = pMongoResult['timestamp']
 
     def getDelta(self, pCurrentTime, pTimeDelta):
         cTimestamp = pCurrentTime
@@ -32,16 +32,18 @@ class XRPManagerSimul(KorbitBase):
         pTimestamp = cTimestamp - (self.minuteUnit * pTimeDelta * 1000)
         #self.printCurrentTime(pTimestamp)
         # get price from baseline and current time
-        redisResult=self.redisCon.zrangebyscore(self.myCurrency, pTimestamp, cTimestamp)
+        delta_dict = {'timestamp':{'$gte':pTimestamp, '$lt':cTimestamp}}
+        rangeResult = self.findRange(delta_dict)
         firstIndex = 0
-        lastIndex = len(redisResult) - 1
+        lastIndex =  0 if rangeResult.count() is 0  else rangeResult.count() - 1 
         #print(str(pTimestamp)+":"+str(cTimestamp))
 
-        firstPriceArray = redisResult[firstIndex].split (':')
-        lastPriceArray = redisResult[lastIndex].split (':')
-        firstPrice = int(firstPriceArray[0])
-        lastPrice = int(lastPriceArray[0])
-        priceDelta = lastPrice-firstPrice
+        try: 
+            firstPrice = float(rangeResult[firstIndex]['last'])
+            lastPrice = float(rangeResult[lastIndex]['last'])
+            priceDelta = lastPrice-firstPrice
+        except IndexError:
+            priceDelta = 0
         #print ("firstPrice :" + str(firstPrice) + " lastPrice: " + str(lastPrice) + " delta:" + str(priceDelta))
         return priceDelta
 
@@ -49,18 +51,10 @@ class XRPManagerSimul(KorbitBase):
         #cTimestamp = int(time.time()*1000)
         cTimestamp = pCurrentTime
         pTimestamp = cTimestamp - (self.minuteUnit * pTimeDelta*1000)
-        redisResult=self.redisCon.zrangebyscore(self.myCurrency, pTimestamp, cTimestamp)
-        firstIndex = 0
-        bucket =[]
-        lastIndex = len(redisResult) - 1
-        for firstIndex in range(lastIndex):
-            pPrice=int(redisResult[firstIndex].split (':')[0])
-            bucket.append(pPrice)
+        avg_dict = [{ "$match":{"timestamp": {"$gte": pTimestamp, "$lt": cTimestamp}}} ,{'$group' : {"_id": "null", "average": {"$avg" : "$last"}}}]
+        rangeResult = self.findAgg(avg_dict)
 
-        if not bucket:
-            return 0
-        else:
-            return mean(bucket)
+        return [i['average'] for i in rangeResult][0]
 
     def isDataExist(self, pTimestamp):
         if (self.managerMode == 'ACTUAL'):
@@ -111,3 +105,12 @@ class XRPManagerSimul(KorbitBase):
 
     def printCurrentTime(self, pTimestamp):
         print(datetime.datetime.fromtimestamp(pTimestamp).strftime('%Y-%m-%d %H:%M:%S'))
+
+if __name__  == '__main__':
+
+    mysimul = simul('simul')
+    mysimul.initMongo('crypto-mongo-1','27017','crypto','korbit_ticker')
+    current_time = mysimul.getEpochTime('2019-1-13 23:12:22')
+    delta = mysimul.getDelta(current_time ,10)
+    average = mysimul.getAverage(current_time ,10)
+    print("delta: {}, average {}".format(delta,average))

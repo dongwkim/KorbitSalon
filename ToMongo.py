@@ -30,17 +30,35 @@ class ToMongo(KorbitBase):
         except ConnectionFailure:
             print("{:20s} | MongoDB is not responsed in a second!".format(""))
 
+    def findAgg(self,mydict):
+        try:
+            return self.col.aggregate(mydict)
+        except ConnectionFailure:
+            print("{:20s} | MongoDB is not responsed in a second!".format(""))
+
 
 if __name__ == "__main__":
 
     mymongo = ToMongo()
-    search_stime = mymongo.getEpochTime('2019-01-12 01:41:00')
-    search_etime = mymongo.getEpochTime('2019-01-12 01:45:00')
+    search_stime = mymongo.getEpochTime('2019-01-13 00:43:00')
+    search_etime = mymongo.getEpochTime('2019-01-13 00:57:00')
     #print(search_stime)
     #my_one_find = { "timestamp": search_time}
     my_range_find = { "timestamp": {'$gte': search_stime, '$lt': search_etime}}
     mymongo.initMongo('crypto-mongo-1',27017,'crypto','korbit_ticker')
-    for doc in  mymongo.findRange(my_range_find):
-        print(doc)
+
+    timestamplist = []
+    out = mymongo.findRange(my_range_find)
+
+    for ticker in  out:
+        print(ticker)
+        timestamplist.append(ticker['timestamp'])
+    timestamplist.sort()
+    print(timestamplist)
+    my_range_aggr = [{ "$match":{"timestamp": {"$gte": search_stime, "$lt": search_etime}}} ,{'$group' : {"_id": "null", "average": {"$avg" : "$last"}}}]
+    findagg = mymongo.findAgg(my_range_aggr)
+    [ print(i['average']) for i in findagg ]
+
+
 
 
