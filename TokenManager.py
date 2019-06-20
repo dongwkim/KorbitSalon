@@ -108,7 +108,7 @@ if __name__ == "__main__":
             redisHost = 'localhost'
             redisPort = 16379
         elif (redisUser == "dongwkim"):
-            secFilePath='/usb/s1/key/korbit_key.csv'
+            secFilePath='/korbit/key/korbit_key.csv'
             redisHost = 'localhost'
             redisPort = 16379
         else:
