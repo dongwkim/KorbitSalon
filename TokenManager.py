@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/bin/python3
 import csv
 import json
 import requests
@@ -97,7 +97,7 @@ class TokenManager:
 if __name__ == "__main__":
     redisUser = os.environ['redisUser']
     #redisPassword = 'RlawjddmsrotoRl#12'
-    redisPassword = 'We$come!'
+    redisPassword = 'We1come$'
 
     if system() is 'Windows':
         secFilePath='c:/Users/dongwkim/Keys/korbit_key.csv'
@@ -109,8 +109,8 @@ if __name__ == "__main__":
             redisHost = 'localhost'
             redisPort = 16379
         elif (redisUser == "dongwkim"):
-            secFilePath='/korbit_key.csv'
-            redisHost = 'crypto-redis-1'
+            secFilePath='/korbit/keys/korbit.key'
+            redisHost = '10.0.0.6'
             redisPort = 6379
         else:
             print("Critical Error")

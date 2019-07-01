@@ -55,9 +55,9 @@ if __name__ == "__main__":
         showhtml = False
     ## Linux
     else:
-        secFilePath='/korbit_key.csv'
+        secFilePath='/korbit/keys/korbit.key'
         #redisHost = '39.115.53.33'
-        redisHost = 'crypto-redis-1'
+        redisHost = 'korbitsalon-redis1'
         redisPort = 6379
         showhtml = False
     redisUser = 'dongwkim'
@@ -74,13 +74,14 @@ if __name__ == "__main__":
     if mongopush:
         try:
             mymongo = PushTicker.ToMongo()
-            mymongo.initMongo('crypto-mongo-1', 27017, 'crypto', 'korbit_ticker')
+            #mymongo.initMongo('korbitsalon-mongo1', 27017, 'crypto', 'korbit_ticker')
+            mymongo.initMongo('korbitsalon-mongo1', 27017, 'crypto', 'xrp_ticker')
         except:
             print("Could not connect to Mongo!")
 
     # Redis initialize
     #myorder.initConnection(redisHost, redisPort, redisUser, 'RlawjddmsrotoRl#12', 'xrp')
-    myorder.initConnection(redisHost, redisPort, redisUser, 'We$come!', 'xrp')
+    myorder.initConnection(redisHost, redisPort, redisUser, 'We1come$', 'xrp')
 
     #refresh token by redis
     mytoken = myorder.getAccessToken()

@@ -1,6 +1,6 @@
-#!/usr/bin/python3
+#!/bin/python3
 from KorbitBase import *
-from ToMongo import *
+from PushTicker import *
 import threading
 from statistics import mean
 import datetime as dt
@@ -109,8 +109,8 @@ class simul(ToMongo):
 if __name__  == '__main__':
 
     mysimul = simul('simul')
-    mysimul.initMongo('crypto-mongo-1','27017','crypto','korbit_ticker')
-    current_time = mysimul.getEpochTime('2019-1-13 23:12:22')
+    mysimul.initMongo('korbitsalon-mongo1','27017','crypto','xrp_ticker')
+    current_time = mysimul.getEpochTime('2019-06-27 00:00:00')
     delta = mysimul.getDelta(current_time ,10)
     average = mysimul.getAverage(current_time ,10)
     print("delta: {}, average {}".format(delta,average))

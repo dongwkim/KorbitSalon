@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/bin/python3
 '''
 author             : kiwon.yoon
 purpose            : Sending notificatin email
@@ -35,7 +35,8 @@ class SendNotificationEmail:
         
 if __name__ == "__main__":
     fromEmail = "notification@cryptosalon.org"
-    toEmail = "tairu.kim@gmail.com"
+    #toEmail = "tairu.kim@gmail.com"
+    toEmail = "dongwook.kim@oracle.com"
     emailSubject = "Test {} Coin at price {}".format('X','Y')
 
     sne = SendNotificationEmail()
