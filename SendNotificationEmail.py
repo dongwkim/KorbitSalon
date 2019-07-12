@@ -34,7 +34,8 @@ class SendNotificationEmail:
         return emailBody
         
 if __name__ == "__main__":
-    fromEmail = "notification@cryptosalon.org"
+    #fromEmail = "notification@cryptosalon.org"
+    fromEmail = "dongwook.kim@oracle.com"
     #toEmail = "tairu.kim@gmail.com"
     toEmail = "dongwook.kim@oracle.com"
     emailSubject = "Test {} Coin at price {}".format('X','Y')

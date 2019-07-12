@@ -1,11 +1,16 @@
 #!/bin/bash
-runcnt=`ps -ef|grep korbit_traing_xrtp  | wc -l`
+while true
+do
+runcnt=`ps -ef|grep korbit_trading_xrp  | wc -l`
 stamp=`date +%Y%m%d`
-if [[ $runcnt == 1 ]]
+timestamp=`date +%Y%m%d-%H%M`
+if [[ $runcnt == 2 ]]
 then
-  echo "Trading is running"
+  echo $timestamp " :Trading is running"
 else
-  echo "Restart Trader"
+  echo $timestamp " :Restart Trader"
   ps -ef |grep korbit_trading_xrp |grep -v 'grep' | awk '{print $2}' | xargs kill -9
   nohup /bin/python3 -u /korbit/KorbitSalon/korbit_trading_xrp.py >> /korbit/KorbitSalon/tracelog/trading_xrp.$stamp.log &
 fi
+sleep 60
+done

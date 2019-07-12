@@ -110,7 +110,7 @@ if __name__  == '__main__':
 
     mysimul = simul('simul')
     mysimul.initMongo('korbitsalon-mongo1','27017','crypto','xrp_ticker')
-    current_time = mysimul.getEpochTime('2019-06-27 00:00:00')
+    current_time = mysimul.getEpochTime('2019-07-01 00:00:00')
     delta = mysimul.getDelta(current_time ,10)
     average = mysimul.getAverage(current_time ,10)
     print("delta: {}, average {}".format(delta,average))

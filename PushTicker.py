@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     mymongo = ToMongo()
     search_stime = mymongo.getEpochTime('2019-06-30 00:00:00')
-    search_etime = mymongo.getEpochTime('2019-07-02 00:57:00')
+    search_etime = mymongo.getEpochTime('2019-07-05 00:57:00')
     #print(search_stime)
     #my_one_find = { "timestamp": search_time}
     my_range_find = { "timestamp": {'$gte': search_stime, '$lt': search_etime}}
@@ -52,10 +52,10 @@ if __name__ == "__main__":
     out = mymongo.findRange(my_range_find)
 
     for ticker in  out:
-        print(ticker)
+        #print(ticker)
         timestamplist.append(ticker['timestamp'])
     timestamplist.sort()
-    print(timestamplist)
+    print(len(timestamplist))
     my_range_aggr = [{ "$match":{"timestamp": {"$gte": search_stime, "$lt": search_etime}}} ,{'$group' : {"_id": "null", "average": {"$avg" : "$last"}}}]
     findagg = mymongo.findAgg(my_range_aggr)
     [ print(i['average']) for i in findagg ]
