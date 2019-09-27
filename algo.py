@@ -25,7 +25,7 @@ class algo:
         ''' Prevent Buy call when last price is less than hr/10min average
             limit : Buy position price limitation pecentage
         '''
-        if self.last < float(self.high) * limit/100 and self.last <= self.tx_hr_price_avg and self.last <= self.tx_10min_price_avg and self.ask <= float(self.last + 4 ) and self.ask - self.bid < 4:
+        if self.last < float(self.high) * limit/100 and self.last <= self.tx_hr_price_avg and self.last <= self.tx_10min_price_avg and self.ask <= float(self.last + 2 ) and self.ask - self.bid < 4:
             return True
         else:
             return False
@@ -38,8 +38,10 @@ class algo:
             p4  : 10min > 1hr ratio
             p5  : bias on slump type, if up and down set to 0 , if down and down set to -9999
         '''
+#        if self.tx_1min_price_delta < -(self.tx_hr_price_avg * p1/100) or \
+#         (self.tx_1min_price_delta > 0 and self.tx_1min_price_delta < (p2/100 * self.tx_hr_price_avg) and self.tx_10min_price_delta < -(self.tx_hr_price_avg * p3/100) and self.tx_hr_price_delta < self.tx_10min_price_delta * p4 and self.tx_hr_price_delta > p5/100 * self.tx_hr_price_avg):
         if self.tx_1min_price_delta < -(self.tx_hr_price_avg * p1/100) or \
-         (self.tx_1min_price_delta > 0 and self.tx_1min_price_delta < (p2/100 * self.tx_hr_price_avg) and self.tx_10min_price_delta < -(self.tx_hr_price_avg * p3/100) and self.tx_hr_price_delta < self.tx_10min_price_delta * p4 and self.tx_hr_price_delta > p5/100 * self.tx_hr_price_avg):
+         (self.tx_1min_price_delta > 0 and self.tx_1min_price_delta < 5 and self.tx_10min_price_delta < -(self.tx_hr_price_avg * p3/100) and self.tx_hr_price_delta < self.tx_10min_price_delta * p4 and self.tx_hr_price_delta > p5/100 * self.tx_hr_price_avg):
             return True
         else:
             return False
@@ -51,7 +53,7 @@ class algo:
             p3  : 1h slump percentage
         '''
         #if (self.last < self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_1min_price_delta > -(p2/100 * self.tx_hr_price_avg)) :
-        if (self.last <= self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_10min_price_delta > (p2/100 * self.tx_hr_price_avg)) and (self.tx_1min_price_delta > -3) and (self.tx_hr_price_delta > self.tx_hr_price_avg * p3/100):
+        if (self.last <= self.tx_hr_price_avg * (100 - p1)/100) and (self.tx_10min_price_delta > (p2/100 * self.tx_hr_price_avg)) and (self.tx_1min_price_delta > -2) and (self.tx_hr_price_delta > self.tx_hr_price_avg * p3/100):
             return True
         else:
             return False

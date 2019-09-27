@@ -81,11 +81,12 @@ class ToMongo(KorbitBase):
 
     def getDelta(self,currentTimestamp, intv):
         delta = 0
-        agg = [{"$match":{"timestamp": {"$gte": currentTimestamp - intv*60*1000, "$lt": currentTimestamp}}},{"$group": { "_id": "null","minlast":{"$min":"$last"},"maxlast":{"$max":"$last"}}}]
+        #agg = [{"$match":{"timestamp": {"$gte": currentTimestamp - intv*60*1000, "$lt": currentTimestamp}}},{"$group": { "_id": "null","minlast":{"$min":"$last"},"maxlast":{"$max":"$last"}}}]
+        agg = [{"$match":{"timestamp": {"$gte": currentTimestamp - intv*60*1000, "$lt": currentTimestamp}}},{"$sort":{"timestamp":1}},{"$group": { "_id": "null","first":{"$first":"$last"},"last":{"$last":"$last"}}}]
         mdbout = self.findAgg(agg)
         for i in mdbout:
             #print(i['maxlast'] , i['minlast'])
-            delta = i['maxlast'] - i['minlast'] 
+            delta = i['last'] - i['first'] 
         return round(delta,2)
 
     def getAverage(self,currentTimestamp, intv):
@@ -115,11 +116,15 @@ if __name__ == "__main__":
         tslist.append(ticker['timestamp'])
     tslist.sort()
     #print(len(tslist))
-    my_range_aggr = [{ "$match":{"timestamp": {"$gte": search_stime, "$lt": search_etime}}} ,{'$group' : {"_id": "null", "average": {"$avg" : "$last"}}}]
+    #my_range_aggr = [{ "$match":{"timestamp": {"$gte": search_stime, "$lt": search_etime}}} ,{'$group' : {"_id": "null", "average": {"$avg" : "$last"}}}]
+    my_range_aggr = [{ "$match":{"timestamp": {"$gte": search_stime, "$lt": search_etime}}},{"$sort":{"timestamp":1}} ,{'$group' : {"_id": "null", "first":{"$first":"$last"},"last":{"$last":"$last"}}}]
     my_one = { "timestamp": 1567961286036 }
-    findone = mymongo.findOne(my_one)
-    findagg = mymongo.getValues(1567961286036)
-    print(findagg)
+    #findone = mymongo.findOne(my_one)
+    findone = mymongo.findAgg(my_range_aggr)
+    for i in findone:
+        print(i)
+    #findagg = mymongo.getValues(1567961286036)
+    #print(findagg)
     #findagg = mymongo.findAgg(my_range_aggr)
     #[ print(i['average']) for i in findagg ]
 

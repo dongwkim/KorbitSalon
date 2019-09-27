@@ -20,11 +20,11 @@ if __name__ == "__main__":
 
     #  Mongo Connection #
     mdb = ToMongo()
-    mdb.initMongo('korbitsalon-mongo1',27017,'crypto','xrp_ticker')
+    mdb.initMongo('korbitsalon-mongo1',27017,'crypto',crypto)
     tslist = []
 
-    start_time = mdb.getEpochTime('2019-09-01 01:00:00')
-    end_time = mdb.getEpochTime('2019-09-02 00:00:00')
+    #start_time = mdb.getEpochTime('2019-09-25 04:00:00')
+    #end_time = mdb.getEpochTime('2019-09-25 06:00:00')
 
     ## Select Ticker source
     use_exchange_inquiry = True
@@ -105,7 +105,7 @@ if __name__ == "__main__":
 
     loop_outsider_timer = time.time()
 
-    for ptime in tslist[start_pos:end_pos:5]:
+    for ptime in tslist[start_pos:end_pos:1]:
 
     #while start_time <= end_time:
 
@@ -198,22 +198,8 @@ if __name__ == "__main__":
             # Create New Algorithm Instance
             myalgo = algo.algo(tx_1min_stat, tx_10min_stat, tx_hr_stat, ticker)
 
-            # Put your Algorithm here
-            if not xrpm.bidding and not xrpm.trading and myalgo.basic(95) and  myalgo.slump(5, 0.5, 2, 2.0, -9999):
-                print("{:20s} | \033[95mHit {} Algorithm\033[0m | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
-                .format(xrpm.getStrTime(int(ptime)), "Big Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
-                xrpm.bidding = True
-                benefit = 0.45
-                algorithm = 'Big Slump'
-            ## Midium Slump Algorithm
-            elif not xrpm.bidding and not xrpm.trading and myalgo.basic(95) and  myalgo.slump(2, 0.2, 1, 1.3 , -9999 ):
-                print("{:20s} | Hit {} Algorithm | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
-                .format(xrpm.getStrTime(int(ptime)), "Midium Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
-                xrpm.bidding = True
-                benefit = 0.032
-                algorithm = 'Midium Slump'
             ## Little Slump Algorithm
-            elif not xrpm.bidding and myalgo.basic(95) and myalgo.slump(2, 0.2, 1, 1.2 , -9999 ):
+            if not xrpm.bidding and myalgo.basic(95) and myalgo.slump(5, 1.0, 3.0, 1.5 , -9999 ):
                 print("{:20s} | \033[95mHit {} Algorithm\033[0m | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Little Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 xrpm.bidding = True
@@ -221,17 +207,10 @@ if __name__ == "__main__":
                 algorithm = 'Little Slump'
                 if c_trader != 0:
                     benefit = 0.032
-            ## Baby Slump Algorithm
-            elif not xrpm.bidding and not xrpm.trading \
-              and myalgo.slump(7, 0.9, 2.0, 4.0 , -9999 ) and myalgo.basic(97) :
-                print("{:20s} | \033[95mHit {} Algorithm\033[0m | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
-                .format(xrpm.getStrTime(int(ptime)), "Baby Slump", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
-                xrpm.bidding = True
-                benefit = 0.032
-                algorithm = 'Baby Slump'
+            """
             ## Regresssion
             elif not xrpm.bidding and not xrpm.trading \
-              and myalgo.reversion(3,-2,-2) and myalgo.basic(97) :
+              and myalgo.reversion(1.5,-1,-1) and myalgo.basic(97) :
                 print("{:20s} | \033[95mHit {} Algorithm\033[0m | price:{} delta:{}/{}/{} avg:{:4.0f}/{:4.0f}"\
                 .format(xrpm.getStrTime(int(ptime)), "Avg Regression", ticker['last'], tx_hr_stat['tx_hr_price_delta'], tx_10min_stat['tx_10min_price_delta'], tx_1min_stat['tx_1min_price_delta'], tx_hr_stat['tx_hr_price_avg'], tx_10min_stat['tx_10min_price_avg']))
                 xrpm.bidding = True
@@ -239,6 +218,7 @@ if __name__ == "__main__":
                 algorithm = 'Avg Regression'
 
 
+            """
             #Buy Position
             if not xrpm.trading and xrpm.bidding:
                 xrpm.buy_price = int(ticker['ask'])
@@ -249,7 +229,7 @@ if __name__ == "__main__":
                 order_id = '12345'
                 xrpm.trading = True
                 xrpm.bidding = True
-                order_savepoint = {"type": "bid", "orderid" : order_id, "sell_volume" : xrpm.sell_volume, "sell_price": xrpm.sell_price, "currency_pair": currency, "algorithm" : algorithm, "trading": xrpm.trading, "bidding": xrpm.bidding, "money": money, "buy_price": xrpm.buy_price }
+                order_savepoint = {"type": "bid", "orderid" : order_id, "sell_volume" : xrpm.sell_volume, "sell_price": xrpm.sell_price, "currency_pair": currency, "algorithm" : algorithm, "trading": str(xrpm.trading), "bidding": str(xrpm.bidding), "money": money, "buy_price": xrpm.buy_price }
                 xrpm.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
 
                 print("\033[93m{:20s} * {} Buy {} coins at price {}, will sell {} won \033[0m".format(xrpm.getStrTime(int(ptime)),list(traders)[c_trader], buy_volume, ticker['ask'], xrpm.sell_price))
@@ -273,7 +253,7 @@ if __name__ == "__main__":
                 sell_time = int(ptime)
                 elapsed = sell_time - buy_time
                 tx_time_list.append((xrpm.getStrTime(buy_time) , xrpm.getStrTime(sell_time), elapsed))
-                order_savepoint = {"type": "ask", "orderid" : order_id, "hell_volume" : xrpm.sell_volume, "sell_price": xrpm.sell_price, "currency_pair": currency, "algorithm" : algorithm, "trading": xrpm.trading, "bidding": xrpm.bidding, "money": money, "buy_price":xrpm.buy_price }
+                order_savepoint = {"type": "ask", "orderid" : order_id, "hell_volume" : xrpm.sell_volume, "sell_price": xrpm.sell_price, "currency_pair": currency, "algorithm" : algorithm, "trading": str(xrpm.trading), "bidding": str(xrpm.bidding), "money": money, "buy_price":xrpm.buy_price }
                 xrpm.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
 
                 ## Remove element from myorderlist

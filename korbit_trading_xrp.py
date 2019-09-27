@@ -17,7 +17,7 @@ if __name__ == "__main__":
     ## Select Ticker source
     use_exchange_inquiry = True
     ### Vriables
-    testing = True
+    testing = False
     coin = 'xrp'
     limit = 0.97
     currency = 'xrp_krw'
@@ -78,6 +78,11 @@ if __name__ == "__main__":
             mymongo.initMongo('korbitsalon-mongo1', 27017, 'crypto', 'xrp_ticker')
         except:
             print("Could not connect to Mongo!")
+            emailBody = sne.makeEmailBody("Could Not Connect to MongoDB!")
+            emailSubject = "Korbit Error:MongoDB"
+            sne.sendEmail(fromEmail, toEmail, emailSubject, emailBody)
+
+            
 
     # Redis initialize
     #myorder.initConnection(redisHost, redisPort, redisUser, 'RlawjddmsrotoRl#12', 'xrp')
@@ -136,7 +141,7 @@ if __name__ == "__main__":
     # Start Looping
     ##############################################
     while True:
-        time.sleep(0.6)
+        time.sleep(1.0)
 
 
 
@@ -304,7 +309,7 @@ if __name__ == "__main__":
                 myorder.bidding = True
                 myorder.benefit = 0.054
                 myorder.algorithm = 'Big Slump'
-                myorder.money = 150000
+                myorder.money = 100000
                 if c_trader >= 2:
                     myorder.money = 100000
                     myorder.benefit = 0.074
@@ -314,51 +319,41 @@ if __name__ == "__main__":
                 myorder.bidding = True
                 myorder.benefit = 0.034
                 myorder.algorithm = 'Midium Slump'
-                myorder.money = 150000
+                myorder.money = 100000
                 if c_trader >= 2:
                     myorder.money = 100000
                     myorder.benefit = 0.054
             ## Little Slump Algorithm
-            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(7, 0.6, 3.0, 1.2, -99 ):
+            elif not myorder.trading and myalgo.basic(95) and myalgo.slump(5, 0.2, 3.0, 1.5, -99 ):
                 print("{:20s} |  \033[95mHit: Little Slump\033[0m".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
                 myorder.benefit = 0.022
                 myorder.algorithm = 'Little Slump'
-                myorder.money = 150000
+                myorder.money = 100000
                 if c_trader >= 4:
                     myorder.money = 50000
                     myorder.benefit = 0.042
                 elif c_trader >= 2:
                     myorder.money = 100000
                     myorder.benefit = 0.032
-            ## Baby Slump Algorithm
-            elif not myorder.trading and myalgo.basic(97) and myalgo.slump(7, 0.6, 2.0, 4.0 , -99 ):
-                print("{:20s} |  \033[95mHit: Baby Slump\033[0m".format(myorder.getStrTime(time.time()*1000)))
-                myorder.bidding = True
-                myorder.benefit = 0.032
-                myorder.algorithm = 'Baby Slump'
-                myorder.money = 150000
-                if c_trader >= 2:
-                    myorder.money = 100000
-                elif c_trader >= 4:
-                    myorder.money = 50000
-                    myorder.benefit = 0.042
             ## Avg Regresssion
             #elif not myorder.trading and myalgo.basic(97) and myalgo.reversion(3,-2):
             #(2,-1) is 40~50% more hit ratio than (3,-2)
-            elif not myorder.trading and myalgo.basic(97) and myalgo.reversion(2.0,-2.0,-4):
+            """
+            elif not myorder.trading and myalgo.basic(96) and myalgo.reversion(1.5,-1,-1):
                 print("{:20s} |  \033[95mHit: Mean Regression\033[0m".format(myorder.getStrTime(time.time()*1000)))
                 myorder.benefit = 0.014
                 myorder.algorithm = 'Mean Reversion'
                 myorder.money = 100000
                 myorder.bidding = True
                 if c_trader >= 2:
-                    myorder.benefit = 0.016
+                    myorder.benefit = 0.013
                     myorder.algorithm = 'Mean Reversion'
-                    myorder.money = 100000
-                elif c_trader >= 5:
                     myorder.money = 50000
-                    myorder.benefit = 0.024
+                elif c_trader >= 3:
+                    myorder.money = 70000
+                    myorder.benefit = 0.023
+            """
 
 
             ## Bid Order
@@ -434,7 +429,7 @@ if __name__ == "__main__":
                     coin_balance = myorder.chkUserBalance(coin,header)
                     myorder.bidding = False
                     myorder.trading = True
-                    order_savepoint = {"type": "bid", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price": myorder.buy_price }
+                    order_savepoint = {"type": "bid", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": str(myorder.trading), "bidding": str(myorder.bidding), "money": myorder.money, "buy_price": myorder.buy_price }
                     myorder.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
 
                     ## For Water Ride Trader
@@ -475,7 +470,7 @@ if __name__ == "__main__":
                         myorder.bidding = False
                         myorder.buy_price = myorder.sell_price = myorder.buy_volume = myorder.sell_volume = 0
                         myorder.algorithm = ''
-                        order_savepoint = {"type": "reset", "orderid" :'', "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price }
+                        order_savepoint = {"type": "reset", "orderid" :'', "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": str(myorder.trading), "bidding": str(myorder.bidding), "money": myorder.money, "buy_price":myorder.buy_price }
                         myorder.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
                         print("{:20s} | \033[93m{} : Bid Order# {} is Canceled.\033[0m".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader], myorder.order_id))
                         ## Set Trader
@@ -492,7 +487,7 @@ if __name__ == "__main__":
                                 print("{:20s} | \033[93m{} : Bid Order# {} is completed.\033[0m".format(myorder.getStrTime(time.time()*1000),list(traders)[c_trader], myorder.order_id))
                                 balance = myorder.chkUserBalance('krw',header)
                                 coin_balance = myorder.chkUserBalance(coin,header)
-                                order_savepoint = {"type": "bid", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money }
+                                order_savepoint = {"type": "bid", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": str(myorder.trading), "bidding": str(myorder.bidding), "money": myorder.money }
                                 myorder.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
                                 #Email Notification
                                 emailBody = sne.makeEmailBody("{} BUY AT {} won\n algo: {}\n sell_volume {}\n".format(currency, myorder.buy_price, myorder.algorithm, myorder.sell_volume))
@@ -505,7 +500,7 @@ if __name__ == "__main__":
                             print("WARNING !! : Bid order is not in order history, Call to Korbit Support. continue trading...")
                             myorder.trading = False
                             myorder.bidding = False
-                            order_savepoint = {"type": "reset", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money,"buy_price": myorder.buy_price }
+                            order_savepoint = {"type": "reset", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": str(myorder.trading), "bidding": str(myorder.bidding), "money": myorder.money,"buy_price": myorder.buy_price }
                             myorder.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
 
 
@@ -559,7 +554,7 @@ if __name__ == "__main__":
                     balance = myorder.chkUserBalance('krw',header)
                     # Save state to Redis
                     #order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price, "deal_count": myorder.total_bidding }
-                    order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "sell_volume" : 0, "sell_price": 0, "currency_pair": currency, "algorithm" : 0,"trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price, "deal_count": myorder.total_bidding }
+                    order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "sell_volume" : 0, "sell_price": 0, "currency_pair": currency, "algorithm" : 0,"trading": str(myorder.trading), "bidding": str(myorder.bidding), "money": myorder.money, "buy_price":myorder.buy_price, "deal_count": myorder.total_bidding }
                     myorder.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
 
                     ## Remove element from myorderlist
@@ -604,7 +599,7 @@ if __name__ == "__main__":
                         balance = myorder.chkUserBalance('krw',header)
                         # Save state to Redis
                         #order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "sell_volume" : myorder.sell_volume, "sell_price": myorder.sell_price, "currency_pair": currency, "algorithm" : myorder.algorithm, "trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price, "deal_count": myorder.total_bidding }
-                        order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "sell_volume" : 0, "sell_price": 0, "currency_pair": currency, "algorithm" : 0,"trading": myorder.trading, "bidding": myorder.bidding, "money": myorder.money, "buy_price":myorder.buy_price, "deal_count": myorder.total_bidding }
+                        order_savepoint = {"type": "ask", "orderid" : myorder.order_id, "sell_volume" : 0, "sell_price": 0, "currency_pair": currency, "algorithm" : 0,"trading": str(myorder.trading), "bidding": str(myorder.bidding), "money": myorder.money, "buy_price":myorder.buy_price, "deal_count": myorder.total_bidding }
                         myorder.saveTradingtoRedis(list(traders)[c_trader],order_savepoint)
     
                         ## Remove element from myorderlist
