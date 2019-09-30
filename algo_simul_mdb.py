@@ -6,6 +6,30 @@ from XRPManagerSimul import XRPManagerSimul as xrpmgrsimul
 import time
 from collections import OrderedDict
 from PushTicker import ToMongo
+import sys
+import getopt
+
+def usage():
+    '''
+    display script usage
+    '''
+
+    print( '------------------------------------------------------------')
+    print( 'Usage: ')
+    print( '  ' + sys.argv[0] + ' -c <crypto currency> -f <from_time> -t <to_time> ')
+    print()
+    print( '  -c|--crypto: crypto currency [xrp_ticker, btc_ticker] ')
+    print( '  -f|--from: start_time in the following format')
+    print( '   YYYY-MM-DD HH24:MI:SS                       ')
+    print( '  -t|--to: end in the following format')
+    print( '   YYYY-MM-DD HH24:MI:SS                       ')
+    print()
+    print( 'NOTE: ')
+    print( '  -p and -l only have to be specified if not using default values ')
+    print( '  and this list is only used if we did not find it in the ExaWatcher')
+    print( '  iostat header')
+    print( '------------------------------------------------------------')
+
 
 def getTxList(tx_list):
     seq = 0
@@ -18,6 +42,28 @@ def getTxList(tx_list):
 
 if __name__ == "__main__":
 
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], 'c:f:t:h', ['crypto=', 'from=', 'to=', 'help'] )
+        for o, a in opts:
+            if o in ('-f', '--from'):
+                start_time = a
+            elif o in ('-t', '--to'):
+                end_time = a
+            elif o in ('-c', '--crypto'):
+                crypto = a
+        # max buckets for testing
+            elif o in ('-h', '--help'):
+                usage()
+                sys.exit()
+            else:
+                usage()
+                sys.exit()
+    except:
+        usage()
+        sys.exit()
+
+		
+
     #  Mongo Connection #
     mdb = ToMongo()
     mdb.initMongo('korbitsalon-mongo1',27017,'crypto',crypto)
@@ -25,6 +71,8 @@ if __name__ == "__main__":
 
     #start_time = mdb.getEpochTime('2019-09-25 04:00:00')
     #end_time = mdb.getEpochTime('2019-09-25 06:00:00')
+    start_time = mdb.getEpochTime(start_time)
+    end_time = mdb.getEpochTime(end_time)
 
     ## Select Ticker source
     use_exchange_inquiry = True
