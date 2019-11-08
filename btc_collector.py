@@ -63,7 +63,7 @@ if __name__ == "__main__":
         try:
             mymongo = PushTicker.ToMongo()
             #mymongo.initMongo('korbitsalon-mongo1', 27017, 'crypto', 'korbit_ticker')
-            mymongo.initMongo('korbitsalon-mongo1', 27017, 'crypto', 'btc_ticker')
+            mymongo.initMongo('korbitsalon-mongo1', 27017, 'crypto', 'korbit.btc')
         except:
             print("Could not connect to Mongo!")
 

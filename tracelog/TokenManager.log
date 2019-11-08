@@ -15423,3 +15423,2485 @@
 2019-09-30 00:27:30 | Refresh Token from API Server
 2019-09-30 00:27:31 | Update Token on Redis
 2019-09-30 00:27:31 | Sleep 50min..
+2019-09-30 01:17:31 | Refresh Token from API Server
+2019-09-30 01:17:32 | Update Token on Redis
+2019-09-30 01:17:32 | Sleep 50min..
+2019-09-30 02:07:32 | Refresh Token from API Server
+2019-09-30 02:07:33 | Update Token on Redis
+2019-09-30 02:07:33 | Sleep 50min..
+2019-09-30 02:57:33 | Refresh Token from API Server
+2019-09-30 02:57:34 | Update Token on Redis
+2019-09-30 02:57:34 | Sleep 50min..
+2019-09-30 03:47:34 | Refresh Token from API Server
+2019-09-30 03:47:35 | Update Token on Redis
+2019-09-30 03:47:35 | Sleep 50min..
+2019-09-30 04:37:35 | Refresh Token from API Server
+2019-09-30 04:37:36 | Update Token on Redis
+2019-09-30 04:37:36 | Sleep 50min..
+2019-09-30 05:27:36 | Refresh Token from API Server
+2019-09-30 05:27:37 | Update Token on Redis
+2019-09-30 05:27:37 | Sleep 50min..
+2019-09-30 06:17:37 | Refresh Token from API Server
+2019-09-30 06:17:38 | Update Token on Redis
+2019-09-30 06:17:38 | Sleep 50min..
+2019-09-30 07:07:38 | Refresh Token from API Server
+2019-09-30 07:07:39 | Update Token on Redis
+2019-09-30 07:07:39 | Sleep 50min..
+2019-09-30 07:57:39 | Refresh Token from API Server
+2019-09-30 07:57:40 | Update Token on Redis
+2019-09-30 07:57:40 | Sleep 50min..
+2019-09-30 08:47:40 | Refresh Token from API Server
+2019-09-30 08:47:41 | Update Token on Redis
+2019-09-30 08:47:41 | Sleep 50min..
+2019-09-30 09:37:41 | Refresh Token from API Server
+2019-09-30 09:37:42 | Update Token on Redis
+2019-09-30 09:37:42 | Sleep 50min..
+2019-09-30 10:27:42 | Refresh Token from API Server
+2019-09-30 10:27:43 | Update Token on Redis
+2019-09-30 10:27:43 | Sleep 50min..
+2019-09-30 11:17:43 | Refresh Token from API Server
+2019-09-30 11:17:44 | Update Token on Redis
+2019-09-30 11:17:44 | Sleep 50min..
+2019-09-30 12:07:44 | Refresh Token from API Server
+2019-09-30 12:07:45 | Update Token on Redis
+2019-09-30 12:07:45 | Sleep 50min..
+2019-09-30 12:57:45 | Refresh Token from API Server
+2019-09-30 12:57:46 | Update Token on Redis
+2019-09-30 12:57:46 | Sleep 50min..
+2019-09-30 13:47:46 | Refresh Token from API Server
+2019-09-30 13:47:47 | Update Token on Redis
+2019-09-30 13:47:47 | Sleep 50min..
+2019-09-30 14:37:47 | Refresh Token from API Server
+2019-09-30 14:37:49 | Update Token on Redis
+2019-09-30 14:37:49 | Sleep 50min..
+2019-09-30 15:27:49 | Refresh Token from API Server
+2019-09-30 15:27:50 | Update Token on Redis
+2019-09-30 15:27:50 | Sleep 50min..
+2019-09-30 16:17:50 | Refresh Token from API Server
+2019-09-30 16:17:51 | Update Token on Redis
+2019-09-30 16:17:51 | Sleep 50min..
+2019-09-30 17:07:51 | Refresh Token from API Server
+2019-09-30 17:07:52 | Update Token on Redis
+2019-09-30 17:07:52 | Sleep 50min..
+2019-09-30 17:57:52 | Refresh Token from API Server
+2019-09-30 17:57:52 | Update Token on Redis
+2019-09-30 17:57:52 | Sleep 50min..
+{'access_token': 'dvE0LX5RSCEGSUtibld3yEu16wa6iFgcXfmWTMn2KrN00kdP9cROBhJbTE1CB', 'expires_in': 2030, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'OV3e98fLQEZhug01TtDr7ppaxfRO09j2viv63HP36oGIh4Sr2fDI9cJuw23A0', 'token_type': 'Bearer'}
+2019-09-30 18:24:03 | Insert Token to Redis
+2019-09-30 19:14:03 | Refresh Token from API Server
+2019-09-30 19:14:04 | Update Token on Redis
+2019-09-30 19:14:04 | Sleep 50min..
+2019-09-30 20:04:04 | Refresh Token from API Server
+2019-09-30 20:04:05 | Update Token on Redis
+2019-09-30 20:04:05 | Sleep 50min..
+2019-09-30 20:54:05 | Refresh Token from API Server
+2019-09-30 20:54:06 | Update Token on Redis
+2019-09-30 20:54:06 | Sleep 50min..
+2019-09-30 21:44:06 | Refresh Token from API Server
+2019-09-30 21:44:07 | Update Token on Redis
+2019-09-30 21:44:07 | Sleep 50min..
+2019-09-30 22:34:07 | Refresh Token from API Server
+2019-09-30 22:34:08 | Update Token on Redis
+2019-09-30 22:34:08 | Sleep 50min..
+2019-09-30 23:24:08 | Refresh Token from API Server
+2019-09-30 23:24:09 | Update Token on Redis
+2019-09-30 23:24:09 | Sleep 50min..
+2019-10-01 00:14:09 | Refresh Token from API Server
+2019-10-01 00:14:10 | Update Token on Redis
+2019-10-01 00:14:10 | Sleep 50min..
+2019-10-01 01:04:10 | Refresh Token from API Server
+2019-10-01 01:04:11 | Update Token on Redis
+2019-10-01 01:04:11 | Sleep 50min..
+2019-10-01 01:54:11 | Refresh Token from API Server
+2019-10-01 01:54:12 | Update Token on Redis
+2019-10-01 01:54:12 | Sleep 50min..
+2019-10-01 02:44:12 | Refresh Token from API Server
+2019-10-01 02:44:13 | Update Token on Redis
+2019-10-01 02:44:13 | Sleep 50min..
+2019-10-01 03:34:13 | Refresh Token from API Server
+2019-10-01 03:34:14 | Update Token on Redis
+2019-10-01 03:34:14 | Sleep 50min..
+2019-10-01 04:24:14 | Refresh Token from API Server
+2019-10-01 04:24:15 | Update Token on Redis
+2019-10-01 04:24:15 | Sleep 50min..
+2019-10-01 05:14:15 | Refresh Token from API Server
+2019-10-01 05:14:16 | Update Token on Redis
+2019-10-01 05:14:16 | Sleep 50min..
+2019-10-01 06:04:16 | Refresh Token from API Server
+2019-10-01 06:04:17 | Update Token on Redis
+2019-10-01 06:04:17 | Sleep 50min..
+2019-10-01 06:54:17 | Refresh Token from API Server
+2019-10-01 06:54:18 | Update Token on Redis
+2019-10-01 06:54:18 | Sleep 50min..
+2019-10-01 07:44:19 | Refresh Token from API Server
+2019-10-01 07:44:19 | Update Token on Redis
+2019-10-01 07:44:19 | Sleep 50min..
+2019-10-01 08:34:19 | Refresh Token from API Server
+2019-10-01 08:34:20 | Update Token on Redis
+2019-10-01 08:34:20 | Sleep 50min..
+2019-10-01 09:24:21 | Refresh Token from API Server
+2019-10-01 09:24:21 | Update Token on Redis
+2019-10-01 09:24:21 | Sleep 50min..
+2019-10-01 10:14:22 | Refresh Token from API Server
+2019-10-01 10:14:22 | Update Token on Redis
+2019-10-01 10:14:22 | Sleep 50min..
+2019-10-01 11:04:23 | Refresh Token from API Server
+2019-10-01 11:04:24 | Update Token on Redis
+2019-10-01 11:04:24 | Sleep 50min..
+2019-10-01 11:54:24 | Refresh Token from API Server
+2019-10-01 11:54:24 | Update Token on Redis
+2019-10-01 11:54:24 | Sleep 50min..
+2019-10-01 12:44:25 | Refresh Token from API Server
+2019-10-01 12:44:26 | Update Token on Redis
+2019-10-01 12:44:26 | Sleep 50min..
+2019-10-01 13:34:26 | Refresh Token from API Server
+2019-10-01 13:34:27 | Update Token on Redis
+2019-10-01 13:34:27 | Sleep 50min..
+2019-10-01 14:24:27 | Refresh Token from API Server
+2019-10-01 14:24:28 | Update Token on Redis
+2019-10-01 14:24:28 | Sleep 50min..
+2019-10-01 15:14:28 | Refresh Token from API Server
+2019-10-01 15:14:29 | Update Token on Redis
+2019-10-01 15:14:29 | Sleep 50min..
+2019-10-01 16:04:29 | Refresh Token from API Server
+2019-10-01 16:04:29 | Update Token on Redis
+2019-10-01 16:04:29 | Sleep 50min..
+2019-10-01 16:54:30 | Refresh Token from API Server
+2019-10-01 16:54:30 | Update Token on Redis
+2019-10-01 16:54:30 | Sleep 50min..
+2019-10-01 17:44:31 | Refresh Token from API Server
+2019-10-01 17:44:31 | Update Token on Redis
+2019-10-01 17:44:31 | Sleep 50min..
+2019-10-01 18:34:32 | Refresh Token from API Server
+2019-10-01 18:34:32 | Update Token on Redis
+2019-10-01 18:34:32 | Sleep 50min..
+2019-10-01 19:24:33 | Refresh Token from API Server
+2019-10-01 19:24:33 | Update Token on Redis
+2019-10-01 19:24:33 | Sleep 50min..
+2019-10-01 20:14:34 | Refresh Token from API Server
+2019-10-01 20:14:34 | Update Token on Redis
+2019-10-01 20:14:34 | Sleep 50min..
+2019-10-01 21:04:35 | Refresh Token from API Server
+2019-10-01 21:04:36 | Update Token on Redis
+2019-10-01 21:04:36 | Sleep 50min..
+2019-10-01 21:54:36 | Refresh Token from API Server
+2019-10-01 21:54:37 | Update Token on Redis
+2019-10-01 21:54:37 | Sleep 50min..
+2019-10-01 22:44:37 | Refresh Token from API Server
+2019-10-01 22:44:38 | Update Token on Redis
+2019-10-01 22:44:38 | Sleep 50min..
+2019-10-01 23:34:38 | Refresh Token from API Server
+2019-10-01 23:34:39 | Update Token on Redis
+2019-10-01 23:34:39 | Sleep 50min..
+2019-10-02 00:24:39 | Refresh Token from API Server
+2019-10-02 00:24:40 | Update Token on Redis
+2019-10-02 00:24:40 | Sleep 50min..
+2019-10-02 01:14:40 | Refresh Token from API Server
+2019-10-02 01:14:42 | Update Token on Redis
+2019-10-02 01:14:42 | Sleep 50min..
+2019-10-02 02:04:42 | Refresh Token from API Server
+2019-10-02 02:04:43 | Update Token on Redis
+2019-10-02 02:04:43 | Sleep 50min..
+2019-10-02 02:54:43 | Refresh Token from API Server
+2019-10-02 02:54:44 | Update Token on Redis
+2019-10-02 02:54:44 | Sleep 50min..
+2019-10-02 03:44:44 | Refresh Token from API Server
+2019-10-02 03:44:45 | Update Token on Redis
+2019-10-02 03:44:45 | Sleep 50min..
+2019-10-02 04:34:45 | Refresh Token from API Server
+2019-10-02 04:34:46 | Update Token on Redis
+2019-10-02 04:34:46 | Sleep 50min..
+2019-10-02 05:24:46 | Refresh Token from API Server
+2019-10-02 05:24:47 | Update Token on Redis
+2019-10-02 05:24:47 | Sleep 50min..
+2019-10-02 06:14:47 | Refresh Token from API Server
+2019-10-02 06:14:48 | Update Token on Redis
+2019-10-02 06:14:48 | Sleep 50min..
+2019-10-02 07:04:48 | Refresh Token from API Server
+2019-10-02 07:04:49 | Update Token on Redis
+2019-10-02 07:04:49 | Sleep 50min..
+2019-10-02 07:54:49 | Refresh Token from API Server
+2019-10-02 07:54:50 | Update Token on Redis
+2019-10-02 07:54:50 | Sleep 50min..
+2019-10-02 08:44:50 | Refresh Token from API Server
+2019-10-02 08:47:01 | Update Token on Redis
+2019-10-02 08:47:01 | Sleep 50min..
+2019-10-02 09:37:01 | Refresh Token from API Server
+2019-10-02 09:37:02 | Update Token on Redis
+2019-10-02 09:37:02 | Sleep 50min..
+2019-10-02 10:27:02 | Refresh Token from API Server
+2019-10-02 10:27:03 | Update Token on Redis
+2019-10-02 10:27:03 | Sleep 50min..
+2019-10-02 11:17:03 | Refresh Token from API Server
+2019-10-02 11:17:04 | Update Token on Redis
+2019-10-02 11:17:04 | Sleep 50min..
+2019-10-02 12:07:04 | Refresh Token from API Server
+2019-10-02 12:07:05 | Update Token on Redis
+2019-10-02 12:07:05 | Sleep 50min..
+{'access_token': '1Gb9vkOmexWnWWg43ZqGhUAc0zWuJx55SPhoiDO02YfBSwPbSoidZqkl5cWhL', 'expires_in': 2350, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': '7lgT6qdkSpaGmIPYndxrlYwvJHJ84WOlM0wxHouhHjwpZm0ObCbCPjULc9Qkp', 'token_type': 'Bearer'}
+2019-10-02 12:27:55 | Insert Token to Redis
+2019-10-02 13:17:55 | Refresh Token from API Server
+2019-10-02 13:17:56 | Update Token on Redis
+2019-10-02 13:17:56 | Sleep 50min..
+2019-10-02 14:07:57 | Refresh Token from API Server
+2019-10-02 14:07:57 | Update Token on Redis
+2019-10-02 14:07:57 | Sleep 50min..
+2019-10-02 14:57:58 | Refresh Token from API Server
+2019-10-02 14:57:58 | Update Token on Redis
+2019-10-02 14:57:58 | Sleep 50min..
+2019-10-02 15:47:59 | Refresh Token from API Server
+2019-10-02 15:47:59 | Update Token on Redis
+2019-10-02 15:47:59 | Sleep 50min..
+2019-10-02 16:38:00 | Refresh Token from API Server
+2019-10-02 16:38:00 | Update Token on Redis
+2019-10-02 16:38:00 | Sleep 50min..
+2019-10-02 17:28:01 | Refresh Token from API Server
+2019-10-02 17:28:01 | Update Token on Redis
+2019-10-02 17:28:01 | Sleep 50min..
+2019-10-02 18:18:02 | Refresh Token from API Server
+2019-10-02 18:18:02 | Update Token on Redis
+2019-10-02 18:18:02 | Sleep 50min..
+2019-10-02 19:08:03 | Refresh Token from API Server
+2019-10-02 19:08:03 | Update Token on Redis
+2019-10-02 19:08:03 | Sleep 50min..
+2019-10-02 19:58:03 | Refresh Token from API Server
+2019-10-02 19:58:04 | Update Token on Redis
+2019-10-02 19:58:04 | Sleep 50min..
+2019-10-02 20:48:04 | Refresh Token from API Server
+2019-10-02 20:48:05 | Update Token on Redis
+2019-10-02 20:48:05 | Sleep 50min..
+2019-10-02 21:38:06 | Refresh Token from API Server
+2019-10-02 21:38:06 | Update Token on Redis
+2019-10-02 21:38:06 | Sleep 50min..
+2019-10-02 22:28:07 | Refresh Token from API Server
+2019-10-02 22:28:08 | Update Token on Redis
+2019-10-02 22:28:08 | Sleep 50min..
+2019-10-02 23:18:08 | Refresh Token from API Server
+2019-10-02 23:18:09 | Update Token on Redis
+2019-10-02 23:18:09 | Sleep 50min..
+2019-10-03 00:08:09 | Refresh Token from API Server
+2019-10-03 00:08:10 | Update Token on Redis
+2019-10-03 00:08:10 | Sleep 50min..
+2019-10-03 00:58:10 | Refresh Token from API Server
+2019-10-03 00:58:11 | Update Token on Redis
+2019-10-03 00:58:11 | Sleep 50min..
+2019-10-03 01:48:11 | Refresh Token from API Server
+2019-10-03 01:48:12 | Update Token on Redis
+2019-10-03 01:48:12 | Sleep 50min..
+2019-10-03 02:38:12 | Refresh Token from API Server
+2019-10-03 02:38:13 | Update Token on Redis
+2019-10-03 02:38:13 | Sleep 50min..
+{'access_token': 'SrxnKqA2Xnf5sLf9Lw9DN1nT2ztC2x0XVmhPHwPRLmOpUJU1Y0dyVpWE18KiG', 'expires_in': 2760, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'vDf9emEoiGr8RrXx0BMzf0P8bACbNVhOSFspgFB2zL0WoOTYQ5kehL9hDmYcR', 'token_type': 'Bearer'}
+2019-10-03 02:52:13 | Insert Token to Redis
+2019-10-03 03:42:13 | Refresh Token from API Server
+2019-10-03 03:42:14 | Update Token on Redis
+2019-10-03 03:42:14 | Sleep 50min..
+2019-10-03 04:32:14 | Refresh Token from API Server
+2019-10-03 04:32:15 | Update Token on Redis
+2019-10-03 04:32:15 | Sleep 50min..
+2019-10-03 05:22:15 | Refresh Token from API Server
+2019-10-03 05:22:16 | Update Token on Redis
+2019-10-03 05:22:16 | Sleep 50min..
+2019-10-03 06:12:16 | Refresh Token from API Server
+2019-10-03 06:12:17 | Update Token on Redis
+2019-10-03 06:12:17 | Sleep 50min..
+2019-10-03 07:02:17 | Refresh Token from API Server
+2019-10-03 07:02:18 | Update Token on Redis
+2019-10-03 07:02:18 | Sleep 50min..
+2019-10-03 07:52:18 | Refresh Token from API Server
+2019-10-03 07:52:19 | Update Token on Redis
+2019-10-03 07:52:19 | Sleep 50min..
+2019-10-03 08:42:19 | Refresh Token from API Server
+2019-10-03 08:42:20 | Update Token on Redis
+2019-10-03 08:42:20 | Sleep 50min..
+2019-10-03 09:32:20 | Refresh Token from API Server
+2019-10-03 09:32:21 | Update Token on Redis
+2019-10-03 09:32:21 | Sleep 50min..
+2019-10-03 10:22:21 | Refresh Token from API Server
+2019-10-03 10:22:22 | Update Token on Redis
+2019-10-03 10:22:22 | Sleep 50min..
+2019-10-03 11:12:22 | Refresh Token from API Server
+2019-10-03 11:12:23 | Update Token on Redis
+2019-10-03 11:12:23 | Sleep 50min..
+2019-10-03 12:02:23 | Refresh Token from API Server
+2019-10-03 12:02:24 | Update Token on Redis
+2019-10-03 12:02:24 | Sleep 50min..
+2019-10-03 12:52:24 | Refresh Token from API Server
+2019-10-03 12:52:25 | Update Token on Redis
+2019-10-03 12:52:25 | Sleep 50min..
+2019-10-03 13:42:26 | Refresh Token from API Server
+2019-10-03 13:42:26 | Update Token on Redis
+2019-10-03 13:42:26 | Sleep 50min..
+2019-10-03 14:32:27 | Refresh Token from API Server
+2019-10-03 14:32:28 | Update Token on Redis
+2019-10-03 14:32:28 | Sleep 50min..
+2019-10-03 15:22:28 | Refresh Token from API Server
+2019-10-03 15:22:28 | Update Token on Redis
+2019-10-03 15:22:28 | Sleep 50min..
+2019-10-03 16:12:29 | Refresh Token from API Server
+2019-10-03 16:12:30 | Update Token on Redis
+2019-10-03 16:12:30 | Sleep 50min..
+2019-10-03 17:02:30 | Refresh Token from API Server
+2019-10-03 17:02:31 | Update Token on Redis
+2019-10-03 17:02:31 | Sleep 50min..
+2019-10-03 17:52:31 | Refresh Token from API Server
+2019-10-03 17:52:31 | Update Token on Redis
+2019-10-03 17:52:31 | Sleep 50min..
+2019-10-03 18:42:32 | Refresh Token from API Server
+2019-10-03 18:42:32 | Update Token on Redis
+2019-10-03 18:42:32 | Sleep 50min..
+2019-10-03 19:32:33 | Refresh Token from API Server
+2019-10-03 19:32:33 | Update Token on Redis
+2019-10-03 19:32:33 | Sleep 50min..
+2019-10-03 20:22:34 | Refresh Token from API Server
+2019-10-03 20:22:35 | Update Token on Redis
+2019-10-03 20:22:35 | Sleep 50min..
+2019-10-03 21:12:35 | Refresh Token from API Server
+2019-10-03 21:12:35 | Update Token on Redis
+2019-10-03 21:12:35 | Sleep 50min..
+2019-10-03 22:02:36 | Refresh Token from API Server
+2019-10-03 22:02:37 | Update Token on Redis
+2019-10-03 22:02:37 | Sleep 50min..
+2019-10-03 22:52:37 | Refresh Token from API Server
+2019-10-03 22:52:38 | Update Token on Redis
+2019-10-03 22:52:38 | Sleep 50min..
+2019-10-03 23:42:38 | Refresh Token from API Server
+2019-10-03 23:42:39 | Update Token on Redis
+2019-10-03 23:42:39 | Sleep 50min..
+2019-10-04 00:32:39 | Refresh Token from API Server
+2019-10-04 00:32:40 | Update Token on Redis
+2019-10-04 00:32:40 | Sleep 50min..
+2019-10-04 01:22:40 | Refresh Token from API Server
+2019-10-04 01:22:41 | Update Token on Redis
+2019-10-04 01:22:41 | Sleep 50min..
+2019-10-04 02:12:41 | Refresh Token from API Server
+2019-10-04 02:12:42 | Update Token on Redis
+2019-10-04 02:12:42 | Sleep 50min..
+2019-10-04 03:02:42 | Refresh Token from API Server
+2019-10-04 03:02:43 | Update Token on Redis
+2019-10-04 03:02:43 | Sleep 50min..
+2019-10-04 03:52:43 | Refresh Token from API Server
+2019-10-04 03:52:44 | Update Token on Redis
+2019-10-04 03:52:44 | Sleep 50min..
+{'access_token': 'LKYM3sQP4c2qv54hQozTtlyFxFqGg7KzOsPbbLBeAnAQWGQUmkaVb8OnGNmcD', 'expires_in': 1079, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'r85paWEjmrnezcQtzbbwUHINnp6ZrHY4oNFbWKrredR1trpnWH3g4RZK6jJ8S', 'token_type': 'Bearer'}
+2019-10-04 04:34:45 | Insert Token to Redis
+2019-10-04 05:24:45 | Refresh Token from API Server
+2019-10-04 05:24:46 | Update Token on Redis
+2019-10-04 05:24:46 | Sleep 50min..
+2019-10-04 06:14:46 | Refresh Token from API Server
+2019-10-04 06:14:47 | Update Token on Redis
+2019-10-04 06:14:47 | Sleep 50min..
+2019-10-04 07:04:47 | Refresh Token from API Server
+2019-10-04 07:04:48 | Update Token on Redis
+2019-10-04 07:04:48 | Sleep 50min..
+2019-10-04 07:54:48 | Refresh Token from API Server
+2019-10-04 07:54:49 | Update Token on Redis
+2019-10-04 07:54:49 | Sleep 50min..
+2019-10-04 08:44:49 | Refresh Token from API Server
+2019-10-04 08:44:50 | Update Token on Redis
+2019-10-04 08:44:50 | Sleep 50min..
+2019-10-04 09:34:50 | Refresh Token from API Server
+2019-10-04 09:34:51 | Update Token on Redis
+2019-10-04 09:34:51 | Sleep 50min..
+2019-10-04 10:24:51 | Refresh Token from API Server
+2019-10-04 10:24:52 | Update Token on Redis
+2019-10-04 10:24:52 | Sleep 50min..
+2019-10-04 11:14:52 | Refresh Token from API Server
+2019-10-04 11:14:53 | Update Token on Redis
+2019-10-04 11:14:53 | Sleep 50min..
+2019-10-04 12:04:53 | Refresh Token from API Server
+2019-10-04 12:04:54 | Update Token on Redis
+2019-10-04 12:04:54 | Sleep 50min..
+2019-10-04 12:54:54 | Refresh Token from API Server
+2019-10-04 12:54:55 | Update Token on Redis
+2019-10-04 12:54:55 | Sleep 50min..
+2019-10-04 13:44:55 | Refresh Token from API Server
+2019-10-04 13:44:56 | Update Token on Redis
+2019-10-04 13:44:56 | Sleep 50min..
+2019-10-04 14:34:56 | Refresh Token from API Server
+2019-10-04 14:34:57 | Update Token on Redis
+2019-10-04 14:34:57 | Sleep 50min..
+2019-10-04 15:24:57 | Refresh Token from API Server
+2019-10-04 15:24:58 | Update Token on Redis
+2019-10-04 15:24:58 | Sleep 50min..
+2019-10-04 16:14:58 | Refresh Token from API Server
+2019-10-04 16:14:59 | Update Token on Redis
+2019-10-04 16:14:59 | Sleep 50min..
+2019-10-04 17:04:59 | Refresh Token from API Server
+2019-10-04 17:05:00 | Update Token on Redis
+2019-10-04 17:05:00 | Sleep 50min..
+2019-10-04 17:55:00 | Refresh Token from API Server
+2019-10-04 17:57:13 | Update Token on Redis
+2019-10-04 17:57:13 | Sleep 50min..
+{'access_token': 'vesa3tnSpLVSSGmVDGBdEF5eH4ckJDKs04zIXPzLnyrWDh9j2XaTjPyx6orRG', 'expires_in': 2231, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': '0hK0psMJXcQhxbjAAfdaC8vM0XrwjJ7vVhPerwBEjzrcawfJXgLM5zmZUvSNC', 'token_type': 'Bearer'}
+2019-10-04 18:20:02 | Insert Token to Redis
+{'access_token': 'vesa3tnSpLVSSGmVDGBdEF5eH4ckJDKs04zIXPzLnyrWDh9j2XaTjPyx6orRG', 'expires_in': 431, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': '0hK0psMJXcQhxbjAAfdaC8vM0XrwjJ7vVhPerwBEjzrcawfJXgLM5zmZUvSNC', 'token_type': 'Bearer'}
+2019-10-04 18:50:02 | Insert Token to Redis
+2019-10-04 19:40:02 | Refresh Token from API Server
+2019-10-04 19:40:04 | Update Token on Redis
+2019-10-04 19:40:04 | Sleep 50min..
+2019-10-04 20:30:04 | Refresh Token from API Server
+2019-10-04 20:30:05 | Update Token on Redis
+2019-10-04 20:30:05 | Sleep 50min..
+2019-10-04 21:20:05 | Refresh Token from API Server
+2019-10-04 21:20:06 | Update Token on Redis
+2019-10-04 21:20:06 | Sleep 50min..
+2019-10-04 22:10:06 | Refresh Token from API Server
+2019-10-04 22:10:07 | Update Token on Redis
+2019-10-04 22:10:07 | Sleep 50min..
+2019-10-04 23:00:07 | Refresh Token from API Server
+2019-10-04 23:00:08 | Update Token on Redis
+2019-10-04 23:00:08 | Sleep 50min..
+2019-10-04 23:50:08 | Refresh Token from API Server
+2019-10-04 23:50:09 | Update Token on Redis
+2019-10-04 23:50:09 | Sleep 50min..
+2019-10-05 00:40:09 | Refresh Token from API Server
+2019-10-05 00:40:10 | Update Token on Redis
+2019-10-05 00:40:10 | Sleep 50min..
+2019-10-05 01:30:10 | Refresh Token from API Server
+2019-10-05 01:30:11 | Update Token on Redis
+2019-10-05 01:30:11 | Sleep 50min..
+{'access_token': 'Da9kbDIuYpsAl9fZaBs70WWGWo93sutnVNtSFq9X2qyFYDnSqsp7qOqD1KNVL', 'expires_in': 2220, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'wojCpqXSrloZbALsSrOnMIjshqK2djupcVHSPHhi3qSuwBLYN1bWgyBKrmPn7', 'token_type': 'Bearer'}
+2019-10-05 01:53:11 | Insert Token to Redis
+2019-10-05 02:43:11 | Refresh Token from API Server
+2019-10-05 02:43:12 | Update Token on Redis
+2019-10-05 02:43:12 | Sleep 50min..
+2019-10-05 03:33:12 | Refresh Token from API Server
+2019-10-05 03:33:13 | Update Token on Redis
+2019-10-05 03:33:13 | Sleep 50min..
+2019-10-05 04:23:13 | Refresh Token from API Server
+2019-10-05 04:23:14 | Update Token on Redis
+2019-10-05 04:23:14 | Sleep 50min..
+2019-10-05 05:13:14 | Refresh Token from API Server
+2019-10-05 05:13:15 | Update Token on Redis
+2019-10-05 05:13:15 | Sleep 50min..
+2019-10-05 06:03:15 | Refresh Token from API Server
+2019-10-05 06:03:16 | Update Token on Redis
+2019-10-05 06:03:16 | Sleep 50min..
+2019-10-05 06:53:16 | Refresh Token from API Server
+2019-10-05 06:53:18 | Update Token on Redis
+2019-10-05 06:53:18 | Sleep 50min..
+2019-10-05 07:43:18 | Refresh Token from API Server
+2019-10-05 07:43:19 | Update Token on Redis
+2019-10-05 07:43:19 | Sleep 50min..
+2019-10-05 08:33:19 | Refresh Token from API Server
+2019-10-05 08:33:22 | Update Token on Redis
+2019-10-05 08:33:22 | Sleep 50min..
+2019-10-05 09:23:22 | Refresh Token from API Server
+2019-10-05 09:23:23 | Update Token on Redis
+2019-10-05 09:23:23 | Sleep 50min..
+2019-10-05 10:13:23 | Refresh Token from API Server
+2019-10-05 10:13:24 | Update Token on Redis
+2019-10-05 10:13:24 | Sleep 50min..
+2019-10-05 11:03:24 | Refresh Token from API Server
+2019-10-05 11:03:25 | Update Token on Redis
+2019-10-05 11:03:25 | Sleep 50min..
+2019-10-05 11:53:25 | Refresh Token from API Server
+2019-10-05 11:53:26 | Update Token on Redis
+2019-10-05 11:53:26 | Sleep 50min..
+2019-10-05 12:43:26 | Refresh Token from API Server
+2019-10-05 12:43:27 | Update Token on Redis
+2019-10-05 12:43:27 | Sleep 50min..
+2019-10-05 13:33:27 | Refresh Token from API Server
+2019-10-05 13:33:28 | Update Token on Redis
+2019-10-05 13:33:28 | Sleep 50min..
+2019-10-05 14:23:28 | Refresh Token from API Server
+2019-10-05 14:23:29 | Update Token on Redis
+2019-10-05 14:23:29 | Sleep 50min..
+2019-10-05 15:13:29 | Refresh Token from API Server
+2019-10-05 15:13:30 | Update Token on Redis
+2019-10-05 15:13:30 | Sleep 50min..
+2019-10-05 16:03:30 | Refresh Token from API Server
+2019-10-05 16:03:31 | Update Token on Redis
+2019-10-05 16:03:31 | Sleep 50min..
+2019-10-05 16:53:31 | Refresh Token from API Server
+2019-10-05 16:53:32 | Update Token on Redis
+2019-10-05 16:53:32 | Sleep 50min..
+2019-10-05 17:43:32 | Refresh Token from API Server
+2019-10-05 17:43:33 | Update Token on Redis
+2019-10-05 17:43:33 | Sleep 50min..
+2019-10-05 18:33:33 | Refresh Token from API Server
+2019-10-05 18:33:34 | Update Token on Redis
+2019-10-05 18:33:34 | Sleep 50min..
+2019-10-05 19:23:34 | Refresh Token from API Server
+2019-10-05 19:23:35 | Update Token on Redis
+2019-10-05 19:23:35 | Sleep 50min..
+2019-10-05 20:13:35 | Refresh Token from API Server
+2019-10-05 20:13:36 | Update Token on Redis
+2019-10-05 20:13:36 | Sleep 50min..
+2019-10-05 21:03:36 | Refresh Token from API Server
+2019-10-05 21:03:37 | Update Token on Redis
+2019-10-05 21:03:37 | Sleep 50min..
+2019-10-05 21:53:37 | Refresh Token from API Server
+2019-10-05 21:53:38 | Update Token on Redis
+2019-10-05 21:53:38 | Sleep 50min..
+2019-10-05 22:43:38 | Refresh Token from API Server
+2019-10-05 22:43:39 | Update Token on Redis
+2019-10-05 22:43:39 | Sleep 50min..
+2019-10-05 23:33:39 | Refresh Token from API Server
+2019-10-05 23:33:40 | Update Token on Redis
+2019-10-05 23:33:40 | Sleep 50min..
+2019-10-06 00:23:40 | Refresh Token from API Server
+2019-10-06 00:23:41 | Update Token on Redis
+2019-10-06 00:23:41 | Sleep 50min..
+2019-10-06 01:13:41 | Refresh Token from API Server
+2019-10-06 01:13:42 | Update Token on Redis
+2019-10-06 01:13:42 | Sleep 50min..
+{'access_token': 'kwna6lpxg2yqYfxv5K5F3oOV0HwlAsqwTge9IfLHovu6J1OwYXlZ3UjvApEQn', 'expires_in': 1322, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'o7HMWbo8HxeYLwE9Kg3tUFtE6MYql0v7gGAt7w58e9HLKbCuUgVncfYlg4BH4', 'token_type': 'Bearer'}
+2019-10-06 01:51:41 | Insert Token to Redis
+2019-10-06 02:41:41 | Refresh Token from API Server
+2019-10-06 02:41:42 | Update Token on Redis
+2019-10-06 02:41:42 | Sleep 50min..
+2019-10-06 03:31:42 | Refresh Token from API Server
+2019-10-06 03:31:43 | Update Token on Redis
+2019-10-06 03:31:43 | Sleep 50min..
+2019-10-06 04:21:43 | Refresh Token from API Server
+2019-10-06 04:21:44 | Update Token on Redis
+2019-10-06 04:21:44 | Sleep 50min..
+2019-10-06 05:11:44 | Refresh Token from API Server
+2019-10-06 05:11:45 | Update Token on Redis
+2019-10-06 05:11:45 | Sleep 50min..
+2019-10-06 06:01:45 | Refresh Token from API Server
+2019-10-06 06:01:46 | Update Token on Redis
+2019-10-06 06:01:46 | Sleep 50min..
+2019-10-06 06:51:46 | Refresh Token from API Server
+2019-10-06 06:51:47 | Update Token on Redis
+2019-10-06 06:51:47 | Sleep 50min..
+2019-10-06 07:41:47 | Refresh Token from API Server
+2019-10-06 07:41:48 | Update Token on Redis
+2019-10-06 07:41:48 | Sleep 50min..
+2019-10-06 08:31:48 | Refresh Token from API Server
+2019-10-06 08:31:49 | Update Token on Redis
+2019-10-06 08:31:49 | Sleep 50min..
+2019-10-06 09:21:49 | Refresh Token from API Server
+2019-10-06 09:21:50 | Update Token on Redis
+2019-10-06 09:21:50 | Sleep 50min..
+2019-10-06 10:11:50 | Refresh Token from API Server
+2019-10-06 10:11:51 | Update Token on Redis
+2019-10-06 10:11:51 | Sleep 50min..
+2019-10-06 11:01:51 | Refresh Token from API Server
+2019-10-06 11:01:52 | Update Token on Redis
+2019-10-06 11:01:52 | Sleep 50min..
+2019-10-06 11:51:52 | Refresh Token from API Server
+2019-10-06 11:51:53 | Update Token on Redis
+2019-10-06 11:51:53 | Sleep 50min..
+2019-10-06 12:41:53 | Refresh Token from API Server
+2019-10-06 12:41:54 | Update Token on Redis
+2019-10-06 12:41:54 | Sleep 50min..
+2019-10-06 13:31:54 | Refresh Token from API Server
+2019-10-06 13:31:55 | Update Token on Redis
+2019-10-06 13:31:55 | Sleep 50min..
+2019-10-06 14:21:55 | Refresh Token from API Server
+2019-10-06 14:21:56 | Update Token on Redis
+2019-10-06 14:21:56 | Sleep 50min..
+2019-10-06 15:11:56 | Refresh Token from API Server
+2019-10-06 15:11:57 | Update Token on Redis
+2019-10-06 15:11:57 | Sleep 50min..
+2019-10-06 16:01:57 | Refresh Token from API Server
+2019-10-06 16:01:58 | Update Token on Redis
+2019-10-06 16:01:58 | Sleep 50min..
+2019-10-06 16:51:58 | Refresh Token from API Server
+2019-10-06 16:51:59 | Update Token on Redis
+2019-10-06 16:51:59 | Sleep 50min..
+2019-10-06 17:41:59 | Refresh Token from API Server
+2019-10-06 17:42:00 | Update Token on Redis
+2019-10-06 17:42:00 | Sleep 50min..
+2019-10-06 18:32:00 | Refresh Token from API Server
+2019-10-06 18:32:01 | Update Token on Redis
+2019-10-06 18:32:01 | Sleep 50min..
+2019-10-06 19:22:02 | Refresh Token from API Server
+2019-10-06 19:22:02 | Update Token on Redis
+2019-10-06 19:22:02 | Sleep 50min..
+2019-10-06 20:12:02 | Refresh Token from API Server
+2019-10-06 20:12:03 | Update Token on Redis
+2019-10-06 20:12:03 | Sleep 50min..
+2019-10-06 21:02:03 | Refresh Token from API Server
+2019-10-06 21:02:04 | Update Token on Redis
+2019-10-06 21:02:04 | Sleep 50min..
+2019-10-06 21:52:04 | Refresh Token from API Server
+2019-10-06 21:52:05 | Update Token on Redis
+2019-10-06 21:52:05 | Sleep 50min..
+2019-10-06 22:42:05 | Refresh Token from API Server
+2019-10-06 22:42:06 | Update Token on Redis
+2019-10-06 22:42:06 | Sleep 50min..
+2019-10-06 23:32:06 | Refresh Token from API Server
+2019-10-06 23:32:07 | Update Token on Redis
+2019-10-06 23:32:07 | Sleep 50min..
+2019-10-07 00:22:07 | Refresh Token from API Server
+2019-10-07 00:22:08 | Update Token on Redis
+2019-10-07 00:22:08 | Sleep 50min..
+2019-10-07 01:12:08 | Refresh Token from API Server
+2019-10-07 01:12:09 | Update Token on Redis
+2019-10-07 01:12:09 | Sleep 50min..
+2019-10-07 02:02:09 | Refresh Token from API Server
+2019-10-07 02:02:10 | Update Token on Redis
+2019-10-07 02:02:10 | Sleep 50min..
+2019-10-07 02:52:11 | Refresh Token from API Server
+2019-10-07 02:52:11 | Update Token on Redis
+2019-10-07 02:52:11 | Sleep 50min..
+2019-10-07 03:42:12 | Refresh Token from API Server
+2019-10-07 03:42:12 | Update Token on Redis
+2019-10-07 03:42:12 | Sleep 50min..
+2019-10-07 04:32:12 | Refresh Token from API Server
+2019-10-07 04:32:13 | Update Token on Redis
+2019-10-07 04:32:13 | Sleep 50min..
+2019-10-07 05:22:13 | Refresh Token from API Server
+2019-10-07 05:22:14 | Update Token on Redis
+2019-10-07 05:22:14 | Sleep 50min..
+2019-10-07 06:12:14 | Refresh Token from API Server
+2019-10-07 06:12:15 | Update Token on Redis
+2019-10-07 06:12:15 | Sleep 50min..
+2019-10-07 07:02:16 | Refresh Token from API Server
+2019-10-07 07:02:17 | Update Token on Redis
+2019-10-07 07:02:17 | Sleep 50min..
+2019-10-07 07:52:17 | Refresh Token from API Server
+2019-10-07 07:52:17 | Update Token on Redis
+2019-10-07 07:52:17 | Sleep 50min..
+2019-10-07 08:42:18 | Refresh Token from API Server
+2019-10-07 08:42:19 | Update Token on Redis
+2019-10-07 08:42:19 | Sleep 50min..
+2019-10-07 09:32:19 | Refresh Token from API Server
+2019-10-07 09:32:20 | Update Token on Redis
+2019-10-07 09:32:20 | Sleep 50min..
+2019-10-07 10:22:20 | Refresh Token from API Server
+2019-10-07 10:22:21 | Update Token on Redis
+2019-10-07 10:22:21 | Sleep 50min..
+2019-10-07 11:12:21 | Refresh Token from API Server
+2019-10-07 11:12:22 | Update Token on Redis
+2019-10-07 11:12:22 | Sleep 50min..
+2019-10-07 12:02:22 | Refresh Token from API Server
+2019-10-07 12:02:23 | Update Token on Redis
+2019-10-07 12:02:23 | Sleep 50min..
+2019-10-07 12:52:23 | Refresh Token from API Server
+2019-10-07 12:52:24 | Update Token on Redis
+2019-10-07 12:52:24 | Sleep 50min..
+2019-10-07 13:42:24 | Refresh Token from API Server
+2019-10-07 13:42:25 | Update Token on Redis
+2019-10-07 13:42:25 | Sleep 50min..
+2019-10-07 14:32:25 | Refresh Token from API Server
+2019-10-07 14:32:26 | Update Token on Redis
+2019-10-07 14:32:26 | Sleep 50min..
+2019-10-07 15:22:26 | Refresh Token from API Server
+2019-10-07 15:22:27 | Update Token on Redis
+2019-10-07 15:22:27 | Sleep 50min..
+2019-10-07 16:12:27 | Refresh Token from API Server
+2019-10-07 16:12:28 | Update Token on Redis
+2019-10-07 16:12:28 | Sleep 50min..
+2019-10-07 17:02:28 | Refresh Token from API Server
+2019-10-07 17:02:29 | Update Token on Redis
+2019-10-07 17:02:29 | Sleep 50min..
+2019-10-07 17:52:29 | Refresh Token from API Server
+2019-10-07 17:52:30 | Update Token on Redis
+2019-10-07 17:52:30 | Sleep 50min..
+2019-10-07 18:42:30 | Refresh Token from API Server
+{'access_token': 'U9D4pnZ7hiPtyHeEl5G2ccxjrZtSIe7G6BquvCKT5ITeooU6koJbDMIUq6OXU', 'expires_in': 3600, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': '5JDustknfp9IBlKmH0KZ6JtnQLA0295o4tF9JfpTMZoxePTuHqKcIsstZMnyE', 'token_type': 'Bearer'}
+2019-10-07 20:13:35 | Insert Token to Redis
+2019-10-07 21:03:35 | Refresh Token from API Server
+2019-10-07 21:03:36 | Update Token on Redis
+2019-10-07 21:03:36 | Sleep 50min..
+2019-10-07 21:53:36 | Refresh Token from API Server
+2019-10-07 21:53:37 | Update Token on Redis
+2019-10-07 21:53:37 | Sleep 50min..
+2019-10-07 22:43:37 | Refresh Token from API Server
+2019-10-07 22:43:38 | Update Token on Redis
+2019-10-07 22:43:38 | Sleep 50min..
+2019-10-07 23:33:38 | Refresh Token from API Server
+2019-10-07 23:33:39 | Update Token on Redis
+2019-10-07 23:33:39 | Sleep 50min..
+2019-10-08 00:23:39 | Refresh Token from API Server
+2019-10-08 00:23:40 | Update Token on Redis
+2019-10-08 00:23:40 | Sleep 50min..
+2019-10-08 01:13:40 | Refresh Token from API Server
+2019-10-08 01:13:41 | Update Token on Redis
+2019-10-08 01:13:41 | Sleep 50min..
+2019-10-08 02:03:41 | Refresh Token from API Server
+2019-10-08 02:03:42 | Update Token on Redis
+2019-10-08 02:03:42 | Sleep 50min..
+2019-10-08 02:53:42 | Refresh Token from API Server
+2019-10-08 02:53:43 | Update Token on Redis
+2019-10-08 02:53:43 | Sleep 50min..
+2019-10-08 03:43:43 | Refresh Token from API Server
+2019-10-08 03:43:44 | Update Token on Redis
+2019-10-08 03:43:44 | Sleep 50min..
+2019-10-08 04:33:44 | Refresh Token from API Server
+2019-10-08 04:33:45 | Update Token on Redis
+2019-10-08 04:33:45 | Sleep 50min..
+2019-10-08 05:23:45 | Refresh Token from API Server
+2019-10-08 05:23:46 | Update Token on Redis
+2019-10-08 05:23:46 | Sleep 50min..
+2019-10-08 06:13:46 | Refresh Token from API Server
+2019-10-08 06:13:47 | Update Token on Redis
+2019-10-08 06:13:47 | Sleep 50min..
+2019-10-08 07:03:47 | Refresh Token from API Server
+2019-10-08 07:03:48 | Update Token on Redis
+2019-10-08 07:03:48 | Sleep 50min..
+2019-10-08 07:53:48 | Refresh Token from API Server
+2019-10-08 07:53:49 | Update Token on Redis
+2019-10-08 07:53:49 | Sleep 50min..
+2019-10-08 08:43:49 | Refresh Token from API Server
+2019-10-08 08:43:50 | Update Token on Redis
+2019-10-08 08:43:50 | Sleep 50min..
+2019-10-08 09:33:50 | Refresh Token from API Server
+2019-10-08 09:33:51 | Update Token on Redis
+2019-10-08 09:33:51 | Sleep 50min..
+2019-10-08 10:23:51 | Refresh Token from API Server
+2019-10-08 10:23:52 | Update Token on Redis
+2019-10-08 10:23:52 | Sleep 50min..
+{'access_token': '7dzulIDSjDPI0JLJe0w7IcZclZ4aRajOJL0MZ6hIGl2olZJgE75tKG4JYaZRE', 'expires_in': 2700, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'H57NUtP1xWY0I2Ljmb4sGOdy4IZUHBdjRthUl6OypzqHCAVoAhSmaH98Qpllh', 'token_type': 'Bearer'}
+2019-10-08 10:38:54 | Insert Token to Redis
+2019-10-08 11:28:54 | Refresh Token from API Server
+2019-10-08 11:28:55 | Update Token on Redis
+2019-10-08 11:28:55 | Sleep 50min..
+2019-10-08 12:18:55 | Refresh Token from API Server
+2019-10-08 12:18:55 | Update Token on Redis
+2019-10-08 12:18:55 | Sleep 50min..
+2019-10-08 13:08:56 | Refresh Token from API Server
+2019-10-08 13:08:56 | Update Token on Redis
+2019-10-08 13:08:56 | Sleep 50min..
+2019-10-08 13:58:57 | Refresh Token from API Server
+2019-10-08 13:58:58 | Update Token on Redis
+2019-10-08 13:58:58 | Sleep 50min..
+2019-10-08 14:48:58 | Refresh Token from API Server
+2019-10-08 14:48:58 | Update Token on Redis
+2019-10-08 14:48:58 | Sleep 50min..
+2019-10-08 15:38:59 | Refresh Token from API Server
+2019-10-08 15:38:59 | Update Token on Redis
+2019-10-08 15:38:59 | Sleep 50min..
+2019-10-08 16:29:00 | Refresh Token from API Server
+2019-10-08 16:29:00 | Update Token on Redis
+2019-10-08 16:29:00 | Sleep 50min..
+2019-10-08 17:19:00 | Refresh Token from API Server
+2019-10-08 17:19:01 | Update Token on Redis
+2019-10-08 17:19:01 | Sleep 50min..
+2019-10-08 18:09:02 | Refresh Token from API Server
+2019-10-08 18:09:02 | Update Token on Redis
+2019-10-08 18:09:02 | Sleep 50min..
+2019-10-08 18:59:03 | Refresh Token from API Server
+2019-10-08 18:59:03 | Update Token on Redis
+2019-10-08 18:59:03 | Sleep 50min..
+2019-10-08 19:49:03 | Refresh Token from API Server
+2019-10-08 19:49:04 | Update Token on Redis
+2019-10-08 19:49:04 | Sleep 50min..
+2019-10-08 20:39:04 | Refresh Token from API Server
+2019-10-08 20:39:05 | Update Token on Redis
+2019-10-08 20:39:05 | Sleep 50min..
+2019-10-08 21:29:05 | Refresh Token from API Server
+2019-10-08 21:29:06 | Update Token on Redis
+2019-10-08 21:29:06 | Sleep 50min..
+2019-10-08 22:19:06 | Refresh Token from API Server
+2019-10-08 22:19:07 | Update Token on Redis
+2019-10-08 22:19:07 | Sleep 50min..
+2019-10-08 23:09:07 | Refresh Token from API Server
+2019-10-08 23:09:08 | Update Token on Redis
+2019-10-08 23:09:08 | Sleep 50min..
+2019-10-08 23:59:09 | Refresh Token from API Server
+2019-10-08 23:59:09 | Update Token on Redis
+2019-10-08 23:59:09 | Sleep 50min..
+2019-10-09 00:49:09 | Refresh Token from API Server
+2019-10-09 00:49:10 | Update Token on Redis
+2019-10-09 00:49:10 | Sleep 50min..
+2019-10-09 01:39:11 | Refresh Token from API Server
+2019-10-09 01:39:11 | Update Token on Redis
+2019-10-09 01:39:11 | Sleep 50min..
+2019-10-09 02:29:12 | Refresh Token from API Server
+2019-10-09 02:29:12 | Update Token on Redis
+2019-10-09 02:29:12 | Sleep 50min..
+2019-10-09 03:19:13 | Refresh Token from API Server
+2019-10-09 03:19:14 | Update Token on Redis
+2019-10-09 03:19:14 | Sleep 50min..
+2019-10-09 04:09:14 | Refresh Token from API Server
+2019-10-09 04:09:15 | Update Token on Redis
+2019-10-09 04:09:15 | Sleep 50min..
+2019-10-09 04:59:15 | Refresh Token from API Server
+2019-10-09 04:59:15 | Update Token on Redis
+2019-10-09 04:59:15 | Sleep 50min..
+2019-10-09 05:49:16 | Refresh Token from API Server
+2019-10-09 05:49:16 | Update Token on Redis
+2019-10-09 05:49:16 | Sleep 50min..
+2019-10-09 06:39:17 | Refresh Token from API Server
+2019-10-09 06:39:17 | Update Token on Redis
+2019-10-09 06:39:17 | Sleep 50min..
+2019-10-09 07:29:17 | Refresh Token from API Server
+2019-10-09 07:29:18 | Update Token on Redis
+2019-10-09 07:29:18 | Sleep 50min..
+2019-10-09 08:19:19 | Refresh Token from API Server
+2019-10-09 08:19:19 | Update Token on Redis
+2019-10-09 08:19:19 | Sleep 50min..
+2019-10-09 09:09:19 | Refresh Token from API Server
+2019-10-09 09:09:20 | Update Token on Redis
+2019-10-09 09:09:20 | Sleep 50min..
+2019-10-09 09:59:20 | Refresh Token from API Server
+2019-10-09 09:59:21 | Update Token on Redis
+2019-10-09 09:59:21 | Sleep 50min..
+2019-10-09 10:49:21 | Refresh Token from API Server
+2019-10-09 10:49:22 | Update Token on Redis
+2019-10-09 10:49:22 | Sleep 50min..
+2019-10-09 11:39:22 | Refresh Token from API Server
+2019-10-09 11:39:23 | Update Token on Redis
+2019-10-09 11:39:23 | Sleep 50min..
+2019-10-09 12:29:24 | Refresh Token from API Server
+2019-10-09 12:29:24 | Update Token on Redis
+2019-10-09 12:29:24 | Sleep 50min..
+2019-10-09 13:19:25 | Refresh Token from API Server
+2019-10-09 13:19:26 | Update Token on Redis
+2019-10-09 13:19:26 | Sleep 50min..
+2019-10-09 14:09:26 | Refresh Token from API Server
+2019-10-09 14:09:27 | Update Token on Redis
+2019-10-09 14:09:27 | Sleep 50min..
+2019-10-09 14:59:27 | Refresh Token from API Server
+2019-10-09 14:59:28 | Update Token on Redis
+2019-10-09 14:59:28 | Sleep 50min..
+2019-10-09 15:49:28 | Refresh Token from API Server
+2019-10-09 15:49:28 | Update Token on Redis
+2019-10-09 15:49:28 | Sleep 50min..
+2019-10-09 16:39:29 | Refresh Token from API Server
+2019-10-09 16:39:29 | Update Token on Redis
+2019-10-09 16:39:29 | Sleep 50min..
+2019-10-09 17:29:30 | Refresh Token from API Server
+2019-10-09 17:29:30 | Update Token on Redis
+2019-10-09 17:29:30 | Sleep 50min..
+2019-10-09 18:19:31 | Refresh Token from API Server
+2019-10-09 18:19:31 | Update Token on Redis
+2019-10-09 18:19:31 | Sleep 50min..
+2019-10-09 19:09:31 | Refresh Token from API Server
+2019-10-09 19:09:32 | Update Token on Redis
+2019-10-09 19:09:32 | Sleep 50min..
+2019-10-09 19:59:32 | Refresh Token from API Server
+2019-10-09 19:59:33 | Update Token on Redis
+2019-10-09 19:59:33 | Sleep 50min..
+2019-10-09 20:49:33 | Refresh Token from API Server
+2019-10-09 20:49:34 | Update Token on Redis
+2019-10-09 20:49:34 | Sleep 50min..
+2019-10-09 21:39:34 | Refresh Token from API Server
+2019-10-09 21:39:35 | Update Token on Redis
+2019-10-09 21:39:35 | Sleep 50min..
+2019-10-09 22:29:35 | Refresh Token from API Server
+2019-10-09 22:29:36 | Update Token on Redis
+2019-10-09 22:29:36 | Sleep 50min..
+2019-10-09 23:19:36 | Refresh Token from API Server
+2019-10-09 23:19:37 | Update Token on Redis
+2019-10-09 23:19:37 | Sleep 50min..
+2019-10-10 00:09:37 | Refresh Token from API Server
+2019-10-10 00:09:38 | Update Token on Redis
+2019-10-10 00:09:38 | Sleep 50min..
+2019-10-10 00:59:38 | Refresh Token from API Server
+2019-10-10 00:59:39 | Update Token on Redis
+2019-10-10 00:59:39 | Sleep 50min..
+2019-10-10 01:49:39 | Refresh Token from API Server
+2019-10-10 01:49:40 | Update Token on Redis
+2019-10-10 01:49:40 | Sleep 50min..
+2019-10-10 02:39:40 | Refresh Token from API Server
+2019-10-10 02:39:41 | Update Token on Redis
+2019-10-10 02:39:41 | Sleep 50min..
+2019-10-10 03:29:41 | Refresh Token from API Server
+2019-10-10 03:29:42 | Update Token on Redis
+2019-10-10 03:29:42 | Sleep 50min..
+2019-10-10 04:19:42 | Refresh Token from API Server
+2019-10-10 04:19:43 | Update Token on Redis
+2019-10-10 04:19:43 | Sleep 50min..
+2019-10-10 05:09:43 | Refresh Token from API Server
+2019-10-10 05:09:44 | Update Token on Redis
+2019-10-10 05:09:44 | Sleep 50min..
+2019-10-10 05:59:44 | Refresh Token from API Server
+2019-10-10 05:59:45 | Update Token on Redis
+2019-10-10 05:59:45 | Sleep 50min..
+2019-10-10 06:49:45 | Refresh Token from API Server
+2019-10-10 06:49:46 | Update Token on Redis
+2019-10-10 06:49:46 | Sleep 50min..
+2019-10-10 07:39:46 | Refresh Token from API Server
+2019-10-10 07:39:47 | Update Token on Redis
+2019-10-10 07:39:47 | Sleep 50min..
+2019-10-10 08:29:47 | Refresh Token from API Server
+2019-10-10 08:29:48 | Update Token on Redis
+2019-10-10 08:29:48 | Sleep 50min..
+2019-10-10 09:19:48 | Refresh Token from API Server
+2019-10-10 09:19:49 | Update Token on Redis
+2019-10-10 09:19:49 | Sleep 50min..
+2019-10-10 10:09:49 | Refresh Token from API Server
+2019-10-10 10:09:50 | Update Token on Redis
+2019-10-10 10:09:50 | Sleep 50min..
+2019-10-10 10:59:50 | Refresh Token from API Server
+2019-10-10 10:59:51 | Update Token on Redis
+2019-10-10 10:59:51 | Sleep 50min..
+2019-10-10 11:49:51 | Refresh Token from API Server
+2019-10-10 11:49:52 | Update Token on Redis
+2019-10-10 11:49:52 | Sleep 50min..
+2019-10-10 12:39:52 | Refresh Token from API Server
+2019-10-10 12:39:53 | Update Token on Redis
+2019-10-10 12:39:53 | Sleep 50min..
+2019-10-10 13:29:53 | Refresh Token from API Server
+2019-10-10 13:29:54 | Update Token on Redis
+2019-10-10 13:29:54 | Sleep 50min..
+2019-10-10 14:19:54 | Refresh Token from API Server
+2019-10-10 14:19:55 | Update Token on Redis
+2019-10-10 14:19:55 | Sleep 50min..
+2019-10-10 15:09:55 | Refresh Token from API Server
+2019-10-10 15:09:56 | Update Token on Redis
+2019-10-10 15:09:56 | Sleep 50min..
+2019-10-10 15:59:56 | Refresh Token from API Server
+2019-10-10 15:59:57 | Update Token on Redis
+2019-10-10 15:59:57 | Sleep 50min..
+2019-10-10 16:49:57 | Refresh Token from API Server
+2019-10-10 16:49:58 | Update Token on Redis
+2019-10-10 16:49:58 | Sleep 50min..
+2019-10-10 17:39:58 | Refresh Token from API Server
+2019-10-10 17:39:59 | Update Token on Redis
+2019-10-10 17:39:59 | Sleep 50min..
+2019-10-10 18:29:59 | Refresh Token from API Server
+2019-10-10 18:30:00 | Update Token on Redis
+2019-10-10 18:30:00 | Sleep 50min..
+2019-10-10 19:20:00 | Refresh Token from API Server
+2019-10-10 19:20:01 | Update Token on Redis
+2019-10-10 19:20:01 | Sleep 50min..
+2019-10-10 20:10:01 | Refresh Token from API Server
+2019-10-10 20:10:02 | Update Token on Redis
+2019-10-10 20:10:02 | Sleep 50min..
+2019-10-10 21:00:02 | Refresh Token from API Server
+2019-10-10 21:00:03 | Update Token on Redis
+2019-10-10 21:00:03 | Sleep 50min..
+2019-10-10 21:50:03 | Refresh Token from API Server
+2019-10-10 21:50:04 | Update Token on Redis
+2019-10-10 21:50:04 | Sleep 50min..
+2019-10-10 22:40:04 | Refresh Token from API Server
+2019-10-10 22:40:05 | Update Token on Redis
+2019-10-10 22:40:05 | Sleep 50min..
+2019-10-10 23:30:05 | Refresh Token from API Server
+2019-10-10 23:30:06 | Update Token on Redis
+2019-10-10 23:30:06 | Sleep 50min..
+2019-10-11 00:20:06 | Refresh Token from API Server
+2019-10-11 00:20:07 | Update Token on Redis
+2019-10-11 00:20:07 | Sleep 50min..
+2019-10-11 01:10:07 | Refresh Token from API Server
+2019-10-11 01:10:08 | Update Token on Redis
+2019-10-11 01:10:08 | Sleep 50min..
+2019-10-11 02:00:08 | Refresh Token from API Server
+2019-10-11 02:00:09 | Update Token on Redis
+2019-10-11 02:00:09 | Sleep 50min..
+2019-10-11 02:50:09 | Refresh Token from API Server
+2019-10-11 02:50:10 | Update Token on Redis
+2019-10-11 02:50:10 | Sleep 50min..
+{'access_token': 'Tn3lyQ1p4vA88HWtDYDVFAM44bYF3lkeyyrhgosX2AG9EPykF7U7a1IDXAmqn', 'expires_in': 3357, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'XfJHiUsuRkAi4vNe2xpj5xifAJObxqWzR7JolYeuLHh9Ena79KmFejB8tb49J', 'token_type': 'Bearer'}
+2019-10-11 02:54:14 | Insert Token to Redis
+2019-10-11 03:44:14 | Refresh Token from API Server
+2019-10-11 03:44:15 | Update Token on Redis
+2019-10-11 03:44:15 | Sleep 50min..
+2019-10-11 04:34:15 | Refresh Token from API Server
+2019-10-11 04:34:16 | Update Token on Redis
+2019-10-11 04:34:16 | Sleep 50min..
+2019-10-11 05:24:16 | Refresh Token from API Server
+2019-10-11 05:24:17 | Update Token on Redis
+2019-10-11 05:24:17 | Sleep 50min..
+2019-10-11 06:14:17 | Refresh Token from API Server
+2019-10-11 06:14:18 | Update Token on Redis
+2019-10-11 06:14:18 | Sleep 50min..
+2019-10-11 07:04:18 | Refresh Token from API Server
+2019-10-11 07:04:19 | Update Token on Redis
+2019-10-11 07:04:19 | Sleep 50min..
+2019-10-11 07:54:19 | Refresh Token from API Server
+2019-10-11 07:54:20 | Update Token on Redis
+2019-10-11 07:54:20 | Sleep 50min..
+2019-10-11 08:44:20 | Refresh Token from API Server
+2019-10-11 08:44:21 | Update Token on Redis
+2019-10-11 08:44:21 | Sleep 50min..
+2019-10-11 09:34:21 | Refresh Token from API Server
+2019-10-11 09:34:22 | Update Token on Redis
+2019-10-11 09:34:22 | Sleep 50min..
+2019-10-11 10:24:22 | Refresh Token from API Server
+2019-10-11 10:24:23 | Update Token on Redis
+2019-10-11 10:24:23 | Sleep 50min..
+2019-10-11 11:14:23 | Refresh Token from API Server
+2019-10-11 11:14:24 | Update Token on Redis
+2019-10-11 11:14:24 | Sleep 50min..
+2019-10-11 12:04:24 | Refresh Token from API Server
+2019-10-11 12:04:25 | Update Token on Redis
+2019-10-11 12:04:25 | Sleep 50min..
+2019-10-11 12:54:25 | Refresh Token from API Server
+2019-10-11 12:54:26 | Update Token on Redis
+2019-10-11 12:54:26 | Sleep 50min..
+2019-10-11 13:44:26 | Refresh Token from API Server
+2019-10-11 13:44:27 | Update Token on Redis
+2019-10-11 13:44:27 | Sleep 50min..
+2019-10-11 14:34:27 | Refresh Token from API Server
+2019-10-11 14:34:28 | Update Token on Redis
+2019-10-11 14:34:28 | Sleep 50min..
+2019-10-11 15:24:28 | Refresh Token from API Server
+2019-10-11 15:24:29 | Update Token on Redis
+2019-10-11 15:24:29 | Sleep 50min..
+2019-10-11 16:14:29 | Refresh Token from API Server
+2019-10-11 16:14:30 | Update Token on Redis
+2019-10-11 16:14:30 | Sleep 50min..
+2019-10-11 17:04:30 | Refresh Token from API Server
+2019-10-11 17:04:31 | Update Token on Redis
+2019-10-11 17:04:31 | Sleep 50min..
+2019-10-11 17:54:31 | Refresh Token from API Server
+2019-10-11 17:54:32 | Update Token on Redis
+2019-10-11 17:54:32 | Sleep 50min..
+2019-10-11 18:44:32 | Refresh Token from API Server
+2019-10-11 18:44:33 | Update Token on Redis
+2019-10-11 18:44:33 | Sleep 50min..
+2019-10-11 19:34:33 | Refresh Token from API Server
+2019-10-11 19:34:34 | Update Token on Redis
+2019-10-11 19:34:34 | Sleep 50min..
+2019-10-11 20:24:34 | Refresh Token from API Server
+2019-10-11 20:24:35 | Update Token on Redis
+2019-10-11 20:24:35 | Sleep 50min..
+2019-10-11 21:14:35 | Refresh Token from API Server
+2019-10-11 21:14:36 | Update Token on Redis
+2019-10-11 21:14:36 | Sleep 50min..
+2019-10-11 22:04:36 | Refresh Token from API Server
+2019-10-11 22:04:37 | Update Token on Redis
+2019-10-11 22:04:37 | Sleep 50min..
+2019-10-11 22:54:38 | Refresh Token from API Server
+2019-10-11 22:54:39 | Update Token on Redis
+2019-10-11 22:54:39 | Sleep 50min..
+2019-10-11 23:44:39 | Refresh Token from API Server
+2019-10-11 23:44:39 | Update Token on Redis
+2019-10-11 23:44:39 | Sleep 50min..
+2019-10-12 00:34:40 | Refresh Token from API Server
+2019-10-12 00:34:41 | Update Token on Redis
+2019-10-12 00:34:41 | Sleep 50min..
+2019-10-12 01:24:41 | Refresh Token from API Server
+2019-10-12 01:24:41 | Update Token on Redis
+2019-10-12 01:24:41 | Sleep 50min..
+2019-10-12 02:14:41 | Refresh Token from API Server
+2019-10-12 02:14:42 | Update Token on Redis
+2019-10-12 02:14:42 | Sleep 50min..
+2019-10-12 03:04:42 | Refresh Token from API Server
+2019-10-12 03:04:43 | Update Token on Redis
+2019-10-12 03:04:43 | Sleep 50min..
+2019-10-12 03:54:44 | Refresh Token from API Server
+2019-10-12 03:54:44 | Update Token on Redis
+2019-10-12 03:54:44 | Sleep 50min..
+2019-10-12 04:44:45 | Refresh Token from API Server
+2019-10-12 04:44:46 | Update Token on Redis
+2019-10-12 04:44:46 | Sleep 50min..
+2019-10-12 05:34:46 | Refresh Token from API Server
+2019-10-12 05:34:47 | Update Token on Redis
+2019-10-12 05:34:47 | Sleep 50min..
+2019-10-12 06:24:47 | Refresh Token from API Server
+2019-10-12 06:24:48 | Update Token on Redis
+2019-10-12 06:24:48 | Sleep 50min..
+{'access_token': 'chpKSnbtE23SEpdxPxlIvpXMuwQf2Xp99UfvOdvPZKVuv5lshY3BNkcXdVszf', 'expires_in': 1318, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'D1wUrxD4ozs6i1Z7wwgms5CV8tiRlUGzNcoXw0HiQ9MEEsbxaZ17K8IfkcR6l', 'token_type': 'Bearer'}
+2019-10-12 07:02:50 | Insert Token to Redis
+2019-10-12 07:52:50 | Refresh Token from API Server
+2019-10-12 07:52:51 | Update Token on Redis
+2019-10-12 07:52:51 | Sleep 50min..
+2019-10-12 08:42:51 | Refresh Token from API Server
+2019-10-12 08:42:52 | Update Token on Redis
+2019-10-12 08:42:52 | Sleep 50min..
+2019-10-12 09:32:52 | Refresh Token from API Server
+2019-10-12 09:32:53 | Update Token on Redis
+2019-10-12 09:32:53 | Sleep 50min..
+2019-10-12 10:22:53 | Refresh Token from API Server
+2019-10-12 10:22:54 | Update Token on Redis
+2019-10-12 10:22:54 | Sleep 50min..
+2019-10-12 11:12:54 | Refresh Token from API Server
+2019-10-12 11:12:55 | Update Token on Redis
+2019-10-12 11:12:55 | Sleep 50min..
+2019-10-12 12:02:55 | Refresh Token from API Server
+2019-10-12 12:02:56 | Update Token on Redis
+2019-10-12 12:02:56 | Sleep 50min..
+2019-10-12 12:52:56 | Refresh Token from API Server
+2019-10-12 12:52:57 | Update Token on Redis
+2019-10-12 12:52:57 | Sleep 50min..
+2019-10-12 13:42:57 | Refresh Token from API Server
+2019-10-12 13:42:58 | Update Token on Redis
+2019-10-12 13:42:58 | Sleep 50min..
+2019-10-12 14:32:58 | Refresh Token from API Server
+2019-10-12 14:32:59 | Update Token on Redis
+2019-10-12 14:32:59 | Sleep 50min..
+2019-10-12 15:22:59 | Refresh Token from API Server
+2019-10-12 15:23:00 | Update Token on Redis
+2019-10-12 15:23:00 | Sleep 50min..
+2019-10-12 16:13:00 | Refresh Token from API Server
+2019-10-12 16:13:01 | Update Token on Redis
+2019-10-12 16:13:01 | Sleep 50min..
+2019-10-12 17:03:01 | Refresh Token from API Server
+2019-10-12 17:03:02 | Update Token on Redis
+2019-10-12 17:03:02 | Sleep 50min..
+2019-10-12 17:53:02 | Refresh Token from API Server
+2019-10-12 17:53:03 | Update Token on Redis
+2019-10-12 17:53:03 | Sleep 50min..
+2019-10-12 18:43:03 | Refresh Token from API Server
+2019-10-12 18:43:04 | Update Token on Redis
+2019-10-12 18:43:04 | Sleep 50min..
+2019-10-12 19:33:04 | Refresh Token from API Server
+2019-10-12 19:33:05 | Update Token on Redis
+2019-10-12 19:33:05 | Sleep 50min..
+2019-10-12 20:23:05 | Refresh Token from API Server
+2019-10-12 20:23:06 | Update Token on Redis
+2019-10-12 20:23:06 | Sleep 50min..
+2019-10-12 21:13:06 | Refresh Token from API Server
+2019-10-12 21:13:07 | Update Token on Redis
+2019-10-12 21:13:07 | Sleep 50min..
+2019-10-12 22:03:07 | Refresh Token from API Server
+2019-10-12 22:03:08 | Update Token on Redis
+2019-10-12 22:03:08 | Sleep 50min..
+2019-10-12 22:53:08 | Refresh Token from API Server
+2019-10-12 22:53:09 | Update Token on Redis
+2019-10-12 22:53:09 | Sleep 50min..
+2019-10-12 23:43:09 | Refresh Token from API Server
+2019-10-12 23:43:10 | Update Token on Redis
+2019-10-12 23:43:10 | Sleep 50min..
+2019-10-13 00:33:10 | Refresh Token from API Server
+2019-10-13 00:33:11 | Update Token on Redis
+2019-10-13 00:33:11 | Sleep 50min..
+2019-10-13 01:23:11 | Refresh Token from API Server
+2019-10-13 01:23:12 | Update Token on Redis
+2019-10-13 01:23:12 | Sleep 50min..
+2019-10-13 02:13:12 | Refresh Token from API Server
+2019-10-13 02:13:13 | Update Token on Redis
+2019-10-13 02:13:13 | Sleep 50min..
+2019-10-13 03:03:13 | Refresh Token from API Server
+2019-10-13 03:03:14 | Update Token on Redis
+2019-10-13 03:03:14 | Sleep 50min..
+2019-10-13 03:53:14 | Refresh Token from API Server
+2019-10-13 03:53:15 | Update Token on Redis
+2019-10-13 03:53:15 | Sleep 50min..
+2019-10-13 04:43:15 | Refresh Token from API Server
+2019-10-13 04:43:16 | Update Token on Redis
+2019-10-13 04:43:16 | Sleep 50min..
+2019-10-13 05:33:16 | Refresh Token from API Server
+2019-10-13 05:33:17 | Update Token on Redis
+2019-10-13 05:33:17 | Sleep 50min..
+2019-10-13 06:23:17 | Refresh Token from API Server
+2019-10-13 06:23:18 | Update Token on Redis
+2019-10-13 06:23:18 | Sleep 50min..
+2019-10-13 07:13:18 | Refresh Token from API Server
+2019-10-13 07:13:19 | Update Token on Redis
+2019-10-13 07:13:19 | Sleep 50min..
+{'access_token': 'MxUi4LSgUFKNaz0f4Znpwwp38rJqvSIzMoPU5mccjAMQqSFT00Y02xmlrMf0l', 'expires_in': 3239, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': '0CVpmmlCkfug2FTe2GgM0naxWmOtvd1ygLZ1vQ4EFks7tU1mO5oSFGM52nsUb', 'token_type': 'Bearer'}
+2019-10-13 07:19:21 | Insert Token to Redis
+2019-10-13 08:09:21 | Refresh Token from API Server
+2019-10-13 08:09:22 | Update Token on Redis
+2019-10-13 08:09:22 | Sleep 50min..
+2019-10-13 08:59:22 | Refresh Token from API Server
+2019-10-13 08:59:23 | Update Token on Redis
+2019-10-13 08:59:23 | Sleep 50min..
+2019-10-13 09:49:23 | Refresh Token from API Server
+2019-10-13 09:49:24 | Update Token on Redis
+2019-10-13 09:49:24 | Sleep 50min..
+2019-10-13 10:39:24 | Refresh Token from API Server
+2019-10-13 10:39:25 | Update Token on Redis
+2019-10-13 10:39:25 | Sleep 50min..
+2019-10-13 11:29:25 | Refresh Token from API Server
+2019-10-13 11:29:26 | Update Token on Redis
+2019-10-13 11:29:26 | Sleep 50min..
+2019-10-13 12:19:26 | Refresh Token from API Server
+2019-10-13 12:19:27 | Update Token on Redis
+2019-10-13 12:19:27 | Sleep 50min..
+2019-10-13 13:09:27 | Refresh Token from API Server
+2019-10-13 13:09:28 | Update Token on Redis
+2019-10-13 13:09:28 | Sleep 50min..
+2019-10-13 13:59:28 | Refresh Token from API Server
+2019-10-13 13:59:29 | Update Token on Redis
+2019-10-13 13:59:29 | Sleep 50min..
+2019-10-13 14:49:29 | Refresh Token from API Server
+2019-10-13 14:49:30 | Update Token on Redis
+2019-10-13 14:49:30 | Sleep 50min..
+2019-10-13 15:39:30 | Refresh Token from API Server
+2019-10-13 15:39:31 | Update Token on Redis
+2019-10-13 15:39:31 | Sleep 50min..
+2019-10-13 16:29:31 | Refresh Token from API Server
+2019-10-13 16:29:32 | Update Token on Redis
+2019-10-13 16:29:32 | Sleep 50min..
+2019-10-13 17:19:32 | Refresh Token from API Server
+2019-10-13 17:19:33 | Update Token on Redis
+2019-10-13 17:19:33 | Sleep 50min..
+2019-10-13 18:09:33 | Refresh Token from API Server
+2019-10-13 18:09:34 | Update Token on Redis
+2019-10-13 18:09:34 | Sleep 50min..
+2019-10-13 18:59:34 | Refresh Token from API Server
+2019-10-13 18:59:35 | Update Token on Redis
+2019-10-13 18:59:35 | Sleep 50min..
+2019-10-13 19:49:35 | Refresh Token from API Server
+2019-10-13 19:49:36 | Update Token on Redis
+2019-10-13 19:49:36 | Sleep 50min..
+2019-10-13 20:39:36 | Refresh Token from API Server
+2019-10-13 20:39:37 | Update Token on Redis
+2019-10-13 20:39:37 | Sleep 50min..
+2019-10-13 21:29:37 | Refresh Token from API Server
+2019-10-13 21:29:38 | Update Token on Redis
+2019-10-13 21:29:38 | Sleep 50min..
+2019-10-13 22:19:38 | Refresh Token from API Server
+2019-10-13 22:19:39 | Update Token on Redis
+2019-10-13 22:19:39 | Sleep 50min..
+2019-10-13 23:09:39 | Refresh Token from API Server
+2019-10-13 23:09:40 | Update Token on Redis
+2019-10-13 23:09:40 | Sleep 50min..
+2019-10-13 23:59:40 | Refresh Token from API Server
+2019-10-13 23:59:41 | Update Token on Redis
+2019-10-13 23:59:41 | Sleep 50min..
+2019-10-14 00:49:41 | Refresh Token from API Server
+2019-10-14 00:49:42 | Update Token on Redis
+2019-10-14 00:49:42 | Sleep 50min..
+2019-10-14 01:39:42 | Refresh Token from API Server
+2019-10-14 01:39:43 | Update Token on Redis
+2019-10-14 01:39:43 | Sleep 50min..
+2019-10-14 02:29:43 | Refresh Token from API Server
+2019-10-14 02:29:44 | Update Token on Redis
+2019-10-14 02:29:44 | Sleep 50min..
+2019-10-14 03:19:44 | Refresh Token from API Server
+2019-10-14 03:19:45 | Update Token on Redis
+2019-10-14 03:19:45 | Sleep 50min..
+2019-10-14 04:09:45 | Refresh Token from API Server
+2019-10-14 04:09:46 | Update Token on Redis
+2019-10-14 04:09:46 | Sleep 50min..
+2019-10-14 04:59:46 | Refresh Token from API Server
+2019-10-14 04:59:47 | Update Token on Redis
+2019-10-14 04:59:47 | Sleep 50min..
+2019-10-14 05:49:47 | Refresh Token from API Server
+2019-10-14 05:49:48 | Update Token on Redis
+2019-10-14 05:49:48 | Sleep 50min..
+2019-10-14 06:39:48 | Refresh Token from API Server
+2019-10-14 06:39:49 | Update Token on Redis
+2019-10-14 06:39:49 | Sleep 50min..
+2019-10-14 07:29:49 | Refresh Token from API Server
+2019-10-14 07:29:50 | Update Token on Redis
+2019-10-14 07:29:50 | Sleep 50min..
+2019-10-14 08:19:50 | Refresh Token from API Server
+2019-10-14 08:19:51 | Update Token on Redis
+2019-10-14 08:19:51 | Sleep 50min..
+2019-10-14 09:09:51 | Refresh Token from API Server
+2019-10-14 09:09:52 | Update Token on Redis
+2019-10-14 09:09:52 | Sleep 50min..
+2019-10-14 09:59:52 | Refresh Token from API Server
+2019-10-14 09:59:53 | Update Token on Redis
+2019-10-14 09:59:53 | Sleep 50min..
+2019-10-14 10:49:53 | Refresh Token from API Server
+2019-10-14 10:49:54 | Update Token on Redis
+2019-10-14 10:49:54 | Sleep 50min..
+2019-10-14 11:39:54 | Refresh Token from API Server
+2019-10-14 11:39:55 | Update Token on Redis
+2019-10-14 11:39:55 | Sleep 50min..
+2019-10-14 12:29:55 | Refresh Token from API Server
+2019-10-14 12:29:56 | Update Token on Redis
+2019-10-14 12:29:56 | Sleep 50min..
+2019-10-14 13:19:56 | Refresh Token from API Server
+2019-10-14 13:19:57 | Update Token on Redis
+2019-10-14 13:19:57 | Sleep 50min..
+2019-10-14 14:09:57 | Refresh Token from API Server
+2019-10-14 14:09:58 | Update Token on Redis
+2019-10-14 14:09:58 | Sleep 50min..
+2019-10-14 14:59:58 | Refresh Token from API Server
+2019-10-14 14:59:59 | Update Token on Redis
+2019-10-14 14:59:59 | Sleep 50min..
+2019-10-14 15:49:59 | Refresh Token from API Server
+2019-10-14 15:50:00 | Update Token on Redis
+2019-10-14 15:50:00 | Sleep 50min..
+2019-10-14 16:40:00 | Refresh Token from API Server
+2019-10-14 16:40:01 | Update Token on Redis
+2019-10-14 16:40:01 | Sleep 50min..
+2019-10-14 17:30:01 | Refresh Token from API Server
+2019-10-14 17:30:02 | Update Token on Redis
+2019-10-14 17:30:02 | Sleep 50min..
+2019-10-14 18:20:02 | Refresh Token from API Server
+2019-10-14 18:20:03 | Update Token on Redis
+2019-10-14 18:20:03 | Sleep 50min..
+2019-10-14 19:10:03 | Refresh Token from API Server
+2019-10-14 19:10:04 | Update Token on Redis
+2019-10-14 19:10:04 | Sleep 50min..
+2019-10-14 20:00:04 | Refresh Token from API Server
+2019-10-14 20:00:05 | Update Token on Redis
+2019-10-14 20:00:05 | Sleep 50min..
+2019-10-14 20:50:05 | Refresh Token from API Server
+2019-10-14 20:50:06 | Update Token on Redis
+2019-10-14 20:50:06 | Sleep 50min..
+2019-10-14 21:40:06 | Refresh Token from API Server
+2019-10-14 21:40:07 | Update Token on Redis
+2019-10-14 21:40:07 | Sleep 50min..
+2019-10-14 22:30:08 | Refresh Token from API Server
+2019-10-14 22:30:08 | Update Token on Redis
+2019-10-14 22:30:08 | Sleep 50min..
+2019-10-14 23:20:08 | Refresh Token from API Server
+2019-10-14 23:20:09 | Update Token on Redis
+2019-10-14 23:20:09 | Sleep 50min..
+2019-10-15 00:10:09 | Refresh Token from API Server
+2019-10-15 00:10:10 | Update Token on Redis
+2019-10-15 00:10:10 | Sleep 50min..
+2019-10-15 01:00:11 | Refresh Token from API Server
+2019-10-15 01:00:12 | Update Token on Redis
+2019-10-15 01:00:12 | Sleep 50min..
+2019-10-15 01:50:12 | Refresh Token from API Server
+2019-10-15 01:50:13 | Update Token on Redis
+2019-10-15 01:50:13 | Sleep 50min..
+2019-10-15 02:40:13 | Refresh Token from API Server
+2019-10-15 02:40:14 | Update Token on Redis
+2019-10-15 02:40:14 | Sleep 50min..
+2019-10-15 03:30:14 | Refresh Token from API Server
+2019-10-15 03:30:15 | Update Token on Redis
+2019-10-15 03:30:15 | Sleep 50min..
+2019-10-15 04:20:15 | Refresh Token from API Server
+2019-10-15 04:20:16 | Update Token on Redis
+2019-10-15 04:20:16 | Sleep 50min..
+2019-10-15 05:10:16 | Refresh Token from API Server
+2019-10-15 05:10:17 | Update Token on Redis
+2019-10-15 05:10:17 | Sleep 50min..
+2019-10-15 06:00:17 | Refresh Token from API Server
+2019-10-15 06:00:18 | Update Token on Redis
+2019-10-15 06:00:18 | Sleep 50min..
+2019-10-15 06:50:18 | Refresh Token from API Server
+2019-10-15 06:50:19 | Update Token on Redis
+2019-10-15 06:50:19 | Sleep 50min..
+2019-10-15 07:40:19 | Refresh Token from API Server
+2019-10-15 07:40:20 | Update Token on Redis
+2019-10-15 07:40:20 | Sleep 50min..
+2019-10-15 08:30:20 | Refresh Token from API Server
+2019-10-15 08:30:21 | Update Token on Redis
+2019-10-15 08:30:21 | Sleep 50min..
+2019-10-15 09:20:21 | Refresh Token from API Server
+2019-10-15 09:20:22 | Update Token on Redis
+2019-10-15 09:20:22 | Sleep 50min..
+2019-10-15 10:10:22 | Refresh Token from API Server
+2019-10-15 10:10:23 | Update Token on Redis
+2019-10-15 10:10:23 | Sleep 50min..
+2019-10-15 11:00:23 | Refresh Token from API Server
+2019-10-15 11:00:24 | Update Token on Redis
+2019-10-15 11:00:24 | Sleep 50min..
+2019-10-15 11:50:24 | Refresh Token from API Server
+2019-10-15 11:50:25 | Update Token on Redis
+2019-10-15 11:50:25 | Sleep 50min..
+2019-10-15 12:40:25 | Refresh Token from API Server
+2019-10-15 12:40:26 | Update Token on Redis
+2019-10-15 12:40:26 | Sleep 50min..
+2019-10-15 13:30:26 | Refresh Token from API Server
+2019-10-15 13:30:27 | Update Token on Redis
+2019-10-15 13:30:27 | Sleep 50min..
+2019-10-15 14:20:27 | Refresh Token from API Server
+2019-10-15 14:20:28 | Update Token on Redis
+2019-10-15 14:20:28 | Sleep 50min..
+2019-10-15 15:10:28 | Refresh Token from API Server
+2019-10-15 15:10:29 | Update Token on Redis
+2019-10-15 15:10:29 | Sleep 50min..
+2019-10-15 16:00:29 | Refresh Token from API Server
+2019-10-15 16:00:30 | Update Token on Redis
+2019-10-15 16:00:30 | Sleep 50min..
+2019-10-15 16:50:30 | Refresh Token from API Server
+2019-10-15 16:50:31 | Update Token on Redis
+2019-10-15 16:50:31 | Sleep 50min..
+2019-10-15 17:40:31 | Refresh Token from API Server
+2019-10-15 17:40:32 | Update Token on Redis
+2019-10-15 17:40:32 | Sleep 50min..
+2019-10-15 18:30:32 | Refresh Token from API Server
+2019-10-15 18:30:33 | Update Token on Redis
+2019-10-15 18:30:33 | Sleep 50min..
+2019-10-15 19:20:33 | Refresh Token from API Server
+2019-10-15 19:20:34 | Update Token on Redis
+2019-10-15 19:20:34 | Sleep 50min..
+2019-10-15 20:10:34 | Refresh Token from API Server
+2019-10-15 20:10:35 | Update Token on Redis
+2019-10-15 20:10:35 | Sleep 50min..
+2019-10-15 21:00:35 | Refresh Token from API Server
+2019-10-15 21:00:35 | Update Token on Redis
+2019-10-15 21:00:35 | Sleep 50min..
+2019-10-15 21:50:36 | Refresh Token from API Server
+2019-10-15 21:50:37 | Update Token on Redis
+2019-10-15 21:50:37 | Sleep 50min..
+2019-10-15 22:40:37 | Refresh Token from API Server
+2019-10-15 22:40:38 | Update Token on Redis
+2019-10-15 22:40:38 | Sleep 50min..
+2019-10-15 23:30:38 | Refresh Token from API Server
+2019-10-15 23:30:39 | Update Token on Redis
+2019-10-15 23:30:39 | Sleep 50min..
+2019-10-16 00:20:39 | Refresh Token from API Server
+2019-10-16 00:20:40 | Update Token on Redis
+2019-10-16 00:20:40 | Sleep 50min..
+2019-10-16 01:10:40 | Refresh Token from API Server
+2019-10-16 01:10:41 | Update Token on Redis
+2019-10-16 01:10:41 | Sleep 50min..
+2019-10-16 02:00:41 | Refresh Token from API Server
+2019-10-16 02:00:42 | Update Token on Redis
+2019-10-16 02:00:42 | Sleep 50min..
+2019-10-16 02:50:42 | Refresh Token from API Server
+2019-10-16 02:50:43 | Update Token on Redis
+2019-10-16 02:50:43 | Sleep 50min..
+2019-10-16 03:40:43 | Refresh Token from API Server
+2019-10-16 03:40:44 | Update Token on Redis
+2019-10-16 03:40:44 | Sleep 50min..
+2019-10-16 04:30:44 | Refresh Token from API Server
+2019-10-16 04:30:44 | Update Token on Redis
+2019-10-16 04:30:44 | Sleep 50min..
+2019-10-16 05:20:45 | Refresh Token from API Server
+2019-10-16 05:20:46 | Update Token on Redis
+2019-10-16 05:20:46 | Sleep 50min..
+2019-10-16 06:10:46 | Refresh Token from API Server
+2019-10-16 06:10:47 | Update Token on Redis
+2019-10-16 06:10:47 | Sleep 50min..
+2019-10-16 07:00:47 | Refresh Token from API Server
+2019-10-16 07:00:48 | Update Token on Redis
+2019-10-16 07:00:48 | Sleep 50min..
+2019-10-16 07:50:48 | Refresh Token from API Server
+2019-10-16 07:50:49 | Update Token on Redis
+2019-10-16 07:50:49 | Sleep 50min..
+2019-10-16 08:40:49 | Refresh Token from API Server
+2019-10-16 08:40:50 | Update Token on Redis
+2019-10-16 08:40:50 | Sleep 50min..
+2019-10-16 09:30:50 | Refresh Token from API Server
+2019-10-16 09:30:50 | Update Token on Redis
+2019-10-16 09:30:50 | Sleep 50min..
+2019-10-16 10:20:51 | Refresh Token from API Server
+2019-10-16 10:20:52 | Update Token on Redis
+2019-10-16 10:20:52 | Sleep 50min..
+2019-10-16 11:10:52 | Refresh Token from API Server
+2019-10-16 11:10:53 | Update Token on Redis
+2019-10-16 11:10:53 | Sleep 50min..
+2019-10-16 12:00:53 | Refresh Token from API Server
+2019-10-16 12:00:54 | Update Token on Redis
+2019-10-16 12:00:54 | Sleep 50min..
+2019-10-16 12:50:54 | Refresh Token from API Server
+2019-10-16 12:50:55 | Update Token on Redis
+2019-10-16 12:50:55 | Sleep 50min..
+2019-10-16 13:40:55 | Refresh Token from API Server
+2019-10-16 13:40:56 | Update Token on Redis
+2019-10-16 13:40:56 | Sleep 50min..
+2019-10-16 14:30:56 | Refresh Token from API Server
+2019-10-16 14:30:56 | Update Token on Redis
+2019-10-16 14:30:56 | Sleep 50min..
+2019-10-16 15:20:57 | Refresh Token from API Server
+2019-10-16 15:20:57 | Update Token on Redis
+2019-10-16 15:20:57 | Sleep 50min..
+{'access_token': 'lTBt2r7ehFQ8GuyOReSOc63rHcoMLxPdO9H4oWKkky2gIGV3EDHcIxXSBo1OL', 'expires_in': 1017, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'RfjfmPBczfkqUr20oQp9T9Ic8egXujqO8hh93VFtK8LIMHLcDgTVem6pTgtCu', 'token_type': 'Bearer'}
+2019-10-16 16:04:02 | Insert Token to Redis
+2019-10-16 16:54:02 | Refresh Token from API Server
+2019-10-16 16:54:03 | Update Token on Redis
+2019-10-16 16:54:03 | Sleep 50min..
+2019-10-16 17:44:03 | Refresh Token from API Server
+2019-10-16 17:44:04 | Update Token on Redis
+2019-10-16 17:44:04 | Sleep 50min..
+2019-10-16 18:34:04 | Refresh Token from API Server
+2019-10-16 18:34:05 | Update Token on Redis
+2019-10-16 18:34:05 | Sleep 50min..
+2019-10-16 19:24:05 | Refresh Token from API Server
+2019-10-16 19:24:06 | Update Token on Redis
+2019-10-16 19:24:06 | Sleep 50min..
+{'access_token': 'iwlyouKJONJtW9yLIWe84t45gVTUvBBziTdYEg64OIIDHjsidhYvrp0kbQv9L', 'expires_in': 1500, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'RTJP8HCd94SCVa4Jy4vA3Ap2mSX35oOyR9gQ46VjZfqgV1w83okHS2t2yAY7M', 'token_type': 'Bearer'}
+2019-10-16 19:59:06 | Insert Token to Redis
+2019-10-16 20:49:06 | Refresh Token from API Server
+2019-10-16 20:49:07 | Update Token on Redis
+2019-10-16 20:49:07 | Sleep 50min..
+2019-10-16 21:39:07 | Refresh Token from API Server
+2019-10-16 21:39:08 | Update Token on Redis
+2019-10-16 21:39:08 | Sleep 50min..
+2019-10-16 22:29:08 | Refresh Token from API Server
+2019-10-16 22:29:09 | Update Token on Redis
+2019-10-16 22:29:09 | Sleep 50min..
+2019-10-16 23:19:10 | Refresh Token from API Server
+2019-10-16 23:19:11 | Update Token on Redis
+2019-10-16 23:19:11 | Sleep 50min..
+{'access_token': 'gadJsUpP4c6oaGw56TX72GnGTPGuVwQjqwunweORtLTEEfqRpuzEaj8vBC5KC', 'expires_in': 3180, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'vdLOLArzc7dxV6yoYVH8MBdqilw94EdlObmuoxyNa3wC2A0pCDJn9Aimu4dZB', 'token_type': 'Bearer'}
+2019-10-16 23:26:11 | Insert Token to Redis
+2019-10-17 00:16:11 | Refresh Token from API Server
+2019-10-17 00:16:12 | Update Token on Redis
+2019-10-17 00:16:12 | Sleep 50min..
+2019-10-17 01:06:12 | Refresh Token from API Server
+2019-10-17 01:06:13 | Update Token on Redis
+2019-10-17 01:06:13 | Sleep 50min..
+2019-10-17 01:56:13 | Refresh Token from API Server
+2019-10-17 01:56:14 | Update Token on Redis
+2019-10-17 01:56:14 | Sleep 50min..
+2019-10-17 02:46:14 | Refresh Token from API Server
+2019-10-17 02:46:15 | Update Token on Redis
+2019-10-17 02:46:15 | Sleep 50min..
+2019-10-17 03:36:15 | Refresh Token from API Server
+2019-10-17 03:36:16 | Update Token on Redis
+2019-10-17 03:36:16 | Sleep 50min..
+2019-10-17 04:26:16 | Refresh Token from API Server
+2019-10-17 04:26:17 | Update Token on Redis
+2019-10-17 04:26:17 | Sleep 50min..
+2019-10-17 05:16:17 | Refresh Token from API Server
+2019-10-17 05:16:18 | Update Token on Redis
+2019-10-17 05:16:18 | Sleep 50min..
+2019-10-17 06:06:18 | Refresh Token from API Server
+2019-10-17 06:06:19 | Update Token on Redis
+2019-10-17 06:06:19 | Sleep 50min..
+2019-10-17 06:56:19 | Refresh Token from API Server
+2019-10-17 06:56:20 | Update Token on Redis
+2019-10-17 06:56:20 | Sleep 50min..
+2019-10-17 07:46:20 | Refresh Token from API Server
+2019-10-17 07:46:21 | Update Token on Redis
+2019-10-17 07:46:21 | Sleep 50min..
+{'access_token': 'qJEq1tXZAvf8bUmG2dNqhVN0tSgFJp0JYIdUTNIIErrYlkcESJIDKinFiXiQ5', 'expires_in': 3120, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'SuXXikYU8Zz5GHhkRfutY8O4EveTxbbaahx2LMoE84F7O19YUjsYfBUEnhoA8', 'token_type': 'Bearer'}
+2019-10-17 07:54:21 | Insert Token to Redis
+2019-10-17 08:44:21 | Refresh Token from API Server
+2019-10-17 08:44:22 | Update Token on Redis
+2019-10-17 08:44:22 | Sleep 50min..
+2019-10-17 09:34:22 | Refresh Token from API Server
+2019-10-17 09:34:23 | Update Token on Redis
+2019-10-17 09:34:23 | Sleep 50min..
+2019-10-17 10:24:23 | Refresh Token from API Server
+2019-10-17 10:24:24 | Update Token on Redis
+2019-10-17 10:24:24 | Sleep 50min..
+2019-10-17 11:14:25 | Refresh Token from API Server
+2019-10-17 11:14:25 | Update Token on Redis
+2019-10-17 11:14:25 | Sleep 50min..
+2019-10-17 12:04:25 | Refresh Token from API Server
+2019-10-17 12:04:26 | Update Token on Redis
+2019-10-17 12:04:26 | Sleep 50min..
+2019-10-17 12:54:26 | Refresh Token from API Server
+2019-10-17 12:54:27 | Update Token on Redis
+2019-10-17 12:54:27 | Sleep 50min..
+2019-10-17 13:44:28 | Refresh Token from API Server
+2019-10-17 13:44:28 | Update Token on Redis
+2019-10-17 13:44:28 | Sleep 50min..
+2019-10-17 14:34:28 | Refresh Token from API Server
+2019-10-17 14:34:29 | Update Token on Redis
+2019-10-17 14:34:29 | Sleep 50min..
+2019-10-17 15:24:29 | Refresh Token from API Server
+2019-10-17 15:24:30 | Update Token on Redis
+2019-10-17 15:24:30 | Sleep 50min..
+2019-10-17 16:14:31 | Refresh Token from API Server
+2019-10-17 16:14:32 | Update Token on Redis
+2019-10-17 16:14:32 | Sleep 50min..
+2019-10-17 17:04:32 | Refresh Token from API Server
+2019-10-17 17:04:33 | Update Token on Redis
+2019-10-17 17:04:33 | Sleep 50min..
+2019-10-17 17:54:33 | Refresh Token from API Server
+2019-10-17 17:54:34 | Update Token on Redis
+2019-10-17 17:54:34 | Sleep 50min..
+2019-10-17 18:44:34 | Refresh Token from API Server
+2019-10-17 18:44:35 | Update Token on Redis
+2019-10-17 18:44:35 | Sleep 50min..
+2019-10-17 19:34:35 | Refresh Token from API Server
+2019-10-17 19:34:36 | Update Token on Redis
+2019-10-17 19:34:36 | Sleep 50min..
+2019-10-17 20:24:36 | Refresh Token from API Server
+2019-10-17 20:24:37 | Update Token on Redis
+2019-10-17 20:24:37 | Sleep 50min..
+2019-10-17 21:14:37 | Refresh Token from API Server
+2019-10-17 21:14:38 | Update Token on Redis
+2019-10-17 21:14:38 | Sleep 50min..
+2019-10-17 22:04:38 | Refresh Token from API Server
+2019-10-17 22:04:39 | Update Token on Redis
+2019-10-17 22:04:39 | Sleep 50min..
+2019-10-17 22:54:39 | Refresh Token from API Server
+2019-10-17 22:54:40 | Update Token on Redis
+2019-10-17 22:54:40 | Sleep 50min..
+2019-10-17 23:44:40 | Refresh Token from API Server
+2019-10-17 23:44:41 | Update Token on Redis
+2019-10-17 23:44:41 | Sleep 50min..
+2019-10-18 00:34:41 | Refresh Token from API Server
+2019-10-18 00:34:42 | Update Token on Redis
+2019-10-18 00:34:42 | Sleep 50min..
+2019-10-18 01:24:42 | Refresh Token from API Server
+2019-10-18 01:24:43 | Update Token on Redis
+2019-10-18 01:24:43 | Sleep 50min..
+2019-10-18 02:14:43 | Refresh Token from API Server
+2019-10-18 02:14:44 | Update Token on Redis
+2019-10-18 02:14:44 | Sleep 50min..
+2019-10-18 03:04:44 | Refresh Token from API Server
+2019-10-18 03:04:45 | Update Token on Redis
+2019-10-18 03:04:45 | Sleep 50min..
+2019-10-18 03:54:45 | Refresh Token from API Server
+2019-10-18 03:54:46 | Update Token on Redis
+2019-10-18 03:54:46 | Sleep 50min..
+2019-10-18 04:44:46 | Refresh Token from API Server
+2019-10-18 04:44:47 | Update Token on Redis
+2019-10-18 04:44:47 | Sleep 50min..
+2019-10-18 05:34:47 | Refresh Token from API Server
+2019-10-18 05:34:48 | Update Token on Redis
+2019-10-18 05:34:48 | Sleep 50min..
+2019-10-18 06:24:48 | Refresh Token from API Server
+2019-10-18 06:24:49 | Update Token on Redis
+2019-10-18 06:24:49 | Sleep 50min..
+2019-10-18 07:14:49 | Refresh Token from API Server
+2019-10-18 07:14:50 | Update Token on Redis
+2019-10-18 07:14:50 | Sleep 50min..
+2019-10-18 08:04:50 | Refresh Token from API Server
+2019-10-18 08:04:51 | Update Token on Redis
+2019-10-18 08:04:51 | Sleep 50min..
+2019-10-18 08:54:51 | Refresh Token from API Server
+2019-10-18 08:54:52 | Update Token on Redis
+2019-10-18 08:54:52 | Sleep 50min..
+2019-10-18 09:44:52 | Refresh Token from API Server
+2019-10-18 09:44:53 | Update Token on Redis
+2019-10-18 09:44:53 | Sleep 50min..
+2019-10-18 10:34:53 | Refresh Token from API Server
+2019-10-18 10:34:54 | Update Token on Redis
+2019-10-18 10:34:54 | Sleep 50min..
+2019-10-18 11:24:54 | Refresh Token from API Server
+2019-10-18 11:24:55 | Update Token on Redis
+2019-10-18 11:24:55 | Sleep 50min..
+2019-10-18 12:14:55 | Refresh Token from API Server
+2019-10-18 12:14:56 | Update Token on Redis
+2019-10-18 12:14:56 | Sleep 50min..
+2019-10-18 13:04:56 | Refresh Token from API Server
+2019-10-18 13:04:57 | Update Token on Redis
+2019-10-18 13:04:57 | Sleep 50min..
+2019-10-18 13:54:57 | Refresh Token from API Server
+2019-10-18 13:54:58 | Update Token on Redis
+2019-10-18 13:54:58 | Sleep 50min..
+2019-10-18 14:44:58 | Refresh Token from API Server
+2019-10-18 14:44:59 | Update Token on Redis
+2019-10-18 14:44:59 | Sleep 50min..
+2019-10-18 15:34:59 | Refresh Token from API Server
+2019-10-18 15:35:00 | Update Token on Redis
+2019-10-18 15:35:00 | Sleep 50min..
+2019-10-18 16:25:00 | Refresh Token from API Server
+2019-10-18 16:25:01 | Update Token on Redis
+2019-10-18 16:25:01 | Sleep 50min..
+2019-10-18 17:15:01 | Refresh Token from API Server
+2019-10-18 17:15:02 | Update Token on Redis
+2019-10-18 17:15:02 | Sleep 50min..
+2019-10-18 18:05:02 | Refresh Token from API Server
+2019-10-18 18:05:03 | Update Token on Redis
+2019-10-18 18:05:03 | Sleep 50min..
+2019-10-18 18:55:03 | Refresh Token from API Server
+2019-10-18 18:55:04 | Update Token on Redis
+2019-10-18 18:55:04 | Sleep 50min..
+2019-10-18 19:45:04 | Refresh Token from API Server
+2019-10-18 19:45:05 | Update Token on Redis
+2019-10-18 19:45:05 | Sleep 50min..
+2019-10-18 20:35:06 | Refresh Token from API Server
+2019-10-18 20:35:06 | Update Token on Redis
+2019-10-18 20:35:06 | Sleep 50min..
+2019-10-18 21:25:07 | Refresh Token from API Server
+2019-10-18 21:25:08 | Update Token on Redis
+2019-10-18 21:25:08 | Sleep 50min..
+2019-10-18 22:15:08 | Refresh Token from API Server
+2019-10-18 22:15:09 | Update Token on Redis
+2019-10-18 22:15:09 | Sleep 50min..
+2019-10-18 23:05:09 | Refresh Token from API Server
+2019-10-18 23:05:10 | Update Token on Redis
+2019-10-18 23:05:10 | Sleep 50min..
+2019-10-18 23:55:10 | Refresh Token from API Server
+2019-10-18 23:55:11 | Update Token on Redis
+2019-10-18 23:55:11 | Sleep 50min..
+2019-10-19 00:45:11 | Refresh Token from API Server
+2019-10-19 00:45:12 | Update Token on Redis
+2019-10-19 00:45:12 | Sleep 50min..
+2019-10-19 01:35:12 | Refresh Token from API Server
+2019-10-19 01:35:13 | Update Token on Redis
+2019-10-19 01:35:13 | Sleep 50min..
+2019-10-19 02:25:13 | Refresh Token from API Server
+2019-10-19 02:25:14 | Update Token on Redis
+2019-10-19 02:25:14 | Sleep 50min..
+2019-10-19 03:15:14 | Refresh Token from API Server
+2019-10-19 03:15:15 | Update Token on Redis
+2019-10-19 03:15:15 | Sleep 50min..
+2019-10-19 04:05:15 | Refresh Token from API Server
+2019-10-19 04:05:16 | Update Token on Redis
+2019-10-19 04:05:16 | Sleep 50min..
+2019-10-19 04:55:16 | Refresh Token from API Server
+2019-10-19 04:55:17 | Update Token on Redis
+2019-10-19 04:55:17 | Sleep 50min..
+2019-10-19 05:45:17 | Refresh Token from API Server
+2019-10-19 05:45:18 | Update Token on Redis
+2019-10-19 05:45:18 | Sleep 50min..
+2019-10-19 06:35:18 | Refresh Token from API Server
+2019-10-19 06:35:19 | Update Token on Redis
+2019-10-19 06:35:19 | Sleep 50min..
+2019-10-19 07:25:19 | Refresh Token from API Server
+2019-10-19 07:25:20 | Update Token on Redis
+2019-10-19 07:25:20 | Sleep 50min..
+2019-10-19 08:15:20 | Refresh Token from API Server
+2019-10-19 08:15:21 | Update Token on Redis
+2019-10-19 08:15:21 | Sleep 50min..
+2019-10-19 09:05:21 | Refresh Token from API Server
+2019-10-19 09:05:22 | Update Token on Redis
+2019-10-19 09:05:22 | Sleep 50min..
+2019-10-19 09:55:22 | Refresh Token from API Server
+2019-10-19 09:55:23 | Update Token on Redis
+2019-10-19 09:55:23 | Sleep 50min..
+{'access_token': 'tBUZeCFIgRh7znjuujDMP5IlD4eyxNRxAm5vIJUFKUDD0gAuj9kg7x3nvOGww', 'expires_in': 2640, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': '5EfyBQOgpEYHvQhk95LbPP3xhGatVg6Rr766rGbJONqPGQkgaFHDGRS1NFYns', 'token_type': 'Bearer'}
+2019-10-19 10:11:23 | Insert Token to Redis
+2019-10-19 11:01:23 | Refresh Token from API Server
+2019-10-19 11:01:24 | Update Token on Redis
+2019-10-19 11:01:24 | Sleep 50min..
+2019-10-19 11:51:24 | Refresh Token from API Server
+2019-10-19 11:51:25 | Update Token on Redis
+2019-10-19 11:51:25 | Sleep 50min..
+2019-10-19 12:41:25 | Refresh Token from API Server
+2019-10-19 12:41:26 | Update Token on Redis
+2019-10-19 12:41:26 | Sleep 50min..
+2019-10-19 13:31:26 | Refresh Token from API Server
+2019-10-19 13:31:27 | Update Token on Redis
+2019-10-19 13:31:27 | Sleep 50min..
+2019-10-19 14:21:27 | Refresh Token from API Server
+2019-10-19 14:21:28 | Update Token on Redis
+2019-10-19 14:21:28 | Sleep 50min..
+2019-10-19 15:11:28 | Refresh Token from API Server
+2019-10-19 15:11:29 | Update Token on Redis
+2019-10-19 15:11:29 | Sleep 50min..
+2019-10-19 16:01:29 | Refresh Token from API Server
+2019-10-19 16:01:30 | Update Token on Redis
+2019-10-19 16:01:30 | Sleep 50min..
+2019-10-19 16:51:30 | Refresh Token from API Server
+2019-10-19 16:51:31 | Update Token on Redis
+2019-10-19 16:51:31 | Sleep 50min..
+2019-10-19 17:41:31 | Refresh Token from API Server
+2019-10-19 17:41:32 | Update Token on Redis
+2019-10-19 17:41:32 | Sleep 50min..
+2019-10-19 18:31:33 | Refresh Token from API Server
+2019-10-19 18:31:33 | Update Token on Redis
+2019-10-19 18:31:33 | Sleep 50min..
+2019-10-19 19:21:34 | Refresh Token from API Server
+2019-10-19 19:21:34 | Update Token on Redis
+2019-10-19 19:21:34 | Sleep 50min..
+2019-10-19 20:11:35 | Refresh Token from API Server
+2019-10-19 20:11:36 | Update Token on Redis
+2019-10-19 20:11:36 | Sleep 50min..
+2019-10-19 21:01:36 | Refresh Token from API Server
+2019-10-19 21:01:37 | Update Token on Redis
+2019-10-19 21:01:37 | Sleep 50min..
+2019-10-19 21:51:37 | Refresh Token from API Server
+2019-10-19 21:51:38 | Update Token on Redis
+2019-10-19 21:51:38 | Sleep 50min..
+2019-10-19 22:41:38 | Refresh Token from API Server
+2019-10-19 22:41:39 | Update Token on Redis
+2019-10-19 22:41:39 | Sleep 50min..
+2019-10-19 23:31:39 | Refresh Token from API Server
+2019-10-19 23:31:40 | Update Token on Redis
+2019-10-19 23:31:40 | Sleep 50min..
+{'access_token': 'gjOiulzqPbQ3mn9uVGCbwo7SCc4XpPpcDjm5zq1LKWc1fxkn0k523EkElo26E', 'expires_in': 1560, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'fLRF9ntY5nGG4MFwemLhJDyD4xJfjjijdbOXH2iDdqJiMoXsT4CYToAdQQLwT', 'token_type': 'Bearer'}
+2019-10-20 00:05:40 | Insert Token to Redis
+2019-10-20 00:55:40 | Refresh Token from API Server
+2019-10-20 00:55:41 | Update Token on Redis
+2019-10-20 00:55:41 | Sleep 50min..
+2019-10-20 01:45:41 | Refresh Token from API Server
+2019-10-20 01:45:42 | Update Token on Redis
+2019-10-20 01:45:42 | Sleep 50min..
+2019-10-20 02:35:43 | Refresh Token from API Server
+2019-10-20 02:35:43 | Update Token on Redis
+2019-10-20 02:35:43 | Sleep 50min..
+2019-10-20 03:25:44 | Refresh Token from API Server
+2019-10-20 03:25:44 | Update Token on Redis
+2019-10-20 03:25:44 | Sleep 50min..
+2019-10-20 04:15:44 | Refresh Token from API Server
+2019-10-20 04:15:45 | Update Token on Redis
+2019-10-20 04:15:45 | Sleep 50min..
+2019-10-20 05:05:45 | Refresh Token from API Server
+2019-10-20 05:05:46 | Update Token on Redis
+2019-10-20 05:05:46 | Sleep 50min..
+2019-10-20 05:55:46 | Refresh Token from API Server
+2019-10-20 05:55:47 | Update Token on Redis
+2019-10-20 05:55:47 | Sleep 50min..
+2019-10-20 06:45:47 | Refresh Token from API Server
+2019-10-20 06:45:48 | Update Token on Redis
+2019-10-20 06:45:48 | Sleep 50min..
+2019-10-20 07:35:48 | Refresh Token from API Server
+2019-10-20 07:35:49 | Update Token on Redis
+2019-10-20 07:35:49 | Sleep 50min..
+2019-10-20 08:25:50 | Refresh Token from API Server
+2019-10-20 08:25:50 | Update Token on Redis
+2019-10-20 08:25:50 | Sleep 50min..
+2019-10-20 09:15:50 | Refresh Token from API Server
+2019-10-20 09:15:51 | Update Token on Redis
+2019-10-20 09:15:51 | Sleep 50min..
+2019-10-20 10:05:51 | Refresh Token from API Server
+2019-10-20 10:05:52 | Update Token on Redis
+2019-10-20 10:05:52 | Sleep 50min..
+2019-10-20 10:55:52 | Refresh Token from API Server
+2019-10-20 10:55:53 | Update Token on Redis
+2019-10-20 10:55:53 | Sleep 50min..
+2019-10-20 11:45:53 | Refresh Token from API Server
+2019-10-20 11:45:54 | Update Token on Redis
+2019-10-20 11:45:54 | Sleep 50min..
+2019-10-20 12:35:55 | Refresh Token from API Server
+2019-10-20 12:35:55 | Update Token on Redis
+2019-10-20 12:35:55 | Sleep 50min..
+2019-10-20 13:25:56 | Refresh Token from API Server
+2019-10-20 13:25:57 | Update Token on Redis
+2019-10-20 13:25:57 | Sleep 50min..
+2019-10-20 14:15:57 | Refresh Token from API Server
+2019-10-20 14:15:58 | Update Token on Redis
+2019-10-20 14:15:58 | Sleep 50min..
+2019-10-20 15:05:58 | Refresh Token from API Server
+2019-10-20 15:05:59 | Update Token on Redis
+2019-10-20 15:05:59 | Sleep 50min..
+2019-10-20 15:55:59 | Refresh Token from API Server
+2019-10-20 15:56:00 | Update Token on Redis
+2019-10-20 15:56:00 | Sleep 50min..
+2019-10-20 16:46:00 | Refresh Token from API Server
+2019-10-20 16:46:01 | Update Token on Redis
+2019-10-20 16:46:01 | Sleep 50min..
+2019-10-20 17:36:01 | Refresh Token from API Server
+2019-10-20 17:36:02 | Update Token on Redis
+2019-10-20 17:36:02 | Sleep 50min..
+2019-10-20 18:26:02 | Refresh Token from API Server
+2019-10-20 18:26:03 | Update Token on Redis
+2019-10-20 18:26:03 | Sleep 50min..
+2019-10-20 19:16:03 | Refresh Token from API Server
+2019-10-20 19:16:04 | Update Token on Redis
+2019-10-20 19:16:04 | Sleep 50min..
+2019-10-20 20:06:04 | Refresh Token from API Server
+2019-10-20 20:06:05 | Update Token on Redis
+2019-10-20 20:06:05 | Sleep 50min..
+2019-10-20 20:56:05 | Refresh Token from API Server
+2019-10-20 20:56:06 | Update Token on Redis
+2019-10-20 20:56:06 | Sleep 50min..
+2019-10-20 21:46:06 | Refresh Token from API Server
+2019-10-20 21:46:07 | Update Token on Redis
+2019-10-20 21:46:07 | Sleep 50min..
+2019-10-20 22:36:07 | Refresh Token from API Server
+2019-10-20 22:36:08 | Update Token on Redis
+2019-10-20 22:36:08 | Sleep 50min..
+2019-10-20 23:26:08 | Refresh Token from API Server
+2019-10-20 23:26:09 | Update Token on Redis
+2019-10-20 23:26:09 | Sleep 50min..
+2019-10-21 00:16:09 | Refresh Token from API Server
+2019-10-21 00:16:10 | Update Token on Redis
+2019-10-21 00:16:10 | Sleep 50min..
+2019-10-21 01:06:10 | Refresh Token from API Server
+2019-10-21 01:06:11 | Update Token on Redis
+2019-10-21 01:06:11 | Sleep 50min..
+2019-10-21 01:56:11 | Refresh Token from API Server
+2019-10-21 01:56:12 | Update Token on Redis
+2019-10-21 01:56:12 | Sleep 50min..
+2019-10-21 02:46:12 | Refresh Token from API Server
+2019-10-21 02:46:13 | Update Token on Redis
+2019-10-21 02:46:13 | Sleep 50min..
+2019-10-21 03:36:13 | Refresh Token from API Server
+2019-10-21 03:36:14 | Update Token on Redis
+2019-10-21 03:36:14 | Sleep 50min..
+2019-10-21 04:26:14 | Refresh Token from API Server
+2019-10-21 04:26:15 | Update Token on Redis
+2019-10-21 04:26:15 | Sleep 50min..
+2019-10-21 05:16:15 | Refresh Token from API Server
+2019-10-21 05:16:16 | Update Token on Redis
+2019-10-21 05:16:16 | Sleep 50min..
+2019-10-21 06:06:16 | Refresh Token from API Server
+2019-10-21 06:06:17 | Update Token on Redis
+2019-10-21 06:06:17 | Sleep 50min..
+2019-10-21 06:56:17 | Refresh Token from API Server
+2019-10-21 06:56:18 | Update Token on Redis
+2019-10-21 06:56:18 | Sleep 50min..
+2019-10-21 07:46:18 | Refresh Token from API Server
+2019-10-21 07:46:19 | Update Token on Redis
+2019-10-21 07:46:19 | Sleep 50min..
+2019-10-21 08:36:19 | Refresh Token from API Server
+2019-10-21 08:36:20 | Update Token on Redis
+2019-10-21 08:36:20 | Sleep 50min..
+2019-10-21 09:26:20 | Refresh Token from API Server
+2019-10-21 09:26:21 | Update Token on Redis
+2019-10-21 09:26:21 | Sleep 50min..
+2019-10-21 10:16:21 | Refresh Token from API Server
+2019-10-21 10:16:22 | Update Token on Redis
+2019-10-21 10:16:22 | Sleep 50min..
+2019-10-21 11:06:22 | Refresh Token from API Server
+2019-10-21 11:06:23 | Update Token on Redis
+2019-10-21 11:06:23 | Sleep 50min..
+2019-10-21 11:56:23 | Refresh Token from API Server
+2019-10-21 11:56:24 | Update Token on Redis
+2019-10-21 11:56:24 | Sleep 50min..
+2019-10-21 12:46:24 | Refresh Token from API Server
+2019-10-21 12:46:25 | Update Token on Redis
+2019-10-21 12:46:25 | Sleep 50min..
+2019-10-21 13:36:25 | Refresh Token from API Server
+2019-10-21 13:36:26 | Update Token on Redis
+2019-10-21 13:36:26 | Sleep 50min..
+2019-10-21 14:26:26 | Refresh Token from API Server
+2019-10-21 14:26:27 | Update Token on Redis
+2019-10-21 14:26:27 | Sleep 50min..
+2019-10-21 15:16:27 | Refresh Token from API Server
+2019-10-21 15:16:28 | Update Token on Redis
+2019-10-21 15:16:28 | Sleep 50min..
+2019-10-21 16:06:28 | Refresh Token from API Server
+2019-10-21 16:06:29 | Update Token on Redis
+2019-10-21 16:06:29 | Sleep 50min..
+2019-10-21 16:56:29 | Refresh Token from API Server
+2019-10-21 16:56:30 | Update Token on Redis
+2019-10-21 16:56:30 | Sleep 50min..
+2019-10-21 17:46:30 | Refresh Token from API Server
+2019-10-21 17:46:31 | Update Token on Redis
+2019-10-21 17:46:31 | Sleep 50min..
+2019-10-21 18:36:31 | Refresh Token from API Server
+2019-10-21 18:36:32 | Update Token on Redis
+2019-10-21 18:36:32 | Sleep 50min..
+2019-10-21 19:26:32 | Refresh Token from API Server
+2019-10-21 19:26:33 | Update Token on Redis
+2019-10-21 19:26:33 | Sleep 50min..
+2019-10-21 20:16:33 | Refresh Token from API Server
+2019-10-21 20:16:34 | Update Token on Redis
+2019-10-21 20:16:34 | Sleep 50min..
+2019-10-21 21:06:34 | Refresh Token from API Server
+2019-10-21 21:06:35 | Update Token on Redis
+2019-10-21 21:06:35 | Sleep 50min..
+2019-10-21 21:56:35 | Refresh Token from API Server
+2019-10-21 21:56:36 | Update Token on Redis
+2019-10-21 21:56:36 | Sleep 50min..
+{'access_token': 'FA0P34ERkGVD53SqrdSurZwaBYoif6x10u7qjc26FRk8CPWVkxKsLhHwExvZo', 'expires_in': 3479, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'N73G7Zs2mlwAZm0R5G7I88QKaBaDDD9d0iPbldn92kiHyq26UQNkYrw2TkdDj', 'token_type': 'Bearer'}
+2019-10-21 21:58:37 | Insert Token to Redis
+2019-10-21 22:48:38 | Refresh Token from API Server
+2019-10-21 22:48:38 | Update Token on Redis
+2019-10-21 22:48:38 | Sleep 50min..
+2019-10-21 23:38:39 | Refresh Token from API Server
+2019-10-21 23:38:39 | Update Token on Redis
+2019-10-21 23:38:39 | Sleep 50min..
+2019-10-22 00:28:39 | Refresh Token from API Server
+2019-10-22 00:28:40 | Update Token on Redis
+2019-10-22 00:28:40 | Sleep 50min..
+2019-10-22 01:18:41 | Refresh Token from API Server
+2019-10-22 01:18:41 | Update Token on Redis
+2019-10-22 01:18:41 | Sleep 50min..
+2019-10-22 02:08:41 | Refresh Token from API Server
+2019-10-22 02:08:42 | Update Token on Redis
+2019-10-22 02:08:42 | Sleep 50min..
+2019-10-22 02:58:42 | Refresh Token from API Server
+2019-10-22 02:58:43 | Update Token on Redis
+2019-10-22 02:58:43 | Sleep 50min..
+2019-10-22 03:48:43 | Refresh Token from API Server
+2019-10-22 03:48:44 | Update Token on Redis
+2019-10-22 03:48:44 | Sleep 50min..
+2019-10-22 04:38:44 | Refresh Token from API Server
+2019-10-22 04:38:45 | Update Token on Redis
+2019-10-22 04:38:45 | Sleep 50min..
+2019-10-22 05:28:45 | Refresh Token from API Server
+2019-10-22 05:28:46 | Update Token on Redis
+2019-10-22 05:28:46 | Sleep 50min..
+2019-10-22 06:18:46 | Refresh Token from API Server
+2019-10-22 06:18:47 | Update Token on Redis
+2019-10-22 06:18:47 | Sleep 50min..
+2019-10-22 07:08:48 | Refresh Token from API Server
+2019-10-22 07:08:48 | Update Token on Redis
+2019-10-22 07:08:48 | Sleep 50min..
+2019-10-22 07:58:48 | Refresh Token from API Server
+2019-10-22 07:58:49 | Update Token on Redis
+2019-10-22 07:58:49 | Sleep 50min..
+2019-10-22 08:48:49 | Refresh Token from API Server
+2019-10-22 08:48:50 | Update Token on Redis
+2019-10-22 08:48:50 | Sleep 50min..
+2019-10-22 09:38:50 | Refresh Token from API Server
+2019-10-22 09:38:51 | Update Token on Redis
+2019-10-22 09:38:51 | Sleep 50min..
+2019-10-22 10:28:51 | Refresh Token from API Server
+2019-10-22 10:28:52 | Update Token on Redis
+2019-10-22 10:28:52 | Sleep 50min..
+2019-10-22 11:18:53 | Refresh Token from API Server
+2019-10-22 11:18:53 | Update Token on Redis
+2019-10-22 11:18:53 | Sleep 50min..
+2019-10-22 12:08:54 | Refresh Token from API Server
+2019-10-22 12:08:54 | Update Token on Redis
+2019-10-22 12:08:54 | Sleep 50min..
+2019-10-22 12:58:54 | Refresh Token from API Server
+2019-10-22 12:58:55 | Update Token on Redis
+2019-10-22 12:58:55 | Sleep 50min..
+2019-10-22 13:48:55 | Refresh Token from API Server
+2019-10-22 13:48:56 | Update Token on Redis
+2019-10-22 13:48:56 | Sleep 50min..
+2019-10-22 14:38:56 | Refresh Token from API Server
+2019-10-22 14:38:57 | Update Token on Redis
+2019-10-22 14:38:57 | Sleep 50min..
+2019-10-22 15:28:57 | Refresh Token from API Server
+2019-10-22 15:28:58 | Update Token on Redis
+2019-10-22 15:28:58 | Sleep 50min..
+2019-10-22 16:18:58 | Refresh Token from API Server
+2019-10-22 16:18:59 | Update Token on Redis
+2019-10-22 16:18:59 | Sleep 50min..
+2019-10-22 17:08:59 | Refresh Token from API Server
+2019-10-22 17:09:00 | Update Token on Redis
+2019-10-22 17:09:00 | Sleep 50min..
+2019-10-22 17:59:00 | Refresh Token from API Server
+2019-10-22 17:59:01 | Update Token on Redis
+2019-10-22 17:59:01 | Sleep 50min..
+2019-10-22 18:49:01 | Refresh Token from API Server
+2019-10-22 18:49:02 | Update Token on Redis
+2019-10-22 18:49:02 | Sleep 50min..
+2019-10-22 19:39:02 | Refresh Token from API Server
+2019-10-22 19:39:03 | Update Token on Redis
+2019-10-22 19:39:03 | Sleep 50min..
+2019-10-22 20:29:03 | Refresh Token from API Server
+2019-10-22 20:29:04 | Update Token on Redis
+2019-10-22 20:29:04 | Sleep 50min..
+2019-10-22 21:19:05 | Refresh Token from API Server
+2019-10-22 21:19:05 | Update Token on Redis
+2019-10-22 21:19:05 | Sleep 50min..
+2019-10-22 22:09:05 | Refresh Token from API Server
+2019-10-22 22:09:07 | Update Token on Redis
+2019-10-22 22:09:07 | Sleep 50min..
+2019-10-22 22:59:07 | Refresh Token from API Server
+2019-10-22 22:59:08 | Update Token on Redis
+2019-10-22 22:59:08 | Sleep 50min..
+2019-10-22 23:49:08 | Refresh Token from API Server
+2019-10-22 23:49:09 | Update Token on Redis
+2019-10-22 23:49:09 | Sleep 50min..
+2019-10-23 00:39:09 | Refresh Token from API Server
+2019-10-23 00:39:10 | Update Token on Redis
+2019-10-23 00:39:10 | Sleep 50min..
+2019-10-23 01:29:10 | Refresh Token from API Server
+2019-10-23 01:29:11 | Update Token on Redis
+2019-10-23 01:29:11 | Sleep 50min..
+2019-10-23 02:19:11 | Refresh Token from API Server
+2019-10-23 02:19:12 | Update Token on Redis
+2019-10-23 02:19:12 | Sleep 50min..
+2019-10-23 03:09:12 | Refresh Token from API Server
+2019-10-23 03:09:13 | Update Token on Redis
+2019-10-23 03:09:13 | Sleep 50min..
+{'access_token': 'I0jl2QxcviHDqVsLkLVVmJDya1OUcdF50iUYywnwUiMbVm3hzh6zma1kh9jhb', 'expires_in': 2699, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'tSPp5MgAF8r8BaiKzpuyPrZxYR1qK3yVFL1iu1w8YHRIVsRb3cSHYuuA8j3i5', 'token_type': 'Bearer'}
+2019-10-23 03:24:14 | Insert Token to Redis
+2019-10-23 04:14:14 | Refresh Token from API Server
+2019-10-23 04:14:15 | Update Token on Redis
+2019-10-23 04:14:15 | Sleep 50min..
+2019-10-23 05:04:15 | Refresh Token from API Server
+2019-10-23 05:04:16 | Update Token on Redis
+2019-10-23 05:04:16 | Sleep 50min..
+2019-10-23 05:54:16 | Refresh Token from API Server
+2019-10-23 05:54:17 | Update Token on Redis
+2019-10-23 05:54:17 | Sleep 50min..
+2019-10-23 06:44:17 | Refresh Token from API Server
+2019-10-23 06:44:18 | Update Token on Redis
+2019-10-23 06:44:18 | Sleep 50min..
+2019-10-23 07:34:18 | Refresh Token from API Server
+2019-10-23 07:34:19 | Update Token on Redis
+2019-10-23 07:34:19 | Sleep 50min..
+2019-10-23 08:24:19 | Refresh Token from API Server
+2019-10-23 08:24:20 | Update Token on Redis
+2019-10-23 08:24:20 | Sleep 50min..
+2019-10-23 09:14:20 | Refresh Token from API Server
+2019-10-23 09:14:21 | Update Token on Redis
+2019-10-23 09:14:21 | Sleep 50min..
+2019-10-23 10:04:21 | Refresh Token from API Server
+2019-10-23 10:04:22 | Update Token on Redis
+2019-10-23 10:04:22 | Sleep 50min..
+2019-10-23 10:54:22 | Refresh Token from API Server
+2019-10-23 10:54:23 | Update Token on Redis
+2019-10-23 10:54:23 | Sleep 50min..
+2019-10-23 11:44:23 | Refresh Token from API Server
+2019-10-23 11:44:24 | Update Token on Redis
+2019-10-23 11:44:24 | Sleep 50min..
+2019-10-23 12:34:24 | Refresh Token from API Server
+2019-10-23 12:34:25 | Update Token on Redis
+2019-10-23 12:34:25 | Sleep 50min..
+2019-10-23 13:24:25 | Refresh Token from API Server
+2019-10-23 13:24:26 | Update Token on Redis
+2019-10-23 13:24:26 | Sleep 50min..
+2019-10-23 14:14:26 | Refresh Token from API Server
+2019-10-23 14:14:27 | Update Token on Redis
+2019-10-23 14:14:27 | Sleep 50min..
+2019-10-23 15:04:27 | Refresh Token from API Server
+2019-10-23 15:04:28 | Update Token on Redis
+2019-10-23 15:04:28 | Sleep 50min..
+2019-10-23 15:54:28 | Refresh Token from API Server
+2019-10-23 15:54:29 | Update Token on Redis
+2019-10-23 15:54:29 | Sleep 50min..
+2019-10-23 16:44:29 | Refresh Token from API Server
+2019-10-23 16:44:30 | Update Token on Redis
+2019-10-23 16:44:30 | Sleep 50min..
+2019-10-23 17:34:30 | Refresh Token from API Server
+2019-10-23 17:34:31 | Update Token on Redis
+2019-10-23 17:34:31 | Sleep 50min..
+2019-10-23 18:24:31 | Refresh Token from API Server
+2019-10-23 18:24:33 | Update Token on Redis
+2019-10-23 18:24:33 | Sleep 50min..
+2019-10-23 19:14:33 | Refresh Token from API Server
+2019-10-23 19:14:34 | Update Token on Redis
+2019-10-23 19:14:34 | Sleep 50min..
+2019-10-23 20:04:34 | Refresh Token from API Server
+2019-10-23 20:04:35 | Update Token on Redis
+2019-10-23 20:04:35 | Sleep 50min..
+2019-10-23 20:54:35 | Refresh Token from API Server
+2019-10-23 20:54:36 | Update Token on Redis
+2019-10-23 20:54:36 | Sleep 50min..
+2019-10-23 21:44:36 | Refresh Token from API Server
+2019-10-23 21:44:37 | Update Token on Redis
+2019-10-23 21:44:37 | Sleep 50min..
+2019-10-23 22:34:37 | Refresh Token from API Server
+2019-10-23 22:34:38 | Update Token on Redis
+2019-10-23 22:34:38 | Sleep 50min..
+2019-10-23 23:24:38 | Refresh Token from API Server
+2019-10-23 23:24:39 | Update Token on Redis
+2019-10-23 23:24:39 | Sleep 50min..
+2019-10-24 00:14:39 | Refresh Token from API Server
+2019-10-24 00:14:40 | Update Token on Redis
+2019-10-24 00:14:40 | Sleep 50min..
+2019-10-24 01:04:40 | Refresh Token from API Server
+2019-10-24 01:04:41 | Update Token on Redis
+2019-10-24 01:04:41 | Sleep 50min..
+2019-10-24 01:54:41 | Refresh Token from API Server
+2019-10-24 01:54:42 | Update Token on Redis
+2019-10-24 01:54:42 | Sleep 50min..
+2019-10-24 02:44:42 | Refresh Token from API Server
+2019-10-24 02:44:43 | Update Token on Redis
+2019-10-24 02:44:43 | Sleep 50min..
+2019-10-24 03:34:43 | Refresh Token from API Server
+2019-10-24 03:34:44 | Update Token on Redis
+2019-10-24 03:34:44 | Sleep 50min..
+2019-10-24 04:24:44 | Refresh Token from API Server
+2019-10-24 04:24:45 | Update Token on Redis
+2019-10-24 04:24:45 | Sleep 50min..
+2019-10-24 05:14:45 | Refresh Token from API Server
+2019-10-24 05:14:46 | Update Token on Redis
+2019-10-24 05:14:46 | Sleep 50min..
+2019-10-24 06:04:46 | Refresh Token from API Server
+2019-10-24 06:04:47 | Update Token on Redis
+2019-10-24 06:04:47 | Sleep 50min..
+2019-10-24 06:54:47 | Refresh Token from API Server
+2019-10-24 06:54:48 | Update Token on Redis
+2019-10-24 06:54:48 | Sleep 50min..
+2019-10-24 07:44:48 | Refresh Token from API Server
+2019-10-24 07:44:49 | Update Token on Redis
+2019-10-24 07:44:49 | Sleep 50min..
+2019-10-24 08:34:49 | Refresh Token from API Server
+2019-10-24 08:34:50 | Update Token on Redis
+2019-10-24 08:34:50 | Sleep 50min..
+2019-10-24 09:24:50 | Refresh Token from API Server
+2019-10-24 09:24:51 | Update Token on Redis
+2019-10-24 09:24:51 | Sleep 50min..
+2019-10-24 10:14:51 | Refresh Token from API Server
+2019-10-24 10:14:52 | Update Token on Redis
+2019-10-24 10:14:52 | Sleep 50min..
+2019-10-24 11:04:52 | Refresh Token from API Server
+2019-10-24 11:04:53 | Update Token on Redis
+2019-10-24 11:04:53 | Sleep 50min..
+2019-10-24 11:54:53 | Refresh Token from API Server
+2019-10-24 11:54:54 | Update Token on Redis
+2019-10-24 11:54:54 | Sleep 50min..
+2019-10-24 12:44:54 | Refresh Token from API Server
+2019-10-24 12:44:55 | Update Token on Redis
+2019-10-24 12:44:55 | Sleep 50min..
+2019-10-24 13:34:55 | Refresh Token from API Server
+2019-10-24 13:34:56 | Update Token on Redis
+2019-10-24 13:34:56 | Sleep 50min..
+2019-10-24 14:24:56 | Refresh Token from API Server
+2019-10-24 14:24:57 | Update Token on Redis
+2019-10-24 14:24:57 | Sleep 50min..
+2019-10-24 15:14:57 | Refresh Token from API Server
+2019-10-24 15:14:58 | Update Token on Redis
+2019-10-24 15:14:58 | Sleep 50min..
+{'access_token': 'OBuN6D0DQjAcn5EI3tk6AVA3D3d8nGBZl5cDkT2PzHDLwwCI2SIyP892vMhd5', 'expires_in': 2040, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'hQd2clCT1dd8jG05W7OjdQ5RsyGkMkgkHR2sdVULy6BrISDXLV9AwpB6OwoMl', 'token_type': 'Bearer'}
+2019-10-24 15:40:58 | Insert Token to Redis
+2019-10-24 16:30:58 | Refresh Token from API Server
+2019-10-24 16:31:00 | Update Token on Redis
+2019-10-24 16:31:00 | Sleep 50min..
+2019-10-24 17:21:00 | Refresh Token from API Server
+2019-10-24 17:21:01 | Update Token on Redis
+2019-10-24 17:21:01 | Sleep 50min..
+2019-10-24 18:11:01 | Refresh Token from API Server
+2019-10-24 18:13:11 | Update Token on Redis
+2019-10-24 18:13:11 | Sleep 50min..
+2019-10-24 19:03:11 | Refresh Token from API Server
+2019-10-24 19:03:12 | Update Token on Redis
+2019-10-24 19:03:12 | Sleep 50min..
+2019-10-24 19:53:12 | Refresh Token from API Server
+2019-10-24 19:53:13 | Update Token on Redis
+2019-10-24 19:53:13 | Sleep 50min..
+2019-10-24 20:43:13 | Refresh Token from API Server
+2019-10-24 20:43:14 | Update Token on Redis
+2019-10-24 20:43:14 | Sleep 50min..
+2019-10-24 21:33:14 | Refresh Token from API Server
+2019-10-24 21:33:16 | Update Token on Redis
+2019-10-24 21:33:16 | Sleep 50min..
+2019-10-24 22:23:16 | Refresh Token from API Server
+2019-10-24 22:23:17 | Update Token on Redis
+2019-10-24 22:23:17 | Sleep 50min..
+2019-10-24 23:13:17 | Refresh Token from API Server
+2019-10-24 23:13:18 | Update Token on Redis
+2019-10-24 23:13:18 | Sleep 50min..
+2019-10-25 00:03:18 | Refresh Token from API Server
+2019-10-25 00:03:19 | Update Token on Redis
+2019-10-25 00:03:19 | Sleep 50min..
+2019-10-25 00:53:19 | Refresh Token from API Server
+2019-10-25 00:53:20 | Update Token on Redis
+2019-10-25 00:53:20 | Sleep 50min..
+2019-10-25 01:43:20 | Refresh Token from API Server
+2019-10-25 01:43:21 | Update Token on Redis
+2019-10-25 01:43:21 | Sleep 50min..
+2019-10-25 02:33:21 | Refresh Token from API Server
+2019-10-25 02:33:22 | Update Token on Redis
+2019-10-25 02:33:22 | Sleep 50min..
+2019-10-25 03:23:22 | Refresh Token from API Server
+2019-10-25 03:23:23 | Update Token on Redis
+2019-10-25 03:23:23 | Sleep 50min..
+2019-10-25 04:13:23 | Refresh Token from API Server
+2019-10-25 04:13:24 | Update Token on Redis
+2019-10-25 04:13:24 | Sleep 50min..
+2019-10-25 05:03:24 | Refresh Token from API Server
+2019-10-25 05:03:25 | Update Token on Redis
+2019-10-25 05:03:25 | Sleep 50min..
+2019-10-25 05:53:25 | Refresh Token from API Server
+2019-10-25 05:55:35 | Update Token on Redis
+2019-10-25 05:55:35 | Sleep 50min..
+2019-10-25 06:45:35 | Refresh Token from API Server
+2019-10-25 06:45:36 | Update Token on Redis
+2019-10-25 06:45:36 | Sleep 50min..
+2019-10-25 07:35:36 | Refresh Token from API Server
+2019-10-25 07:37:46 | Update Token on Redis
+2019-10-25 07:37:46 | Sleep 50min..
+2019-10-25 08:27:47 | Refresh Token from API Server
+2019-10-25 08:27:47 | Update Token on Redis
+2019-10-25 08:27:47 | Sleep 50min..
+2019-10-25 09:17:47 | Refresh Token from API Server
+2019-10-25 09:17:48 | Update Token on Redis
+2019-10-25 09:17:48 | Sleep 50min..
+2019-10-25 10:07:48 | Refresh Token from API Server
+2019-10-25 10:07:49 | Update Token on Redis
+2019-10-25 10:07:49 | Sleep 50min..
+2019-10-25 10:57:49 | Refresh Token from API Server
+2019-10-25 10:57:50 | Update Token on Redis
+2019-10-25 10:57:50 | Sleep 50min..
+2019-10-25 11:47:51 | Refresh Token from API Server
+2019-10-25 11:47:51 | Update Token on Redis
+2019-10-25 11:47:51 | Sleep 50min..
+2019-10-25 12:37:52 | Refresh Token from API Server
+2019-10-25 12:37:52 | Update Token on Redis
+2019-10-25 12:37:52 | Sleep 50min..
+2019-10-25 13:27:52 | Refresh Token from API Server
+2019-10-25 13:27:53 | Update Token on Redis
+2019-10-25 13:27:53 | Sleep 50min..
+2019-10-25 14:17:54 | Refresh Token from API Server
+2019-10-25 14:17:55 | Update Token on Redis
+2019-10-25 14:17:55 | Sleep 50min..
+2019-10-25 15:07:55 | Refresh Token from API Server
+2019-10-25 15:07:56 | Update Token on Redis
+2019-10-25 15:07:56 | Sleep 50min..
+2019-10-25 15:57:56 | Refresh Token from API Server
+2019-10-25 15:57:57 | Update Token on Redis
+2019-10-25 15:57:57 | Sleep 50min..
+2019-10-25 16:47:57 | Refresh Token from API Server
+2019-10-25 16:47:58 | Update Token on Redis
+2019-10-25 16:47:58 | Sleep 50min..
+2019-10-25 17:37:58 | Refresh Token from API Server
+2019-10-25 17:37:59 | Update Token on Redis
+2019-10-25 17:37:59 | Sleep 50min..
+2019-10-25 18:27:59 | Refresh Token from API Server
+2019-10-25 18:28:00 | Update Token on Redis
+2019-10-25 18:28:00 | Sleep 50min..
+2019-10-25 19:18:00 | Refresh Token from API Server
+2019-10-25 19:18:01 | Update Token on Redis
+2019-10-25 19:18:01 | Sleep 50min..
+2019-10-25 20:08:01 | Refresh Token from API Server
+2019-10-25 20:08:02 | Update Token on Redis
+2019-10-25 20:08:02 | Sleep 50min..
+2019-10-25 20:58:02 | Refresh Token from API Server
+2019-10-25 20:58:03 | Update Token on Redis
+2019-10-25 20:58:03 | Sleep 50min..
+2019-10-25 21:48:03 | Refresh Token from API Server
+2019-10-25 21:48:04 | Update Token on Redis
+2019-10-25 21:48:04 | Sleep 50min..
+2019-10-25 22:38:04 | Refresh Token from API Server
+2019-10-25 22:38:05 | Update Token on Redis
+2019-10-25 22:38:05 | Sleep 50min..
+2019-10-25 23:28:05 | Refresh Token from API Server
+2019-10-25 23:28:06 | Update Token on Redis
+2019-10-25 23:28:06 | Sleep 50min..
+2019-10-26 00:18:06 | Refresh Token from API Server
+2019-10-26 00:18:07 | Update Token on Redis
+2019-10-26 00:18:07 | Sleep 50min..
+2019-10-26 01:08:07 | Refresh Token from API Server
+2019-10-26 01:08:08 | Update Token on Redis
+2019-10-26 01:08:08 | Sleep 50min..
+2019-10-26 01:58:08 | Refresh Token from API Server
+2019-10-26 01:58:09 | Update Token on Redis
+2019-10-26 01:58:09 | Sleep 50min..
+2019-10-26 02:48:09 | Refresh Token from API Server
+2019-10-26 02:50:19 | Update Token on Redis
+2019-10-26 02:50:19 | Sleep 50min..
+2019-10-26 03:40:19 | Refresh Token from API Server
+2019-10-26 03:40:20 | Update Token on Redis
+2019-10-26 03:40:20 | Sleep 50min..
+2019-10-26 04:30:20 | Refresh Token from API Server
+2019-10-26 04:30:21 | Update Token on Redis
+2019-10-26 04:30:21 | Sleep 50min..
+2019-10-26 05:20:21 | Refresh Token from API Server
+2019-10-26 05:20:22 | Update Token on Redis
+2019-10-26 05:20:22 | Sleep 50min..
+2019-10-26 06:10:22 | Refresh Token from API Server
+2019-10-26 06:10:23 | Update Token on Redis
+2019-10-26 06:10:23 | Sleep 50min..
+2019-10-26 07:00:23 | Refresh Token from API Server
+2019-10-26 07:00:24 | Update Token on Redis
+2019-10-26 07:00:24 | Sleep 50min..
+2019-10-26 07:50:24 | Refresh Token from API Server
+2019-10-26 07:50:25 | Update Token on Redis
+2019-10-26 07:50:25 | Sleep 50min..
+2019-10-26 08:40:25 | Refresh Token from API Server
+2019-10-26 08:40:26 | Update Token on Redis
+2019-10-26 08:40:26 | Sleep 50min..
+2019-10-26 09:30:26 | Refresh Token from API Server
+2019-10-26 09:30:27 | Update Token on Redis
+2019-10-26 09:30:27 | Sleep 50min..
+2019-10-26 10:20:27 | Refresh Token from API Server
+2019-10-26 10:20:28 | Update Token on Redis
+2019-10-26 10:20:28 | Sleep 50min..
+2019-10-26 11:10:28 | Refresh Token from API Server
+2019-10-26 11:10:29 | Update Token on Redis
+2019-10-26 11:10:29 | Sleep 50min..
+2019-10-26 12:00:30 | Refresh Token from API Server
+2019-10-26 12:00:31 | Update Token on Redis
+2019-10-26 12:00:31 | Sleep 50min..
+2019-10-26 12:50:31 | Refresh Token from API Server
+2019-10-26 12:50:32 | Update Token on Redis
+2019-10-26 12:50:32 | Sleep 50min..
+2019-10-26 13:40:32 | Refresh Token from API Server
+2019-10-26 13:40:33 | Update Token on Redis
+2019-10-26 13:40:33 | Sleep 50min..
+{'access_token': 'FJytdnGUB9vTwfzux09MHQjFMnIfZgFdSfau8GyqMS8AsGwsmvWjVCWACoOuD', 'expires_in': 3217, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'XLBBKjk7LtyKlDQ233jc0p3eGAluHGsBp627tTxePmxT66sheWoBnuXxoadck', 'token_type': 'Bearer'}
+2019-10-26 13:46:56 | Insert Token to Redis
+2019-10-26 14:36:56 | Refresh Token from API Server
+2019-10-26 14:36:57 | Update Token on Redis
+2019-10-26 14:36:57 | Sleep 50min..
+2019-10-26 15:26:57 | Refresh Token from API Server
+2019-10-26 15:26:58 | Update Token on Redis
+2019-10-26 15:26:58 | Sleep 50min..
+2019-10-26 16:16:58 | Refresh Token from API Server
+2019-10-26 16:16:59 | Update Token on Redis
+2019-10-26 16:16:59 | Sleep 50min..
+2019-10-26 17:06:59 | Refresh Token from API Server
+2019-10-26 17:07:00 | Update Token on Redis
+2019-10-26 17:07:00 | Sleep 50min..
+2019-10-26 17:57:00 | Refresh Token from API Server
+2019-10-26 17:57:01 | Update Token on Redis
+2019-10-26 17:57:01 | Sleep 50min..
+2019-10-26 18:47:01 | Refresh Token from API Server
+2019-10-26 18:47:02 | Update Token on Redis
+2019-10-26 18:47:02 | Sleep 50min..
+2019-10-26 19:37:02 | Refresh Token from API Server
+2019-10-26 19:37:03 | Update Token on Redis
+2019-10-26 19:37:03 | Sleep 50min..
+2019-10-26 20:27:03 | Refresh Token from API Server
+2019-10-26 20:27:04 | Update Token on Redis
+2019-10-26 20:27:04 | Sleep 50min..
+2019-10-26 21:17:04 | Refresh Token from API Server
+2019-10-26 21:17:05 | Update Token on Redis
+2019-10-26 21:17:05 | Sleep 50min..
+2019-10-26 22:07:05 | Refresh Token from API Server
+2019-10-26 22:07:06 | Update Token on Redis
+2019-10-26 22:07:06 | Sleep 50min..
+2019-10-26 22:57:06 | Refresh Token from API Server
+2019-10-26 22:57:07 | Update Token on Redis
+2019-10-26 22:57:07 | Sleep 50min..
+2019-10-26 23:47:07 | Refresh Token from API Server
+2019-10-26 23:47:08 | Update Token on Redis
+2019-10-26 23:47:08 | Sleep 50min..
+2019-10-27 00:37:08 | Refresh Token from API Server
+2019-10-27 00:37:09 | Update Token on Redis
+2019-10-27 00:37:09 | Sleep 50min..
+2019-10-27 01:27:09 | Refresh Token from API Server
+2019-10-27 01:27:10 | Update Token on Redis
+2019-10-27 01:27:10 | Sleep 50min..
+2019-10-27 02:17:10 | Refresh Token from API Server
+2019-10-27 02:17:11 | Update Token on Redis
+2019-10-27 02:17:11 | Sleep 50min..
+2019-10-27 03:07:11 | Refresh Token from API Server
+2019-10-27 03:07:12 | Update Token on Redis
+2019-10-27 03:07:12 | Sleep 50min..
+2019-10-27 03:57:12 | Refresh Token from API Server
+2019-10-27 03:57:13 | Update Token on Redis
+2019-10-27 03:57:13 | Sleep 50min..
+2019-10-27 04:47:13 | Refresh Token from API Server
+2019-10-27 04:47:14 | Update Token on Redis
+2019-10-27 04:47:14 | Sleep 50min..
+2019-10-27 05:37:14 | Refresh Token from API Server
+2019-10-27 05:37:15 | Update Token on Redis
+2019-10-27 05:37:15 | Sleep 50min..
+2019-10-27 06:27:15 | Refresh Token from API Server
+2019-10-27 06:27:16 | Update Token on Redis
+2019-10-27 06:27:16 | Sleep 50min..
+2019-10-27 07:17:16 | Refresh Token from API Server
+2019-10-27 07:17:17 | Update Token on Redis
+2019-10-27 07:17:17 | Sleep 50min..
+2019-10-27 08:07:17 | Refresh Token from API Server
+2019-10-27 08:07:18 | Update Token on Redis
+2019-10-27 08:07:18 | Sleep 50min..
+2019-10-27 08:57:18 | Refresh Token from API Server
+2019-10-27 08:57:20 | Update Token on Redis
+2019-10-27 08:57:20 | Sleep 50min..
+2019-10-27 09:47:20 | Refresh Token from API Server
+2019-10-27 09:47:21 | Update Token on Redis
+2019-10-27 09:47:21 | Sleep 50min..
+2019-10-27 10:37:21 | Refresh Token from API Server
+2019-10-27 10:37:22 | Update Token on Redis
+2019-10-27 10:37:22 | Sleep 50min..
+2019-10-27 11:27:22 | Refresh Token from API Server
+2019-10-27 11:27:23 | Update Token on Redis
+2019-10-27 11:27:23 | Sleep 50min..
+2019-10-27 12:17:23 | Refresh Token from API Server
+2019-10-27 12:17:24 | Update Token on Redis
+2019-10-27 12:17:24 | Sleep 50min..
+2019-10-27 13:07:24 | Refresh Token from API Server
+2019-10-27 13:07:25 | Update Token on Redis
+2019-10-27 13:07:25 | Sleep 50min..
+2019-10-27 13:57:25 | Refresh Token from API Server
+2019-10-27 13:57:26 | Update Token on Redis
+2019-10-27 13:57:26 | Sleep 50min..
+2019-10-27 14:47:26 | Refresh Token from API Server
+2019-10-27 14:47:27 | Update Token on Redis
+2019-10-27 14:47:27 | Sleep 50min..
+2019-10-27 15:37:27 | Refresh Token from API Server
+2019-10-27 15:37:28 | Update Token on Redis
+2019-10-27 15:37:28 | Sleep 50min..
+2019-10-27 16:27:29 | Refresh Token from API Server
+2019-10-27 16:27:29 | Update Token on Redis
+2019-10-27 16:27:29 | Sleep 50min..
+{'access_token': 'QZKNCxi7XO61LAOnWpVKjUKJuEjhfu9dRrU80G2a8r9yObab1hko0U6EgPaxV', 'expires_in': 1740, 'scope': 'VIEW,TRADE,WITHDRAWAL', 'refresh_token': 'yqF2hCfQi3Cut5O4IaCxnSkmP5vOpeu8hYnrEPtZTzAnMWagrCMvkztLPByYY', 'token_type': 'Bearer'}
+2019-10-27 16:58:30 | Insert Token to Redis
+2019-10-27 17:48:30 | Refresh Token from API Server
+2019-10-27 17:48:31 | Update Token on Redis
+2019-10-27 17:48:31 | Sleep 50min..
+2019-10-27 18:38:31 | Refresh Token from API Server
+2019-10-27 18:38:32 | Update Token on Redis
+2019-10-27 18:38:32 | Sleep 50min..
+2019-10-27 19:28:32 | Refresh Token from API Server
+2019-10-27 19:28:34 | Update Token on Redis
+2019-10-27 19:28:34 | Sleep 50min..
+2019-10-27 20:18:34 | Refresh Token from API Server
+2019-10-27 20:18:35 | Update Token on Redis
+2019-10-27 20:18:35 | Sleep 50min..
+2019-10-27 21:08:35 | Refresh Token from API Server
+2019-10-27 21:08:36 | Update Token on Redis
+2019-10-27 21:08:36 | Sleep 50min..
+2019-10-27 21:58:36 | Refresh Token from API Server
+2019-10-27 21:58:37 | Update Token on Redis
+2019-10-27 21:58:37 | Sleep 50min..
+2019-10-27 22:48:37 | Refresh Token from API Server
+2019-10-27 22:48:38 | Update Token on Redis
+2019-10-27 22:48:38 | Sleep 50min..
+2019-10-27 23:38:38 | Refresh Token from API Server
+2019-10-27 23:38:39 | Update Token on Redis
+2019-10-27 23:38:39 | Sleep 50min..
+2019-10-28 00:28:39 | Refresh Token from API Server
+2019-10-28 00:28:40 | Update Token on Redis
+2019-10-28 00:28:40 | Sleep 50min..
+2019-10-28 01:18:40 | Refresh Token from API Server
+2019-10-28 01:18:41 | Update Token on Redis
+2019-10-28 01:18:41 | Sleep 50min..
+2019-10-28 02:08:41 | Refresh Token from API Server
+2019-10-28 02:08:42 | Update Token on Redis
+2019-10-28 02:08:42 | Sleep 50min..
+2019-10-28 02:58:42 | Refresh Token from API Server
+2019-10-28 02:58:43 | Update Token on Redis
+2019-10-28 02:58:43 | Sleep 50min..
+2019-10-28 03:48:43 | Refresh Token from API Server
+2019-10-28 03:48:44 | Update Token on Redis
+2019-10-28 03:48:44 | Sleep 50min..
+2019-10-28 04:38:44 | Refresh Token from API Server
+2019-10-28 04:38:45 | Update Token on Redis
+2019-10-28 04:38:45 | Sleep 50min..
+2019-10-28 05:28:45 | Refresh Token from API Server
+2019-10-28 05:28:46 | Update Token on Redis
+2019-10-28 05:28:46 | Sleep 50min..
+2019-10-28 06:18:46 | Refresh Token from API Server
+2019-10-28 06:18:47 | Update Token on Redis
+2019-10-28 06:18:47 | Sleep 50min..
+2019-10-28 07:08:47 | Refresh Token from API Server
+2019-10-28 07:08:48 | Update Token on Redis
+2019-10-28 07:08:48 | Sleep 50min..
+2019-10-28 07:58:48 | Refresh Token from API Server
+2019-10-28 07:58:49 | Update Token on Redis
+2019-10-28 07:58:49 | Sleep 50min..
+2019-10-28 08:48:49 | Refresh Token from API Server
+2019-10-28 08:48:50 | Update Token on Redis
+2019-10-28 08:48:50 | Sleep 50min..
+2019-10-28 09:38:50 | Refresh Token from API Server
+2019-10-28 09:38:51 | Update Token on Redis
+2019-10-28 09:38:51 | Sleep 50min..
+2019-10-28 10:28:51 | Refresh Token from API Server
+2019-10-28 10:28:52 | Update Token on Redis
+2019-10-28 10:28:52 | Sleep 50min..
+2019-10-28 11:18:52 | Refresh Token from API Server
+2019-10-28 11:18:53 | Update Token on Redis
+2019-10-28 11:18:53 | Sleep 50min..
+2019-10-28 12:08:53 | Refresh Token from API Server
+2019-10-28 12:08:54 | Update Token on Redis
+2019-10-28 12:08:54 | Sleep 50min..
+2019-10-28 12:58:54 | Refresh Token from API Server
+2019-10-28 12:58:55 | Update Token on Redis
+2019-10-28 12:58:55 | Sleep 50min..
+2019-10-28 13:48:55 | Refresh Token from API Server
+2019-10-28 13:48:56 | Update Token on Redis
+2019-10-28 13:48:56 | Sleep 50min..
+2019-10-28 14:38:56 | Refresh Token from API Server
+2019-10-28 14:38:57 | Update Token on Redis
+2019-10-28 14:38:57 | Sleep 50min..
+2019-10-28 15:28:57 | Refresh Token from API Server
+2019-10-28 15:28:58 | Update Token on Redis
+2019-10-28 15:28:58 | Sleep 50min..

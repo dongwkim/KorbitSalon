@@ -255,7 +255,7 @@ if __name__ == "__main__":
                 algorithm = 'Little Slump'
                 if c_trader != 0:
                     benefit = 0.032
-            """
+#            """
             ## Regresssion
             elif not xrpm.bidding and not xrpm.trading \
               and myalgo.reversion(1.5,-1,-1) and myalgo.basic(97) :
@@ -266,7 +266,7 @@ if __name__ == "__main__":
                 algorithm = 'Avg Regression'
 
 
-            """
+#            """
             #Buy Position
             if not xrpm.trading and xrpm.bidding:
                 xrpm.buy_price = int(ticker['ask'])

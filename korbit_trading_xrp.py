@@ -75,7 +75,7 @@ if __name__ == "__main__":
         try:
             mymongo = PushTicker.ToMongo()
             #mymongo.initMongo('korbitsalon-mongo1', 27017, 'crypto', 'korbit_ticker')
-            mymongo.initMongo('korbitsalon-mongo1', 27017, 'crypto', 'xrp_ticker')
+            mymongo.initMongo('korbitsalon-mongo1', 27017, 'crypto', 'korbit.xrp')
         except:
             print("Could not connect to Mongo!")
             emailBody = sne.makeEmailBody("Could Not Connect to MongoDB!")
@@ -309,9 +309,9 @@ if __name__ == "__main__":
                 myorder.bidding = True
                 myorder.benefit = 0.054
                 myorder.algorithm = 'Big Slump'
-                myorder.money = 100000
+                myorder.money = 150000
                 if c_trader >= 2:
-                    myorder.money = 100000
+                    myorder.money = 200000
                     myorder.benefit = 0.074
             ## Midium Slump Algorithm
             elif not myorder.trading and myalgo.basic(95) and  myalgo.slump(8, 0.6, 7.0, 1.3 , -99 ):
@@ -327,15 +327,15 @@ if __name__ == "__main__":
             elif not myorder.trading and myalgo.basic(95) and myalgo.slump(5, 0.2, 3.0, 1.5, -99 ):
                 print("{:20s} |  \033[95mHit: Little Slump\033[0m".format(myorder.getStrTime(time.time()*1000)))
                 myorder.bidding = True
-                myorder.benefit = 0.022
+                myorder.benefit = 0.052
                 myorder.algorithm = 'Little Slump'
-                myorder.money = 100000
+                myorder.money = 150000
                 if c_trader >= 4:
                     myorder.money = 50000
-                    myorder.benefit = 0.042
+                    myorder.benefit = 0.072
                 elif c_trader >= 2:
                     myorder.money = 100000
-                    myorder.benefit = 0.032
+                    myorder.benefit = 0.062
             ## Avg Regresssion
             #elif not myorder.trading and myalgo.basic(97) and myalgo.reversion(3,-2):
             #(2,-1) is 40~50% more hit ratio than (3,-2)
